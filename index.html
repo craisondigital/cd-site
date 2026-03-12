@@ -2,33 +2,1001 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World - Craison Digital</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Craison Digital – Smart Gate Access</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #080c12;
+      --dark: #0d1320;
+      --card: #111827;
+      --border: rgba(255,255,255,0.07);
+      --blue: #2f80ed;
+      --blue-bright: #5ba4f5;
+      --blue-glow: rgba(47,128,237,0.18);
+      --cyan: #00d4ff;
+      --text: #e8edf5;
+      --muted: #7a8599;
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      margin: 0;
+      background: var(--black);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(8,12,18,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--cyan); }
+
+    nav ul {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    nav ul a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+
+    nav ul a:hover { color: var(--text); }
+
+    .nav-cta {
+      background: var(--blue);
+      color: #fff !important;
+      padding: 0.5rem 1.3rem;
+      border-radius: 6px;
+      font-weight: 500 !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--blue-bright) !important; color: #fff !important; }
+
+    /* ── HERO ── */
+    .hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #0f172a;
-      font-family: sans-serif;
-      color: #f8fafc;
+      position: relative;
+      padding: 8rem 4rem 6rem;
+      overflow: hidden;
     }
-    h1 {
-      font-size: 3rem;
-      letter-spacing: 0.05em;
+
+    .hero-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(47,128,237,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(47,128,237,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%);
     }
-    p {
+
+    .hero-glow {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 500px;
+      background: radial-gradient(ellipse, rgba(47,128,237,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 820px;
       text-align: center;
-      color: #94a3b8;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(47,128,237,0.1);
+      border: 1px solid rgba(47,128,237,0.25);
+      color: var(--blue-bright);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--cyan);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--blue-bright);
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 2.5rem;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 0 24px rgba(47,128,237,0.3);
+    }
+
+    .btn-primary:hover {
+      background: var(--blue-bright);
+      transform: translateY(-1px);
+      box-shadow: 0 0 36px rgba(47,128,237,0.45);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 400;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.2); color: #fff; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--dark);
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .stat {
+      flex: 1;
+      max-width: 260px;
+      padding: 2rem 2.5rem;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat:last-child { border-right: none; }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--blue-bright);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 6rem 4rem;
+    }
+
+    .section-tag {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--blue-bright);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 520px;
+      margin-bottom: 3.5rem;
+    }
+
+    /* ── WHAT YOU GET ── */
+    .package-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .package-item {
+      background: var(--card);
+      padding: 2.2rem;
+      transition: background 0.2s;
+    }
+
+    .package-item:hover { background: #161e2e; }
+
+    .pkg-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--blue-glow);
+      border: 1px solid rgba(47,128,237,0.2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+      font-size: 1.3rem;
+    }
+
+    .pkg-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .pkg-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── HOW IT WORKS ── */
+    #how { background: var(--dark); }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      left: 22px;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--blue), transparent);
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 1.8rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .step:last-child { border-bottom: none; }
+
+    .step-num {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--blue-glow);
+      border: 1px solid var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--blue-bright);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .step-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* ── FEATURES ── */
+    .features-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .feature-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .feature-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(0,212,255,0.1);
+      border: 1px solid rgba(0,212,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      font-size: 0.65rem;
+      color: var(--cyan);
+    }
+
+    .feature-text strong {
+      display: block;
+      font-weight: 500;
+      font-size: 0.95rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .feature-text span {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .dashboard-mockup {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(47,128,237,0.1);
+    }
+
+    .mockup-bar {
+      background: #0d1320;
+      border-bottom: 1px solid var(--border);
+      padding: 0.8rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #ff5f57; }
+    .dot-y { background: #febc2e; }
+    .dot-g { background: #28c840; }
+
+    .mockup-title {
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .mockup-body {
+      padding: 1.5rem;
+    }
+
+    .mockup-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+      margin-bottom: 0.6rem;
+      font-size: 0.82rem;
+    }
+
+    .mockup-row:last-child { margin-bottom: 0; }
+
+    .tag-name { font-weight: 500; color: var(--text); }
+    .tag-time { color: var(--muted); font-size: 0.75rem; }
+
+    .tag-status {
+      font-size: 0.72rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 100px;
+      font-weight: 500;
+    }
+
+    .status-in {
+      background: rgba(40,200,100,0.12);
+      color: #4ade80;
+      border: 1px solid rgba(40,200,100,0.2);
+    }
+
+    .status-out {
+      background: rgba(251,113,133,0.1);
+      color: #f87171;
+      border: 1px solid rgba(251,113,133,0.2);
+    }
+
+    .status-denied {
+      background: rgba(251,191,36,0.1);
+      color: #fbbf24;
+      border: 1px solid rgba(251,191,36,0.2);
+    }
+
+    .mockup-notif {
+      margin-top: 1rem;
+      background: rgba(47,128,237,0.08);
+      border: 1px solid rgba(47,128,237,0.15);
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
+      font-size: 0.78rem;
+      color: var(--blue-bright);
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    /* ── PRICING ── */
+    #pricing { background: var(--dark); }
+
+    .pricing-card {
+      max-width: 520px;
+      margin: 0 auto;
+      background: var(--card);
+      border: 1px solid rgba(47,128,237,0.25);
+      border-radius: 20px;
+      padding: 3rem;
+      position: relative;
+      box-shadow: 0 0 60px rgba(47,128,237,0.08);
+      text-align: center;
+    }
+
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+    }
+
+    .price-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .price-amount {
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .price-amount sup {
+      font-size: 1.5rem;
+      vertical-align: super;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .price-note {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .price-includes {
+      text-align: left;
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .price-line {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.9rem;
+    }
+
+    .price-line::before {
+      content: '✓';
+      color: var(--cyan);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ── CTA ── */
+    #contact {
+      text-align: center;
+    }
+
+    .cta-box {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      text-align: left;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    input, textarea {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    input:focus, textarea:focus {
+      border-color: rgba(47,128,237,0.5);
+    }
+
+    textarea { resize: vertical; min-height: 110px; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--black);
+      padding: 2.5rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .footer-logo span { color: var(--cyan); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      nav ul { display: none; }
+      .hero { padding: 7rem 1.5rem 4rem; }
+      .section-inner { padding: 4rem 1.5rem; }
+      .features-layout { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .stats-bar { flex-wrap: wrap; }
+      .stat { min-width: 50%; border-right: none; border-bottom: 1px solid var(--border); }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
     }
   </style>
 </head>
 <body>
-  <div>
-    <h1>Hello World 👋</h1>
-    <p>Craison Digital – test page</p>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Craison<span>Digital</span></a>
+    <ul>
+      <li><a href="#package">Package</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <div class="hero-badge">Smart Gate Access System</div>
+      <h1>Your Gate.<br/><em>Fully Intelligent.</em></h1>
+      <p>Upgrade your existing gate opener with long-range RFID, keypad access, and real-time Home Assistant automation — all professionally installed and configured.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Request a Quote</a>
+        <a href="#package" class="btn-secondary">See What's Included</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">Works with existing opener</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">UHF</div>
+      <div class="stat-label">Long-range RFID read</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">24/7</div>
+      <div class="stat-label">Access logging & alerts</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">1 day</div>
+      <div class="stat-label">Professional install</div>
+    </div>
   </div>
+
+  <!-- PACKAGE -->
+  <section id="package">
+    <div class="section-inner">
+      <div class="section-tag">What's Included</div>
+      <h2 class="section-title">Everything in one package.</h2>
+      <p class="section-sub">Hardware, installation, and full Home Assistant configuration — done for you.</p>
+      <div class="package-grid">
+        <div class="package-item">
+          <div class="pkg-icon">📡</div>
+          <div class="pkg-title">Long-Range UHF RFID Reader</div>
+          <div class="pkg-desc">Reads authorized tags from up to 20 feet away — no stopping to roll down your window.</div>
+        </div>
+        <div class="package-item">
+          <div class="pkg-icon">⌨️</div>
+          <div class="pkg-title">Wiegand Keypad</div>
+          <div class="pkg-desc">PIN code backup access for guests, deliveries, or anyone without a tag.</div>
+        </div>
+        <div class="package-item">
+          <div class="pkg-icon">🏠</div>
+          <div class="pkg-title">Home Assistant Integration</div>
+          <div class="pkg-desc">Full HA setup with a clean dashboard to add, remove, and manage tags and PINs in seconds.</div>
+        </div>
+        <div class="package-item">
+          <div class="pkg-icon">📋</div>
+          <div class="pkg-title">Complete Access Logging</div>
+          <div class="pkg-desc">Every entry and exit is timestamped and logged — always know who came and went.</div>
+        </div>
+        <div class="package-item">
+          <div class="pkg-icon">🔔</div>
+          <div class="pkg-title">Real-Time Notifications</div>
+          <div class="pkg-desc">Get instant alerts on your phone when someone arrives, leaves, or tries an invalid code.</div>
+        </div>
+        <div class="package-item">
+          <div class="pkg-icon">🔧</div>
+          <div class="pkg-title">Professional Installation</div>
+          <div class="pkg-desc">We handle everything — hardware mounting, wiring, and complete system configuration.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="section-inner">
+      <div class="section-tag">The Process</div>
+      <h2 class="section-title">Simple from day one.</h2>
+      <p class="section-sub">We take care of the technical work. You end up with a system that's genuinely easy to manage.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div>
+            <div class="step-title">We assess your existing setup</div>
+            <div class="step-desc">We evaluate your current gate opener and confirm compatibility. Most standard openers with a Wiegand input work out of the box.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div>
+            <div class="step-title">Hardware installation</div>
+            <div class="step-desc">We mount the UHF RFID reader and keypad at the right position for your driveway, wire everything cleanly, and connect to your opener.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div>
+            <div class="step-title">Home Assistant configuration</div>
+            <div class="step-desc">We set up or connect to your existing Home Assistant instance, configure all integrations, build your access dashboard, and set up notifications.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div>
+            <div class="step-title">You take control</div>
+            <div class="step-desc">We walk you through the dashboard — adding tags, setting PINs, viewing logs. It's straightforward enough that anyone in the household can manage it.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES / MOCKUP -->
+  <section id="features">
+    <div class="section-inner">
+      <div class="features-layout">
+        <div>
+          <div class="section-tag">Access Management</div>
+          <h2 class="section-title">Full control from your phone.</h2>
+          <p class="section-sub" style="margin-bottom:2rem;">Your Home Assistant dashboard gives you a clear, real-time view of everything happening at your gate.</p>
+          <div class="feature-list">
+            <div class="feature-item">
+              <div class="feature-check">✓</div>
+              <div class="feature-text">
+                <strong>Add or revoke tags instantly</strong>
+                <span>Assign RFID tags to family, staff, or regular visitors. Remove access in seconds if a tag is lost.</span>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-check">✓</div>
+              <div class="feature-text">
+                <strong>Manage PINs for guests</strong>
+                <span>Create temporary or permanent PIN codes for the keypad — no physical tag required.</span>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-check">✓</div>
+              <div class="feature-text">
+                <strong>Arrival & departure alerts</strong>
+                <span>Push notifications sent directly to your phone the moment the gate is triggered.</span>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-check">✓</div>
+              <div class="feature-text">
+                <strong>Full audit log</strong>
+                <span>Every access event is stored with a timestamp, name, and method (RFID or PIN).</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dashboard-mockup">
+          <div class="mockup-bar">
+            <div class="dot dot-r"></div>
+            <div class="dot dot-y"></div>
+            <div class="dot dot-g"></div>
+            <div class="mockup-title">Gate Access Log</div>
+          </div>
+          <div class="mockup-body">
+            <div class="mockup-row">
+              <div>
+                <div class="tag-name">John (Tag #1)</div>
+                <div class="tag-time">Today, 8:14 AM · RFID</div>
+              </div>
+              <div class="tag-status status-in">Entered</div>
+            </div>
+            <div class="mockup-row">
+              <div>
+                <div class="tag-name">Housekeeper</div>
+                <div class="tag-time">Today, 9:02 AM · PIN</div>
+              </div>
+              <div class="tag-status status-in">Entered</div>
+            </div>
+            <div class="mockup-row">
+              <div>
+                <div class="tag-name">Housekeeper</div>
+                <div class="tag-time">Today, 1:45 PM · PIN</div>
+              </div>
+              <div class="tag-status status-out">Exited</div>
+            </div>
+            <div class="mockup-row">
+              <div>
+                <div class="tag-name">Unknown</div>
+                <div class="tag-time">Today, 3:28 PM · PIN</div>
+              </div>
+              <div class="tag-status status-denied">Denied</div>
+            </div>
+            <div class="mockup-notif">
+              🔔 &nbsp;<span><strong>Gate opened</strong> — John arrived at 8:14 AM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="section-inner" style="text-align:center;">
+      <div class="section-tag">Pricing</div>
+      <h2 class="section-title">One flat rate. No surprises.</h2>
+      <p class="section-sub" style="margin:0 auto 3rem;">Everything included — hardware, installation, and full setup.</p>
+      <div class="pricing-card">
+        <div class="price-label">Complete Package</div>
+        <div class="price-amount"><sup>$</sup>Contact for pricing</div>
+        <div class="price-note">Pricing varies by property. Get a custom quote.</div>
+        <div class="price-includes">
+          <div class="price-line">Long-range UHF RFID reader + tags</div>
+          <div class="price-line">Wiegand keypad installation</div>
+          <div class="price-line">Full Home Assistant setup & configuration</div>
+          <div class="price-line">Access logging & notification setup</div>
+          <div class="price-line">Custom dashboard for easy management</div>
+          <div class="price-line">Walkthrough & handoff training</div>
+        </div>
+        <a href="#contact" class="btn-primary" style="display:block;text-align:center;">Request a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="cta-box">
+        <div class="section-tag">Get Started</div>
+        <h2 class="section-title">Ready to upgrade your gate?</h2>
+        <p class="section-sub" style="margin-bottom:0;">Tell us a bit about your property and we'll get back to you with a quote.</p>
+        <form class="contact-form" onsubmit="return false;">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" placeholder="John" />
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" placeholder="Smith" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="john@example.com" />
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" placeholder="(555) 000-0000" />
+          </div>
+          <div class="form-group">
+            <label>Tell us about your gate setup</label>
+            <textarea placeholder="What gate opener do you have? Any other details..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="margin-top:0.5rem;">Send My Request</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Craison<span>Digital</span></div>
+    <div>© 2025 Craison Digital. All rights reserved.</div>
+    <div>Smart Home Consulting</div>
+  </footer>
+
 </body>
 </html>

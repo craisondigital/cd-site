@@ -30,7 +30,31 @@
     .hero-visual { position: relative; width: 100%; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; overflow: hidden; padding-top: 70px; }
     .hero-visual-bg { position: absolute; inset: 0; background: linear-gradient(180deg, #060a10 0%, #0a1525 40%, #0d1a2e 100%); }
     .hero-grid-bg { position: absolute; inset: 0; background-image: linear-gradient(rgba(47,128,237,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(47,128,237,0.05) 1px, transparent 1px); background-size: 52px 52px; mask-image: radial-gradient(ellipse 90% 80% at 50% 60%, black 20%, transparent 100%); }
-    .gate-illustration { position: relative; z-index: 2; width: 100%; max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
+    .gate-illustration { position: relative; z-index: 2; width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
+
+    /* Notification toast overlaid on SVG */
+    .notif-wrap { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; z-index: 10; pointer-events: none; }
+    .notif-toast {
+      background: rgba(8,18,32,0.96);
+      border: 1px solid rgba(74,222,128,0.4);
+      border-radius: 16px;
+      padding: 1.1rem 1.6rem;
+      display: flex; align-items: center; gap: 1rem;
+      box-shadow: 0 0 40px rgba(74,222,128,0.2), 0 8px 40px rgba(0,0,0,0.6);
+      opacity: 0;
+      transform: translateY(16px) scale(0.96);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      max-width: 380px; width: 90%;
+    }
+    .notif-toast.visible { opacity: 1; transform: translateY(0) scale(1); }
+    .notif-icon { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #1a4a2a, #0d2a1a); border: 1.5px solid rgba(74,222,128,0.4); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    .notif-body { flex: 1; }
+    .notif-title { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; color: #e8edf5; margin-bottom: 0.15rem; }
+    .notif-sub { font-size: 0.78rem; color: #7a8599; }
+    .notif-badge { background: rgba(74,222,128,0.12); border: 1px solid rgba(74,222,128,0.3); color: #4ade80; font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 100px; white-space: nowrap; }
+    .notif-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 8px #4ade80; flex-shrink: 0; animation: blink 1s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
     .hero-overlay { position: relative; z-index: 3; width: 100%; text-align: center; padding: 2rem 2rem 5rem; background: linear-gradient(0deg, #080c12 30%, transparent 100%); }
     .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(47,128,237,0.1); border: 1px solid rgba(47,128,237,0.25); color: var(--blue-bright); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.4rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; animation: fadeUp 0.6s ease both; }
     .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--cyan); border-radius: 50%; box-shadow: 0 0 8px var(--cyan); animation: pulse 2s infinite; }
@@ -39,24 +63,6 @@
     .hero-overlay h1 em { font-style: normal; color: var(--blue-bright); }
     .hero-overlay p { font-size: 1.1rem; color: var(--muted); max-width: 540px; margin: 0 auto 2rem; animation: fadeUp 0.6s 0.2s ease both; }
     .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
-
-    @keyframes rfid-ring { 0% { opacity: 0.9; transform: scale(0.2); } 100% { opacity: 0; transform: scale(1); } }
-    .rfid-ring { animation: rfid-ring 2.4s ease-out infinite; }
-    .rfid-ring:nth-child(2) { animation-delay: 0.6s; }
-    .rfid-ring:nth-child(3) { animation-delay: 1.2s; }
-    .rfid-ring:nth-child(4) { animation-delay: 1.8s; }
-
-    @keyframes car-drive { 0% { transform: translateX(-320px); opacity: 0; } 12% { opacity: 1; } 55%, 100% { transform: translateX(0px); opacity: 1; } }
-    .car-group { animation: car-drive 5s ease-out infinite; }
-
-    @keyframes beam-pulse { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.35; } }
-    .headlight-beam { animation: beam-pulse 1.5s ease-in-out infinite; }
-
-    @keyframes scan { 0%, 100% { transform: translateY(0); opacity: 1; } 50% { transform: translateY(18px); opacity: 0.5; } }
-    .scan-line { animation: scan 1.8s ease-in-out infinite; }
-
-    @keyframes auth-flash { 0%, 55% { opacity: 0; } 60%, 80% { opacity: 1; } 100% { opacity: 0; } }
-    .auth-badge { animation: auth-flash 5s ease infinite; }
 
     .btn-primary { background: var(--blue); color: #fff; padding: 0.85rem 2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; box-shadow: 0 0 24px rgba(47,128,237,0.3); }
     .btn-primary:hover { background: var(--blue-bright); transform: translateY(-1px); box-shadow: 0 0 36px rgba(47,128,237,0.45); }
@@ -165,212 +171,404 @@
     <div class="hero-visual-bg"></div>
     <div class="hero-grid-bg"></div>
 
-    <div class="gate-illustration">
+    <div class="gate-illustration" style="position:relative;">
+
+      <!-- Notification toast — overlaid on SVG, centred -->
+      <div class="notif-wrap">
+        <div class="notif-toast" id="notifToast">
+          <div class="notif-dot"></div>
+          <div class="notif-icon">🏊</div>
+          <div class="notif-body">
+            <div class="notif-title">Pool Service Arrived</div>
+            <div class="notif-sub">Blue Wave Pool Co. · Gate opened · 10:24 AM</div>
+          </div>
+          <div class="notif-badge">✓ Authorized</div>
+        </div>
+      </div>
+
       <!--
-        BOOM BARRIER gate. Pivot at left end (the post), arm extends rightward.
-        Hinge SVG coord = (444, 310)  — top of the barrier post, where arm meets it.
-        In local space: arm goes from x=0 to x=260 at y=0 (horizontal at rest).
-        JS: translate(444,310) rotate(DEG)
-        DEG=0   → arm horizontal, blocking the road
-        DEG=-80 → arm rotated up (pointing up and slightly left), road clear
+        SCENE LAYOUT (viewBox 0 0 1100 500)
+        Road runs full width at y≈355–500.
+        Gate posts at x=480 (left) and x=620 (right), spanning y=180–355.
+        Left panel hinges at x=480, swings LEFT  → local coords, pivot at (0,0)
+        Right panel hinges at x=620, swings RIGHT → local coords, pivot at (0,0)
+        Reader post: x≈390, y=220–340 (left of left post)
+        Truck starts off-screen left, stops at x≈200 (front near reader at x≈390)
       -->
-      <svg id="gateSVG" viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+      <svg id="gateSVG" viewBox="0 0 1100 500" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
         <defs>
           <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#060d1a"/><stop offset="100%" stop-color="#0d1e35"/>
+            <stop offset="0%" stop-color="#05080f"/><stop offset="100%" stop-color="#0b1628"/>
           </linearGradient>
           <linearGradient id="roadGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#0e1520"/><stop offset="100%" stop-color="#080c10"/>
+            <stop offset="0%" stop-color="#111820"/><stop offset="100%" stop-color="#080c10"/>
           </linearGradient>
-          <linearGradient id="carBodyGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#1a2540"/><stop offset="60%" stop-color="#111827"/><stop offset="100%" stop-color="#0a0f1a"/>
+          <linearGradient id="truckWhiteGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#d8e8f0"/><stop offset="100%" stop-color="#a8c0d0"/>
           </linearGradient>
-          <linearGradient id="boomGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%"   stop-color="#2f80ed"/>
-            <stop offset="12%"  stop-color="#ff4040"/>
-            <stop offset="25%"  stop-color="#ff4040"/>
-            <stop offset="38%"  stop-color="#2f80ed"/>
-            <stop offset="50%"  stop-color="#2f80ed"/>
-            <stop offset="62%"  stop-color="#ff4040"/>
-            <stop offset="75%"  stop-color="#ff4040"/>
-            <stop offset="88%"  stop-color="#2f80ed"/>
-            <stop offset="100%" stop-color="#2f80ed"/>
+          <linearGradient id="truckStripe" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1a8aaa"/><stop offset="100%" stop-color="#0e6080"/>
+          </linearGradient>
+          <linearGradient id="bedGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#8a9aaa"/><stop offset="100%" stop-color="#6a7a88"/>
+          </linearGradient>
+          <linearGradient id="gateIronGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#1a2a40"/><stop offset="40%" stop-color="#2a4060"/><stop offset="100%" stop-color="#1a2a40"/>
+          </linearGradient>
+          <linearGradient id="postGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#1e3050"/><stop offset="50%" stop-color="#2e4870"/><stop offset="100%" stop-color="#1e3050"/>
           </linearGradient>
           <linearGradient id="beamGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#fffbe0" stop-opacity="0.55"/>
+            <stop offset="0%" stop-color="#fffbe0" stop-opacity="0.5"/>
             <stop offset="100%" stop-color="#fffbe0" stop-opacity="0"/>
           </linearGradient>
-          <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-          <filter id="softglow"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-          <clipPath id="sceneClip"><rect width="1000" height="480"/></clipPath>
+          <linearGradient id="drivewayGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1a2535"/><stop offset="100%" stop-color="#0e1520"/>
+          </linearGradient>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="4" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="softglow" x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur stdDeviation="7" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="shadow">
+            <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.5"/>
+          </filter>
+          <clipPath id="sceneClip"><rect width="1100" height="500"/></clipPath>
+          <!-- Driveway stone wall / pillar texture gradient -->
+          <linearGradient id="pillarGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#1a2535"/><stop offset="30%" stop-color="#243040"/><stop offset="70%" stop-color="#243040"/><stop offset="100%" stop-color="#1a2535"/>
+          </linearGradient>
         </defs>
 
         <g clip-path="url(#sceneClip)">
 
-          <!-- Sky -->
-          <rect width="1000" height="480" fill="url(#skyGrad)"/>
-          <ellipse cx="500" cy="305" rx="420" ry="80" fill="#0a1e3a" opacity="0.5"/>
-          <circle cx="80"  cy="40" r="1"   fill="white" opacity="0.6"/>
-          <circle cx="150" cy="20" r="1.2" fill="white" opacity="0.5"/>
-          <circle cx="220" cy="60" r="0.8" fill="white" opacity="0.7"/>
-          <circle cx="310" cy="30" r="1"   fill="white" opacity="0.4"/>
-          <circle cx="400" cy="15" r="1.2" fill="white" opacity="0.6"/>
-          <circle cx="600" cy="25" r="0.8" fill="white" opacity="0.5"/>
-          <circle cx="700" cy="50" r="1"   fill="white" opacity="0.6"/>
-          <circle cx="820" cy="20" r="1.2" fill="white" opacity="0.4"/>
-          <circle cx="920" cy="45" r="0.8" fill="white" opacity="0.7"/>
+          <!-- SKY -->
+          <rect width="1100" height="500" fill="url(#skyGrad)"/>
+          <!-- subtle horizon glow -->
+          <ellipse cx="550" cy="355" rx="500" ry="60" fill="#0a1e3a" opacity="0.6"/>
+          <!-- Stars -->
+          <circle cx="60"  cy="35" r="1"   fill="white" opacity="0.5"/>
+          <circle cx="140" cy="18" r="1.2" fill="white" opacity="0.6"/>
+          <circle cx="230" cy="55" r="0.8" fill="white" opacity="0.7"/>
+          <circle cx="340" cy="25" r="1"   fill="white" opacity="0.4"/>
+          <circle cx="450" cy="12" r="1.2" fill="white" opacity="0.6"/>
+          <circle cx="650" cy="20" r="0.8" fill="white" opacity="0.5"/>
+          <circle cx="760" cy="48" r="1"   fill="white" opacity="0.6"/>
+          <circle cx="880" cy="15" r="1.2" fill="white" opacity="0.4"/>
+          <circle cx="990" cy="42" r="0.8" fill="white" opacity="0.7"/>
+          <circle cx="1070" cy="28" r="1"  fill="white" opacity="0.5"/>
 
-          <!-- Road -->
-          <rect x="0" y="340" width="1000" height="140" fill="url(#roadGrad)"/>
-          <rect x="0" y="340" width="1000" height="2" fill="#1a2535" opacity="0.8"/>
-          <rect x="0"   y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
-          <rect x="120" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
-          <rect x="240" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
-          <rect x="360" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
-          <rect x="480" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
-          <rect x="600" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
-          <rect x="720" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
-          <rect x="840" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
+          <!-- ROAD / DRIVEWAY -->
+          <rect x="0" y="355" width="1100" height="145" fill="url(#roadGrad)"/>
+          <rect x="0" y="355" width="1100" height="2" fill="#1e2d40" opacity="0.9"/>
+          <!-- Driveway centre line dashes -->
+          <rect x="0"   y="420" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
+          <rect x="130" y="420" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
+          <rect x="260" y="420" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
+          <rect x="390" y="420" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
+          <rect x="520" y="420" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
+          <rect x="650" y="420" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
+          <rect x="780" y="420" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
+          <rect x="910" y="420" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
+          <rect x="1040" y="420" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
 
-          <!-- ===== BARRIER HOUSING / POST ===== -->
-          <!-- Main housing box — sits to the left of the road lane -->
-          <rect x="410" y="255" width="50" height="88" rx="6" fill="#1a2e4a"/>
-          <rect x="410" y="255" width="50" height="88" rx="6" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.7"/>
-          <!-- Housing top cap -->
-          <rect x="406" y="248" width="58" height="12" rx="4" fill="#1e3555"/>
-          <rect x="406" y="248" width="58" height="12" rx="4" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.5"/>
-          <!-- Warning stripe on housing -->
-          <rect x="410" y="290" width="50" height="8" fill="#ff4040" opacity="0.25"/>
-          <!-- Status light on top -->
-          <circle cx="435" cy="244" r="6" fill="#4ade80" opacity="0.9" filter="url(#glow)"/>
-          <circle cx="435" cy="244" r="12" fill="#4ade80" opacity="0.12"/>
-          <!-- Pivot bolt where arm meets housing -->
-          <circle cx="444" cy="310" r="8" fill="#2a4060"/>
-          <circle cx="444" cy="310" r="8" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.8"/>
-          <circle cx="444" cy="310" r="3" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/>
-          <!-- Base / foundation -->
-          <rect x="418" y="340" width="36" height="6" rx="2" fill="#1e3050"/>
+          <!-- Stone wall / hedge on each side (residential feel) -->
+          <!-- Left wall -->
+          <rect x="0" y="280" width="380" height="78" fill="#131f2e"/>
+          <rect x="0" y="280" width="380" height="78" fill="none" stroke="#1e2d40" stroke-width="1"/>
+          <!-- Wall stone texture lines -->
+          <line x1="0" y1="305" x2="380" y2="305" stroke="#1a2a3a" stroke-width="1"/>
+          <line x1="0" y1="330" x2="380" y2="330" stroke="#1a2a3a" stroke-width="1"/>
+          <line x1="60" y1="280" x2="60" y2="358" stroke="#1a2a3a" stroke-width="1"/>
+          <line x1="130" y1="280" x2="130" y2="358" stroke="#1a2a3a" stroke-width="1"/>
+          <line x1="200" y1="280" x2="200" y2="358" stroke="#1a2a3a" stroke-width="1"/>
+          <line x1="280" y1="280" x2="280" y2="358" stroke="#1a2a3a" stroke-width="1"/>
+          <line x1="340" y1="280" x2="340" y2="358" stroke="#1a2a3a" stroke-width="1"/>
+          <!-- Right wall -->
+          <rect x="720" y="280" width="380" height="78" fill="#131f2e"/>
+          <rect x="720" y="280" width="380" height="78" fill="none" stroke="#1e2d40" stroke-width="1"/>
+          <line x1="720" y1="305" x2="1100" y2="305" stroke="#1a2a3a" stroke-width="1"/>
+          <line x1="720" y1="330" x2="1100" y2="330" stroke="#1a2a3a" stroke-width="1"/>
+          <line x1="760" y1="280" x2="760" y2="358" stroke="#1a2a3a" stroke-width="1"/>
+          <line x1="820" y1="280" x2="820" y2="358" stroke="#1a2a3a" stroke-width="1"/>
+          <line x1="900" y1="280" x2="900" y2="358" stroke="#1a2a3a" stroke-width="1"/>
+          <line x1="970" y1="280" x2="970" y2="358" stroke="#1a2a3a" stroke-width="1"/>
+          <line x1="1040" y1="280" x2="1040" y2="358" stroke="#1a2a3a" stroke-width="1"/>
 
-          <!-- ===== BOOM ARM =====
-               Pivot at local (0,0) = SVG (444, 310).
-               Arm extends in +x direction, length ~270px, height 10px.
-               At rest (deg=0): horizontal, blocking road at y=310.
-               Lifted (deg=-80): pointing up.
+          <!-- ===== GATE PILLARS ===== -->
+          <!-- Left pillar (x=430–480) -->
+          <rect x="432" y="155" width="48" height="200" rx="4" fill="url(#pillarGrad)"/>
+          <rect x="432" y="155" width="48" height="200" rx="4" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.4"/>
+          <!-- Pillar cap -->
+          <rect x="426" y="146" width="60" height="16" rx="4" fill="#1e3050"/>
+          <rect x="426" y="146" width="60" height="16" rx="4" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.5"/>
+          <!-- Decorative cap orb -->
+          <circle cx="456" cy="140" r="9" fill="#1e3555"/>
+          <circle cx="456" cy="140" r="9" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.6"/>
+          <circle cx="456" cy="140" r="4" fill="#2f80ed" opacity="0.5"/>
+          <!-- Pillar number plate detail -->
+          <rect x="440" y="200" width="32" height="20" rx="3" fill="#111e30"/>
+          <rect x="440" y="200" width="32" height="20" rx="3" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.4"/>
+
+          <!-- Right pillar (x=620–668) -->
+          <rect x="620" y="155" width="48" height="200" rx="4" fill="url(#pillarGrad)"/>
+          <rect x="620" y="155" width="48" height="200" rx="4" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.4"/>
+          <rect x="614" y="146" width="60" height="16" rx="4" fill="#1e3050"/>
+          <rect x="614" y="146" width="60" height="16" rx="4" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.5"/>
+          <circle cx="644" cy="140" r="9" fill="#1e3555"/>
+          <circle cx="644" cy="140" r="9" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.6"/>
+          <circle cx="644" cy="140" r="4" fill="#2f80ed" opacity="0.5"/>
+          <rect x="628" y="200" width="32" height="20" rx="3" fill="#111e30"/>
+          <rect x="628" y="200" width="32" height="20" rx="3" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.4"/>
+
+          <!--
+            LEFT GATE PANEL
+            Hinged at RIGHT edge of left pillar = SVG x=480, mid-height y=267.
+            Panel extends LEFT in local space (from x=0 to x=-138).
+            Closed: rotate(0)  → fills x=342..480
+            Open:   rotate(60) → swings outward to the left/toward viewer (clockwise = outward swing)
           -->
-          <g id="gatePanel" transform="translate(444,310) rotate(0)">
-            <!-- Counterweight tail (behind pivot, short) -->
-            <rect x="-38" y="-7" width="38" height="14" rx="4" fill="#1e3555"/>
-            <rect x="-38" y="-7" width="38" height="14" rx="4" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.5"/>
-            <rect x="-34" y="-4" width="10" height="8" rx="2" fill="#2a4a6a" opacity="0.8"/>
-            <!-- Main arm body -->
-            <rect x="0" y="-7" width="270" height="14" rx="4" fill="url(#boomGrad)" opacity="0.9"/>
-            <rect x="0" y="-7" width="270" height="14" rx="4" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-            <!-- Reflective tip -->
-            <rect x="262" y="-7" width="8" height="14" rx="3" fill="#ffffff" opacity="0.7"/>
-            <!-- Arm highlight stripe -->
-            <rect x="0" y="-7" width="270" height="3" rx="2" fill="white" opacity="0.08"/>
+          <g id="gateLeft" transform="translate(480,267) rotate(0)">
+            <!-- Main panel body: x=-138..0, y=-74..74 -->
+            <rect x="-138" y="-74" width="138" height="148" rx="3" fill="url(#gateIronGrad)" opacity="0.95"/>
+            <!-- Decorative vertical bars -->
+            <line x1="-115" y1="-74" x2="-115" y2="74" stroke="#2f80ed" stroke-width="2" opacity="0.5"/>
+            <line x1="-92"  y1="-74" x2="-92"  y2="74" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
+            <line x1="-69"  y1="-74" x2="-69"  y2="74" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
+            <line x1="-46"  y1="-74" x2="-46"  y2="74" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
+            <line x1="-23"  y1="-74" x2="-23"  y2="74" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
+            <!-- Horizontal rails -->
+            <rect x="-138" y="-74" width="138" height="10" rx="2" fill="#1e3555" opacity="0.8"/>
+            <rect x="-138" y="64"  width="138" height="10" rx="2" fill="#1e3555" opacity="0.8"/>
+            <rect x="-138" y="-5"  width="138" height="10" rx="2" fill="#1e3555" opacity="0.6"/>
+            <!-- Decorative spikes on top -->
+            <polygon points="-126,-74 -122,-90 -118,-74" fill="#2a4060"/>
+            <polygon points="-103,-74  -99,-90  -95,-74" fill="#2a4060"/>
+            <polygon points="-80,-74  -76,-90  -72,-74"  fill="#2a4060"/>
+            <polygon points="-57,-74  -53,-90  -49,-74"  fill="#2a4060"/>
+            <polygon points="-34,-74  -30,-90  -26,-74"  fill="#2a4060"/>
+            <polygon points="-11,-74   -7,-90   -3,-74"  fill="#2a4060"/>
+            <!-- Panel border glow -->
+            <rect x="-138" y="-74" width="138" height="148" rx="3" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.6"/>
+            <!-- Blue accent stripe -->
+            <rect x="-138" y="-74" width="138" height="4" rx="1" fill="#2f80ed" opacity="0.4"/>
           </g>
 
-          <!-- ===== RFID READER (mounted on housing face) ===== -->
-          <rect x="394" y="268" width="18" height="30" rx="4" fill="#0d1e35"/>
-          <rect x="394" y="268" width="18" height="30" rx="4" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.8"/>
-          <rect x="396" y="270" width="13" height="14" rx="2" fill="#091525"/>
-          <rect x="396" y="270" width="13" height="14" rx="2" fill="none" stroke="#00d4ff" stroke-width="1" opacity="0.6"/>
-          <rect class="scan-line" x="397" y="271" width="11" height="2" rx="1" fill="#00d4ff" opacity="0.9"/>
-
-          <!-- AUTHORIZED badge -->
-          <g class="auth-badge">
-            <rect x="340" y="258" width="56" height="18" rx="4" fill="#0d2a1a"/>
-            <rect x="340" y="258" width="56" height="18" rx="4" fill="none" stroke="#4ade80" stroke-width="1"/>
-            <text x="368" y="270" text-anchor="middle" font-size="7" fill="#4ade80" font-family="monospace" font-weight="bold">AUTHORIZED</text>
+          <!--
+            RIGHT GATE PANEL
+            Hinged at LEFT edge of right pillar = SVG x=620, mid-height y=267.
+            Panel extends RIGHT in local space (from x=0 to x=138).
+            Closed: rotate(0)   → fills x=620..758
+            Open:   rotate(-60) → swings outward to the right/toward viewer
+          -->
+          <g id="gateRight" transform="translate(620,267) rotate(0)">
+            <rect x="0" y="-74" width="138" height="148" rx="3" fill="url(#gateIronGrad)" opacity="0.95"/>
+            <line x1="23"  y1="-74" x2="23"  y2="74" stroke="#2f80ed" stroke-width="2" opacity="0.5"/>
+            <line x1="46"  y1="-74" x2="46"  y2="74" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
+            <line x1="69"  y1="-74" x2="69"  y2="74" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
+            <line x1="92"  y1="-74" x2="92"  y2="74" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
+            <line x1="115" y1="-74" x2="115" y2="74" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
+            <rect x="0" y="-74" width="138" height="10" rx="2" fill="#1e3555" opacity="0.8"/>
+            <rect x="0" y="64"  width="138" height="10" rx="2" fill="#1e3555" opacity="0.8"/>
+            <rect x="0" y="-5"  width="138" height="10" rx="2" fill="#1e3555" opacity="0.6"/>
+            <polygon points="3,-74   7,-90  11,-74"  fill="#2a4060"/>
+            <polygon points="26,-74 30,-90  34,-74"  fill="#2a4060"/>
+            <polygon points="49,-74 53,-90  57,-74"  fill="#2a4060"/>
+            <polygon points="72,-74 76,-90  80,-74"  fill="#2a4060"/>
+            <polygon points="95,-74 99,-90 103,-74"  fill="#2a4060"/>
+            <polygon points="118,-74 122,-90 126,-74" fill="#2a4060"/>
+            <rect x="0" y="-74" width="138" height="148" rx="3" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.6"/>
+            <rect x="0" y="-74" width="138" height="4" rx="1" fill="#2f80ed" opacity="0.4"/>
           </g>
 
-          <!-- RFID rings -->
-          <g opacity="0.75" filter="url(#softglow)">
-            <ellipse class="rfid-ring" cx="403" cy="283" rx="16" ry="11" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0"/>
-            <ellipse class="rfid-ring" cx="403" cy="283" rx="28" ry="20" fill="none" stroke="#00d4ff" stroke-width="1.2" opacity="0"/>
-            <ellipse class="rfid-ring" cx="403" cy="283" rx="42" ry="32" fill="none" stroke="#2f80ed" stroke-width="1"   opacity="0"/>
-            <ellipse class="rfid-ring" cx="403" cy="283" rx="58" ry="44" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0"/>
+          <!-- ===== RFID READER POST (left of left pillar) ===== -->
+          <!-- Post column -->
+          <rect x="390" y="230" width="20" height="125" rx="4" fill="#0f1c2e"/>
+          <rect x="390" y="230" width="20" height="125" rx="4" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.4"/>
+          <!-- Reader head box -->
+          <rect x="380" y="200" width="40" height="55" rx="6" fill="#0d1e35"/>
+          <rect x="380" y="200" width="40" height="55" rx="6" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.7"/>
+          <!-- Screen area -->
+          <rect x="385" y="206" width="28" height="22" rx="3" fill="#060e18"/>
+          <rect x="385" y="206" width="28" height="22" rx="3" fill="none" stroke="#1a3050" stroke-width="1"/>
+          <!-- Status LED — JS will update fill colour -->
+          <circle id="readerLed" cx="400" cy="244" r="7" fill="#cc2020" filter="url(#glow)"/>
+          <circle id="readerLedGlow" cx="400" cy="244" r="14" fill="#cc2020" opacity="0.15"/>
+          <!-- Tiny antenna nub -->
+          <rect x="397" y="194" width="6" height="10" rx="2" fill="#1e3050"/>
+
+          <!-- RFID signal rings (emit leftward toward approaching truck) -->
+          <g id="rfidRings" opacity="0" filter="url(#softglow)">
+            <ellipse id="ring1" cx="400" cy="222" rx="18" ry="12" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0"/>
+            <ellipse id="ring2" cx="400" cy="222" rx="34" ry="24" fill="none" stroke="#00d4ff" stroke-width="1.2" opacity="0"/>
+            <ellipse id="ring3" cx="400" cy="222" rx="52" ry="38" fill="none" stroke="#2f80ed" stroke-width="1"   opacity="0"/>
+            <ellipse id="ring4" cx="400" cy="222" rx="70" ry="52" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0"/>
           </g>
 
-          <!-- ===== VEHICLE ===== -->
-          <g class="car-group">
-            <polygon class="headlight-beam" points="368,355 560,338 560,382 368,372" fill="url(#beamGrad)" opacity="0.22"/>
-            <polygon class="headlight-beam" points="368,360 520,346 520,376 368,368" fill="url(#beamGrad)" opacity="0.14"/>
-            <ellipse cx="232" cy="428" rx="130" ry="10" fill="#000" opacity="0.35"/>
-            <rect x="102" y="370" width="268" height="55" rx="6" fill="url(#carBodyGrad)"/>
-            <path d="M160,310 Q172,282 210,274 L320,274 Q352,282 360,310 L370,370 L100,370 Z" fill="#0f1c30"/>
-            <path d="M160,310 Q172,282 210,274 L320,274 Q352,282 360,310 L370,370 L100,370 Z" fill="none" stroke="#1e3050" stroke-width="1.5"/>
-            <path d="M310,278 Q345,285 358,308 L368,345 L268,345 Q258,310 268,278 Z" fill="#0a1828" opacity="0.9"/>
-            <path d="M310,278 Q345,285 358,308 L368,345 L268,345 Q258,310 268,278 Z" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.4"/>
-            <path d="M315,280 Q342,287 352,306 L360,332 L278,332 Q270,308 276,280 Z" fill="#1a3a5c" opacity="0.22"/>
-            <path d="M162,310 Q172,284 212,276 L264,276 L256,345 L152,345 Z" fill="#0a1828" opacity="0.7"/>
-            <path d="M162,310 Q172,284 212,276 L264,276 L256,345 L152,345 Z" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.3"/>
-            <line x1="200" y1="345" x2="200" y2="424" stroke="#1a2a40" stroke-width="1.5"/>
-            <line x1="268" y1="345" x2="268" y2="424" stroke="#1a2a40" stroke-width="1.5"/>
-            <rect x="210" y="388" width="18" height="4" rx="2" fill="#2a3a50"/>
-            <rect x="278" y="388" width="18" height="4" rx="2" fill="#2a3a50"/>
-            <rect x="356" y="356" width="14" height="10" rx="2" fill="#fffbe0" opacity="0.95" filter="url(#glow)"/>
-            <rect x="356" y="370" width="14" height="8"  rx="2" fill="#ffe080" opacity="0.7"  filter="url(#glow)"/>
-            <rect x="354" y="354" width="18" height="14" rx="3" fill="none" stroke="#fffbe0" stroke-width="1" opacity="0.4"/>
-            <rect x="102" y="356" width="14" height="10" rx="2" fill="#ff4040" opacity="0.9" filter="url(#glow)"/>
-            <rect x="102" y="370" width="14" height="8"  rx="2" fill="#cc2020" opacity="0.7"/>
-            <rect x="360" y="400" width="12" height="14" rx="3" fill="#0d1828"/>
-            <rect x="340" y="402" width="22" height="10" rx="2" fill="#0a1828"/>
-            <rect x="100" y="400" width="12" height="14" rx="3" fill="#0d1828"/>
-            <circle cx="310" cy="426" r="26" fill="#080c10"/>
-            <circle cx="310" cy="426" r="26" fill="none" stroke="#1a2535" stroke-width="3"/>
-            <circle cx="310" cy="426" r="18" fill="#0d1520"/>
-            <circle cx="310" cy="426" r="18" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.5"/>
-            <line x1="310" y1="408" x2="310" y2="444" stroke="#2a3a50" stroke-width="2"/>
-            <line x1="292" y1="426" x2="328" y2="426" stroke="#2a3a50" stroke-width="2"/>
-            <line x1="297" y1="413" x2="323" y2="439" stroke="#2a3a50" stroke-width="1.5"/>
-            <line x1="323" y1="413" x2="297" y2="439" stroke="#2a3a50" stroke-width="1.5"/>
-            <circle cx="310" cy="426" r="5" fill="#2f80ed" opacity="0.8"/>
-            <circle cx="162" cy="426" r="26" fill="#080c10"/>
-            <circle cx="162" cy="426" r="26" fill="none" stroke="#1a2535" stroke-width="3"/>
-            <circle cx="162" cy="426" r="18" fill="#0d1520"/>
-            <circle cx="162" cy="426" r="18" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.5"/>
-            <line x1="162" y1="408" x2="162" y2="444" stroke="#2a3a50" stroke-width="2"/>
-            <line x1="144" y1="426" x2="180" y2="426" stroke="#2a3a50" stroke-width="2"/>
-            <line x1="149" y1="413" x2="175" y2="439" stroke="#2a3a50" stroke-width="1.5"/>
-            <line x1="175" y1="413" x2="149" y2="439" stroke="#2a3a50" stroke-width="1.5"/>
-            <circle cx="162" cy="426" r="5" fill="#2f80ed" opacity="0.8"/>
-            <line x1="230" y1="274" x2="230" y2="258" stroke="#1e3050" stroke-width="2"/>
-            <circle cx="230" cy="256" r="3" fill="#00d4ff" opacity="0.7" filter="url(#glow)"/>
-            <rect x="102" y="368" width="268" height="3" rx="1" fill="#2f80ed" opacity="0.3"/>
-          </g>
-
-          <!-- HUD panels -->
+          <!-- HUD overlay top-left -->
           <g opacity="0.85">
-            <rect x="30" y="30" width="160" height="70" rx="6" fill="#060e1c" opacity="0.85"/>
-            <rect x="30" y="30" width="160" height="70" rx="6" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.4"/>
-            <text x="44" y="50" font-size="8" fill="#5ba4f5" font-family="monospace" font-weight="bold" letter-spacing="1">RFID SYSTEM</text>
-            <rect x="44" y="55" width="60" height="1" fill="#2f80ed" opacity="0.3"/>
-            <text x="44" y="68" font-size="7" fill="#7a8599" font-family="monospace">STATUS</text>
-            <text x="90" y="68" font-size="7" fill="#4ade80" font-family="monospace">ACTIVE</text>
-            <text x="44" y="82" font-size="7" fill="#7a8599" font-family="monospace">RANGE</text>
-            <text x="90" y="82" font-size="7" fill="#00d4ff" font-family="monospace">20 FT UHF</text>
+            <rect x="28" y="28" width="165" height="75" rx="6" fill="#060e1c" opacity="0.9"/>
+            <rect x="28" y="28" width="165" height="75" rx="6" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.35"/>
+            <text x="42" y="50" font-size="8" fill="#5ba4f5" font-family="monospace" font-weight="bold" letter-spacing="1">RFID SYSTEM</text>
+            <rect x="42" y="55" width="65" height="1" fill="#2f80ed" opacity="0.3"/>
+            <text x="42" y="70" font-size="7" fill="#7a8599" font-family="monospace">STATUS</text>
+            <text x="92" y="70" font-size="7" fill="#4ade80" font-family="monospace">ACTIVE</text>
+            <text x="42" y="85" font-size="7" fill="#7a8599" font-family="monospace">RANGE</text>
+            <text x="92" y="85" font-size="7" fill="#00d4ff" font-family="monospace">20 FT UHF</text>
           </g>
-          <g opacity="0.85">
-            <rect x="810" y="30" width="160" height="70" rx="6" fill="#060e1c" opacity="0.85"/>
-            <rect x="810" y="30" width="160" height="70" rx="6" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.4"/>
-            <text x="824" y="50" font-size="8" fill="#5ba4f5" font-family="monospace" font-weight="bold" letter-spacing="1">GATE STATUS</text>
-            <rect x="824" y="55" width="60" height="1" fill="#2f80ed" opacity="0.3"/>
-            <text x="824" y="68" font-size="7" fill="#7a8599" font-family="monospace">MODE</text>
-            <text x="870" y="68" font-size="7" fill="#4ade80" font-family="monospace">AUTHORIZED</text>
-            <text x="824" y="82" font-size="7" fill="#7a8599" font-family="monospace">LOG</text>
-            <text x="870" y="82" font-size="7" fill="#00d4ff" font-family="monospace">NOTIFIED ✓</text>
+          <!-- HUD overlay top-right -->
+          <g id="hudRight" opacity="0.85">
+            <rect x="907" y="28" width="165" height="75" rx="6" fill="#060e1c" opacity="0.9"/>
+            <rect x="907" y="28" width="165" height="75" rx="6" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.35"/>
+            <text x="921" y="50" font-size="8" fill="#5ba4f5" font-family="monospace" font-weight="bold" letter-spacing="1">GATE STATUS</text>
+            <rect x="921" y="55" width="65" height="1" fill="#2f80ed" opacity="0.3"/>
+            <text x="921" y="70" font-size="7" fill="#7a8599" font-family="monospace">MODE</text>
+            <text id="hudMode" x="965" y="70" font-size="7" fill="#cc4040" font-family="monospace">LOCKED</text>
+            <text x="921" y="85" font-size="7" fill="#7a8599" font-family="monospace">TAG</text>
+            <text id="hudTag" x="965" y="85" font-size="7" fill="#7a8599" font-family="monospace">SCANNING...</text>
           </g>
 
-          <path d="M0,0 L0,20 M0,0 L20,0" stroke="#2f80ed" stroke-width="2" opacity="0.3" fill="none"/>
-          <path d="M1000,0 L1000,20 M1000,0 L980,0" stroke="#2f80ed" stroke-width="2" opacity="0.3" fill="none"/>
-          <path d="M0,480 L0,460 M0,480 L20,480" stroke="#2f80ed" stroke-width="2" opacity="0.3" fill="none"/>
-          <path d="M1000,480 L1000,460 M1000,480 L980,480" stroke="#2f80ed" stroke-width="2" opacity="0.3" fill="none"/>
+          <!-- Corner brackets -->
+          <path d="M0,0 L0,22 M0,0 L22,0" stroke="#2f80ed" stroke-width="2" opacity="0.25" fill="none"/>
+          <path d="M1100,0 L1100,22 M1100,0 L1078,0" stroke="#2f80ed" stroke-width="2" opacity="0.25" fill="none"/>
+          <path d="M0,500 L0,478 M0,500 L22,500" stroke="#2f80ed" stroke-width="2" opacity="0.25" fill="none"/>
+          <path d="M1100,500 L1100,478 M1100,500 L1078,500" stroke="#2f80ed" stroke-width="2" opacity="0.25" fill="none"/>
 
-        </g>
+          <!-- ===== POOL SERVICE PICKUP TRUCK =====
+               Truck faces RIGHT (front = right side, headlights on right).
+               Cab occupies roughly x=0..200 in local space, bed x=200..340, total ~340px wide.
+               Resting position: front of truck (right side) at x≈420 — just left of the reader.
+               Animation: starts at translateX(-480), slides to translateX(0).
+          -->
+          <g id="truckGroup" transform="translate(0,0)">
+
+            <!-- Headlight beam -->
+            <polygon id="beamLeft" points="420,360 600,345 600,388 420,378" fill="url(#beamGrad)" opacity="0.18"/>
+
+            <!-- Ground shadow -->
+            <ellipse cx="230" cy="450" rx="170" ry="12" fill="#000" opacity="0.3"/>
+
+            <!-- ── TRUCK BED (rear / left side) x=80..240 ── -->
+            <rect x="80" y="355" width="165" height="58" rx="3" fill="url(#bedGrad)"/>
+            <rect x="80" y="355" width="165" height="58" rx="3" fill="none" stroke="#5a6a78" stroke-width="1.5"/>
+            <!-- Bed floor -->
+            <rect x="85" y="358" width="155" height="50" rx="2" fill="#6a7a88"/>
+            <!-- Bed wall slats -->
+            <line x1="120" y1="355" x2="120" y2="413" stroke="#7a8a98" stroke-width="1"/>
+            <line x1="155" y1="355" x2="155" y2="413" stroke="#7a8a98" stroke-width="1"/>
+            <line x1="190" y1="355" x2="190" y2="413" stroke="#7a8a98" stroke-width="1"/>
+            <line x1="225" y1="355" x2="225" y2="413" stroke="#7a8a98" stroke-width="1"/>
+            <!-- Tailgate -->
+            <rect x="80" y="355" width="12" height="58" rx="2" fill="#7a8a98"/>
+            <rect x="80" y="355" width="12" height="58" rx="2" fill="none" stroke="#5a6a78" stroke-width="1"/>
+
+            <!-- POOL EQUIPMENT IN BED -->
+            <!-- Telescoping pole (diagonal, leaning against cab) -->
+            <line x1="100" y1="405" x2="240" y2="285" stroke="#4a90c0" stroke-width="5" stroke-linecap="round"/>
+            <line x1="100" y1="405" x2="240" y2="285" stroke="#6ab0e0" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+            <!-- Pool brush head at tip of pole -->
+            <rect x="232" y="278" width="20" height="10" rx="3" fill="#80c0e0"/>
+            <rect x="232" y="278" width="20" height="10" rx="3" fill="none" stroke="#4a90c0" stroke-width="1"/>
+            <!-- Bristles -->
+            <line x1="234" y1="288" x2="234" y2="294" stroke="#60a0c0" stroke-width="1.5"/>
+            <line x1="238" y1="288" x2="238" y2="295" stroke="#60a0c0" stroke-width="1.5"/>
+            <line x1="242" y1="288" x2="242" y2="294" stroke="#60a0c0" stroke-width="1.5"/>
+            <line x1="246" y1="288" x2="246" y2="294" stroke="#60a0c0" stroke-width="1.5"/>
+            <!-- Chemical jugs (2x) -->
+            <rect x="92" y="368" width="24" height="35" rx="4" fill="#e8f4e8"/>
+            <rect x="92" y="368" width="24" height="35" rx="4" fill="none" stroke="#b0c8b0" stroke-width="1"/>
+            <rect x="96" y="363" width="16" height="8" rx="3" fill="#c8e0c8"/>
+            <text x="95" y="380" font-size="5" fill="#2a6a2a" font-family="monospace" font-weight="bold">POOL</text>
+            <text x="95" y="387" font-size="4" fill="#2a6a2a" font-family="monospace">CHEM</text>
+            <rect x="120" y="372" width="22" height="31" rx="4" fill="#e8eef8"/>
+            <rect x="120" y="372" width="22" height="31" rx="4" fill="none" stroke="#b0b8d0" stroke-width="1"/>
+            <rect x="124" y="367" width="14" height="7" rx="2" fill="#c8d0e8"/>
+            <text x="122" y="384" font-size="4" fill="#2a3a6a" font-family="monospace">ALGAE</text>
+            <!-- Net / skimmer bag rolled up -->
+            <ellipse cx="200" cy="390" rx="18" ry="12" fill="#a0b4c0" opacity="0.8"/>
+            <ellipse cx="200" cy="390" rx="18" ry="12" fill="none" stroke="#8a9aaa" stroke-width="1"/>
+            <line x1="186" y1="384" x2="214" y2="396" stroke="#8a9aaa" stroke-width="1" opacity="0.6"/>
+            <line x1="186" y1="390" x2="214" y2="390" stroke="#8a9aaa" stroke-width="1" opacity="0.6"/>
+            <!-- Small pump box -->
+            <rect x="218" y="375" width="22" height="20" rx="3" fill="#3a4a5a"/>
+            <rect x="218" y="375" width="22" height="20" rx="3" fill="none" stroke="#4a6080" stroke-width="1"/>
+            <circle cx="229" cy="385" r="5" fill="#2a3a4a"/>
+            <circle cx="229" cy="385" r="5" fill="none" stroke="#4a6080" stroke-width="1"/>
+            <circle cx="229" cy="385" r="2" fill="#00d4ff" opacity="0.6"/>
+
+            <!-- ── TRUCK CAB (white, x=240..420) ── -->
+            <!-- Cab body lower -->
+            <rect x="238" y="370" width="185" height="43" rx="5" fill="url(#truckWhiteGrad)"/>
+            <!-- Blue stripe along body -->
+            <rect x="238" y="380" width="185" height="12" fill="url(#truckStripe)" opacity="0.9"/>
+            <!-- Cab upper / roof -->
+            <path d="M268,300 Q278,270 310,262 L390,262 Q415,270 422,300 L422,370 L238,370 Z" fill="url(#truckWhiteGrad)"/>
+            <path d="M268,300 Q278,270 310,262 L390,262 Q415,270 422,300 L422,370 L238,370 Z" fill="none" stroke="#c0d0e0" stroke-width="1.5"/>
+            <!-- Blue stripe on cab upper too -->
+            <path d="M280,342 Q282,328 295,322 L422,322 L422,342 Z" fill="url(#truckStripe)" opacity="0.5"/>
+            <!-- Company text on door -->
+            <text x="268" y="396" font-size="8" fill="#0e6080" font-family="sans-serif" font-weight="bold" opacity="0.9">BLUE WAVE</text>
+            <text x="268" y="406" font-size="6" fill="#1a8aaa" font-family="sans-serif">POOL SERVICE</text>
+            <!-- Windshield (front/right side) -->
+            <path d="M382,266 Q412,274 420,298 L420,340 L310,340 Q302,310 308,266 Z" fill="#0a1828" opacity="0.85"/>
+            <path d="M382,266 Q412,274 420,298 L420,340 L310,340 Q302,310 308,266 Z" fill="none" stroke="#b0c8d8" stroke-width="1.2" opacity="0.5"/>
+            <!-- Windshield glare -->
+            <path d="M388,270 Q408,278 414,296 L412,316 L320,316 Q314,295 318,270 Z" fill="#1a3a5c" opacity="0.18"/>
+            <!-- Rear window (left side) -->
+            <path d="M268,302 Q276,274 308,266 L310,266 L304,340 L242,340 Z" fill="#0a1828" opacity="0.75"/>
+            <path d="M268,302 Q276,274 308,266 L310,266 L304,340 L242,340 Z" fill="none" stroke="#b0c8d8" stroke-width="0.8" opacity="0.3"/>
+            <!-- Door line -->
+            <line x1="310" y1="340" x2="310" y2="413" stroke="#b0c0d0" stroke-width="1.5" opacity="0.5"/>
+            <!-- Door handle -->
+            <rect x="318" y="384" width="20" height="5" rx="2" fill="#a0b0c0"/>
+            <!-- HEADLIGHTS (right/front of cab) -->
+            <rect x="412" y="358" width="12" height="9" rx="2" fill="#fffde0" opacity="0.95" filter="url(#glow)"/>
+            <rect x="412" y="370" width="12" height="8" rx="2" fill="#ffe080" opacity="0.7" filter="url(#glow)"/>
+            <rect x="410" y="356" width="16" height="13" rx="3" fill="none" stroke="#fffde0" stroke-width="1" opacity="0.4"/>
+            <!-- TAIL LIGHTS (left/rear) -->
+            <rect x="238" y="358" width="12" height="9" rx="2" fill="#ff3030" opacity="0.9" filter="url(#glow)"/>
+            <rect x="238" y="370" width="12" height="7" rx="2" fill="#aa1010" opacity="0.7"/>
+            <!-- Front bumper -->
+            <rect x="416" y="400" width="10" height="13" rx="3" fill="#a0b0c0"/>
+            <rect x="396" y="405" width="22" height="9" rx="2" fill="#8a9aaa"/>
+            <!-- Rear bumper -->
+            <rect x="236" y="400" width="10" height="13" rx="3" fill="#a0b0c0"/>
+            <!-- Roof rack / lightbar -->
+            <rect x="280" y="257" width="120" height="8" rx="3" fill="#8a9aaa"/>
+            <rect x="280" y="257" width="120" height="8" rx="3" fill="none" stroke="#7a8a98" stroke-width="1"/>
+            <!-- Amber work lights on roof rack -->
+            <circle cx="300" cy="256" r="4" fill="#ffaa20" opacity="0.8" filter="url(#glow)"/>
+            <circle cx="340" cy="256" r="4" fill="#ffaa20" opacity="0.8" filter="url(#glow)"/>
+            <circle cx="380" cy="256" r="4" fill="#ffaa20" opacity="0.8" filter="url(#glow)"/>
+            <!-- FRONT WHEEL -->
+            <circle cx="368" cy="443" r="28" fill="#080c10"/>
+            <circle cx="368" cy="443" r="28" fill="none" stroke="#1a2535" stroke-width="3"/>
+            <circle cx="368" cy="443" r="20" fill="#0d1520"/>
+            <circle cx="368" cy="443" r="20" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
+            <line x1="368" y1="423" x2="368" y2="463" stroke="#2a3a50" stroke-width="2.5"/>
+            <line x1="348" y1="443" x2="388" y2="443" stroke="#2a3a50" stroke-width="2.5"/>
+            <line x1="354" y1="429" x2="382" y2="457" stroke="#2a3a50" stroke-width="2"/>
+            <line x1="382" y1="429" x2="354" y2="457" stroke="#2a3a50" stroke-width="2"/>
+            <circle cx="368" cy="443" r="6" fill="#2f80ed" opacity="0.7"/>
+            <!-- REAR WHEEL -->
+            <circle cx="162" cy="443" r="28" fill="#080c10"/>
+            <circle cx="162" cy="443" r="28" fill="none" stroke="#1a2535" stroke-width="3"/>
+            <circle cx="162" cy="443" r="20" fill="#0d1520"/>
+            <circle cx="162" cy="443" r="20" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
+            <line x1="162" y1="423" x2="162" y2="463" stroke="#2a3a50" stroke-width="2.5"/>
+            <line x1="142" y1="443" x2="182" y2="443" stroke="#2a3a50" stroke-width="2.5"/>
+            <line x1="148" y1="429" x2="176" y2="457" stroke="#2a3a50" stroke-width="2"/>
+            <line x1="176" y1="429" x2="148" y2="457" stroke="#2a3a50" stroke-width="2"/>
+            <circle cx="162" cy="443" r="6" fill="#2f80ed" opacity="0.7"/>
+
+          </g><!-- end truckGroup -->
+
+        </g><!-- end sceneClip -->
       </svg>
-    </div>
+    </div><!-- end gate-illustration -->
 
     <div class="hero-overlay">
       <div class="hero-badge">Smart Gate Access System</div>
@@ -440,8 +638,8 @@
             <div class="mockup-row"><div><div class="tag-name">John (Tag #1)</div><div class="tag-time">Today, 8:14 AM · RFID</div></div><div class="tag-status status-in">Entered</div></div>
             <div class="mockup-row"><div><div class="tag-name">Housekeeper</div><div class="tag-time">Today, 9:02 AM · PIN</div></div><div class="tag-status status-in">Entered</div></div>
             <div class="mockup-row"><div><div class="tag-name">Housekeeper</div><div class="tag-time">Today, 1:45 PM · PIN</div></div><div class="tag-status status-out">Exited</div></div>
-            <div class="mockup-row"><div><div class="tag-name">Unknown</div><div class="tag-time">Today, 3:28 PM · PIN</div></div><div class="tag-status status-denied">Denied</div></div>
-            <div class="mockup-notif">🔔 &nbsp;<span><strong>Gate opened</strong> — John arrived at 8:14 AM</span></div>
+            <div class="mockup-row"><div><div class="tag-name">Blue Wave Pool Co.</div><div class="tag-time">Today, 10:24 AM · RFID</div></div><div class="tag-status status-in">Entered</div></div>
+            <div class="mockup-notif">🔔 &nbsp;<span><strong>Gate opened</strong> — Pool Service arrived at 10:24 AM</span></div>
           </div>
         </div>
       </div>
@@ -497,38 +695,164 @@
   </footer>
 
   <script>
-    (function() {
-      var panel = document.getElementById('gatePanel');
-      if (!panel) return;
+  (function() {
+    // ── Elements ──
+    var truck     = document.getElementById('truckGroup');
+    var gateL     = document.getElementById('gateLeft');
+    var gateR     = document.getElementById('gateRight');
+    var led       = document.getElementById('readerLed');
+    var ledGlow   = document.getElementById('readerLedGlow');
+    var rfidRings = document.getElementById('rfidRings');
+    var ring1     = document.getElementById('ring1');
+    var ring2     = document.getElementById('ring2');
+    var ring3     = document.getElementById('ring3');
+    var ring4     = document.getElementById('ring4');
+    var hudMode   = document.getElementById('hudMode');
+    var hudTag    = document.getElementById('hudTag');
+    var toast     = document.getElementById('notifToast');
 
-      var CYCLE        = 5000;
-      var PAUSE_CLOSED = 0.15;
-      var OPEN_AT      = 0.50;
-      var PAUSE_OPEN   = 0.75;
-      var MAX_DEG      = -82; // negative = arm swings upward (counterclockwise)
+    if (!truck) return;
 
-      function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+    // ── Timing (ms fractions of CYCLE) ──
+    var CYCLE         = 9000;  // total loop ms
+    var T_TRUCK_START = 0.05;  // truck begins driving
+    var T_TRUCK_STOP  = 0.38;  // truck stops at reader
+    var T_SCAN_START  = 0.30;  // RFID rings begin
+    var T_LED_GREEN   = 0.38;  // reader turns green
+    var T_GATE_OPEN   = 0.42;  // gate starts opening
+    var T_GATE_FULL   = 0.58;  // gate fully open
+    var T_NOTIF       = 0.60;  // notification appears
+    var T_HOLD        = 0.90;  // hold until end
 
-      function getAngle(frac) {
-        if (frac <= PAUSE_CLOSED) return 0;
-        if (frac <= OPEN_AT) {
-          var t = (frac - PAUSE_CLOSED) / (OPEN_AT - PAUSE_CLOSED);
-          return MAX_DEG * easeInOut(t);
-        }
-        if (frac <= PAUSE_OPEN) return MAX_DEG;
-        var t = (frac - PAUSE_OPEN) / (1 - PAUSE_OPEN);
-        return MAX_DEG * (1 - easeInOut(t));
+    // Gate max swing angle (degrees). Left panel = +60 (clockwise = outward), Right = -60
+    var GATE_MAX = 68;
+
+    // Truck travel: from off-screen left to resting position
+    var TRUCK_START_X = -530;
+    var TRUCK_REST_X  = 0;
+
+    // Ring animation state (independent oscillation)
+    var ringTime = 0;
+    var lastTs   = null;
+    var ringsActive = false;
+
+    function lerp(a, b, t) { return a + (b - a) * t; }
+    function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+    function ease(t) { return t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t; }
+    function frac(t, a, b) { return clamp((t - a) / (b - a), 0, 1); }
+
+    function lerpColor(c1, c2, t) {
+      // c1, c2 = [r,g,b]
+      var r = Math.round(lerp(c1[0], c2[0], t));
+      var g = Math.round(lerp(c1[1], c2[1], t));
+      var b = Math.round(lerp(c1[2], c2[2], t));
+      return 'rgb('+r+','+g+','+b+')';
+    }
+
+    var RED    = [204, 32,  32];
+    var AMBER  = [220, 160,  20];
+    var GREEN  = [74,  222, 128];
+
+    function setLed(color, glowAlpha) {
+      led.setAttribute('fill', color);
+      ledGlow.setAttribute('fill', color);
+      ledGlow.setAttribute('opacity', glowAlpha);
+    }
+
+    function animateRings(dt) {
+      ringTime += dt;
+      var period = 2200; // ms per ring cycle
+      var t = (ringTime % period) / period;
+      // 4 rings staggered by 0.25 each
+      var rings = [ring1, ring2, ring3, ring4];
+      var delays = [0, 0.25, 0.5, 0.75];
+      rings.forEach(function(r, i) {
+        var rt = ((t - delays[i] + 1) % 1);
+        var op = rt < 0.7 ? (1 - rt / 0.7) * 0.85 : 0;
+        r.setAttribute('opacity', op);
+      });
+    }
+
+    function tick(ts) {
+      var dt = lastTs ? ts - lastTs : 16;
+      lastTs = ts;
+
+      var cycleTs = ts % CYCLE;
+      var f = cycleTs / CYCLE; // 0..1 within cycle
+
+      // ── Truck position ──
+      var truckF = ease(frac(f, T_TRUCK_START, T_TRUCK_STOP));
+      var tx = lerp(TRUCK_START_X, TRUCK_REST_X, truckF);
+      truck.setAttribute('transform', 'translate(' + tx + ',0)');
+
+      // ── LED colour ──
+      if (f < T_SCAN_START) {
+        setLed('rgb(204,32,32)', '0.15');
+      } else if (f < T_LED_GREEN) {
+        // red → amber during approach
+        var t1 = frac(f, T_SCAN_START, T_LED_GREEN);
+        setLed(lerpColor(RED, AMBER, t1), '0.2');
+      } else if (f < T_GATE_OPEN) {
+        // amber → green on scan confirm
+        var t2 = frac(f, T_LED_GREEN, T_GATE_OPEN);
+        setLed(lerpColor(AMBER, GREEN, t2), String(0.2 + 0.15 * t2));
+      } else {
+        setLed('rgb(74,222,128)', '0.3');
       }
 
-      function tick(ts) {
-        var frac = (ts % CYCLE) / CYCLE;
-        var deg  = getAngle(frac);
-        panel.setAttribute('transform', 'translate(444,310) rotate(' + deg + ')');
-        requestAnimationFrame(tick);
+      // ── RFID rings ──
+      if (f >= T_SCAN_START && f < T_GATE_OPEN) {
+        rfidRings.setAttribute('opacity', '0.8');
+        animateRings(dt);
+      } else {
+        rfidRings.setAttribute('opacity', '0');
+        if (f < T_SCAN_START) ringTime = 0;
+      }
+
+      // ── Gate swing ──
+      // Left panel: hinge at right edge → swings outward = positive rotation (clockwise)
+      // Right panel: hinge at left edge → swings outward = negative rotation (counter-clockwise)
+      var gateT = ease(frac(f, T_GATE_OPEN, T_GATE_FULL));
+      var leftAngle  =  GATE_MAX * gateT;
+      var rightAngle = -GATE_MAX * gateT;
+      gateL.setAttribute('transform', 'translate(480,267) rotate(' + leftAngle + ')');
+      gateR.setAttribute('transform', 'translate(620,267) rotate(' + rightAngle + ')');
+
+      // ── HUD text ──
+      if (f < T_SCAN_START) {
+        hudMode.setAttribute('fill', '#cc4040');
+        hudMode.textContent = 'LOCKED';
+        hudTag.setAttribute('fill', '#7a8599');
+        hudTag.textContent = 'SCANNING...';
+      } else if (f < T_LED_GREEN) {
+        hudMode.setAttribute('fill', '#ddaa20');
+        hudMode.textContent = 'READING';
+        hudTag.setAttribute('fill', '#ddaa20');
+        hudTag.textContent = 'TAG FOUND';
+      } else if (f < T_GATE_OPEN) {
+        hudMode.setAttribute('fill', '#4ade80');
+        hudMode.textContent = 'AUTHORIZED';
+        hudTag.setAttribute('fill', '#4ade80');
+        hudTag.textContent = 'POOL SVC';
+      } else {
+        hudMode.setAttribute('fill', '#4ade80');
+        hudMode.textContent = 'OPEN';
+        hudTag.setAttribute('fill', '#4ade80');
+        hudTag.textContent = 'POOL SVC';
+      }
+
+      // ── Notification toast ──
+      if (f >= T_NOTIF && f < T_HOLD) {
+        toast.classList.add('visible');
+      } else {
+        toast.classList.remove('visible');
       }
 
       requestAnimationFrame(tick);
-    })();
+    }
+
+    requestAnimationFrame(tick);
+  })();
   </script>
 
 </body>

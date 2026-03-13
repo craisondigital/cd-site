@@ -42,45 +42,22 @@
     .hero-overlay p { font-size: 1.1rem; color: var(--muted); max-width: 540px; margin: 0 auto 2rem; animation: fadeUp 0.6s 0.2s ease both; }
     .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
 
-    /* ── ANIMATIONS ── */
-
-    /* RFID rings pulse outward from reader */
-    @keyframes rfid-ring {
-      0%   { opacity: 0.9; transform: scale(0.2); }
-      100% { opacity: 0;   transform: scale(1);   }
-    }
+    /* CSS animations for non-gate elements */
+    @keyframes rfid-ring { 0% { opacity: 0.9; transform: scale(0.2); } 100% { opacity: 0; transform: scale(1); } }
     .rfid-ring { animation: rfid-ring 2.4s ease-out infinite; }
     .rfid-ring:nth-child(2) { animation-delay: 0.6s; }
     .rfid-ring:nth-child(3) { animation-delay: 1.2s; }
     .rfid-ring:nth-child(4) { animation-delay: 1.8s; }
 
-    /* Single gate swings open from LEFT hinge (rotates around left edge) */
-    @keyframes gate-swing {
-      0%,  15% { transform: perspective(600px) rotateY(0deg);   }
-      55%, 100% { transform: perspective(600px) rotateY(-78deg); }
-    }
-    .gate-single {
-      transform-origin: left center;
-      animation: gate-swing 4s ease-in-out infinite;
-    }
-
-    /* Car drives LEFT → RIGHT: starts off left edge, stops near gate */
-    @keyframes car-drive {
-      0%   { transform: translateX(-320px); opacity: 0; }
-      12%  { opacity: 1; }
-      55%, 100% { transform: translateX(0px); opacity: 1; }
-    }
+    @keyframes car-drive { 0% { transform: translateX(-320px); opacity: 0; } 12% { opacity: 1; } 55%, 100% { transform: translateX(0px); opacity: 1; } }
     .car-group { animation: car-drive 4s ease-out infinite; }
 
-    /* Headlight beams */
     @keyframes beam-pulse { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.35; } }
     .headlight-beam { animation: beam-pulse 1.5s ease-in-out infinite; }
 
-    /* RFID reader scan line */
     @keyframes scan { 0%, 100% { transform: translateY(0); opacity: 1; } 50% { transform: translateY(18px); opacity: 0.5; } }
     .scan-line { animation: scan 1.8s ease-in-out infinite; }
 
-    /* Authorized badge flash */
     @keyframes auth-flash { 0%, 55% { opacity: 0; } 60%, 80% { opacity: 1; } 100% { opacity: 0; } }
     .auth-badge { animation: auth-flash 4s ease infinite; }
 
@@ -173,7 +150,6 @@
     .footer-logo { font-family: var(--font-display); font-weight: 800; font-size: 1rem; color: var(--text); }
     .footer-logo span { color: var(--cyan); }
 
-    /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 1rem 1.5rem; } nav ul { display: none; }
       .section-inner { padding: 4rem 1.5rem; }
@@ -187,7 +163,6 @@
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <a href="#" class="nav-logo">Craison<span>Digital</span></a>
     <ul>
@@ -198,7 +173,6 @@
     </ul>
   </nav>
 
-  <!-- HERO WITH GATE ILLUSTRATION -->
   <section class="hero-visual">
     <div class="hero-visual-bg"></div>
     <div class="hero-grid-bg"></div>
@@ -216,9 +190,8 @@
             <stop offset="0%" stop-color="#1a2540"/><stop offset="60%" stop-color="#111827"/><stop offset="100%" stop-color="#0a0f1a"/>
           </linearGradient>
           <linearGradient id="gateGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#1a2e4a"/><stop offset="50%" stop-color="#2a4060"/><stop offset="100%" stop-color="#1a2e4a"/>
+            <stop offset="0%" stop-color="#1e3555"/><stop offset="50%" stop-color="#2a4a6a"/><stop offset="100%" stop-color="#1e3555"/>
           </linearGradient>
-          <!-- Beam shoots RIGHT from headlights toward the gate -->
           <linearGradient id="beamGrad" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stop-color="#fffbe0" stop-opacity="0.55"/>
             <stop offset="100%" stop-color="#fffbe0" stop-opacity="0"/>
@@ -230,10 +203,9 @@
 
         <g clip-path="url(#sceneClip)">
 
-          <!-- Sky -->
+          <!-- Sky & atmosphere -->
           <rect width="1000" height="480" fill="url(#skyGrad)"/>
           <ellipse cx="500" cy="305" rx="420" ry="80" fill="#0a1e3a" opacity="0.5"/>
-          <!-- Stars -->
           <circle cx="80"  cy="40" r="1"   fill="white" opacity="0.6"/>
           <circle cx="150" cy="20" r="1.2" fill="white" opacity="0.5"/>
           <circle cx="220" cy="60" r="0.8" fill="white" opacity="0.7"/>
@@ -247,7 +219,6 @@
           <!-- Road -->
           <rect x="0" y="340" width="1000" height="140" fill="url(#roadGrad)"/>
           <rect x="0" y="340" width="1000" height="2" fill="#1a2535" opacity="0.8"/>
-          <!-- Lane dashes -->
           <rect x="0"   y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
           <rect x="120" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
           <rect x="240" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
@@ -259,47 +230,74 @@
           <rect x="960" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
 
           <!-- ===== GATE POSTS ===== -->
-          <!-- Left post (hinge post — gate swings from here) -->
+          <!-- Left / hinge post. Right edge is at x=458. Gate pivots here. -->
           <rect x="430" y="175" width="28" height="168" rx="4" fill="#1e3050"/>
           <rect x="430" y="175" width="28" height="168" rx="4" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.5"/>
           <rect x="426" y="167" width="36" height="12" rx="3" fill="#2a4060"/>
           <circle cx="444" cy="188" r="5" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/>
           <circle cx="444" cy="188" r="10" fill="#00d4ff" opacity="0.15"/>
+          <!-- Hinge knuckles on post -->
+          <rect x="453" y="205" width="6" height="10" rx="3" fill="#3a5070"/>
+          <rect x="453" y="280" width="6" height="10" rx="3" fill="#3a5070"/>
+          <rect x="453" y="320" width="6" height="10" rx="3" fill="#3a5070"/>
 
-          <!-- Right post (receiver post) -->
+          <!-- Right / receiver post -->
           <rect x="640" y="175" width="28" height="168" rx="4" fill="#1e3050"/>
           <rect x="640" y="175" width="28" height="168" rx="4" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.5"/>
           <rect x="636" y="167" width="36" height="12" rx="3" fill="#2a4060"/>
           <circle cx="654" cy="188" r="5" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/>
           <circle cx="654" cy="188" r="10" fill="#00d4ff" opacity="0.15"/>
 
-          <!-- ===== SINGLE GATE PANEL — swings open from left post ===== -->
-          <!-- The gate is 196px wide, hinged at x=458 (right edge of left post) -->
-          <g class="gate-single">
-            <!-- Gate body — starts at hinge point x=458 -->
+          <!-- ===== SINGLE GATE PANEL =====
+               Hinge is at x=458, vertical centre y=266 (midpoint of 192..340).
+               The gate swings open away from viewer (negative rotation in 2-D
+               looks like it swings into the property).
+               SVG animateTransform rotate: "angle cx cy"
+               0 deg  = closed (gate fills 458..640)
+               -70 deg = open   (gate swings behind left post / into property)
+          -->
+          <g id="gate-panel">
+            <!-- Gate fill -->
             <rect x="458" y="192" width="182" height="148" rx="2" fill="url(#gateGrad)" opacity="0.95"/>
             <!-- Vertical bars -->
-            <line x1="494" y1="192" x2="494" y2="340" stroke="#2f80ed" stroke-width="1.5" opacity="0.45"/>
-            <line x1="530" y1="192" x2="530" y2="340" stroke="#2f80ed" stroke-width="1.5" opacity="0.45"/>
-            <line x1="566" y1="192" x2="566" y2="340" stroke="#2f80ed" stroke-width="1.5" opacity="0.45"/>
-            <line x1="602" y1="192" x2="602" y2="340" stroke="#2f80ed" stroke-width="1.5" opacity="0.45"/>
-            <line x1="638" y1="192" x2="638" y2="340" stroke="#2f80ed" stroke-width="1.5" opacity="0.45"/>
+            <line x1="494" y1="192" x2="494" y2="340" stroke="#2f80ed" stroke-width="1.5" opacity="0.5"/>
+            <line x1="530" y1="192" x2="530" y2="340" stroke="#2f80ed" stroke-width="1.5" opacity="0.5"/>
+            <line x1="566" y1="192" x2="566" y2="340" stroke="#2f80ed" stroke-width="1.5" opacity="0.5"/>
+            <line x1="602" y1="192" x2="602" y2="340" stroke="#2f80ed" stroke-width="1.5" opacity="0.5"/>
+            <line x1="638" y1="192" x2="638" y2="340" stroke="#2f80ed" stroke-width="1.5" opacity="0.5"/>
             <!-- Horizontal mid-rail -->
-            <rect x="458" y="258" width="182" height="3" fill="#2f80ed" opacity="0.3"/>
+            <rect x="458" y="258" width="182" height="3" fill="#2f80ed" opacity="0.35"/>
             <!-- Top spikes -->
             <polygon points="474,192 478,180 482,192" fill="#2a4060"/>
             <polygon points="510,192 514,180 518,192" fill="#2a4060"/>
             <polygon points="546,192 550,180 554,192" fill="#2a4060"/>
             <polygon points="582,192 586,180 590,192" fill="#2a4060"/>
             <polygon points="618,192 622,180 626,192" fill="#2a4060"/>
-            <!-- Edge glow border -->
-            <rect x="458" y="192" width="182" height="148" rx="2" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.65"/>
-            <!-- Latch bolt on free (right) end of gate -->
+            <!-- Border glow -->
+            <rect x="458" y="192" width="182" height="148" rx="2" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.7"/>
+            <!-- Latch on free end -->
             <rect x="632" y="255" width="10" height="20" rx="3" fill="#1a3050"/>
             <rect x="632" y="255" width="10" height="20" rx="3" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.5"/>
+
+            <!--
+              SVG native animateTransform — rotates around the exact hinge point (458, 266).
+              This is the CORRECT way to pivot an SVG element; CSS transform-origin
+              is unreliable on <g> elements and causes the detach bug.
+              values: "0,458,266 ; 0,458,266 ; -72,458,266 ; -72,458,266 ; 0,458,266"
+              keyTimes match: closed → pause → open → pause → closed
+            -->
+            <animateTransform
+              attributeName="transform"
+              type="rotate"
+              values="0,458,266; 0,458,266; -72,458,266; -72,458,266; 0,458,266"
+              keyTimes="0; 0.15; 0.5; 0.75; 1"
+              keySplines="0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1"
+              calcMode="spline"
+              dur="5s"
+              repeatCount="indefinite"/>
           </g>
 
-          <!-- ===== RFID READER (mounted on left post, outside) ===== -->
+          <!-- ===== RFID READER (left post exterior) ===== -->
           <rect x="398" y="234" width="34" height="52" rx="5" fill="#0d1e35"/>
           <rect x="398" y="234" width="34" height="52" rx="5" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.8"/>
           <rect x="402" y="238" width="24" height="24" rx="2" fill="#091525"/>
@@ -307,14 +305,14 @@
           <rect class="scan-line" x="403" y="239" width="22" height="2" rx="1" fill="#00d4ff" opacity="0.9"/>
           <circle cx="415" cy="274" r="4" fill="#4ade80" opacity="0.9" filter="url(#glow)"/>
 
-          <!-- AUTHORIZED badge (flashes when car arrives) -->
+          <!-- AUTHORIZED badge -->
           <g class="auth-badge">
             <rect x="340" y="226" width="56" height="18" rx="4" fill="#0d2a1a"/>
             <rect x="340" y="226" width="56" height="18" rx="4" fill="none" stroke="#4ade80" stroke-width="1"/>
             <text x="368" y="238" text-anchor="middle" font-size="7" fill="#4ade80" font-family="monospace" font-weight="bold">AUTHORIZED</text>
           </g>
 
-          <!-- RFID signal rings (emit from reader toward approaching car on the left) -->
+          <!-- RFID rings -->
           <g opacity="0.75" filter="url(#softglow)">
             <ellipse class="rfid-ring" cx="415" cy="250" rx="20" ry="14" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0"/>
             <ellipse class="rfid-ring" cx="415" cy="250" rx="36" ry="26" fill="none" stroke="#00d4ff" stroke-width="1.2" opacity="0"/>
@@ -322,69 +320,35 @@
             <ellipse class="rfid-ring" cx="415" cy="250" rx="72" ry="54" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0"/>
           </g>
 
-          <!-- ===== VEHICLE — drives LEFT → RIGHT (headlights on RIGHT/front) ===== -->
-          <!--
-            Car occupies roughly x=100–370 in rest position.
-            Front of car (headlights) is on the RIGHT at x≈370, facing the gate.
-            Rear (tail lights) is on the LEFT at x≈100.
-            Animation: starts at translateX(-320), slides to translateX(0).
-          -->
+          <!-- ===== VEHICLE (drives left → right, headlights on right) ===== -->
           <g class="car-group">
-
-            <!-- Headlight beams — shoot RIGHTWARD from front of car -->
             <polygon class="headlight-beam" points="368,355 560,338 560,382 368,372" fill="url(#beamGrad)" opacity="0.22"/>
             <polygon class="headlight-beam" points="368,360 520,346 520,376 368,368" fill="url(#beamGrad)" opacity="0.14"/>
-
-            <!-- Ground shadow -->
             <ellipse cx="232" cy="428" rx="130" ry="10" fill="#000" opacity="0.35"/>
-
-            <!-- Car body lower -->
             <rect x="102" y="370" width="268" height="55" rx="6" fill="url(#carBodyGrad)"/>
-
-            <!-- Car cabin/upper — FRONT on RIGHT, rear on LEFT -->
-            <!-- Windshield slopes from front-right cabin down toward the rear -->
             <path d="M160,310 Q172,282 210,274 L320,274 Q352,282 360,310 L370,370 L100,370 Z" fill="#0f1c30"/>
             <path d="M160,310 Q172,282 210,274 L320,274 Q352,282 360,310 L370,370 L100,370 Z" fill="none" stroke="#1e3050" stroke-width="1.5"/>
-
-            <!-- Windshield glass (tilts toward front-right) -->
             <path d="M310,278 Q345,285 358,308 L368,345 L268,345 Q258,310 268,278 Z" fill="#0a1828" opacity="0.9"/>
             <path d="M310,278 Q345,285 358,308 L368,345 L268,345 Q258,310 268,278 Z" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.4"/>
-            <!-- Windshield sheen -->
             <path d="M315,280 Q342,287 352,306 L360,332 L278,332 Q270,308 276,280 Z" fill="#1a3a5c" opacity="0.22"/>
-
-            <!-- Rear window (left side) -->
             <path d="M162,310 Q172,284 212,276 L264,276 L256,345 L152,345 Z" fill="#0a1828" opacity="0.7"/>
             <path d="M162,310 Q172,284 212,276 L264,276 L256,345 L152,345 Z" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.3"/>
-
-            <!-- Door lines -->
             <line x1="200" y1="345" x2="200" y2="424" stroke="#1a2a40" stroke-width="1.5"/>
             <line x1="268" y1="345" x2="268" y2="424" stroke="#1a2a40" stroke-width="1.5"/>
-
-            <!-- Door handles -->
             <rect x="210" y="388" width="18" height="4" rx="2" fill="#2a3a50"/>
             <rect x="278" y="388" width="18" height="4" rx="2" fill="#2a3a50"/>
-
-            <!-- HEADLIGHTS — on RIGHT (front) -->
+            <!-- Headlights (right/front) -->
             <rect x="356" y="356" width="14" height="10" rx="2" fill="#fffbe0" opacity="0.95" filter="url(#glow)"/>
             <rect x="356" y="370" width="14" height="8"  rx="2" fill="#ffe080" opacity="0.7"  filter="url(#glow)"/>
-            <!-- Headlight lens rings -->
             <rect x="354" y="354" width="18" height="14" rx="3" fill="none" stroke="#fffbe0" stroke-width="1" opacity="0.4"/>
-
-            <!-- TAIL LIGHTS — on LEFT (rear) -->
+            <!-- Tail lights (left/rear) -->
             <rect x="102" y="356" width="14" height="10" rx="2" fill="#ff4040" opacity="0.9" filter="url(#glow)"/>
             <rect x="102" y="370" width="14" height="8"  rx="2" fill="#cc2020" opacity="0.7"/>
-
-            <!-- Front bumper (right) -->
             <rect x="360" y="400" width="12" height="14" rx="3" fill="#0d1828"/>
-            <rect x="360" y="400" width="12" height="14" rx="3" fill="none" stroke="#1e3050" stroke-width="1"/>
-            <!-- Front license plate area -->
             <rect x="340" y="402" width="22" height="10" rx="2" fill="#0a1828"/>
             <rect x="340" y="402" width="22" height="10" rx="2" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.4"/>
-
-            <!-- Rear bumper (left) -->
             <rect x="100" y="400" width="12" height="14" rx="3" fill="#0d1828"/>
-
-            <!-- FRONT WHEEL (right side of car) -->
+            <!-- Front wheel -->
             <circle cx="310" cy="426" r="26" fill="#080c10"/>
             <circle cx="310" cy="426" r="26" fill="none" stroke="#1a2535" stroke-width="3"/>
             <circle cx="310" cy="426" r="18" fill="#0d1520"/>
@@ -394,8 +358,7 @@
             <line x1="297" y1="413" x2="323" y2="439" stroke="#2a3a50" stroke-width="1.5"/>
             <line x1="323" y1="413" x2="297" y2="439" stroke="#2a3a50" stroke-width="1.5"/>
             <circle cx="310" cy="426" r="5" fill="#2f80ed" opacity="0.8"/>
-
-            <!-- REAR WHEEL (left side of car) -->
+            <!-- Rear wheel -->
             <circle cx="162" cy="426" r="26" fill="#080c10"/>
             <circle cx="162" cy="426" r="26" fill="none" stroke="#1a2535" stroke-width="3"/>
             <circle cx="162" cy="426" r="18" fill="#0d1520"/>
@@ -405,17 +368,12 @@
             <line x1="149" y1="413" x2="175" y2="439" stroke="#2a3a50" stroke-width="1.5"/>
             <line x1="175" y1="413" x2="149" y2="439" stroke="#2a3a50" stroke-width="1.5"/>
             <circle cx="162" cy="426" r="5" fill="#2f80ed" opacity="0.8"/>
-
-            <!-- Roof antenna -->
             <line x1="230" y1="274" x2="230" y2="258" stroke="#1e3050" stroke-width="2"/>
             <circle cx="230" cy="256" r="3" fill="#00d4ff" opacity="0.7" filter="url(#glow)"/>
-
-            <!-- Blue accent stripe along body -->
             <rect x="102" y="368" width="268" height="3" rx="1" fill="#2f80ed" opacity="0.3"/>
-
           </g>
 
-          <!-- ===== HUD OVERLAYS ===== -->
+          <!-- HUD panels -->
           <g opacity="0.85">
             <rect x="30" y="30" width="160" height="70" rx="6" fill="#060e1c" opacity="0.85"/>
             <rect x="30" y="30" width="160" height="70" rx="6" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.4"/>
@@ -447,7 +405,6 @@
       </svg>
     </div>
 
-    <!-- HERO TEXT -->
     <div class="hero-overlay">
       <div class="hero-badge">Smart Gate Access System</div>
       <h1>Your Gate.<br/><em>Fully Intelligent.</em></h1>
@@ -459,15 +416,13 @@
     </div>
   </section>
 
-  <!-- STATS -->
   <div class="stats-bar">
     <div class="stat"><div class="stat-number">100%</div><div class="stat-label">Works with existing opener</div></div>
     <div class="stat"><div class="stat-number">UHF</div><div class="stat-label">Long-range RFID read</div></div>
-    <div class="stat"><div class="stat-number">24/7</div><div class="stat-label">Access logging & alerts</div></div>
+    <div class="stat"><div class="stat-number">24/7</div><div class="stat-label">Access logging &amp; alerts</div></div>
     <div class="stat"><div class="stat-number">1 day</div><div class="stat-label">Professional install</div></div>
   </div>
 
-  <!-- PACKAGE -->
   <section id="package">
     <div class="section-inner">
       <div class="section-tag">What's Included</div>
@@ -484,7 +439,6 @@
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
   <section id="how">
     <div class="section-inner">
       <div class="section-tag">The Process</div>
@@ -499,7 +453,6 @@
     </div>
   </section>
 
-  <!-- FEATURES -->
   <section id="features">
     <div class="section-inner">
       <div class="features-layout">
@@ -528,7 +481,6 @@
     </div>
   </section>
 
-  <!-- PRICING -->
   <section id="pricing">
     <div class="section-inner" style="text-align:center;">
       <div class="section-tag">Pricing</div>
@@ -551,7 +503,6 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact">
     <div class="section-inner">
       <div class="cta-box">
@@ -572,7 +523,6 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-logo">Craison<span>Digital</span></div>
     <div>© 2025 Craison Digital. All rights reserved.</div>

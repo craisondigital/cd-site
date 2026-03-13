@@ -167,12 +167,12 @@
 
     <div class="gate-illustration">
       <!--
-        GATE HINGE is at SVG coordinate (458, 266).
-        The gate panel is drawn with its LEFT edge at x=0 in its own local space,
-        so the group can be positioned at (458,266) and rotated around (0,0) of that group.
-        JS does:  gateGroup.setAttribute('transform', `translate(458,266) rotate(${deg})`)
-        At deg=0  → gate is closed, spanning x=458..640
-        At deg=-75 → gate swings open into property (behind left post, foreshortened)
+        BOOM BARRIER gate. Pivot at left end (the post), arm extends rightward.
+        Hinge SVG coord = (444, 310)  — top of the barrier post, where arm meets it.
+        In local space: arm goes from x=0 to x=260 at y=0 (horizontal at rest).
+        JS: translate(444,310) rotate(DEG)
+        DEG=0   → arm horizontal, blocking the road
+        DEG=-80 → arm rotated up (pointing up and slightly left), road clear
       -->
       <svg id="gateSVG" viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
         <defs>
@@ -185,8 +185,16 @@
           <linearGradient id="carBodyGrad" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#1a2540"/><stop offset="60%" stop-color="#111827"/><stop offset="100%" stop-color="#0a0f1a"/>
           </linearGradient>
-          <linearGradient id="gateGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#1e3555"/><stop offset="50%" stop-color="#2a4a6a"/><stop offset="100%" stop-color="#1e3555"/>
+          <linearGradient id="boomGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%"   stop-color="#2f80ed"/>
+            <stop offset="12%"  stop-color="#ff4040"/>
+            <stop offset="25%"  stop-color="#ff4040"/>
+            <stop offset="38%"  stop-color="#2f80ed"/>
+            <stop offset="50%"  stop-color="#2f80ed"/>
+            <stop offset="62%"  stop-color="#ff4040"/>
+            <stop offset="75%"  stop-color="#ff4040"/>
+            <stop offset="88%"  stop-color="#2f80ed"/>
+            <stop offset="100%" stop-color="#2f80ed"/>
           </linearGradient>
           <linearGradient id="beamGrad" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stop-color="#fffbe0" stop-opacity="0.55"/>
@@ -199,6 +207,7 @@
 
         <g clip-path="url(#sceneClip)">
 
+          <!-- Sky -->
           <rect width="1000" height="480" fill="url(#skyGrad)"/>
           <ellipse cx="500" cy="305" rx="420" ry="80" fill="#0a1e3a" opacity="0.5"/>
           <circle cx="80"  cy="40" r="1"   fill="white" opacity="0.6"/>
@@ -211,6 +220,7 @@
           <circle cx="820" cy="20" r="1.2" fill="white" opacity="0.4"/>
           <circle cx="920" cy="45" r="0.8" fill="white" opacity="0.7"/>
 
+          <!-- Road -->
           <rect x="0" y="340" width="1000" height="140" fill="url(#roadGrad)"/>
           <rect x="0" y="340" width="1000" height="2" fill="#1a2535" opacity="0.8"/>
           <rect x="0"   y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
@@ -222,78 +232,68 @@
           <rect x="720" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
           <rect x="840" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
 
-          <!-- LEFT / HINGE POST  (right edge x=458, gate pivots here) -->
-          <rect x="430" y="175" width="28" height="168" rx="4" fill="#1e3050"/>
-          <rect x="430" y="175" width="28" height="168" rx="4" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.5"/>
-          <rect x="426" y="167" width="36" height="12" rx="3" fill="#2a4060"/>
-          <circle cx="444" cy="188" r="5" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/>
-          <circle cx="444" cy="188" r="10" fill="#00d4ff" opacity="0.15"/>
-          <!-- hinge knuckles -->
-          <rect x="454" y="208" width="7" height="12" rx="3" fill="#3a6080"/>
-          <rect x="454" y="258" width="7" height="12" rx="3" fill="#3a6080"/>
-          <rect x="454" y="308" width="7" height="12" rx="3" fill="#3a6080"/>
+          <!-- ===== BARRIER HOUSING / POST ===== -->
+          <!-- Main housing box — sits to the left of the road lane -->
+          <rect x="410" y="255" width="50" height="88" rx="6" fill="#1a2e4a"/>
+          <rect x="410" y="255" width="50" height="88" rx="6" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.7"/>
+          <!-- Housing top cap -->
+          <rect x="406" y="248" width="58" height="12" rx="4" fill="#1e3555"/>
+          <rect x="406" y="248" width="58" height="12" rx="4" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.5"/>
+          <!-- Warning stripe on housing -->
+          <rect x="410" y="290" width="50" height="8" fill="#ff4040" opacity="0.25"/>
+          <!-- Status light on top -->
+          <circle cx="435" cy="244" r="6" fill="#4ade80" opacity="0.9" filter="url(#glow)"/>
+          <circle cx="435" cy="244" r="12" fill="#4ade80" opacity="0.12"/>
+          <!-- Pivot bolt where arm meets housing -->
+          <circle cx="444" cy="310" r="8" fill="#2a4060"/>
+          <circle cx="444" cy="310" r="8" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.8"/>
+          <circle cx="444" cy="310" r="3" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/>
+          <!-- Base / foundation -->
+          <rect x="418" y="340" width="36" height="6" rx="2" fill="#1e3050"/>
 
-          <!-- RIGHT / RECEIVER POST -->
-          <rect x="640" y="175" width="28" height="168" rx="4" fill="#1e3050"/>
-          <rect x="640" y="175" width="28" height="168" rx="4" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.5"/>
-          <rect x="636" y="167" width="36" height="12" rx="3" fill="#2a4060"/>
-          <circle cx="654" cy="188" r="5" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/>
-          <circle cx="654" cy="188" r="10" fill="#00d4ff" opacity="0.15"/>
-
-          <!--
-            GATE PANEL — origin-relative.
-            Hinge point in SVG space = (458, 266).
-            In local space the gate left edge = 0, top = -74, height = 148, width = 182.
-            JS sets: transform="translate(458,266) rotate(DEG)"
+          <!-- ===== BOOM ARM =====
+               Pivot at local (0,0) = SVG (444, 310).
+               Arm extends in +x direction, length ~270px, height 10px.
+               At rest (deg=0): horizontal, blocking road at y=310.
+               Lifted (deg=-80): pointing up.
           -->
-          <g id="gatePanel" transform="translate(458,266) rotate(0)">
-            <!-- main fill: local x=0..182, y=-74..74 -->
-            <rect x="0" y="-74" width="182" height="148" rx="2" fill="url(#gateGrad)" opacity="0.95"/>
-            <!-- vertical bars (local x) -->
-            <line x1="36"  y1="-74" x2="36"  y2="74" stroke="#2f80ed" stroke-width="1.5" opacity="0.5"/>
-            <line x1="72"  y1="-74" x2="72"  y2="74" stroke="#2f80ed" stroke-width="1.5" opacity="0.5"/>
-            <line x1="108" y1="-74" x2="108" y2="74" stroke="#2f80ed" stroke-width="1.5" opacity="0.5"/>
-            <line x1="144" y1="-74" x2="144" y2="74" stroke="#2f80ed" stroke-width="1.5" opacity="0.5"/>
-            <line x1="180" y1="-74" x2="180" y2="74" stroke="#2f80ed" stroke-width="1.5" opacity="0.5"/>
-            <!-- mid rail -->
-            <rect x="0" y="-2" width="182" height="3" fill="#2f80ed" opacity="0.35"/>
-            <!-- top spikes -->
-            <polygon points="16,-74 20,-86 24,-74" fill="#2a4060"/>
-            <polygon points="52,-74 56,-86 60,-74" fill="#2a4060"/>
-            <polygon points="88,-74 92,-86 96,-74" fill="#2a4060"/>
-            <polygon points="124,-74 128,-86 132,-74" fill="#2a4060"/>
-            <polygon points="160,-74 164,-86 168,-74" fill="#2a4060"/>
-            <!-- border -->
-            <rect x="0" y="-74" width="182" height="148" rx="2" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.7"/>
-            <!-- latch on free end -->
-            <rect x="174" y="-5" width="10" height="20" rx="3" fill="#1a3050"/>
-            <rect x="174" y="-5" width="10" height="20" rx="3" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.5"/>
+          <g id="gatePanel" transform="translate(444,310) rotate(0)">
+            <!-- Counterweight tail (behind pivot, short) -->
+            <rect x="-38" y="-7" width="38" height="14" rx="4" fill="#1e3555"/>
+            <rect x="-38" y="-7" width="38" height="14" rx="4" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.5"/>
+            <rect x="-34" y="-4" width="10" height="8" rx="2" fill="#2a4a6a" opacity="0.8"/>
+            <!-- Main arm body -->
+            <rect x="0" y="-7" width="270" height="14" rx="4" fill="url(#boomGrad)" opacity="0.9"/>
+            <rect x="0" y="-7" width="270" height="14" rx="4" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <!-- Reflective tip -->
+            <rect x="262" y="-7" width="8" height="14" rx="3" fill="#ffffff" opacity="0.7"/>
+            <!-- Arm highlight stripe -->
+            <rect x="0" y="-7" width="270" height="3" rx="2" fill="white" opacity="0.08"/>
           </g>
 
-          <!-- RFID READER on left post exterior -->
-          <rect x="398" y="234" width="34" height="52" rx="5" fill="#0d1e35"/>
-          <rect x="398" y="234" width="34" height="52" rx="5" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.8"/>
-          <rect x="402" y="238" width="24" height="24" rx="2" fill="#091525"/>
-          <rect x="402" y="238" width="24" height="24" rx="2" fill="none" stroke="#00d4ff" stroke-width="1" opacity="0.6"/>
-          <rect class="scan-line" x="403" y="239" width="22" height="2" rx="1" fill="#00d4ff" opacity="0.9"/>
-          <circle cx="415" cy="274" r="4" fill="#4ade80" opacity="0.9" filter="url(#glow)"/>
+          <!-- ===== RFID READER (mounted on housing face) ===== -->
+          <rect x="394" y="268" width="18" height="30" rx="4" fill="#0d1e35"/>
+          <rect x="394" y="268" width="18" height="30" rx="4" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.8"/>
+          <rect x="396" y="270" width="13" height="14" rx="2" fill="#091525"/>
+          <rect x="396" y="270" width="13" height="14" rx="2" fill="none" stroke="#00d4ff" stroke-width="1" opacity="0.6"/>
+          <rect class="scan-line" x="397" y="271" width="11" height="2" rx="1" fill="#00d4ff" opacity="0.9"/>
 
           <!-- AUTHORIZED badge -->
           <g class="auth-badge">
-            <rect x="340" y="226" width="56" height="18" rx="4" fill="#0d2a1a"/>
-            <rect x="340" y="226" width="56" height="18" rx="4" fill="none" stroke="#4ade80" stroke-width="1"/>
-            <text x="368" y="238" text-anchor="middle" font-size="7" fill="#4ade80" font-family="monospace" font-weight="bold">AUTHORIZED</text>
+            <rect x="340" y="258" width="56" height="18" rx="4" fill="#0d2a1a"/>
+            <rect x="340" y="258" width="56" height="18" rx="4" fill="none" stroke="#4ade80" stroke-width="1"/>
+            <text x="368" y="270" text-anchor="middle" font-size="7" fill="#4ade80" font-family="monospace" font-weight="bold">AUTHORIZED</text>
           </g>
 
           <!-- RFID rings -->
           <g opacity="0.75" filter="url(#softglow)">
-            <ellipse class="rfid-ring" cx="415" cy="250" rx="20" ry="14" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0"/>
-            <ellipse class="rfid-ring" cx="415" cy="250" rx="36" ry="26" fill="none" stroke="#00d4ff" stroke-width="1.2" opacity="0"/>
-            <ellipse class="rfid-ring" cx="415" cy="250" rx="54" ry="40" fill="none" stroke="#2f80ed" stroke-width="1"   opacity="0"/>
-            <ellipse class="rfid-ring" cx="415" cy="250" rx="72" ry="54" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0"/>
+            <ellipse class="rfid-ring" cx="403" cy="283" rx="16" ry="11" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0"/>
+            <ellipse class="rfid-ring" cx="403" cy="283" rx="28" ry="20" fill="none" stroke="#00d4ff" stroke-width="1.2" opacity="0"/>
+            <ellipse class="rfid-ring" cx="403" cy="283" rx="42" ry="32" fill="none" stroke="#2f80ed" stroke-width="1"   opacity="0"/>
+            <ellipse class="rfid-ring" cx="403" cy="283" rx="58" ry="44" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0"/>
           </g>
 
-          <!-- VEHICLE -->
+          <!-- ===== VEHICLE ===== -->
           <g class="car-group">
             <polygon class="headlight-beam" points="368,355 560,338 560,382 368,372" fill="url(#beamGrad)" opacity="0.22"/>
             <polygon class="headlight-beam" points="368,360 520,346 520,376 368,368" fill="url(#beamGrad)" opacity="0.14"/>
@@ -497,24 +497,17 @@
   </footer>
 
   <script>
-    // Gate panel animation via JavaScript.
-    // The group is translated to the hinge point (458,266) in the SVG.
-    // We just update the rotate() part. This is 100% reliable vs SVG/CSS methods.
     (function() {
       var panel = document.getElementById('gatePanel');
       if (!panel) return;
 
-      var CYCLE   = 5000;   // ms total per cycle
-      var PAUSE_CLOSED = 0.15;   // fraction: sit closed
-      var OPEN_AT      = 0.50;   // fraction: fully open
-      var PAUSE_OPEN   = 0.75;   // fraction: sit open
-      // then close back to 1.0
+      var CYCLE        = 5000;
+      var PAUSE_CLOSED = 0.15;
+      var OPEN_AT      = 0.50;
+      var PAUSE_OPEN   = 0.75;
+      var MAX_DEG      = -82; // negative = arm swings upward (counterclockwise)
 
-      var MAX_DEG = -72; // negative = swings toward viewer (opens rightward from hinge)
-
-      function easeInOut(t) {
-        return t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
-      }
+      function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
 
       function getAngle(frac) {
         if (frac <= PAUSE_CLOSED) return 0;
@@ -530,7 +523,7 @@
       function tick(ts) {
         var frac = (ts % CYCLE) / CYCLE;
         var deg  = getAngle(frac);
-        panel.setAttribute('transform', 'translate(458,266) rotate(' + deg + ')');
+        panel.setAttribute('transform', 'translate(444,310) rotate(' + deg + ')');
         requestAnimationFrame(tick);
       }
 

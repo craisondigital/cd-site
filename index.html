@@ -7,256 +7,88 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --black: #080c12;
-      --dark: #0d1320;
-      --card: #111827;
-      --border: rgba(255,255,255,0.07);
-      --blue: #2f80ed;
-      --blue-bright: #5ba4f5;
-      --blue-glow: rgba(47,128,237,0.18);
-      --cyan: #00d4ff;
-      --text: #e8edf5;
-      --muted: #7a8599;
-      --font-display: 'Syne', sans-serif;
-      --font-body: 'DM Sans', sans-serif;
+      --black: #080c12; --dark: #0d1320; --card: #111827;
+      --border: rgba(255,255,255,0.07); --blue: #2f80ed;
+      --blue-bright: #5ba4f5; --blue-glow: rgba(47,128,237,0.18);
+      --cyan: #00d4ff; --text: #e8edf5; --muted: #7a8599;
+      --font-display: 'Syne', sans-serif; --font-body: 'DM Sans', sans-serif;
     }
-
     html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--black);
-      color: var(--text);
-      font-family: var(--font-body);
-      font-weight: 300;
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.4;
-    }
+    body { background: var(--black); color: var(--text); font-family: var(--font-body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.4; }
 
     /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.2rem 4rem;
-      background: rgba(8,12,18,0.85);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(8,12,18,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
     .nav-logo { font-family: var(--font-display); font-weight: 800; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--text); text-decoration: none; }
     .nav-logo span { color: var(--cyan); }
     nav ul { display: flex; gap: 2.5rem; list-style: none; }
-    nav ul a { color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 400; letter-spacing: 0.02em; transition: color 0.2s; }
+    nav ul a { color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 400; transition: color 0.2s; }
     nav ul a:hover { color: var(--text); }
-    .nav-cta { background: var(--blue); color: #fff !important; padding: 0.5rem 1.3rem; border-radius: 6px; font-weight: 500 !important; transition: background 0.2s !important; }
+    .nav-cta { background: var(--blue); color: #fff !important; padding: 0.5rem 1.3rem; border-radius: 6px; font-weight: 500 !important; }
     .nav-cta:hover { background: var(--blue-bright) !important; }
 
-    /* HERO VISUAL SECTION */
-    .hero-visual {
-      position: relative;
-      width: 100%;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      overflow: hidden;
-      padding-top: 70px;
-    }
-
-    .hero-visual-bg {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, #060a10 0%, #0a1525 40%, #0d1a2e 100%);
-    }
-
-    .hero-grid-bg {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(47,128,237,0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(47,128,237,0.05) 1px, transparent 1px);
-      background-size: 52px 52px;
-      mask-image: radial-gradient(ellipse 90% 80% at 50% 60%, black 20%, transparent 100%);
-    }
-
-    /* SVG illustration fills top portion */
-    .gate-illustration {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    /* Hero text overlays bottom of visual */
-    .hero-overlay {
-      position: relative;
-      z-index: 3;
-      width: 100%;
-      text-align: center;
-      padding: 2rem 2rem 5rem;
-      background: linear-gradient(0deg, #080c12 30%, transparent 100%);
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(47,128,237,0.1);
-      border: 1px solid rgba(47,128,237,0.25);
-      color: var(--blue-bright);
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.4rem 1rem;
-      border-radius: 100px;
-      margin-bottom: 1.5rem;
-      animation: fadeUp 0.6s ease both;
-    }
-
-    .hero-badge::before {
-      content: '';
-      width: 6px; height: 6px;
-      background: var(--cyan);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--cyan);
-      animation: pulse 2s infinite;
-    }
-
+    /* HERO */
+    .hero-visual { position: relative; width: 100%; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; overflow: hidden; padding-top: 70px; }
+    .hero-visual-bg { position: absolute; inset: 0; background: linear-gradient(180deg, #060a10 0%, #0a1525 40%, #0d1a2e 100%); }
+    .hero-grid-bg { position: absolute; inset: 0; background-image: linear-gradient(rgba(47,128,237,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(47,128,237,0.05) 1px, transparent 1px); background-size: 52px 52px; mask-image: radial-gradient(ellipse 90% 80% at 50% 60%, black 20%, transparent 100%); }
+    .gate-illustration { position: relative; z-index: 2; width: 100%; max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
+    .hero-overlay { position: relative; z-index: 3; width: 100%; text-align: center; padding: 2rem 2rem 5rem; background: linear-gradient(0deg, #080c12 30%, transparent 100%); }
+    .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(47,128,237,0.1); border: 1px solid rgba(47,128,237,0.25); color: var(--blue-bright); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.4rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; animation: fadeUp 0.6s ease both; }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--cyan); border-radius: 50%; box-shadow: 0 0 8px var(--cyan); animation: pulse 2s infinite; }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-
-    .hero-overlay h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2.4rem, 5.5vw, 4.5rem);
-      font-weight: 800;
-      line-height: 1.08;
-      letter-spacing: -0.02em;
-      margin-bottom: 1.2rem;
-      animation: fadeUp 0.6s 0.1s ease both;
-    }
-
+    .hero-overlay h1 { font-family: var(--font-display); font-size: clamp(2.4rem, 5.5vw, 4.5rem); font-weight: 800; line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 1.2rem; animation: fadeUp 0.6s 0.1s ease both; }
     .hero-overlay h1 em { font-style: normal; color: var(--blue-bright); }
+    .hero-overlay p { font-size: 1.1rem; color: var(--muted); max-width: 540px; margin: 0 auto 2rem; animation: fadeUp 0.6s 0.2s ease both; }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
 
-    .hero-overlay p {
-      font-size: 1.1rem;
-      color: var(--muted);
-      max-width: 540px;
-      margin: 0 auto 2rem;
-      animation: fadeUp 0.6s 0.2s ease both;
-    }
+    /* ── ANIMATIONS ── */
 
-    .hero-actions {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      animation: fadeUp 0.6s 0.3s ease both;
-    }
-
-    /* RFID signal rings animation */
+    /* RFID rings pulse outward from reader */
     @keyframes rfid-ring {
-      0% { opacity: 0.8; transform: scale(0.3); }
-      100% { opacity: 0; transform: scale(1); }
+      0%   { opacity: 0.9; transform: scale(0.2); }
+      100% { opacity: 0;   transform: scale(1);   }
     }
+    .rfid-ring { animation: rfid-ring 2.4s ease-out infinite; }
+    .rfid-ring:nth-child(2) { animation-delay: 0.6s; }
+    .rfid-ring:nth-child(3) { animation-delay: 1.2s; }
+    .rfid-ring:nth-child(4) { animation-delay: 1.8s; }
 
-    .rfid-ring {
-      animation: rfid-ring 2.2s ease-out infinite;
+    /* Single gate swings open from LEFT hinge (rotates around left edge) */
+    @keyframes gate-swing {
+      0%,  15% { transform: perspective(600px) rotateY(0deg);   }
+      55%, 100% { transform: perspective(600px) rotateY(-78deg); }
     }
-    .rfid-ring:nth-child(2) { animation-delay: 0.5s; }
-    .rfid-ring:nth-child(3) { animation-delay: 1s; }
-    .rfid-ring:nth-child(4) { animation-delay: 1.5s; }
-
-    /* Gate opening animation */
-    @keyframes gate-open-left {
-      0%, 20% { transform: rotate(0deg); transform-origin: left center; }
-      60%, 100% { transform: rotate(-75deg); transform-origin: left center; }
-    }
-
-    @keyframes gate-open-right {
-      0%, 20% { transform: rotate(0deg); transform-origin: right center; }
-      60%, 100% { transform: rotate(75deg); transform-origin: right center; }
-    }
-
-    .gate-panel-left {
-      animation: gate-open-left 3s ease-in-out infinite;
+    .gate-single {
       transform-origin: left center;
+      animation: gate-swing 4s ease-in-out infinite;
     }
 
-    .gate-panel-right {
-      animation: gate-open-right 3s ease-in-out infinite;
-      transform-origin: right center;
+    /* Car drives LEFT → RIGHT: starts off left edge, stops near gate */
+    @keyframes car-drive {
+      0%   { transform: translateX(-320px); opacity: 0; }
+      12%  { opacity: 1; }
+      55%, 100% { transform: translateX(0px); opacity: 1; }
     }
+    .car-group { animation: car-drive 4s ease-out infinite; }
 
-    /* Car approach animation */
-    @keyframes car-approach {
-      0% { transform: translateX(-180px); opacity: 0; }
-      15% { opacity: 1; }
-      50%, 100% { transform: translateX(0px); opacity: 1; }
-    }
-
-    .car-group {
-      animation: car-approach 3s ease-out infinite;
-    }
-
-    /* Headlight beam */
-    @keyframes beam-pulse {
-      0%, 100% { opacity: 0.15; }
-      50% { opacity: 0.35; }
-    }
+    /* Headlight beams */
+    @keyframes beam-pulse { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.35; } }
     .headlight-beam { animation: beam-pulse 1.5s ease-in-out infinite; }
 
-    /* scan line on reader */
-    @keyframes scan {
-      0%, 100% { transform: translateY(0); opacity: 1; }
-      50% { transform: translateY(18px); opacity: 0.5; }
-    }
+    /* RFID reader scan line */
+    @keyframes scan { 0%, 100% { transform: translateY(0); opacity: 1; } 50% { transform: translateY(18px); opacity: 0.5; } }
     .scan-line { animation: scan 1.8s ease-in-out infinite; }
 
-    /* authorized tag flash */
-    @keyframes auth-flash {
-      0%, 60% { opacity: 0; }
-      65%, 80% { opacity: 1; }
-      100% { opacity: 0; }
-    }
-    .auth-badge { animation: auth-flash 3s ease infinite; }
+    /* Authorized badge flash */
+    @keyframes auth-flash { 0%, 55% { opacity: 0; } 60%, 80% { opacity: 1; } 100% { opacity: 0; } }
+    .auth-badge { animation: auth-flash 4s ease infinite; }
 
     /* BUTTONS */
-    .btn-primary {
-      background: var(--blue); color: #fff;
-      padding: 0.85rem 2rem; border-radius: 8px;
-      font-family: var(--font-body); font-size: 0.95rem; font-weight: 500;
-      text-decoration: none; border: none; cursor: pointer;
-      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-      box-shadow: 0 0 24px rgba(47,128,237,0.3);
-    }
+    .btn-primary { background: var(--blue); color: #fff; padding: 0.85rem 2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; box-shadow: 0 0 24px rgba(47,128,237,0.3); }
     .btn-primary:hover { background: var(--blue-bright); transform: translateY(-1px); box-shadow: 0 0 36px rgba(47,128,237,0.45); }
-
-    .btn-secondary {
-      background: transparent; color: var(--text);
-      padding: 0.85rem 2rem; border-radius: 8px;
-      font-family: var(--font-body); font-size: 0.95rem; font-weight: 400;
-      text-decoration: none; border: 1px solid var(--border); cursor: pointer;
-      transition: border-color 0.2s, color 0.2s;
-    }
+    .btn-secondary { background: transparent; color: var(--text); padding: 0.85rem 2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.95rem; font-weight: 400; text-decoration: none; border: 1px solid var(--border); cursor: pointer; transition: border-color 0.2s, color 0.2s; }
     .btn-secondary:hover { border-color: rgba(255,255,255,0.2); color: #fff; }
-
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
     /* STATS */
@@ -343,8 +175,7 @@
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
-      nav { padding: 1rem 1.5rem; }
-      nav ul { display: none; }
+      nav { padding: 1rem 1.5rem; } nav ul { display: none; }
       .section-inner { padding: 4rem 1.5rem; }
       .features-layout { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
@@ -372,285 +203,245 @@
     <div class="hero-visual-bg"></div>
     <div class="hero-grid-bg"></div>
 
-    <!-- SVG GATE SCENE -->
     <div class="gate-illustration">
       <svg viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
         <defs>
           <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#060d1a"/>
-            <stop offset="100%" stop-color="#0d1e35"/>
+            <stop offset="0%" stop-color="#060d1a"/><stop offset="100%" stop-color="#0d1e35"/>
           </linearGradient>
           <linearGradient id="roadGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#0e1520"/>
-            <stop offset="100%" stop-color="#080c10"/>
+            <stop offset="0%" stop-color="#0e1520"/><stop offset="100%" stop-color="#080c10"/>
           </linearGradient>
           <linearGradient id="carBodyGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#1a2540"/>
-            <stop offset="60%" stop-color="#111827"/>
-            <stop offset="100%" stop-color="#0a0f1a"/>
+            <stop offset="0%" stop-color="#1a2540"/><stop offset="60%" stop-color="#111827"/><stop offset="100%" stop-color="#0a0f1a"/>
           </linearGradient>
           <linearGradient id="gateGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#1a2e4a"/>
-            <stop offset="50%" stop-color="#2a4060"/>
-            <stop offset="100%" stop-color="#1a2e4a"/>
+            <stop offset="0%" stop-color="#1a2e4a"/><stop offset="50%" stop-color="#2a4060"/><stop offset="100%" stop-color="#1a2e4a"/>
           </linearGradient>
+          <!-- Beam shoots RIGHT from headlights toward the gate -->
           <linearGradient id="beamGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#fffbe0" stop-opacity="0.6"/>
+            <stop offset="0%" stop-color="#fffbe0" stop-opacity="0.55"/>
             <stop offset="100%" stop-color="#fffbe0" stop-opacity="0"/>
           </linearGradient>
-          <radialGradient id="rfidGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.4"/>
-            <stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/>
-          </radialGradient>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="3" result="blur"/>
-            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-          <filter id="softglow">
-            <feGaussianBlur stdDeviation="6" result="blur"/>
-            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-          <clipPath id="sceneClip">
-            <rect width="1000" height="480"/>
-          </clipPath>
+          <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="softglow"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <clipPath id="sceneClip"><rect width="1000" height="480"/></clipPath>
         </defs>
 
         <g clip-path="url(#sceneClip)">
 
-        <!-- Background sky -->
-        <rect width="1000" height="480" fill="url(#skyGrad)"/>
+          <!-- Sky -->
+          <rect width="1000" height="480" fill="url(#skyGrad)"/>
+          <ellipse cx="500" cy="305" rx="420" ry="80" fill="#0a1e3a" opacity="0.5"/>
+          <!-- Stars -->
+          <circle cx="80"  cy="40" r="1"   fill="white" opacity="0.6"/>
+          <circle cx="150" cy="20" r="1.2" fill="white" opacity="0.5"/>
+          <circle cx="220" cy="60" r="0.8" fill="white" opacity="0.7"/>
+          <circle cx="310" cy="30" r="1"   fill="white" opacity="0.4"/>
+          <circle cx="400" cy="15" r="1.2" fill="white" opacity="0.6"/>
+          <circle cx="600" cy="25" r="0.8" fill="white" opacity="0.5"/>
+          <circle cx="700" cy="50" r="1"   fill="white" opacity="0.6"/>
+          <circle cx="820" cy="20" r="1.2" fill="white" opacity="0.4"/>
+          <circle cx="920" cy="45" r="0.8" fill="white" opacity="0.7"/>
 
-        <!-- Distant city glow on horizon -->
-        <ellipse cx="500" cy="300" rx="420" ry="80" fill="#0a1e3a" opacity="0.5"/>
-        <ellipse cx="500" cy="310" rx="280" ry="40" fill="#102040" opacity="0.6"/>
+          <!-- Road -->
+          <rect x="0" y="340" width="1000" height="140" fill="url(#roadGrad)"/>
+          <rect x="0" y="340" width="1000" height="2" fill="#1a2535" opacity="0.8"/>
+          <!-- Lane dashes -->
+          <rect x="0"   y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
+          <rect x="120" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
+          <rect x="240" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
+          <rect x="360" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
+          <rect x="480" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
+          <rect x="600" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
+          <rect x="720" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
+          <rect x="840" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
+          <rect x="960" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
 
-        <!-- Stars -->
-        <circle cx="80" cy="40" r="1" fill="white" opacity="0.6"/>
-        <circle cx="150" cy="20" r="1.2" fill="white" opacity="0.5"/>
-        <circle cx="220" cy="60" r="0.8" fill="white" opacity="0.7"/>
-        <circle cx="310" cy="30" r="1" fill="white" opacity="0.4"/>
-        <circle cx="400" cy="15" r="1.2" fill="white" opacity="0.6"/>
-        <circle cx="600" cy="25" r="0.8" fill="white" opacity="0.5"/>
-        <circle cx="700" cy="50" r="1" fill="white" opacity="0.6"/>
-        <circle cx="820" cy="20" r="1.2" fill="white" opacity="0.4"/>
-        <circle cx="920" cy="45" r="0.8" fill="white" opacity="0.7"/>
-        <circle cx="960" cy="15" r="1" fill="white" opacity="0.5"/>
+          <!-- ===== GATE POSTS ===== -->
+          <!-- Left post (hinge post — gate swings from here) -->
+          <rect x="430" y="175" width="28" height="168" rx="4" fill="#1e3050"/>
+          <rect x="430" y="175" width="28" height="168" rx="4" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.5"/>
+          <rect x="426" y="167" width="36" height="12" rx="3" fill="#2a4060"/>
+          <circle cx="444" cy="188" r="5" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/>
+          <circle cx="444" cy="188" r="10" fill="#00d4ff" opacity="0.15"/>
 
-        <!-- Road -->
-        <rect x="0" y="340" width="1000" height="140" fill="url(#roadGrad)"/>
-        <!-- Road surface lines -->
-        <rect x="0" y="340" width="1000" height="2" fill="#1a2535" opacity="0.8"/>
-        <!-- Center lane dashes -->
-        <rect x="0" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
-        <rect x="120" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
-        <rect x="240" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
-        <rect x="360" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
-        <rect x="480" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
-        <rect x="600" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
-        <rect x="720" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
-        <rect x="840" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
-        <rect x="960" y="408" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.5"/>
+          <!-- Right post (receiver post) -->
+          <rect x="640" y="175" width="28" height="168" rx="4" fill="#1e3050"/>
+          <rect x="640" y="175" width="28" height="168" rx="4" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.5"/>
+          <rect x="636" y="167" width="36" height="12" rx="3" fill="#2a4060"/>
+          <circle cx="654" cy="188" r="5" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/>
+          <circle cx="654" cy="188" r="10" fill="#00d4ff" opacity="0.15"/>
 
-        <!-- Ground / driveway surface sheen -->
-        <rect x="0" y="340" width="1000" height="10" fill="#0f1c2e" opacity="0.4"/>
+          <!-- ===== SINGLE GATE PANEL — swings open from left post ===== -->
+          <!-- The gate is 196px wide, hinged at x=458 (right edge of left post) -->
+          <g class="gate-single">
+            <!-- Gate body — starts at hinge point x=458 -->
+            <rect x="458" y="192" width="182" height="148" rx="2" fill="url(#gateGrad)" opacity="0.95"/>
+            <!-- Vertical bars -->
+            <line x1="494" y1="192" x2="494" y2="340" stroke="#2f80ed" stroke-width="1.5" opacity="0.45"/>
+            <line x1="530" y1="192" x2="530" y2="340" stroke="#2f80ed" stroke-width="1.5" opacity="0.45"/>
+            <line x1="566" y1="192" x2="566" y2="340" stroke="#2f80ed" stroke-width="1.5" opacity="0.45"/>
+            <line x1="602" y1="192" x2="602" y2="340" stroke="#2f80ed" stroke-width="1.5" opacity="0.45"/>
+            <line x1="638" y1="192" x2="638" y2="340" stroke="#2f80ed" stroke-width="1.5" opacity="0.45"/>
+            <!-- Horizontal mid-rail -->
+            <rect x="458" y="258" width="182" height="3" fill="#2f80ed" opacity="0.3"/>
+            <!-- Top spikes -->
+            <polygon points="474,192 478,180 482,192" fill="#2a4060"/>
+            <polygon points="510,192 514,180 518,192" fill="#2a4060"/>
+            <polygon points="546,192 550,180 554,192" fill="#2a4060"/>
+            <polygon points="582,192 586,180 590,192" fill="#2a4060"/>
+            <polygon points="618,192 622,180 626,192" fill="#2a4060"/>
+            <!-- Edge glow border -->
+            <rect x="458" y="192" width="182" height="148" rx="2" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.65"/>
+            <!-- Latch bolt on free (right) end of gate -->
+            <rect x="632" y="255" width="10" height="20" rx="3" fill="#1a3050"/>
+            <rect x="632" y="255" width="10" height="20" rx="3" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.5"/>
+          </g>
 
-        <!-- ===== GATE POSTS ===== -->
-        <!-- Left post -->
-        <rect x="370" y="180" width="28" height="165" rx="4" fill="#1e3050"/>
-        <rect x="370" y="180" width="28" height="165" rx="4" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.5"/>
-        <!-- Left post cap -->
-        <rect x="366" y="172" width="36" height="12" rx="3" fill="#2a4060"/>
-        <!-- Left post light -->
-        <circle cx="384" cy="192" r="5" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/>
-        <circle cx="384" cy="192" r="10" fill="#00d4ff" opacity="0.15"/>
+          <!-- ===== RFID READER (mounted on left post, outside) ===== -->
+          <rect x="398" y="234" width="34" height="52" rx="5" fill="#0d1e35"/>
+          <rect x="398" y="234" width="34" height="52" rx="5" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.8"/>
+          <rect x="402" y="238" width="24" height="24" rx="2" fill="#091525"/>
+          <rect x="402" y="238" width="24" height="24" rx="2" fill="none" stroke="#00d4ff" stroke-width="1" opacity="0.6"/>
+          <rect class="scan-line" x="403" y="239" width="22" height="2" rx="1" fill="#00d4ff" opacity="0.9"/>
+          <circle cx="415" cy="274" r="4" fill="#4ade80" opacity="0.9" filter="url(#glow)"/>
 
-        <!-- Right post -->
-        <rect x="602" y="180" width="28" height="165" rx="4" fill="#1e3050"/>
-        <rect x="602" y="180" width="28" height="165" rx="4" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.5"/>
-        <!-- Right post cap -->
-        <rect x="598" y="172" width="36" height="12" rx="3" fill="#2a4060"/>
-        <!-- Right post light -->
-        <circle cx="616" cy="192" r="5" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/>
-        <circle cx="616" cy="192" r="10" fill="#00d4ff" opacity="0.15"/>
+          <!-- AUTHORIZED badge (flashes when car arrives) -->
+          <g class="auth-badge">
+            <rect x="340" y="226" width="56" height="18" rx="4" fill="#0d2a1a"/>
+            <rect x="340" y="226" width="56" height="18" rx="4" fill="none" stroke="#4ade80" stroke-width="1"/>
+            <text x="368" y="238" text-anchor="middle" font-size="7" fill="#4ade80" font-family="monospace" font-weight="bold">AUTHORIZED</text>
+          </g>
 
-        <!-- ===== GATE PANELS (animated open) ===== -->
-        <!-- Left panel -->
-        <g class="gate-panel-left" style="transform-origin: 398px 270px">
-          <rect x="398" y="200" width="98" height="140" rx="2" fill="url(#gateGrad)" opacity="0.95"/>
-          <!-- Left panel bars -->
-          <line x1="418" y1="200" x2="418" y2="340" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
-          <line x1="438" y1="200" x2="438" y2="340" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
-          <line x1="458" y1="200" x2="458" y2="340" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
-          <line x1="478" y1="200" x2="478" y2="340" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
-          <!-- Horizontal accent -->
-          <rect x="398" y="258" width="98" height="3" fill="#2f80ed" opacity="0.3"/>
-          <!-- Gate top spikes -->
-          <polygon points="408,200 412,188 416,200" fill="#2a4060"/>
-          <polygon points="428,200 432,188 436,200" fill="#2a4060"/>
-          <polygon points="448,200 452,188 456,200" fill="#2a4060"/>
-          <polygon points="468,200 472,188 476,200" fill="#2a4060"/>
-          <polygon points="488,200 492,188 496,200" fill="#2a4060"/>
-          <!-- Blue edge glow -->
-          <rect x="398" y="200" width="98" height="140" rx="2" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.6"/>
-        </g>
+          <!-- RFID signal rings (emit from reader toward approaching car on the left) -->
+          <g opacity="0.75" filter="url(#softglow)">
+            <ellipse class="rfid-ring" cx="415" cy="250" rx="20" ry="14" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0"/>
+            <ellipse class="rfid-ring" cx="415" cy="250" rx="36" ry="26" fill="none" stroke="#00d4ff" stroke-width="1.2" opacity="0"/>
+            <ellipse class="rfid-ring" cx="415" cy="250" rx="54" ry="40" fill="none" stroke="#2f80ed" stroke-width="1"   opacity="0"/>
+            <ellipse class="rfid-ring" cx="415" cy="250" rx="72" ry="54" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0"/>
+          </g>
 
-        <!-- Right panel -->
-        <g class="gate-panel-right" style="transform-origin: 602px 270px">
-          <rect x="504" y="200" width="98" height="140" rx="2" fill="url(#gateGrad)" opacity="0.95"/>
-          <!-- Right panel bars -->
-          <line x1="524" y1="200" x2="524" y2="340" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
-          <line x1="544" y1="200" x2="544" y2="340" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
-          <line x1="564" y1="200" x2="564" y2="340" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
-          <line x1="584" y1="200" x2="584" y2="340" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
-          <!-- Horizontal accent -->
-          <rect x="504" y="258" width="98" height="3" fill="#2f80ed" opacity="0.3"/>
-          <!-- Gate top spikes -->
-          <polygon points="514,200 518,188 522,200" fill="#2a4060"/>
-          <polygon points="534,200 538,188 542,200" fill="#2a4060"/>
-          <polygon points="554,200 558,188 562,200" fill="#2a4060"/>
-          <polygon points="574,200 578,188 582,200" fill="#2a4060"/>
-          <polygon points="592,200 596,188 600,200" fill="#2a4060"/>
-          <!-- Blue edge glow -->
-          <rect x="504" y="200" width="98" height="140" rx="2" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.6"/>
-        </g>
+          <!-- ===== VEHICLE — drives LEFT → RIGHT (headlights on RIGHT/front) ===== -->
+          <!--
+            Car occupies roughly x=100–370 in rest position.
+            Front of car (headlights) is on the RIGHT at x≈370, facing the gate.
+            Rear (tail lights) is on the LEFT at x≈100.
+            Animation: starts at translateX(-320), slides to translateX(0).
+          -->
+          <g class="car-group">
 
-        <!-- ===== RFID READER (left post) ===== -->
-        <rect x="342" y="238" width="30" height="48" rx="5" fill="#0d1e35"/>
-        <rect x="342" y="238" width="30" height="48" rx="5" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.8"/>
-        <!-- Reader screen -->
-        <rect x="346" y="242" width="22" height="22" rx="2" fill="#091525"/>
-        <rect x="346" y="242" width="22" height="22" rx="2" fill="none" stroke="#00d4ff" stroke-width="1" opacity="0.6"/>
-        <!-- Scan line -->
-        <rect class="scan-line" x="347" y="243" width="20" height="2" rx="1" fill="#00d4ff" opacity="0.9"/>
-        <!-- Reader LED -->
-        <circle cx="357" cy="275" r="4" fill="#4ade80" opacity="0.9" filter="url(#glow)"/>
+            <!-- Headlight beams — shoot RIGHTWARD from front of car -->
+            <polygon class="headlight-beam" points="368,355 560,338 560,382 368,372" fill="url(#beamGrad)" opacity="0.22"/>
+            <polygon class="headlight-beam" points="368,360 520,346 520,376 368,368" fill="url(#beamGrad)" opacity="0.14"/>
 
-        <!-- AUTHORIZED badge -->
-        <g class="auth-badge">
-          <rect x="290" y="230" width="50" height="18" rx="4" fill="#0d2a1a"/>
-          <rect x="290" y="230" width="50" height="18" rx="4" fill="none" stroke="#4ade80" stroke-width="1"/>
-          <text x="315" y="242" text-anchor="middle" font-size="7" fill="#4ade80" font-family="monospace" font-weight="bold">AUTHORIZED</text>
-        </g>
+            <!-- Ground shadow -->
+            <ellipse cx="232" cy="428" rx="130" ry="10" fill="#000" opacity="0.35"/>
 
-        <!-- ===== RFID SIGNAL RINGS ===== -->
-        <g opacity="0.7" filter="url(#softglow)">
-          <ellipse class="rfid-ring" cx="357" cy="253" rx="22" ry="16" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0"/>
-          <ellipse class="rfid-ring" cx="357" cy="253" rx="38" ry="28" fill="none" stroke="#00d4ff" stroke-width="1.2" opacity="0"/>
-          <ellipse class="rfid-ring" cx="357" cy="253" rx="56" ry="42" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0"/>
-          <ellipse class="rfid-ring" cx="357" cy="253" rx="74" ry="56" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0"/>
-        </g>
+            <!-- Car body lower -->
+            <rect x="102" y="370" width="268" height="55" rx="6" fill="url(#carBodyGrad)"/>
 
-        <!-- ===== VEHICLE ===== -->
-        <g class="car-group">
-          <!-- Headlight beams -->
-          <polygon class="headlight-beam" points="595,355 750,340 750,380 595,370" fill="url(#beamGrad)" opacity="0.2"/>
-          <polygon class="headlight-beam" points="595,358 720,345 720,375 595,368" fill="url(#beamGrad)" opacity="0.15"/>
+            <!-- Car cabin/upper — FRONT on RIGHT, rear on LEFT -->
+            <!-- Windshield slopes from front-right cabin down toward the rear -->
+            <path d="M160,310 Q172,282 210,274 L320,274 Q352,282 360,310 L370,370 L100,370 Z" fill="#0f1c30"/>
+            <path d="M160,310 Q172,282 210,274 L320,274 Q352,282 360,310 L370,370 L100,370 Z" fill="none" stroke="#1e3050" stroke-width="1.5"/>
 
-          <!-- Car shadow -->
-          <ellipse cx="490" cy="428" rx="130" ry="10" fill="#000" opacity="0.35"/>
+            <!-- Windshield glass (tilts toward front-right) -->
+            <path d="M310,278 Q345,285 358,308 L368,345 L268,345 Q258,310 268,278 Z" fill="#0a1828" opacity="0.9"/>
+            <path d="M310,278 Q345,285 358,308 L368,345 L268,345 Q258,310 268,278 Z" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.4"/>
+            <!-- Windshield sheen -->
+            <path d="M315,280 Q342,287 352,306 L360,332 L278,332 Q270,308 276,280 Z" fill="#1a3a5c" opacity="0.22"/>
 
-          <!-- Car body lower -->
-          <rect x="340" y="370" width="260" height="55" rx="6" fill="url(#carBodyGrad)"/>
+            <!-- Rear window (left side) -->
+            <path d="M162,310 Q172,284 212,276 L264,276 L256,345 L152,345 Z" fill="#0a1828" opacity="0.7"/>
+            <path d="M162,310 Q172,284 212,276 L264,276 L256,345 L152,345 Z" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.3"/>
 
-          <!-- Car body upper / cabin -->
-          <path d="M390,310 Q400,285 440,278 L540,278 Q580,285 590,310 L600,370 L340,370 Z" fill="#0f1c30"/>
-          <path d="M390,310 Q400,285 440,278 L540,278 Q580,285 590,310 L600,370 L340,370 Z" fill="none" stroke="#1e3050" stroke-width="1.5"/>
+            <!-- Door lines -->
+            <line x1="200" y1="345" x2="200" y2="424" stroke="#1a2a40" stroke-width="1.5"/>
+            <line x1="268" y1="345" x2="268" y2="424" stroke="#1a2a40" stroke-width="1.5"/>
 
-          <!-- Windshield -->
-          <path d="M402,308 Q410,290 440,283 L540,283 Q568,290 576,308 L590,345 L350,345 Z" fill="#0a1828" opacity="0.9"/>
-          <path d="M402,308 Q410,290 440,283 L540,283 Q568,290 576,308 L590,345 L350,345 Z" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.4"/>
+            <!-- Door handles -->
+            <rect x="210" y="388" width="18" height="4" rx="2" fill="#2a3a50"/>
+            <rect x="278" y="388" width="18" height="4" rx="2" fill="#2a3a50"/>
 
-          <!-- Windshield tint sheen -->
-          <path d="M415,308 Q420,295 445,288 L520,288 Q548,295 555,308 L565,330 L390,330 Z" fill="#1a3a5c" opacity="0.25"/>
+            <!-- HEADLIGHTS — on RIGHT (front) -->
+            <rect x="356" y="356" width="14" height="10" rx="2" fill="#fffbe0" opacity="0.95" filter="url(#glow)"/>
+            <rect x="356" y="370" width="14" height="8"  rx="2" fill="#ffe080" opacity="0.7"  filter="url(#glow)"/>
+            <!-- Headlight lens rings -->
+            <rect x="354" y="354" width="18" height="14" rx="3" fill="none" stroke="#fffbe0" stroke-width="1" opacity="0.4"/>
 
-          <!-- Door lines -->
-          <line x1="460" y1="345" x2="460" y2="424" stroke="#1a2a40" stroke-width="1.5"/>
-          <line x1="510" y1="345" x2="510" y2="424" stroke="#1a2a40" stroke-width="1.5"/>
+            <!-- TAIL LIGHTS — on LEFT (rear) -->
+            <rect x="102" y="356" width="14" height="10" rx="2" fill="#ff4040" opacity="0.9" filter="url(#glow)"/>
+            <rect x="102" y="370" width="14" height="8"  rx="2" fill="#cc2020" opacity="0.7"/>
 
-          <!-- Door handles -->
-          <rect x="435" y="388" width="18" height="4" rx="2" fill="#2a3a50"/>
-          <rect x="488" y="388" width="18" height="4" rx="2" fill="#2a3a50"/>
+            <!-- Front bumper (right) -->
+            <rect x="360" y="400" width="12" height="14" rx="3" fill="#0d1828"/>
+            <rect x="360" y="400" width="12" height="14" rx="3" fill="none" stroke="#1e3050" stroke-width="1"/>
+            <!-- Front license plate area -->
+            <rect x="340" y="402" width="22" height="10" rx="2" fill="#0a1828"/>
+            <rect x="340" y="402" width="22" height="10" rx="2" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.4"/>
 
-          <!-- Headlights -->
-          <rect x="580" y="358" width="22" height="10" rx="3" fill="#fffbe0" opacity="0.95" filter="url(#glow)"/>
-          <rect x="580" y="358" width="22" height="10" rx="3" fill="#fffbe0" opacity="0.3"/>
+            <!-- Rear bumper (left) -->
+            <rect x="100" y="400" width="12" height="14" rx="3" fill="#0d1828"/>
 
-          <!-- Tail lights -->
-          <rect x="337" y="358" width="18" height="10" rx="3" fill="#ff4444" opacity="0.9" filter="url(#glow)"/>
-          <rect x="337" y="372" width="18" height="8" rx="3" fill="#ff2222" opacity="0.7"/>
+            <!-- FRONT WHEEL (right side of car) -->
+            <circle cx="310" cy="426" r="26" fill="#080c10"/>
+            <circle cx="310" cy="426" r="26" fill="none" stroke="#1a2535" stroke-width="3"/>
+            <circle cx="310" cy="426" r="18" fill="#0d1520"/>
+            <circle cx="310" cy="426" r="18" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.5"/>
+            <line x1="310" y1="408" x2="310" y2="444" stroke="#2a3a50" stroke-width="2"/>
+            <line x1="292" y1="426" x2="328" y2="426" stroke="#2a3a50" stroke-width="2"/>
+            <line x1="297" y1="413" x2="323" y2="439" stroke="#2a3a50" stroke-width="1.5"/>
+            <line x1="323" y1="413" x2="297" y2="439" stroke="#2a3a50" stroke-width="1.5"/>
+            <circle cx="310" cy="426" r="5" fill="#2f80ed" opacity="0.8"/>
 
-          <!-- Front bumper -->
-          <rect x="572" y="400" width="30" height="12" rx="3" fill="#0d1828"/>
-          <rect x="572" y="400" width="30" height="12" rx="3" fill="none" stroke="#1e3050" stroke-width="1"/>
+            <!-- REAR WHEEL (left side of car) -->
+            <circle cx="162" cy="426" r="26" fill="#080c10"/>
+            <circle cx="162" cy="426" r="26" fill="none" stroke="#1a2535" stroke-width="3"/>
+            <circle cx="162" cy="426" r="18" fill="#0d1520"/>
+            <circle cx="162" cy="426" r="18" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.5"/>
+            <line x1="162" y1="408" x2="162" y2="444" stroke="#2a3a50" stroke-width="2"/>
+            <line x1="144" y1="426" x2="180" y2="426" stroke="#2a3a50" stroke-width="2"/>
+            <line x1="149" y1="413" x2="175" y2="439" stroke="#2a3a50" stroke-width="1.5"/>
+            <line x1="175" y1="413" x2="149" y2="439" stroke="#2a3a50" stroke-width="1.5"/>
+            <circle cx="162" cy="426" r="5" fill="#2f80ed" opacity="0.8"/>
 
-          <!-- Rear bumper -->
-          <rect x="338" y="400" width="28" height="12" rx="3" fill="#0d1828"/>
+            <!-- Roof antenna -->
+            <line x1="230" y1="274" x2="230" y2="258" stroke="#1e3050" stroke-width="2"/>
+            <circle cx="230" cy="256" r="3" fill="#00d4ff" opacity="0.7" filter="url(#glow)"/>
 
-          <!-- Wheels -->
-          <!-- Front wheel -->
-          <circle cx="545" cy="426" r="26" fill="#080c10"/>
-          <circle cx="545" cy="426" r="26" fill="none" stroke="#1a2535" stroke-width="3"/>
-          <circle cx="545" cy="426" r="18" fill="#0d1520"/>
-          <circle cx="545" cy="426" r="18" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.5"/>
-          <!-- Wheel spokes -->
-          <line x1="545" y1="408" x2="545" y2="444" stroke="#2a3a50" stroke-width="2"/>
-          <line x1="527" y1="426" x2="563" y2="426" stroke="#2a3a50" stroke-width="2"/>
-          <line x1="532" y1="413" x2="558" y2="439" stroke="#2a3a50" stroke-width="1.5"/>
-          <line x1="558" y1="413" x2="532" y2="439" stroke="#2a3a50" stroke-width="1.5"/>
-          <circle cx="545" cy="426" r="5" fill="#2f80ed" opacity="0.8"/>
+            <!-- Blue accent stripe along body -->
+            <rect x="102" y="368" width="268" height="3" rx="1" fill="#2f80ed" opacity="0.3"/>
 
-          <!-- Rear wheel -->
-          <circle cx="400" cy="426" r="26" fill="#080c10"/>
-          <circle cx="400" cy="426" r="26" fill="none" stroke="#1a2535" stroke-width="3"/>
-          <circle cx="400" cy="426" r="18" fill="#0d1520"/>
-          <circle cx="400" cy="426" r="18" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.5"/>
-          <line x1="400" y1="408" x2="400" y2="444" stroke="#2a3a50" stroke-width="2"/>
-          <line x1="382" y1="426" x2="418" y2="426" stroke="#2a3a50" stroke-width="2"/>
-          <line x1="387" y1="413" x2="413" y2="439" stroke="#2a3a50" stroke-width="1.5"/>
-          <line x1="413" y1="413" x2="387" y2="439" stroke="#2a3a50" stroke-width="1.5"/>
-          <circle cx="400" cy="426" r="5" fill="#2f80ed" opacity="0.8"/>
+          </g>
 
-          <!-- Car roof antenna -->
-          <line x1="490" y1="278" x2="490" y2="262" stroke="#1e3050" stroke-width="2"/>
-          <circle cx="490" cy="260" r="3" fill="#00d4ff" opacity="0.7" filter="url(#glow)"/>
+          <!-- ===== HUD OVERLAYS ===== -->
+          <g opacity="0.85">
+            <rect x="30" y="30" width="160" height="70" rx="6" fill="#060e1c" opacity="0.85"/>
+            <rect x="30" y="30" width="160" height="70" rx="6" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.4"/>
+            <text x="44" y="50" font-size="8" fill="#5ba4f5" font-family="monospace" font-weight="bold" letter-spacing="1">RFID SYSTEM</text>
+            <rect x="44" y="55" width="60" height="1" fill="#2f80ed" opacity="0.3"/>
+            <text x="44" y="68" font-size="7" fill="#7a8599" font-family="monospace">STATUS</text>
+            <text x="90" y="68" font-size="7" fill="#4ade80" font-family="monospace">ACTIVE</text>
+            <text x="44" y="82" font-size="7" fill="#7a8599" font-family="monospace">RANGE</text>
+            <text x="90" y="82" font-size="7" fill="#00d4ff" font-family="monospace">20 FT UHF</text>
+          </g>
+          <g opacity="0.85">
+            <rect x="810" y="30" width="160" height="70" rx="6" fill="#060e1c" opacity="0.85"/>
+            <rect x="810" y="30" width="160" height="70" rx="6" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.4"/>
+            <text x="824" y="50" font-size="8" fill="#5ba4f5" font-family="monospace" font-weight="bold" letter-spacing="1">GATE STATUS</text>
+            <rect x="824" y="55" width="60" height="1" fill="#2f80ed" opacity="0.3"/>
+            <text x="824" y="68" font-size="7" fill="#7a8599" font-family="monospace">MODE</text>
+            <text x="870" y="68" font-size="7" fill="#4ade80" font-family="monospace">AUTHORIZED</text>
+            <text x="824" y="82" font-size="7" fill="#7a8599" font-family="monospace">LOG</text>
+            <text x="870" y="82" font-size="7" fill="#00d4ff" font-family="monospace">NOTIFIED ✓</text>
+          </g>
 
-          <!-- Blue accent stripe -->
-          <rect x="340" y="368" width="260" height="3" rx="1" fill="#2f80ed" opacity="0.3"/>
-        </g>
-
-        <!-- Ground reflection of car -->
-        <ellipse cx="490" cy="342" rx="140" ry="6" fill="#2f80ed" opacity="0.04"/>
-
-        <!-- ===== HUD OVERLAYS ===== -->
-        <!-- Top left info panel -->
-        <g opacity="0.85">
-          <rect x="30" y="30" width="160" height="70" rx="6" fill="#060e1c" opacity="0.85"/>
-          <rect x="30" y="30" width="160" height="70" rx="6" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.4"/>
-          <text x="44" y="50" font-size="8" fill="#5ba4f5" font-family="monospace" font-weight="bold" letter-spacing="1">RFID SYSTEM</text>
-          <rect x="44" y="55" width="60" height="1" fill="#2f80ed" opacity="0.3"/>
-          <text x="44" y="68" font-size="7" fill="#7a8599" font-family="monospace">STATUS</text>
-          <text x="90" y="68" font-size="7" fill="#4ade80" font-family="monospace">ACTIVE</text>
-          <text x="44" y="82" font-size="7" fill="#7a8599" font-family="monospace">RANGE</text>
-          <text x="90" y="82" font-size="7" fill="#00d4ff" font-family="monospace">20 FT UHF</text>
-        </g>
-
-        <!-- Top right info panel -->
-        <g opacity="0.85">
-          <rect x="810" y="30" width="160" height="70" rx="6" fill="#060e1c" opacity="0.85"/>
-          <rect x="810" y="30" width="160" height="70" rx="6" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.4"/>
-          <text x="824" y="50" font-size="8" fill="#5ba4f5" font-family="monospace" font-weight="bold" letter-spacing="1">GATE STATUS</text>
-          <rect x="824" y="55" width="60" height="1" fill="#2f80ed" opacity="0.3"/>
-          <text x="824" y="68" font-size="7" fill="#7a8599" font-family="monospace">MODE</text>
-          <text x="870" y="68" font-size="7" fill="#4ade80" font-family="monospace">AUTHORIZED</text>
-          <text x="824" y="82" font-size="7" fill="#7a8599" font-family="monospace">LOG</text>
-          <text x="870" y="82" font-size="7" fill="#00d4ff" font-family="monospace">NOTIFIED ✓</text>
-        </g>
-
-        <!-- Corner bracket decorations -->
-        <path d="M0,0 L0,20 M0,0 L20,0" stroke="#2f80ed" stroke-width="2" opacity="0.3" fill="none"/>
-        <path d="M1000,0 L1000,20 M1000,0 L980,0" stroke="#2f80ed" stroke-width="2" opacity="0.3" fill="none"/>
-        <path d="M0,480 L0,460 M0,480 L20,480" stroke="#2f80ed" stroke-width="2" opacity="0.3" fill="none"/>
-        <path d="M1000,480 L1000,460 M1000,480 L980,480" stroke="#2f80ed" stroke-width="2" opacity="0.3" fill="none"/>
+          <!-- Corner brackets -->
+          <path d="M0,0 L0,20 M0,0 L20,0" stroke="#2f80ed" stroke-width="2" opacity="0.3" fill="none"/>
+          <path d="M1000,0 L1000,20 M1000,0 L980,0" stroke="#2f80ed" stroke-width="2" opacity="0.3" fill="none"/>
+          <path d="M0,480 L0,460 M0,480 L20,480" stroke="#2f80ed" stroke-width="2" opacity="0.3" fill="none"/>
+          <path d="M1000,480 L1000,460 M1000,480 L980,480" stroke="#2f80ed" stroke-width="2" opacity="0.3" fill="none"/>
 
         </g>
       </svg>
@@ -719,7 +510,7 @@
           <div class="feature-list">
             <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Add or revoke tags instantly</strong><span>Assign RFID tags to family, staff, or regular visitors. Remove access in seconds if a tag is lost.</span></div></div>
             <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Manage PINs for guests</strong><span>Create temporary or permanent PIN codes for the keypad — no physical tag required.</span></div></div>
-            <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Arrival & departure alerts</strong><span>Push notifications sent directly to your phone the moment the gate is triggered.</span></div></div>
+            <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Arrival &amp; departure alerts</strong><span>Push notifications sent directly to your phone the moment the gate is triggered.</span></div></div>
             <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Full audit log</strong><span>Every access event is stored with a timestamp, name, and method (RFID or PIN).</span></div></div>
           </div>
         </div>
@@ -750,10 +541,10 @@
         <div class="price-includes">
           <div class="price-line">Long-range UHF RFID reader + tags</div>
           <div class="price-line">Wiegand keypad installation</div>
-          <div class="price-line">Full Home Assistant setup & configuration</div>
-          <div class="price-line">Access logging & notification setup</div>
+          <div class="price-line">Full Home Assistant setup &amp; configuration</div>
+          <div class="price-line">Access logging &amp; notification setup</div>
           <div class="price-line">Custom dashboard for easy management</div>
-          <div class="price-line">Walkthrough & handoff training</div>
+          <div class="price-line">Walkthrough &amp; handoff training</div>
         </div>
         <a href="#contact" class="btn-primary" style="display:block;text-align:center;">Request a Quote</a>
       </div>

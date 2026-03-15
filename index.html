@@ -165,6 +165,21 @@
         </div>
       </div>
 
+      <!--
+        WIDE GATE LAYOUT
+        Gate centre: x=550
+        Gate opening: x=375..725 (350px)
+        Each panel: 175px wide
+
+        LEFT PILLAR:  x=307..375 (68px)
+        RIGHT PILLAR: x=725..793 (68px)
+
+        Left panel:  x=375..550, hinge at x=375
+        Right panel: x=550..725, hinge at x=725
+
+        Walls: left 0..307, right 793..1100
+      -->
+
       <svg id="gateSVG" viewBox="0 0 1100 500" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
         <defs>
           <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
@@ -201,8 +216,8 @@
             <feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
           <clipPath id="sceneClip"><rect width="1100" height="500"/></clipPath>
-          <clipPath id="leftPanelClip"><rect x="440" y="130" width="120" height="220"/></clipPath>
-          <clipPath id="rightPanelClip"><rect x="540" y="130" width="120" height="220"/></clipPath>
+          <clipPath id="leftPanelClip"><rect x="307" y="130" width="250" height="230"/></clipPath>
+          <clipPath id="rightPanelClip"><rect x="543" y="130" width="250" height="230"/></clipPath>
         </defs>
 
         <g clip-path="url(#sceneClip)">
@@ -235,119 +250,127 @@
           <rect x="1040" y="418" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
 
           <!-- STONE WALLS -->
-          <rect x="0" y="278" width="440" height="80" fill="#121d2c"/>
-          <line x1="0"   y1="303" x2="440" y2="303" stroke="#192535" stroke-width="1.2"/>
-          <line x1="0"   y1="328" x2="440" y2="328" stroke="#192535" stroke-width="1.2"/>
+          <rect x="0" y="278" width="307" height="80" fill="#121d2c"/>
+          <line x1="0"   y1="303" x2="307" y2="303" stroke="#192535" stroke-width="1.2"/>
+          <line x1="0"   y1="328" x2="307" y2="328" stroke="#192535" stroke-width="1.2"/>
           <line x1="55"  y1="278" x2="55"  y2="358" stroke="#192535" stroke-width="1"/>
           <line x1="120" y1="278" x2="120" y2="358" stroke="#192535" stroke-width="1"/>
           <line x1="195" y1="278" x2="195" y2="358" stroke="#192535" stroke-width="1"/>
           <line x1="270" y1="278" x2="270" y2="358" stroke="#192535" stroke-width="1"/>
-          <line x1="345" y1="278" x2="345" y2="358" stroke="#192535" stroke-width="1"/>
-          <line x1="405" y1="278" x2="405" y2="358" stroke="#192535" stroke-width="1"/>
-          <rect x="660" y="278" width="440" height="80" fill="#121d2c"/>
-          <line x1="660"  y1="303" x2="1100" y2="303" stroke="#192535" stroke-width="1.2"/>
-          <line x1="660"  y1="328" x2="1100" y2="328" stroke="#192535" stroke-width="1.2"/>
-          <line x1="695"  y1="278" x2="695"  y2="358" stroke="#192535" stroke-width="1"/>
-          <line x1="755"  y1="278" x2="755"  y2="358" stroke="#192535" stroke-width="1"/>
-          <line x1="825"  y1="278" x2="825"  y2="358" stroke="#192535" stroke-width="1"/>
-          <line x1="905"  y1="278" x2="905"  y2="358" stroke="#192535" stroke-width="1"/>
-          <line x1="975"  y1="278" x2="975"  y2="358" stroke="#192535" stroke-width="1"/>
+          <rect x="793" y="278" width="307" height="80" fill="#121d2c"/>
+          <line x1="793"  y1="303" x2="1100" y2="303" stroke="#192535" stroke-width="1.2"/>
+          <line x1="793"  y1="328" x2="1100" y2="328" stroke="#192535" stroke-width="1.2"/>
+          <line x1="830"  y1="278" x2="830"  y2="358" stroke="#192535" stroke-width="1"/>
+          <line x1="900"  y1="278" x2="900"  y2="358" stroke="#192535" stroke-width="1"/>
+          <line x1="970"  y1="278" x2="970"  y2="358" stroke="#192535" stroke-width="1"/>
           <line x1="1045" y1="278" x2="1045" y2="358" stroke="#192535" stroke-width="1"/>
 
-          <!-- LEFT GATE PANEL -->
+          <!-- LEFT GATE PANEL: x=375..550, hinge at x=375 -->
           <g id="gateLeft" clip-path="url(#leftPanelClip)">
-            <rect x="508" y="155" width="84" height="190" fill="url(#gateIronL)"/>
-            <rect x="512" y="155" width="6" height="190" rx="3" fill="#2a4870"/>
-            <rect x="526" y="155" width="5" height="190" rx="2" fill="#253a5f" opacity="0.9"/>
-            <rect x="540" y="155" width="5" height="190" rx="2" fill="#253a5f" opacity="0.9"/>
-            <rect x="554" y="155" width="5" height="190" rx="2" fill="#253a5f" opacity="0.9"/>
-            <rect x="568" y="155" width="5" height="190" rx="2" fill="#253a5f" opacity="0.9"/>
-            <rect x="582" y="155" width="6" height="190" rx="3" fill="#2a4870"/>
-            <rect x="508" y="155" width="84" height="12" rx="2" fill="#1e3560" opacity="0.95"/>
-            <rect x="508" y="333" width="84" height="12" rx="2" fill="#1e3560" opacity="0.95"/>
-            <rect x="508" y="244" width="84" height="10" rx="2" fill="#1e3560" opacity="0.8"/>
-            <polygon points="515,155 518,140 521,155" fill="#2a4268"/>
-            <polygon points="529,155 532,140 535,155" fill="#2a4268"/>
-            <polygon points="543,155 546,140 549,155" fill="#2a4268"/>
-            <polygon points="557,155 560,140 563,155" fill="#2a4268"/>
-            <polygon points="571,155 574,140 577,155" fill="#2a4268"/>
-            <polygon points="585,155 588,140 591,155" fill="#2a4268"/>
-            <line x1="515" y1="170" x2="515" y2="332" stroke="#2f80ed" stroke-width="1" opacity="0.35"/>
-            <line x1="529" y1="170" x2="529" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
-            <line x1="543" y1="170" x2="543" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
-            <line x1="557" y1="170" x2="557" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
-            <line x1="571" y1="170" x2="571" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
-            <line x1="585" y1="170" x2="585" y2="332" stroke="#2f80ed" stroke-width="1" opacity="0.35"/>
-            <rect x="508" y="155" width="84" height="190" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.5"/>
+            <rect x="375" y="155" width="175" height="190" fill="url(#gateIronL)"/>
+            <rect x="379" y="155" width="6" height="190" rx="3" fill="#2a4870"/>
+            <rect x="400" y="155" width="5" height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="425" y="155" width="5" height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="450" y="155" width="5" height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="475" y="155" width="5" height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="500" y="155" width="5" height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="525" y="155" width="5" height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="544" y="155" width="6" height="190" rx="3" fill="#2a4870"/>
+            <rect x="375" y="155" width="175" height="12" rx="2" fill="#1e3560" opacity="0.95"/>
+            <rect x="375" y="333" width="175" height="12" rx="2" fill="#1e3560" opacity="0.95"/>
+            <rect x="375" y="244" width="175" height="10" rx="2" fill="#1e3560" opacity="0.8"/>
+            <polygon points="381,155 384,140 387,155" fill="#2a4268"/>
+            <polygon points="401,155 404,140 407,155" fill="#2a4268"/>
+            <polygon points="426,155 429,140 432,155" fill="#2a4268"/>
+            <polygon points="451,155 454,140 457,155" fill="#2a4268"/>
+            <polygon points="476,155 479,140 482,155" fill="#2a4268"/>
+            <polygon points="501,155 504,140 507,155" fill="#2a4268"/>
+            <polygon points="526,155 529,140 532,155" fill="#2a4268"/>
+            <polygon points="545,155 548,140 551,155" fill="#2a4268"/>
+            <line x1="382" y1="170" x2="382" y2="332" stroke="#2f80ed" stroke-width="1" opacity="0.35"/>
+            <line x1="403" y1="170" x2="403" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
+            <line x1="428" y1="170" x2="428" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
+            <line x1="453" y1="170" x2="453" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
+            <line x1="478" y1="170" x2="478" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
+            <line x1="503" y1="170" x2="503" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
+            <line x1="528" y1="170" x2="528" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
+            <line x1="547" y1="170" x2="547" y2="332" stroke="#2f80ed" stroke-width="1" opacity="0.35"/>
+            <rect x="375" y="155" width="175" height="190" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.5"/>
           </g>
 
-          <!-- RIGHT GATE PANEL -->
+          <!-- RIGHT GATE PANEL: x=550..725, hinge at x=725 -->
           <g id="gateRight" clip-path="url(#rightPanelClip)">
-            <rect x="508" y="155" width="84" height="190" fill="url(#gateIronR)"/>
-            <rect x="512" y="155" width="6"  height="190" rx="3" fill="#2a4870"/>
-            <rect x="526" y="155" width="5"  height="190" rx="2" fill="#253a5f" opacity="0.9"/>
-            <rect x="540" y="155" width="5"  height="190" rx="2" fill="#253a5f" opacity="0.9"/>
-            <rect x="554" y="155" width="5"  height="190" rx="2" fill="#253a5f" opacity="0.9"/>
-            <rect x="568" y="155" width="5"  height="190" rx="2" fill="#253a5f" opacity="0.9"/>
-            <rect x="582" y="155" width="6"  height="190" rx="3" fill="#2a4870"/>
-            <rect x="508" y="155" width="84" height="12" rx="2" fill="#1e3560" opacity="0.95"/>
-            <rect x="508" y="333" width="84" height="12" rx="2" fill="#1e3560" opacity="0.95"/>
-            <rect x="508" y="244" width="84" height="10" rx="2" fill="#1e3560" opacity="0.8"/>
-            <polygon points="515,155 518,140 521,155" fill="#2a4268"/>
-            <polygon points="529,155 532,140 535,155" fill="#2a4268"/>
-            <polygon points="543,155 546,140 549,155" fill="#2a4268"/>
-            <polygon points="557,155 560,140 563,155" fill="#2a4268"/>
+            <rect x="550" y="155" width="175" height="190" fill="url(#gateIronR)"/>
+            <rect x="550" y="155" width="6"  height="190" rx="3" fill="#2a4870"/>
+            <rect x="570" y="155" width="5"  height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="595" y="155" width="5"  height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="620" y="155" width="5"  height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="645" y="155" width="5"  height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="670" y="155" width="5"  height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="695" y="155" width="5"  height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="719" y="155" width="6"  height="190" rx="3" fill="#2a4870"/>
+            <rect x="550" y="155" width="175" height="12" rx="2" fill="#1e3560" opacity="0.95"/>
+            <rect x="550" y="333" width="175" height="12" rx="2" fill="#1e3560" opacity="0.95"/>
+            <rect x="550" y="244" width="175" height="10" rx="2" fill="#1e3560" opacity="0.8"/>
+            <polygon points="551,155 554,140 557,155" fill="#2a4268"/>
             <polygon points="571,155 574,140 577,155" fill="#2a4268"/>
-            <polygon points="585,155 588,140 591,155" fill="#2a4268"/>
-            <line x1="515" y1="170" x2="515" y2="332" stroke="#2f80ed" stroke-width="1" opacity="0.35"/>
-            <line x1="529" y1="170" x2="529" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
-            <line x1="543" y1="170" x2="543" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
-            <line x1="557" y1="170" x2="557" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
-            <line x1="571" y1="170" x2="571" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
-            <line x1="585" y1="170" x2="585" y2="332" stroke="#2f80ed" stroke-width="1" opacity="0.35"/>
-            <rect x="508" y="155" width="84" height="190" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.5"/>
+            <polygon points="596,155 599,140 602,155" fill="#2a4268"/>
+            <polygon points="621,155 624,140 627,155" fill="#2a4268"/>
+            <polygon points="646,155 649,140 652,155" fill="#2a4268"/>
+            <polygon points="671,155 674,140 677,155" fill="#2a4268"/>
+            <polygon points="696,155 699,140 702,155" fill="#2a4268"/>
+            <polygon points="720,155 723,140 726,155" fill="#2a4268"/>
+            <line x1="553" y1="170" x2="553" y2="332" stroke="#2f80ed" stroke-width="1" opacity="0.35"/>
+            <line x1="573" y1="170" x2="573" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
+            <line x1="598" y1="170" x2="598" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
+            <line x1="623" y1="170" x2="623" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
+            <line x1="648" y1="170" x2="648" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
+            <line x1="673" y1="170" x2="673" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
+            <line x1="698" y1="170" x2="698" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
+            <line x1="722" y1="170" x2="722" y2="332" stroke="#2f80ed" stroke-width="1" opacity="0.35"/>
+            <rect x="550" y="155" width="175" height="190" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.5"/>
           </g>
 
-          <!-- LEFT PILLAR -->
-          <rect x="440" y="130" width="68" height="225" rx="4" fill="url(#pillarGrad)"/>
-          <rect x="440" y="130" width="68" height="225" rx="4" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.38"/>
-          <rect x="433" y="119" width="82" height="16" rx="5" fill="#1e3050"/>
-          <rect x="433" y="119" width="82" height="16" rx="5" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.45"/>
-          <circle cx="474" cy="112" r="11" fill="#1b2e4a"/>
-          <circle cx="474" cy="112" r="11" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.55"/>
-          <circle cx="474" cy="112" r="5"  fill="#2f80ed" opacity="0.45"/>
-          <rect x="450" y="182" width="36" height="22" rx="3" fill="#111e30"/>
-          <rect x="450" y="182" width="36" height="22" rx="3" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.38"/>
-          <rect x="440" y="130" width="68" height="3" rx="1" fill="white" opacity="0.05"/>
+          <!-- LEFT PILLAR: x=307..375 -->
+          <rect x="307" y="130" width="68" height="225" rx="4" fill="url(#pillarGrad)"/>
+          <rect x="307" y="130" width="68" height="225" rx="4" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.38"/>
+          <rect x="300" y="119" width="82" height="16" rx="5" fill="#1e3050"/>
+          <rect x="300" y="119" width="82" height="16" rx="5" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.45"/>
+          <circle cx="341" cy="112" r="11" fill="#1b2e4a"/>
+          <circle cx="341" cy="112" r="11" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.55"/>
+          <circle cx="341" cy="112" r="5"  fill="#2f80ed" opacity="0.45"/>
+          <rect x="317" y="182" width="36" height="22" rx="3" fill="#111e30"/>
+          <rect x="317" y="182" width="36" height="22" rx="3" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.38"/>
+          <rect x="307" y="130" width="68" height="3" rx="1" fill="white" opacity="0.05"/>
 
-          <!-- RIGHT PILLAR -->
-          <rect x="592" y="130" width="68" height="225" rx="4" fill="url(#pillarGrad)"/>
-          <rect x="592" y="130" width="68" height="225" rx="4" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.38"/>
-          <rect x="585" y="119" width="82" height="16" rx="5" fill="#1e3050"/>
-          <rect x="585" y="119" width="82" height="16" rx="5" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.45"/>
-          <circle cx="626" cy="112" r="11" fill="#1b2e4a"/>
-          <circle cx="626" cy="112" r="11" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.55"/>
-          <circle cx="626" cy="112" r="5"  fill="#2f80ed" opacity="0.45"/>
-          <rect x="614" y="182" width="36" height="22" rx="3" fill="#111e30"/>
-          <rect x="614" y="182" width="36" height="22" rx="3" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.38"/>
-          <rect x="592" y="130" width="68" height="3" rx="1" fill="white" opacity="0.05"/>
+          <!-- RIGHT PILLAR: x=725..793 -->
+          <rect x="725" y="130" width="68" height="225" rx="4" fill="url(#pillarGrad)"/>
+          <rect x="725" y="130" width="68" height="225" rx="4" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.38"/>
+          <rect x="718" y="119" width="82" height="16" rx="5" fill="#1e3050"/>
+          <rect x="718" y="119" width="82" height="16" rx="5" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.45"/>
+          <circle cx="759" cy="112" r="11" fill="#1b2e4a"/>
+          <circle cx="759" cy="112" r="11" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.55"/>
+          <circle cx="759" cy="112" r="5"  fill="#2f80ed" opacity="0.45"/>
+          <rect x="747" y="182" width="36" height="22" rx="3" fill="#111e30"/>
+          <rect x="747" y="182" width="36" height="22" rx="3" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.38"/>
+          <rect x="725" y="130" width="68" height="3" rx="1" fill="white" opacity="0.05"/>
 
           <!-- RFID READER POST -->
-          <rect x="400" y="220" width="20" height="135" rx="4" fill="#0e1b2c"/>
-          <rect x="400" y="220" width="20" height="135" rx="4" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.35"/>
-          <rect x="388" y="188" width="46" height="60" rx="6" fill="#0d1e35"/>
-          <rect x="388" y="188" width="46" height="60" rx="6" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.65"/>
-          <rect x="393" y="194" width="34" height="26" rx="3" fill="#060e18"/>
-          <rect x="393" y="194" width="34" height="26" rx="3" fill="none" stroke="#1a3050" stroke-width="1"/>
-          <circle id="readerLed"     cx="411" cy="235" r="8"  fill="#cc2020" filter="url(#glow)"/>
-          <circle id="readerLedGlow" cx="411" cy="235" r="18" fill="#cc2020" opacity="0.15"/>
-          <rect x="408" y="181" width="6" height="11" rx="2" fill="#1e3050"/>
+          <rect x="267" y="220" width="20" height="135" rx="4" fill="#0e1b2c"/>
+          <rect x="267" y="220" width="20" height="135" rx="4" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.35"/>
+          <rect x="255" y="188" width="46" height="60" rx="6" fill="#0d1e35"/>
+          <rect x="255" y="188" width="46" height="60" rx="6" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.65"/>
+          <rect x="260" y="194" width="34" height="26" rx="3" fill="#060e18"/>
+          <rect x="260" y="194" width="34" height="26" rx="3" fill="none" stroke="#1a3050" stroke-width="1"/>
+          <circle id="readerLed"     cx="278" cy="235" r="8"  fill="#cc2020" filter="url(#glow)"/>
+          <circle id="readerLedGlow" cx="278" cy="235" r="18" fill="#cc2020" opacity="0.15"/>
+          <rect x="275" y="181" width="6" height="11" rx="2" fill="#1e3050"/>
 
           <g id="rfidRings" opacity="0" filter="url(#softglow)">
-            <ellipse id="ring1" cx="411" cy="210" rx="20" ry="13" fill="none" stroke="#00d4ff" stroke-width="1.8" opacity="0"/>
-            <ellipse id="ring2" cx="411" cy="210" rx="38" ry="26" fill="none" stroke="#00d4ff" stroke-width="1.4" opacity="0"/>
-            <ellipse id="ring3" cx="411" cy="210" rx="58" ry="40" fill="none" stroke="#2f80ed" stroke-width="1.1" opacity="0"/>
-            <ellipse id="ring4" cx="411" cy="210" rx="78" ry="54" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0"/>
+            <ellipse id="ring1" cx="278" cy="210" rx="20" ry="13" fill="none" stroke="#00d4ff" stroke-width="1.8" opacity="0"/>
+            <ellipse id="ring2" cx="278" cy="210" rx="38" ry="26" fill="none" stroke="#00d4ff" stroke-width="1.4" opacity="0"/>
+            <ellipse id="ring3" cx="278" cy="210" rx="58" ry="40" fill="none" stroke="#2f80ed" stroke-width="1.1" opacity="0"/>
+            <ellipse id="ring4" cx="278" cy="210" rx="78" ry="54" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0"/>
           </g>
 
           <!-- HUD overlays -->
@@ -384,7 +407,6 @@
             <polygon points="420,358 640,338 640,394 420,378" fill="url(#beamGrad)" opacity="0.2"/>
             <ellipse cx="232" cy="454" rx="178" ry="12" fill="#000" opacity="0.28"/>
 
-            <!-- BED -->
             <rect x="78" y="354" width="172" height="62" rx="3" fill="url(#bedGrad)"/>
             <rect x="78" y="354" width="172" height="62" rx="3" fill="none" stroke="#5a6a78" stroke-width="1.5"/>
             <rect x="83" y="357" width="162" height="54" rx="2" fill="#6a7a88"/>
@@ -394,7 +416,6 @@
             <line x1="218" y1="354" x2="218" y2="416" stroke="#7a8a98" stroke-width="1"/>
             <rect x="78" y="354" width="13" height="62" rx="2" fill="#7a8a98"/>
 
-            <!-- POOL EQUIPMENT -->
             <line x1="96"  y1="410" x2="248" y2="274" stroke="#3a80b8" stroke-width="6" stroke-linecap="round"/>
             <line x1="96"  y1="410" x2="248" y2="274" stroke="#6ab0e0" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
             <rect x="239" y="266" width="24" height="12" rx="4" fill="#7bc8e8"/>
@@ -422,7 +443,6 @@
             <circle cx="232" cy="385" r="5" fill="none" stroke="#4a6080" stroke-width="1"/>
             <circle cx="232" cy="385" r="2" fill="#00d4ff" opacity="0.6"/>
 
-            <!-- CAB -->
             <rect x="246" y="370" width="184" height="46" rx="5" fill="url(#truckWhiteGrad)"/>
             <rect x="246" y="381" width="184" height="12" fill="url(#truckStripe)" opacity="0.88"/>
             <path d="M276,300 Q286,268 320,260 L400,260 Q426,268 430,300 L430,370 L246,370 Z" fill="url(#truckWhiteGrad)"/>
@@ -451,7 +471,6 @@
             <circle cx="350" cy="253" r="4.5" fill="#ffaa20" opacity="0.82" filter="url(#glow)"/>
             <circle cx="390" cy="253" r="4.5" fill="#ffaa20" opacity="0.82" filter="url(#glow)"/>
 
-            <!-- FRONT WHEEL -->
             <circle cx="376" cy="447" r="30" fill="#080c10"/>
             <circle cx="376" cy="447" r="30" fill="none" stroke="#1a2535" stroke-width="3"/>
             <circle cx="376" cy="447" r="21" fill="#0d1520"/>
@@ -462,7 +481,6 @@
             <line x1="391" y1="432" x2="361" y2="462" stroke="#2a3a50" stroke-width="2"/>
             <circle cx="376" cy="447" r="6" fill="#2f80ed" opacity="0.7"/>
 
-            <!-- REAR WHEEL -->
             <circle cx="164" cy="447" r="30" fill="#080c10"/>
             <circle cx="164" cy="447" r="30" fill="none" stroke="#1a2535" stroke-width="3"/>
             <circle cx="164" cy="447" r="21" fill="#0d1520"/>
@@ -610,27 +628,27 @@
     var toast   = document.getElementById('notifToast');
     if (!truck) return;
 
-    // Timing
-    var CYCLE         = 9000;
-    var T_TRUCK_START = 0.05;
-    var T_TRUCK_STOP  = 0.38;
-    var T_SCAN_START  = 0.28;
-    var T_LED_GREEN   = 0.38;
-    var T_GATE_OPEN   = 0.42;
-    var T_GATE_FULL   = 0.60;
-    var T_NOTIF       = 0.62;
-    var T_HOLD        = 0.92;
+    // ── Timing ──
+    // Everything syncs at T_SYNC (0.62): truck stops, gate fully open, notification appears
+    var CYCLE         = 9000;  // ms per loop
+    var T_TRUCK_START = 0.05;  // truck begins moving in from left
+    var T_SCAN_START  = 0.25;  // truck reaches reader, RFID rings start
+    var T_LED_GREEN   = 0.35;  // LED turns green, tag authorized
+    var T_GATE_OPEN   = 0.38;  // gate begins opening + truck starts driving through
+    var T_SYNC        = 0.62;  // SYNC: truck stops + gate fully open + notification appears
+    var T_HOLD        = 0.92;  // hold everything until loop resets
 
-    var TRUCK_START_X = -540;
-    var TRUCK_REST_X  = 0;
+    // Truck positions (translateX offsets applied to the truck group)
+    // Truck local coords: front bumper ~x=430, rear ~x=78
+    // Reader post at SVG x~278
+    // Truck front at reader: translateX = 278 - 430 = -152
+    var TRUCK_START_X = -660;   // off-screen left
+    var TRUCK_READER_X = -152;  // front of truck at RFID reader
+    var TRUCK_REST_X  = 120;    // truck centered in gate opening (front at ~550)
 
-    // Gate hinge x-coords in SVG space
-    // Left panel hinge at x=508 (left pillar inner face)
-    // Right panel hinge at x=592 (right pillar inner face)
-    // Panels swing OUTWARD: left panel swings left, right panel swings right
-    // We use scaleX to simulate foreshortening as they rotate toward the viewer
-    var HINGE_L = 508;
-    var HINGE_R = 592;
+    // Gate hinge positions (wider gate)
+    var HINGE_L = 375;  // left panel hinge (left pillar inner face)
+    var HINGE_R = 725;  // right panel hinge (right pillar inner face)
 
     var ringTime = 0;
     var lastTs   = null;
@@ -661,14 +679,10 @@
     }
 
     function setGate(sx) {
-      // Left panel: scale from hinge at x=508
-      // sx=1 = closed (full width), sx=0 = open (collapsed to hinge, swung outward)
       gateL.setAttribute('transform',
         'translate(' + HINGE_L + ',0) scale(' + sx + ',1) translate(' + (-HINGE_L) + ',0)');
-      // Right panel: scale from hinge at x=592
       gateR.setAttribute('transform',
         'translate(' + HINGE_R + ',0) scale(' + sx + ',1) translate(' + (-HINGE_R) + ',0)');
-      // Dim slightly as panels open (edge-on = darker)
       var op = String(0.5 + 0.5 * sx);
       gateL.setAttribute('opacity', op);
       gateR.setAttribute('opacity', op);
@@ -680,11 +694,25 @@
       lastTs = ts;
       var f = ((ts - startTs) % CYCLE) / CYCLE;
 
-      // Truck
-      var truckX = lerp(TRUCK_START_X, TRUCK_REST_X, ease(frac(f, T_TRUCK_START, T_TRUCK_STOP)));
+      // ── Truck movement (3 phases) ──
+      var truckX;
+      if (f < T_TRUCK_START) {
+        truckX = TRUCK_START_X;
+      } else if (f < T_SCAN_START) {
+        // Phase 1: Drive to reader
+        truckX = lerp(TRUCK_START_X, TRUCK_READER_X, ease(frac(f, T_TRUCK_START, T_SCAN_START)));
+      } else if (f < T_GATE_OPEN) {
+        // Phase 2: Wait at reader during scan
+        truckX = TRUCK_READER_X;
+      } else if (f < T_SYNC) {
+        // Phase 3: Drive through gate — arrives at T_SYNC
+        truckX = lerp(TRUCK_READER_X, TRUCK_REST_X, ease(frac(f, T_GATE_OPEN, T_SYNC)));
+      } else {
+        truckX = TRUCK_REST_X;
+      }
       truck.setAttribute('transform', 'translate('+truckX+',0)');
 
-      // LED colour
+      // ── LED colour ──
       if (f < T_SCAN_START) {
         setLed('rgb(204,32,32)', '0.15');
       } else if (f < T_LED_GREEN) {
@@ -696,7 +724,7 @@
         setLed('rgb(74,222,128)', '0.35');
       }
 
-      // RFID rings
+      // ── RFID rings ──
       if (f >= T_SCAN_START && f < T_GATE_OPEN) {
         rfidRings.setAttribute('opacity', '0.85');
         animateRings(dt);
@@ -705,11 +733,11 @@
         if (f < T_SCAN_START) ringTime = 0;
       }
 
-      // Gate: sx goes 1 (closed) -> 0 (open/swung out)
-      var sx = 1 - ease(frac(f, T_GATE_OPEN, T_GATE_FULL));
+      // ── Gate: opens from T_GATE_OPEN → T_SYNC ──
+      var sx = 1 - ease(frac(f, T_GATE_OPEN, T_SYNC));
       setGate(sx);
 
-      // HUD text
+      // ── HUD text ──
       if (f < T_SCAN_START) {
         hudMode.setAttribute('fill','#cc4040'); hudMode.textContent='LOCKED';
         hudTag.setAttribute('fill','#7a8599');  hudTag.textContent='SCANNING...';
@@ -724,8 +752,8 @@
         hudTag.setAttribute('fill','#4ade80');  hudTag.textContent='POOL SVC';
       }
 
-      // Toast
-      if (f >= T_NOTIF && f < T_HOLD) {
+      // ── Toast: appears at T_SYNC ──
+      if (f >= T_SYNC && f < T_HOLD) {
         toast.classList.add('visible');
       } else {
         toast.classList.remove('visible');
@@ -734,7 +762,7 @@
       requestAnimationFrame(tick);
     }
 
-    // Initialise gate as fully CLOSED before first frame
+    // Initialise gate as fully CLOSED
     setGate(1);
     requestAnimationFrame(tick);
   })();

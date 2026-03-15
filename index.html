@@ -33,7 +33,7 @@
     .gate-illustration { position: relative; z-index: 2; width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
 
     .notif-wrap { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; z-index: 10; pointer-events: none; }
-    .notif-toast { background: rgba(8,18,32,0.96); border: 1px solid rgba(74,222,128,0.4); border-radius: 16px; padding: 1.1rem 1.6rem; display: flex; align-items: center; gap: 1rem; box-shadow: 0 0 40px rgba(74,222,128,0.2), 0 8px 40px rgba(0,0,0,0.6); opacity: 0; transform: translateY(16px) scale(0.96); transition: opacity 0.4s ease, transform 0.4s ease; max-width: 380px; width: 90%; }
+    .notif-toast { background: rgba(8,18,32,0.96); border: 1px solid rgba(74,222,128,0.4); border-radius: 16px; padding: 1.1rem 1.6rem; display: flex; align-items: center; gap: 1rem; box-shadow: 0 0 40px rgba(74,222,128,0.2), 0 8px 40px rgba(0,0,0,0.6); opacity: 0; transform: translateY(16px) scale(0.96); transition: opacity 0.5s ease, transform 0.5s ease; max-width: 380px; width: 90%; }
     .notif-toast.visible { opacity: 1; transform: translateY(0) scale(1); }
     .notif-icon { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg,#1a4a2a,#0d2a1a); border: 1.5px solid rgba(74,222,128,0.4); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
     .notif-body { flex: 1; }
@@ -165,21 +165,6 @@
         </div>
       </div>
 
-      <!--
-        WIDE GATE LAYOUT
-        Gate centre: x=550
-        Gate opening: x=375..725 (350px)
-        Each panel: 175px wide
-
-        LEFT PILLAR:  x=307..375 (68px)
-        RIGHT PILLAR: x=725..793 (68px)
-
-        Left panel:  x=375..550, hinge at x=375
-        Right panel: x=550..725, hinge at x=725
-
-        Walls: left 0..307, right 793..1100
-      -->
-
       <svg id="gateSVG" viewBox="0 0 1100 500" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
         <defs>
           <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
@@ -265,7 +250,7 @@
           <line x1="970"  y1="278" x2="970"  y2="358" stroke="#192535" stroke-width="1"/>
           <line x1="1045" y1="278" x2="1045" y2="358" stroke="#192535" stroke-width="1"/>
 
-          <!-- LEFT GATE PANEL: x=375..550, hinge at x=375 -->
+          <!-- LEFT GATE PANEL -->
           <g id="gateLeft" clip-path="url(#leftPanelClip)">
             <rect x="375" y="155" width="175" height="190" fill="url(#gateIronL)"/>
             <rect x="379" y="155" width="6" height="190" rx="3" fill="#2a4870"/>
@@ -298,7 +283,7 @@
             <rect x="375" y="155" width="175" height="190" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.5"/>
           </g>
 
-          <!-- RIGHT GATE PANEL: x=550..725, hinge at x=725 -->
+          <!-- RIGHT GATE PANEL -->
           <g id="gateRight" clip-path="url(#rightPanelClip)">
             <rect x="550" y="155" width="175" height="190" fill="url(#gateIronR)"/>
             <rect x="550" y="155" width="6"  height="190" rx="3" fill="#2a4870"/>
@@ -331,7 +316,7 @@
             <rect x="550" y="155" width="175" height="190" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.5"/>
           </g>
 
-          <!-- LEFT PILLAR: x=307..375 -->
+          <!-- LEFT PILLAR -->
           <rect x="307" y="130" width="68" height="225" rx="4" fill="url(#pillarGrad)"/>
           <rect x="307" y="130" width="68" height="225" rx="4" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.38"/>
           <rect x="300" y="119" width="82" height="16" rx="5" fill="#1e3050"/>
@@ -343,7 +328,7 @@
           <rect x="317" y="182" width="36" height="22" rx="3" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.38"/>
           <rect x="307" y="130" width="68" height="3" rx="1" fill="white" opacity="0.05"/>
 
-          <!-- RIGHT PILLAR: x=725..793 -->
+          <!-- RIGHT PILLAR -->
           <rect x="725" y="130" width="68" height="225" rx="4" fill="url(#pillarGrad)"/>
           <rect x="725" y="130" width="68" height="225" rx="4" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.38"/>
           <rect x="718" y="119" width="82" height="16" rx="5" fill="#1e3050"/>
@@ -407,6 +392,7 @@
             <polygon points="420,358 640,338 640,394 420,378" fill="url(#beamGrad)" opacity="0.2"/>
             <ellipse cx="232" cy="454" rx="178" ry="12" fill="#000" opacity="0.28"/>
 
+            <!-- Truck bed -->
             <rect x="78" y="354" width="172" height="62" rx="3" fill="url(#bedGrad)"/>
             <rect x="78" y="354" width="172" height="62" rx="3" fill="none" stroke="#5a6a78" stroke-width="1.5"/>
             <rect x="83" y="357" width="162" height="54" rx="2" fill="#6a7a88"/>
@@ -416,61 +402,89 @@
             <line x1="218" y1="354" x2="218" y2="416" stroke="#7a8a98" stroke-width="1"/>
             <rect x="78" y="354" width="13" height="62" rx="2" fill="#7a8a98"/>
 
+            <!-- Pool skimmer pole (diagonal) -->
             <line x1="96"  y1="410" x2="248" y2="274" stroke="#3a80b8" stroke-width="6" stroke-linecap="round"/>
             <line x1="96"  y1="410" x2="248" y2="274" stroke="#6ab0e0" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+            <!-- Net head -->
             <rect x="239" y="266" width="24" height="12" rx="4" fill="#7bc8e8"/>
             <rect x="239" y="266" width="24" height="12" rx="4" fill="none" stroke="#4a90c0" stroke-width="1"/>
             <line x1="241" y1="278" x2="241" y2="286" stroke="#5a9ab0" stroke-width="1.5"/>
             <line x1="246" y1="278" x2="246" y2="287" stroke="#5a9ab0" stroke-width="1.5"/>
             <line x1="251" y1="278" x2="251" y2="286" stroke="#5a9ab0" stroke-width="1.5"/>
             <line x1="257" y1="278" x2="257" y2="286" stroke="#5a9ab0" stroke-width="1.5"/>
+
+            <!-- Pool chemicals container -->
             <rect x="90" y="366" width="26" height="38" rx="4" fill="#eaf4ea"/>
             <rect x="90" y="366" width="26" height="38" rx="4" fill="none" stroke="#b0c8b0" stroke-width="1"/>
             <rect x="95" y="360" width="16" height="8" rx="3" fill="#cce4cc"/>
             <text x="93" y="379" font-size="5" fill="#2a6a2a" font-family="monospace" font-weight="bold">POOL</text>
             <text x="93" y="386" font-size="4" fill="#2a6a2a" font-family="monospace">CHEM</text>
+
+            <!-- Algaecide bottle -->
             <rect x="120" y="370" width="24" height="34" rx="4" fill="#e8eef8"/>
             <rect x="120" y="370" width="24" height="34" rx="4" fill="none" stroke="#b0b8d0" stroke-width="1"/>
             <rect x="125" y="364" width="14" height="8" rx="2" fill="#c8d0e8"/>
             <text x="122" y="383" font-size="4" fill="#2a3a6a" font-family="monospace">ALGAE</text>
+
+            <!-- Pool hose reel -->
             <ellipse cx="200" cy="392" rx="20" ry="13" fill="#9ab4c0" opacity="0.85"/>
             <ellipse cx="200" cy="392" rx="20" ry="13" fill="none" stroke="#8a9aaa" stroke-width="1"/>
             <line x1="184" y1="386" x2="216" y2="398" stroke="#8a9aaa" stroke-width="1" opacity="0.55"/>
             <line x1="184" y1="392" x2="216" y2="392" stroke="#8a9aaa" stroke-width="1" opacity="0.55"/>
+
+            <!-- Toolbox -->
             <rect x="220" y="374" width="24" height="22" rx="3" fill="#3a4a5a"/>
             <rect x="220" y="374" width="24" height="22" rx="3" fill="none" stroke="#4a6080" stroke-width="1"/>
             <circle cx="232" cy="385" r="5" fill="#2a3a4a"/>
             <circle cx="232" cy="385" r="5" fill="none" stroke="#4a6080" stroke-width="1"/>
             <circle cx="232" cy="385" r="2" fill="#00d4ff" opacity="0.6"/>
 
+            <!-- Cab body -->
             <rect x="246" y="370" width="184" height="46" rx="5" fill="url(#truckWhiteGrad)"/>
             <rect x="246" y="381" width="184" height="12" fill="url(#truckStripe)" opacity="0.88"/>
+
+            <!-- Cab top -->
             <path d="M276,300 Q286,268 320,260 L400,260 Q426,268 430,300 L430,370 L246,370 Z" fill="url(#truckWhiteGrad)"/>
             <path d="M276,300 Q286,268 320,260 L400,260 Q426,268 430,300 L430,370 L246,370 Z" fill="none" stroke="#c0d0e0" stroke-width="1.5"/>
             <path d="M288,344 Q290,328 304,322 L430,322 L430,344 Z" fill="url(#truckStripe)" opacity="0.45"/>
+
+            <!-- Company name on cab -->
             <text x="276" y="397" font-size="8" fill="#0e6080" font-family="sans-serif" font-weight="bold" opacity="0.9">BLUE WAVE</text>
             <text x="276" y="408" font-size="6" fill="#1a8aaa" font-family="sans-serif">POOL SERVICE</text>
+
+            <!-- Windshield -->
             <path d="M392,264 Q422,272 428,300 L428,340 L318,340 Q310,310 316,264 Z" fill="#0a1828" opacity="0.88"/>
             <path d="M392,264 Q422,272 428,300 L428,340 L318,340 Q310,310 316,264 Z" fill="none" stroke="#b0c8d8" stroke-width="1.2" opacity="0.45"/>
             <path d="M398,268 Q418,276 422,296 L420,318 L326,318 Q320,296 324,268 Z" fill="#1a3a5c" opacity="0.16"/>
+            <!-- Driver side window -->
             <path d="M278,302 Q286,272 318,262 L320,262 L312,340 L250,340 Z" fill="#0a1828" opacity="0.78"/>
             <path d="M278,302 Q286,272 318,262 L320,262 L312,340 L250,340 Z" fill="none" stroke="#b0c8d8" stroke-width="0.8" opacity="0.28"/>
             <line x1="318" y1="340" x2="318" y2="416" stroke="#b0c0d0" stroke-width="1.5" opacity="0.45"/>
+
+            <!-- Door handle -->
             <rect x="326" y="386" width="20" height="5" rx="2.5" fill="#a0b0c0"/>
+
+            <!-- Headlights -->
             <rect x="420" y="357" width="12" height="10" rx="2" fill="#fffde0" opacity="0.96" filter="url(#glow)"/>
             <rect x="420" y="371" width="12" height="8"  rx="2" fill="#ffe080" opacity="0.72" filter="url(#glow)"/>
             <rect x="418" y="355" width="16" height="14" rx="3" fill="none" stroke="#fffde0" stroke-width="1" opacity="0.38"/>
+            <!-- Tail lights -->
             <rect x="246" y="357" width="12" height="10" rx="2" fill="#ff3030" opacity="0.92" filter="url(#glow)"/>
             <rect x="246" y="371" width="12" height="8"  rx="2" fill="#aa1010" opacity="0.72"/>
+
+            <!-- Bumpers -->
             <rect x="424" y="402" width="10" height="14" rx="3" fill="#a0b0c0"/>
             <rect x="404" y="406" width="22" height="10" rx="2" fill="#8a9aaa"/>
             <rect x="244" y="402" width="10" height="14" rx="3" fill="#a0b0c0"/>
+
+            <!-- Roof rack -->
             <rect x="290" y="254" width="120" height="9" rx="3" fill="#8a9aaa"/>
             <rect x="290" y="254" width="120" height="9" rx="3" fill="none" stroke="#7a8a98" stroke-width="1"/>
             <circle cx="310" cy="253" r="4.5" fill="#ffaa20" opacity="0.82" filter="url(#glow)"/>
             <circle cx="350" cy="253" r="4.5" fill="#ffaa20" opacity="0.82" filter="url(#glow)"/>
             <circle cx="390" cy="253" r="4.5" fill="#ffaa20" opacity="0.82" filter="url(#glow)"/>
 
+            <!-- Front wheel -->
             <circle cx="376" cy="447" r="30" fill="#080c10"/>
             <circle cx="376" cy="447" r="30" fill="none" stroke="#1a2535" stroke-width="3"/>
             <circle cx="376" cy="447" r="21" fill="#0d1520"/>
@@ -481,6 +495,7 @@
             <line x1="391" y1="432" x2="361" y2="462" stroke="#2a3a50" stroke-width="2"/>
             <circle cx="376" cy="447" r="6" fill="#2f80ed" opacity="0.7"/>
 
+            <!-- Rear wheel -->
             <circle cx="164" cy="447" r="30" fill="#080c10"/>
             <circle cx="164" cy="447" r="30" fill="none" stroke="#1a2535" stroke-width="3"/>
             <circle cx="164" cy="447" r="21" fill="#0d1520"/>
@@ -628,27 +643,35 @@
     var toast   = document.getElementById('notifToast');
     if (!truck) return;
 
-    // ── Timing ──
-    // Everything syncs at T_SYNC (0.62): truck stops, gate fully open, notification appears
-    var CYCLE         = 9000;  // ms per loop
-    var T_TRUCK_START = 0.05;  // truck begins moving in from left
-    var T_SCAN_START  = 0.25;  // truck reaches reader, RFID rings start
-    var T_LED_GREEN   = 0.35;  // LED turns green, tag authorized
-    var T_GATE_OPEN   = 0.38;  // gate begins opening + truck starts driving through
-    var T_SYNC        = 0.62;  // SYNC: truck stops + gate fully open + notification appears
-    var T_HOLD        = 0.92;  // hold everything until loop resets
+    // ── SEAMLESS TIMING ──
+    // The truck NEVER stops. RFID reads at long range as truck enters.
+    // Gate opens early so truck drives straight through without pausing.
+    var CYCLE         = 10000; // ms per loop
 
-    // Truck positions (translateX offsets applied to the truck group)
-    // Truck local coords: front bumper ~x=430, rear ~x=78
-    // Reader post at SVG x~278
-    // Truck front at reader: translateX = 278 - 430 = -152
+    // Phase 1: Approach — truck enters, RFID detects at long range
+    var T_TRUCK_START = 0.03;  // truck begins entering from left
+    var T_RFID_DETECT = 0.08;  // RFID detects tag at long range (truck just visible)
+    var T_LED_GREEN   = 0.12;  // LED goes green, authorization confirmed
+    var T_GATE_START  = 0.12;  // gate starts opening immediately on auth
+    var T_GATE_DONE   = 0.32;  // gate fully open (well before truck arrives)
+    var T_TOAST_SHOW  = 0.30;  // notification appears as truck approaches gate
+
+    // Phase 2: Drive through — truck passes through open gate smoothly
+    var T_TRUCK_THRU  = 0.52;  // truck reaches rest position past gate
+
+    // Phase 3: Hold & Reset
+    var T_TOAST_HIDE  = 0.78;  // hide toast before reset
+    var T_HOLD_END    = 0.82;  // start resetting
+    var T_GATE_CLOSE  = 0.88;  // gate closes
+    var T_RESET_DONE  = 0.95;  // everything back to initial state
+
+    // Truck positions
     var TRUCK_START_X = -660;   // off-screen left
-    var TRUCK_READER_X = -152;  // front of truck at RFID reader
-    var TRUCK_REST_X  = 120;    // truck centered in gate opening (front at ~550)
+    var TRUCK_REST_X  = 200;    // truck well past the gate
 
-    // Gate hinge positions (wider gate)
-    var HINGE_L = 375;  // left panel hinge (left pillar inner face)
-    var HINGE_R = 725;  // right panel hinge (right pillar inner face)
+    // Gate hinge positions
+    var HINGE_L = 375;
+    var HINGE_R = 725;
 
     var ringTime = 0;
     var lastTs   = null;
@@ -657,6 +680,7 @@
     function lerp(a,b,t){ return a+(b-a)*t; }
     function clamp(v,lo,hi){ return v<lo?lo:v>hi?hi:v; }
     function ease(t){ return t<0.5?2*t*t:-1+(4-2*t)*t; }
+    function easeSmooth(t){ return t*t*(3-2*t); }
     function frac(t,a,b){ return clamp((t-a)/(b-a),0,1); }
     function lerpColor(c1,c2,t){
       return 'rgb('+Math.round(lerp(c1[0],c2[0],t))+','+Math.round(lerp(c1[1],c2[1],t))+','+Math.round(lerp(c1[2],c2[2],t))+')';
@@ -671,10 +695,10 @@
 
     function animateRings(dt){
       ringTime += dt;
-      var t = (ringTime % 2000) / 2000;
+      var t = (ringTime % 1600) / 1600;
       [ring1,ring2,ring3,ring4].forEach(function(r,i){
-        var rt = ((t - i*0.25 + 1) % 1);
-        r.setAttribute('opacity', rt < 0.7 ? String((1-rt/0.7)*0.85) : '0');
+        var rt = ((t - i*0.22 + 1) % 1);
+        r.setAttribute('opacity', rt < 0.65 ? String((1-rt/0.65)*0.9) : '0');
       });
     }
 
@@ -694,66 +718,81 @@
       lastTs = ts;
       var f = ((ts - startTs) % CYCLE) / CYCLE;
 
-      // ── Truck movement (3 phases) ──
+      // ── Truck movement: ONE continuous smooth motion, no stops ──
       var truckX;
       if (f < T_TRUCK_START) {
         truckX = TRUCK_START_X;
-      } else if (f < T_SCAN_START) {
-        // Phase 1: Drive to reader
-        truckX = lerp(TRUCK_START_X, TRUCK_READER_X, ease(frac(f, T_TRUCK_START, T_SCAN_START)));
-      } else if (f < T_GATE_OPEN) {
-        // Phase 2: Wait at reader during scan
-        truckX = TRUCK_READER_X;
-      } else if (f < T_SYNC) {
-        // Phase 3: Drive through gate — arrives at T_SYNC
-        truckX = lerp(TRUCK_READER_X, TRUCK_REST_X, ease(frac(f, T_GATE_OPEN, T_SYNC)));
-      } else {
+      } else if (f < T_TRUCK_THRU) {
+        // Single smooth drive from off-screen to rest position — never pauses
+        truckX = lerp(TRUCK_START_X, TRUCK_REST_X, easeSmooth(frac(f, T_TRUCK_START, T_TRUCK_THRU)));
+      } else if (f < T_HOLD_END) {
         truckX = TRUCK_REST_X;
+      } else {
+        // Reset truck to start for next cycle
+        truckX = TRUCK_START_X;
       }
       truck.setAttribute('transform', 'translate('+truckX+',0)');
 
-      // ── LED colour ──
-      if (f < T_SCAN_START) {
+      // ── LED colour: quick transition as truck enters ──
+      if (f < T_RFID_DETECT) {
         setLed('rgb(204,32,32)', '0.15');
       } else if (f < T_LED_GREEN) {
-        setLed(lerpColor(RED, AMBER, frac(f, T_SCAN_START, T_LED_GREEN)), '0.2');
-      } else if (f < T_GATE_OPEN) {
-        var t2 = frac(f, T_LED_GREEN, T_GATE_OPEN);
-        setLed(lerpColor(AMBER, GREEN, t2), String(0.2 + 0.15*t2));
-      } else {
+        var tScan = frac(f, T_RFID_DETECT, T_LED_GREEN);
+        setLed(lerpColor(RED, AMBER, tScan), String(0.15 + 0.1*tScan));
+      } else if (f < T_LED_GREEN + 0.03) {
+        var tAuth = frac(f, T_LED_GREEN, T_LED_GREEN + 0.03);
+        setLed(lerpColor(AMBER, GREEN, tAuth), String(0.25 + 0.1*tAuth));
+      } else if (f < T_HOLD_END) {
         setLed('rgb(74,222,128)', '0.35');
+      } else if (f < T_RESET_DONE) {
+        var tReset = frac(f, T_HOLD_END, T_RESET_DONE);
+        setLed(lerpColor(GREEN, RED, tReset), String(lerp(0.35, 0.15, tReset)));
+      } else {
+        setLed('rgb(204,32,32)', '0.15');
       }
 
-      // ── RFID rings ──
-      if (f >= T_SCAN_START && f < T_GATE_OPEN) {
-        rfidRings.setAttribute('opacity', '0.85');
+      // ── RFID rings: pulse while detecting ──
+      if (f >= T_RFID_DETECT && f < T_GATE_DONE) {
+        var ringFade = f > T_LED_GREEN + 0.05 ? (1 - ease(frac(f, T_LED_GREEN + 0.05, T_GATE_DONE))) : 1;
+        rfidRings.setAttribute('opacity', String(0.85 * ringFade));
         animateRings(dt);
       } else {
         rfidRings.setAttribute('opacity', '0');
-        if (f < T_SCAN_START) ringTime = 0;
+        if (f < T_RFID_DETECT) ringTime = 0;
       }
 
-      // ── Gate: opens from T_GATE_OPEN → T_SYNC ──
-      var sx = 1 - ease(frac(f, T_GATE_OPEN, T_SYNC));
+      // ── Gate: opens smoothly, stays open, then closes ──
+      var sx;
+      if (f < T_GATE_START) {
+        sx = 1;
+      } else if (f < T_GATE_DONE) {
+        sx = 1 - ease(frac(f, T_GATE_START, T_GATE_DONE));
+      } else if (f < T_GATE_CLOSE) {
+        sx = 0;
+      } else if (f < T_RESET_DONE) {
+        sx = ease(frac(f, T_GATE_CLOSE, T_RESET_DONE));
+      } else {
+        sx = 1;
+      }
       setGate(sx);
 
       // ── HUD text ──
-      if (f < T_SCAN_START) {
+      if (f < T_RFID_DETECT) {
         hudMode.setAttribute('fill','#cc4040'); hudMode.textContent='LOCKED';
         hudTag.setAttribute('fill','#7a8599');  hudTag.textContent='SCANNING...';
       } else if (f < T_LED_GREEN) {
         hudMode.setAttribute('fill','#ddaa20'); hudMode.textContent='READING';
         hudTag.setAttribute('fill','#ddaa20');  hudTag.textContent='TAG FOUND';
-      } else if (f < T_GATE_OPEN) {
-        hudMode.setAttribute('fill','#4ade80'); hudMode.textContent='AUTHORIZED';
-        hudTag.setAttribute('fill','#4ade80');  hudTag.textContent='POOL SVC';
-      } else {
+      } else if (f < T_HOLD_END) {
         hudMode.setAttribute('fill','#4ade80'); hudMode.textContent='OPEN';
         hudTag.setAttribute('fill','#4ade80');  hudTag.textContent='POOL SVC';
+      } else {
+        hudMode.setAttribute('fill','#cc4040'); hudMode.textContent='LOCKED';
+        hudTag.setAttribute('fill','#7a8599');  hudTag.textContent='SCANNING...';
       }
 
-      // ── Toast: appears at T_SYNC ──
-      if (f >= T_SYNC && f < T_HOLD) {
+      // ── Toast notification ──
+      if (f >= T_TOAST_SHOW && f < T_TOAST_HIDE) {
         toast.classList.add('visible');
       } else {
         toast.classList.remove('visible');

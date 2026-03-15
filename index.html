@@ -165,32 +165,6 @@
         </div>
       </div>
 
-      <!--
-        viewBox: 0 0 1100 500
-        Scene is a straight-on view down the driveway.
-        Gate spans x=508 (left pillar inner edge) to x=592 (right pillar inner edge) = 84px gap each panel.
-        LEFT PILLAR:  outer x=440, inner x=508, width=68
-        RIGHT PILLAR: inner x=592, outer x=660, width=68
-        Gate centre: x=550
-
-        LEFT PANEL: drawn in local space x=0..84, y=0..190.
-          Hinge is at LEFT edge (x=0) = attaches to left pillar inner face.
-          Free end at x=84 = meets gate centre when closed.
-          Transform-origin for scaleX: left edge (x=0 in local = SVG x=508).
-          To open: scaleX shrinks from 1→0 anchored at x=508 → free end moves LEFT toward pillar = swings OUT toward viewer.
-
-        RIGHT PANEL: drawn in local space x=0..84, y=0..190.
-          Hinge at RIGHT edge (x=84) = attaches to right pillar inner face.
-          Free end at x=0 = meets gate centre when closed.
-          Transform-origin for scaleX: right edge (x=84 in local = SVG x=592 + 84 = wait, local x=84 maps to SVG x=592).
-          Actually: place group at SVG x=592, panel drawn x=-84..0. Hinge at local x=0 = SVG x=592.
-          ScaleX from SVG x=592: translate(592,0) scale(sx,1) translate(-592,0).
-          sx 1→0 collapses free end (x=-84) rightward toward x=592 = swings OUT.
-
-        Y layout: gate top y=155, gate bottom y=345, mid y=250. Height=190.
-        Pillar top y=130 (taller than gate).
-      -->
-
       <svg id="gateSVG" viewBox="0 0 1100 500" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
         <defs>
           <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
@@ -208,7 +182,6 @@
           <linearGradient id="bedGrad" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#8a9aaa"/><stop offset="100%" stop-color="#6a7a88"/>
           </linearGradient>
-          <!-- Iron gate panel gradient: darker at edges, lighter centre to show depth -->
           <linearGradient id="gateIronL" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stop-color="#1e3258"/><stop offset="60%" stop-color="#2a4878"/><stop offset="100%" stop-color="#162840"/>
           </linearGradient>
@@ -228,7 +201,6 @@
             <feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
           <clipPath id="sceneClip"><rect width="1100" height="500"/></clipPath>
-          <!-- Clip panels so they don't poke outside their pillar edges when scaling has floating point issues -->
           <clipPath id="leftPanelClip"><rect x="440" y="130" width="120" height="220"/></clipPath>
           <clipPath id="rightPanelClip"><rect x="540" y="130" width="120" height="220"/></clipPath>
         </defs>
@@ -252,7 +224,6 @@
           <!-- ROAD -->
           <rect x="0" y="355" width="1100" height="145" fill="url(#roadGrad)"/>
           <rect x="0" y="355" width="1100" height="2" fill="#1e2d40" opacity="0.9"/>
-          <!-- Dashed centre line -->
           <rect x="0"    y="418" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
           <rect x="130"  y="418" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
           <rect x="260"  y="418" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
@@ -263,8 +234,7 @@
           <rect x="910"  y="418" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
           <rect x="1040" y="418" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
 
-          <!-- STONE WALLS (residential driveway boundary walls) -->
-          <!-- Left wall -->
+          <!-- STONE WALLS -->
           <rect x="0" y="278" width="440" height="80" fill="#121d2c"/>
           <line x1="0"   y1="303" x2="440" y2="303" stroke="#192535" stroke-width="1.2"/>
           <line x1="0"   y1="328" x2="440" y2="328" stroke="#192535" stroke-width="1.2"/>
@@ -274,7 +244,6 @@
           <line x1="270" y1="278" x2="270" y2="358" stroke="#192535" stroke-width="1"/>
           <line x1="345" y1="278" x2="345" y2="358" stroke="#192535" stroke-width="1"/>
           <line x1="405" y1="278" x2="405" y2="358" stroke="#192535" stroke-width="1"/>
-          <!-- Right wall -->
           <rect x="660" y="278" width="440" height="80" fill="#121d2c"/>
           <line x1="660"  y1="303" x2="1100" y2="303" stroke="#192535" stroke-width="1.2"/>
           <line x1="660"  y1="328" x2="1100" y2="328" stroke="#192535" stroke-width="1.2"/>
@@ -285,66 +254,34 @@
           <line x1="975"  y1="278" x2="975"  y2="358" stroke="#192535" stroke-width="1"/>
           <line x1="1045" y1="278" x2="1045" y2="358" stroke="#192535" stroke-width="1"/>
 
-          <!--
-            ═══════════════════════════════════════════════════
-            GATE PANELS — drawn BEFORE pillars so pillars cover hinge seams
-            ═══════════════════════════════════════════════════
-
-            LEFT PANEL
-            • In local coordinates: rect from x=0,y=0 to x=84,y=190
-            • Hinge: local x=0 → SVG x=508 (inner face of left pillar)
-            • Free end: local x=84 → SVG x=592 (gate centre) when sx=1 (closed)
-            • Open: scale(sx) from SVG x=508 collapses free end toward x=508
-              transform = translate(508,155) scale(sx,1) translate(-508,-155)
-              But since we only scale x and not y, simpler:
-              translate(508,0) scale(sx,1) translate(-508,0)
-            • Panel is drawn at absolute SVG coords 508..592, y=155..345
-          -->
+          <!-- LEFT GATE PANEL -->
           <g id="gateLeft" clip-path="url(#leftPanelClip)">
-            <!-- transform applied by JS: translate(508,0) scaleX(sx) translate(-508,0) -->
-            <!-- Iron panel body -->
             <rect x="508" y="155" width="84" height="190" fill="url(#gateIronL)"/>
-            <!-- Vertical bars (iron spindles) -->
             <rect x="512" y="155" width="6" height="190" rx="3" fill="#2a4870"/>
             <rect x="526" y="155" width="5" height="190" rx="2" fill="#253a5f" opacity="0.9"/>
             <rect x="540" y="155" width="5" height="190" rx="2" fill="#253a5f" opacity="0.9"/>
             <rect x="554" y="155" width="5" height="190" rx="2" fill="#253a5f" opacity="0.9"/>
             <rect x="568" y="155" width="5" height="190" rx="2" fill="#253a5f" opacity="0.9"/>
             <rect x="582" y="155" width="6" height="190" rx="3" fill="#2a4870"/>
-            <!-- Horizontal rails top/bottom/mid -->
             <rect x="508" y="155" width="84" height="12" rx="2" fill="#1e3560" opacity="0.95"/>
             <rect x="508" y="333" width="84" height="12" rx="2" fill="#1e3560" opacity="0.95"/>
             <rect x="508" y="244" width="84" height="10" rx="2" fill="#1e3560" opacity="0.8"/>
-            <!-- Decorative spear tips on top rail -->
             <polygon points="515,155 518,140 521,155" fill="#2a4268"/>
             <polygon points="529,155 532,140 535,155" fill="#2a4268"/>
             <polygon points="543,155 546,140 549,155" fill="#2a4268"/>
             <polygon points="557,155 560,140 563,155" fill="#2a4268"/>
             <polygon points="571,155 574,140 577,155" fill="#2a4268"/>
             <polygon points="585,155 588,140 591,155" fill="#2a4268"/>
-            <!-- Blue accent glow on bars -->
             <line x1="515" y1="170" x2="515" y2="332" stroke="#2f80ed" stroke-width="1" opacity="0.35"/>
             <line x1="529" y1="170" x2="529" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
             <line x1="543" y1="170" x2="543" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
             <line x1="557" y1="170" x2="557" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
             <line x1="571" y1="170" x2="571" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
             <line x1="585" y1="170" x2="585" y2="332" stroke="#2f80ed" stroke-width="1" opacity="0.35"/>
-            <!-- Panel outline -->
             <rect x="508" y="155" width="84" height="190" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.5"/>
           </g>
 
-          <!--
-            RIGHT PANEL
-            • In SVG coords: rect from x=508..592, y=155..345 (same width, mirror image)
-            • Hinge: SVG x=592 (inner face of right pillar)
-            • Free end: SVG x=508 (gate centre) when sx=1 (closed)
-            • Open: scale(sx) from SVG x=592 collapses free end toward x=592
-              transform = translate(592,0) scale(sx,1) translate(-592,0)
-            • NOTE: since the rect is drawn x=508..592, scaling from x=592 means:
-              new_x = 592 + (old_x - 592)*sx
-              When sx=1: x=508 stays at 508, x=592 stays at 592. ✓ Closed.
-              When sx=0: x=508 maps to 592, x=592 maps to 592. ✓ Fully open (collapsed to hinge).
-          -->
+          <!-- RIGHT GATE PANEL -->
           <g id="gateRight" clip-path="url(#rightPanelClip)">
             <rect x="508" y="155" width="84" height="190" fill="url(#gateIronR)"/>
             <rect x="512" y="155" width="6"  height="190" rx="3" fill="#2a4870"/>
@@ -371,27 +308,16 @@
             <rect x="508" y="155" width="84" height="190" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.5"/>
           </g>
 
-          <!--
-            ═══════════════════════════════════════════════════
-            PILLARS — drawn OVER gate panels to mask hinge edge
-            ═══════════════════════════════════════════════════
-            LEFT PILLAR:  x=440..508, y=130..355
-            RIGHT PILLAR: x=592..660, y=130..355
-          -->
           <!-- LEFT PILLAR -->
           <rect x="440" y="130" width="68" height="225" rx="4" fill="url(#pillarGrad)"/>
           <rect x="440" y="130" width="68" height="225" rx="4" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.38"/>
-          <!-- Cap -->
           <rect x="433" y="119" width="82" height="16" rx="5" fill="#1e3050"/>
           <rect x="433" y="119" width="82" height="16" rx="5" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.45"/>
-          <!-- Orb finial -->
           <circle cx="474" cy="112" r="11" fill="#1b2e4a"/>
           <circle cx="474" cy="112" r="11" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.55"/>
           <circle cx="474" cy="112" r="5"  fill="#2f80ed" opacity="0.45"/>
-          <!-- Address plate -->
           <rect x="450" y="182" width="36" height="22" rx="3" fill="#111e30"/>
           <rect x="450" y="182" width="36" height="22" rx="3" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.38"/>
-          <!-- Highlight stripe -->
           <rect x="440" y="130" width="68" height="3" rx="1" fill="white" opacity="0.05"/>
 
           <!-- RIGHT PILLAR -->
@@ -406,25 +332,17 @@
           <rect x="614" y="182" width="36" height="22" rx="3" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.38"/>
           <rect x="592" y="130" width="68" height="3" rx="1" fill="white" opacity="0.05"/>
 
-          <!-- ═══════════════════════════════════════════
-               RFID READER POST — mounted on left pillar face
-               ═══════════════════════════════════════════ -->
-          <!-- Post column -->
+          <!-- RFID READER POST -->
           <rect x="400" y="220" width="20" height="135" rx="4" fill="#0e1b2c"/>
           <rect x="400" y="220" width="20" height="135" rx="4" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.35"/>
-          <!-- Reader head -->
           <rect x="388" y="188" width="46" height="60" rx="6" fill="#0d1e35"/>
           <rect x="388" y="188" width="46" height="60" rx="6" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.65"/>
-          <!-- Screen -->
           <rect x="393" y="194" width="34" height="26" rx="3" fill="#060e18"/>
           <rect x="393" y="194" width="34" height="26" rx="3" fill="none" stroke="#1a3050" stroke-width="1"/>
-          <!-- Status LED -->
           <circle id="readerLed"     cx="411" cy="235" r="8"  fill="#cc2020" filter="url(#glow)"/>
           <circle id="readerLedGlow" cx="411" cy="235" r="18" fill="#cc2020" opacity="0.15"/>
-          <!-- Antenna nub -->
           <rect x="408" y="181" width="6" height="11" rx="2" fill="#1e3050"/>
 
-          <!-- RFID signal rings (emit leftward toward approaching truck) -->
           <g id="rfidRings" opacity="0" filter="url(#softglow)">
             <ellipse id="ring1" cx="411" cy="210" rx="20" ry="13" fill="none" stroke="#00d4ff" stroke-width="1.8" opacity="0"/>
             <ellipse id="ring2" cx="411" cy="210" rx="38" ry="26" fill="none" stroke="#00d4ff" stroke-width="1.4" opacity="0"/>
@@ -460,106 +378,75 @@
           <path d="M0,500 L0,478 M0,500 L22,500"       stroke="#2f80ed" stroke-width="2" opacity="0.22" fill="none"/>
           <path d="M1100,500 L1100,478 M1100,500 L1078,500" stroke="#2f80ed" stroke-width="2" opacity="0.22" fill="none"/>
 
-          <!-- ═══════════════════════════════════════════
-               POOL SERVICE PICKUP TRUCK
-               Faces right. Front (headlights) on right side.
-               Resting x: front of cab at ~x=420, just left of reader at x=388.
-               Drive-in: starts at TRUCK_START_X offset, slides to 0.
-               ═══════════════════════════════════════════ -->
+          <!-- POOL SERVICE PICKUP TRUCK -->
           <g id="truckGroup" transform="translate(0,0)">
 
-            <!-- Headlight beam (from front of cab) -->
             <polygon points="420,358 640,338 640,394 420,378" fill="url(#beamGrad)" opacity="0.2"/>
-
-            <!-- Ground shadow -->
             <ellipse cx="232" cy="454" rx="178" ry="12" fill="#000" opacity="0.28"/>
 
-            <!-- BED (rear/left side): x=78..248 -->
+            <!-- BED -->
             <rect x="78" y="354" width="172" height="62" rx="3" fill="url(#bedGrad)"/>
             <rect x="78" y="354" width="172" height="62" rx="3" fill="none" stroke="#5a6a78" stroke-width="1.5"/>
-            <!-- Bed floor surface -->
             <rect x="83" y="357" width="162" height="54" rx="2" fill="#6a7a88"/>
-            <!-- Bed slat lines -->
             <line x1="116" y1="354" x2="116" y2="416" stroke="#7a8a98" stroke-width="1"/>
             <line x1="150" y1="354" x2="150" y2="416" stroke="#7a8a98" stroke-width="1"/>
             <line x1="184" y1="354" x2="184" y2="416" stroke="#7a8a98" stroke-width="1"/>
             <line x1="218" y1="354" x2="218" y2="416" stroke="#7a8a98" stroke-width="1"/>
-            <!-- Tailgate (left / rear face) -->
             <rect x="78" y="354" width="13" height="62" rx="2" fill="#7a8a98"/>
 
-            <!-- POOL EQUIPMENT IN BED -->
-            <!-- Telescoping pole (diagonal, long, leaning against cab wall) -->
+            <!-- POOL EQUIPMENT -->
             <line x1="96"  y1="410" x2="248" y2="274" stroke="#3a80b8" stroke-width="6" stroke-linecap="round"/>
             <line x1="96"  y1="410" x2="248" y2="274" stroke="#6ab0e0" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
-            <!-- Pool brush at tip -->
             <rect x="239" y="266" width="24" height="12" rx="4" fill="#7bc8e8"/>
             <rect x="239" y="266" width="24" height="12" rx="4" fill="none" stroke="#4a90c0" stroke-width="1"/>
             <line x1="241" y1="278" x2="241" y2="286" stroke="#5a9ab0" stroke-width="1.5"/>
             <line x1="246" y1="278" x2="246" y2="287" stroke="#5a9ab0" stroke-width="1.5"/>
             <line x1="251" y1="278" x2="251" y2="286" stroke="#5a9ab0" stroke-width="1.5"/>
             <line x1="257" y1="278" x2="257" y2="286" stroke="#5a9ab0" stroke-width="1.5"/>
-            <!-- Chlorine/chemical jug 1 (white) -->
             <rect x="90" y="366" width="26" height="38" rx="4" fill="#eaf4ea"/>
             <rect x="90" y="366" width="26" height="38" rx="4" fill="none" stroke="#b0c8b0" stroke-width="1"/>
             <rect x="95" y="360" width="16" height="8" rx="3" fill="#cce4cc"/>
             <text x="93" y="379" font-size="5" fill="#2a6a2a" font-family="monospace" font-weight="bold">POOL</text>
             <text x="93" y="386" font-size="4" fill="#2a6a2a" font-family="monospace">CHEM</text>
-            <!-- Chemical jug 2 (blue tint) -->
             <rect x="120" y="370" width="24" height="34" rx="4" fill="#e8eef8"/>
             <rect x="120" y="370" width="24" height="34" rx="4" fill="none" stroke="#b0b8d0" stroke-width="1"/>
             <rect x="125" y="364" width="14" height="8" rx="2" fill="#c8d0e8"/>
             <text x="122" y="383" font-size="4" fill="#2a3a6a" font-family="monospace">ALGAE</text>
-            <!-- Skimmer net / bag (rolled) -->
             <ellipse cx="200" cy="392" rx="20" ry="13" fill="#9ab4c0" opacity="0.85"/>
             <ellipse cx="200" cy="392" rx="20" ry="13" fill="none" stroke="#8a9aaa" stroke-width="1"/>
             <line x1="184" y1="386" x2="216" y2="398" stroke="#8a9aaa" stroke-width="1" opacity="0.55"/>
             <line x1="184" y1="392" x2="216" y2="392" stroke="#8a9aaa" stroke-width="1" opacity="0.55"/>
-            <!-- Small pump/equipment box -->
             <rect x="220" y="374" width="24" height="22" rx="3" fill="#3a4a5a"/>
             <rect x="220" y="374" width="24" height="22" rx="3" fill="none" stroke="#4a6080" stroke-width="1"/>
             <circle cx="232" cy="385" r="5" fill="#2a3a4a"/>
             <circle cx="232" cy="385" r="5" fill="none" stroke="#4a6080" stroke-width="1"/>
             <circle cx="232" cy="385" r="2" fill="#00d4ff" opacity="0.6"/>
 
-            <!-- CAB BODY (lower sill): x=246..428 -->
+            <!-- CAB -->
             <rect x="246" y="370" width="184" height="46" rx="5" fill="url(#truckWhiteGrad)"/>
-            <!-- Blue accent stripe along door -->
             <rect x="246" y="381" width="184" height="12" fill="url(#truckStripe)" opacity="0.88"/>
-            <!-- Cab upper / roof shape -->
             <path d="M276,300 Q286,268 320,260 L400,260 Q426,268 430,300 L430,370 L246,370 Z" fill="url(#truckWhiteGrad)"/>
             <path d="M276,300 Q286,268 320,260 L400,260 Q426,268 430,300 L430,370 L246,370 Z" fill="none" stroke="#c0d0e0" stroke-width="1.5"/>
-            <!-- Stripe on upper cab -->
             <path d="M288,344 Q290,328 304,322 L430,322 L430,344 Z" fill="url(#truckStripe)" opacity="0.45"/>
-            <!-- Company name on door -->
             <text x="276" y="397" font-size="8" fill="#0e6080" font-family="sans-serif" font-weight="bold" opacity="0.9">BLUE WAVE</text>
             <text x="276" y="408" font-size="6" fill="#1a8aaa" font-family="sans-serif">POOL SERVICE</text>
-            <!-- Front windshield (right/front face) -->
             <path d="M392,264 Q422,272 428,300 L428,340 L318,340 Q310,310 316,264 Z" fill="#0a1828" opacity="0.88"/>
             <path d="M392,264 Q422,272 428,300 L428,340 L318,340 Q310,310 316,264 Z" fill="none" stroke="#b0c8d8" stroke-width="1.2" opacity="0.45"/>
-            <!-- Windshield glare -->
             <path d="M398,268 Q418,276 422,296 L420,318 L326,318 Q320,296 324,268 Z" fill="#1a3a5c" opacity="0.16"/>
-            <!-- Rear window (left face) -->
             <path d="M278,302 Q286,272 318,262 L320,262 L312,340 L250,340 Z" fill="#0a1828" opacity="0.78"/>
             <path d="M278,302 Q286,272 318,262 L320,262 L312,340 L250,340 Z" fill="none" stroke="#b0c8d8" stroke-width="0.8" opacity="0.28"/>
-            <!-- Door line divider -->
             <line x1="318" y1="340" x2="318" y2="416" stroke="#b0c0d0" stroke-width="1.5" opacity="0.45"/>
-            <!-- Door handle -->
             <rect x="326" y="386" width="20" height="5" rx="2.5" fill="#a0b0c0"/>
-            <!-- HEADLIGHTS (right/front side) -->
             <rect x="420" y="357" width="12" height="10" rx="2" fill="#fffde0" opacity="0.96" filter="url(#glow)"/>
             <rect x="420" y="371" width="12" height="8"  rx="2" fill="#ffe080" opacity="0.72" filter="url(#glow)"/>
             <rect x="418" y="355" width="16" height="14" rx="3" fill="none" stroke="#fffde0" stroke-width="1" opacity="0.38"/>
-            <!-- TAIL LIGHTS (left/rear) -->
             <rect x="246" y="357" width="12" height="10" rx="2" fill="#ff3030" opacity="0.92" filter="url(#glow)"/>
             <rect x="246" y="371" width="12" height="8"  rx="2" fill="#aa1010" opacity="0.72"/>
-            <!-- Bumpers -->
             <rect x="424" y="402" width="10" height="14" rx="3" fill="#a0b0c0"/>
             <rect x="404" y="406" width="22" height="10" rx="2" fill="#8a9aaa"/>
             <rect x="244" y="402" width="10" height="14" rx="3" fill="#a0b0c0"/>
-            <!-- Roof rack / light bar -->
             <rect x="290" y="254" width="120" height="9" rx="3" fill="#8a9aaa"/>
             <rect x="290" y="254" width="120" height="9" rx="3" fill="none" stroke="#7a8a98" stroke-width="1"/>
-            <!-- Amber work lights on rack -->
             <circle cx="310" cy="253" r="4.5" fill="#ffaa20" opacity="0.82" filter="url(#glow)"/>
             <circle cx="350" cy="253" r="4.5" fill="#ffaa20" opacity="0.82" filter="url(#glow)"/>
             <circle cx="390" cy="253" r="4.5" fill="#ffaa20" opacity="0.82" filter="url(#glow)"/>
@@ -586,9 +473,9 @@
             <line x1="179" y1="432" x2="149" y2="462" stroke="#2a3a50" stroke-width="2"/>
             <circle cx="164" cy="447" r="6" fill="#2f80ed" opacity="0.7"/>
 
-          </g><!-- /truckGroup -->
+          </g>
 
-        </g><!-- /sceneClip -->
+        </g>
       </svg>
     </div>
 
@@ -627,7 +514,7 @@
   <section id="how"><div class="section-inner">
     <div class="section-tag">The Process</div>
     <h2 class="section-title">Simple from day one.</h2>
-    <p class="section-sub">We take care of the technical work. You end up with a system that's genuinely easy to manage.</p>
+    <p class="section-sub">We take care of the technical work. You end up with a system that's easy to manage.</p>
     <div class="steps">
       <div class="step"><div class="step-num">01</div><div><div class="step-title">We assess your existing setup</div><div class="step-desc">We evaluate your current gate opener and confirm compatibility. Most standard openers with a Wiegand input work out of the box.</div></div></div>
       <div class="step"><div class="step-num">02</div><div><div class="step-title">Hardware installation</div><div class="step-desc">We mount the UHF RFID reader and keypad at the right position for your driveway, wire everything cleanly, and connect to your opener.</div></div></div>
@@ -723,29 +610,27 @@
     var toast   = document.getElementById('notifToast');
     if (!truck) return;
 
-    // ── Timing ──
-    var CYCLE         = 9000;  // ms
-    var T_TRUCK_START = 0.05;  // truck begins moving
-    var T_TRUCK_STOP  = 0.38;  // truck reaches reader
-    var T_SCAN_START  = 0.28;  // RFID rings start
-    var T_LED_GREEN   = 0.38;  // LED turns green
-    var T_GATE_OPEN   = 0.42;  // gate begins opening
-    var T_GATE_FULL   = 0.60;  // gate fully open
-    var T_NOTIF       = 0.62;  // notification slides in
-    var T_HOLD        = 0.92;  // hold until loop reset
+    // Timing
+    var CYCLE         = 9000;
+    var T_TRUCK_START = 0.05;
+    var T_TRUCK_STOP  = 0.38;
+    var T_SCAN_START  = 0.28;
+    var T_LED_GREEN   = 0.38;
+    var T_GATE_OPEN   = 0.42;
+    var T_GATE_FULL   = 0.60;
+    var T_NOTIF       = 0.62;
+    var T_HOLD        = 0.92;
 
     var TRUCK_START_X = -540;
     var TRUCK_REST_X  = 0;
 
     // Gate hinge x-coords in SVG space
-    // Left panel: hinge at LEFT edge (x=508), panel extends RIGHT to x=592
-    //   To open: scaleX from x=508. new_x = 508 + (old_x-508)*sx
-    //   sx=1: free end stays at 592. sx=0: free end collapses to 508. ✓
-    // Right panel: hinge at RIGHT edge (x=592), panel extends LEFT to x=508
-    //   To open: scaleX from x=592. new_x = 592 + (old_x-592)*sx
-    //   sx=1: free end stays at 508. sx=0: free end collapses to 592. ✓
-    var HINGE_L = 508;  // left panel hinge (pivot on left pillar inner face)
-    var HINGE_R = 592;  // right panel hinge (pivot on right pillar inner face)
+    // Left panel hinge at x=508 (left pillar inner face)
+    // Right panel hinge at x=592 (right pillar inner face)
+    // Panels swing OUTWARD: left panel swings left, right panel swings right
+    // We use scaleX to simulate foreshortening as they rotate toward the viewer
+    var HINGE_L = 508;
+    var HINGE_R = 592;
 
     var ringTime = 0;
     var lastTs   = null;
@@ -776,14 +661,15 @@
     }
 
     function setGate(sx) {
-      // Left panel: translate hinge to origin, scale, translate back
+      // Left panel: scale from hinge at x=508
+      // sx=1 = closed (full width), sx=0 = open (collapsed to hinge, swung outward)
       gateL.setAttribute('transform',
-        'translate('+HINGE_L+',0) scale('+sx+',1) translate('+(−HINGE_L)+',0)');
-      // Right panel: translate hinge to origin, scale, translate back
+        'translate(' + HINGE_L + ',0) scale(' + sx + ',1) translate(' + (-HINGE_L) + ',0)');
+      // Right panel: scale from hinge at x=592
       gateR.setAttribute('transform',
-        'translate('+HINGE_R+',0) scale('+sx+',1) translate('+(−HINGE_R)+',0)');
-      // Dim slightly as open (edge-on = darker)
-      var op = String(0.5 + 0.5*sx);
+        'translate(' + HINGE_R + ',0) scale(' + sx + ',1) translate(' + (-HINGE_R) + ',0)');
+      // Dim slightly as panels open (edge-on = darker)
+      var op = String(0.5 + 0.5 * sx);
       gateL.setAttribute('opacity', op);
       gateR.setAttribute('opacity', op);
     }
@@ -819,7 +705,7 @@
         if (f < T_SCAN_START) ringTime = 0;
       }
 
-      // Gate: sx goes 1 (closed) → 0 (open)
+      // Gate: sx goes 1 (closed) -> 0 (open/swung out)
       var sx = 1 - ease(frac(f, T_GATE_OPEN, T_GATE_FULL));
       setGate(sx);
 
@@ -848,7 +734,7 @@
       requestAnimationFrame(tick);
     }
 
-    // Initialise gate as fully closed before first frame renders
+    // Initialise gate as fully CLOSED before first frame
     setGate(1);
     requestAnimationFrame(tick);
   })();

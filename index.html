@@ -173,13 +173,16 @@
           <linearGradient id="roadGrad" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#111820"/><stop offset="100%" stop-color="#080c10"/>
           </linearGradient>
-          <linearGradient id="truckWhiteGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#d8e8f0"/><stop offset="100%" stop-color="#a8c0d0"/>
+          <linearGradient id="truckBodyGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#f0f4f8"/><stop offset="40%" stop-color="#dce6f0"/><stop offset="100%" stop-color="#c0d0e0"/>
           </linearGradient>
           <linearGradient id="truckStripe" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#1a8aaa"/><stop offset="100%" stop-color="#0e6080"/>
+            <stop offset="0%" stop-color="#1a90bb"/><stop offset="100%" stop-color="#0e6888"/>
           </linearGradient>
           <linearGradient id="bedGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#c8d4de"/><stop offset="100%" stop-color="#a0b0be"/>
+          </linearGradient>
+          <linearGradient id="bedInnerGrad" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#8a9aaa"/><stop offset="100%" stop-color="#6a7a88"/>
           </linearGradient>
           <linearGradient id="gateIronL" x1="0" y1="0" x2="1" y2="0">
@@ -192,13 +195,19 @@
             <stop offset="0%" stop-color="#1a2535"/><stop offset="35%" stop-color="#253348"/><stop offset="65%" stop-color="#253348"/><stop offset="100%" stop-color="#1a2535"/>
           </linearGradient>
           <linearGradient id="beamGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#fffbe0" stop-opacity="0.5"/><stop offset="100%" stop-color="#fffbe0" stop-opacity="0"/>
+            <stop offset="0%" stop-color="#fffbe0" stop-opacity="0.6"/><stop offset="100%" stop-color="#fffbe0" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="windowGrad" x1="0" y1="0" x2="0.3" y2="1">
+            <stop offset="0%" stop-color="#1a3050" stop-opacity="0.3"/><stop offset="100%" stop-color="#0a1828" stop-opacity="0"/>
           </linearGradient>
           <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
             <feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
           <filter id="softglow" x="-100%" y="-100%" width="300%" height="300%">
             <feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="headlightGlow" x="-200%" y="-200%" width="500%" height="500%">
+            <feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
           <clipPath id="sceneClip"><rect width="1100" height="500"/></clipPath>
           <clipPath id="leftPanelClip"><rect x="307" y="130" width="250" height="230"/></clipPath>
@@ -236,18 +245,18 @@
 
           <!-- STONE WALLS -->
           <rect x="0" y="278" width="307" height="80" fill="#121d2c"/>
-          <line x1="0"   y1="303" x2="307" y2="303" stroke="#192535" stroke-width="1.2"/>
-          <line x1="0"   y1="328" x2="307" y2="328" stroke="#192535" stroke-width="1.2"/>
-          <line x1="55"  y1="278" x2="55"  y2="358" stroke="#192535" stroke-width="1"/>
+          <line x1="0" y1="303" x2="307" y2="303" stroke="#192535" stroke-width="1.2"/>
+          <line x1="0" y1="328" x2="307" y2="328" stroke="#192535" stroke-width="1.2"/>
+          <line x1="55" y1="278" x2="55" y2="358" stroke="#192535" stroke-width="1"/>
           <line x1="120" y1="278" x2="120" y2="358" stroke="#192535" stroke-width="1"/>
           <line x1="195" y1="278" x2="195" y2="358" stroke="#192535" stroke-width="1"/>
           <line x1="270" y1="278" x2="270" y2="358" stroke="#192535" stroke-width="1"/>
           <rect x="793" y="278" width="307" height="80" fill="#121d2c"/>
-          <line x1="793"  y1="303" x2="1100" y2="303" stroke="#192535" stroke-width="1.2"/>
-          <line x1="793"  y1="328" x2="1100" y2="328" stroke="#192535" stroke-width="1.2"/>
-          <line x1="830"  y1="278" x2="830"  y2="358" stroke="#192535" stroke-width="1"/>
-          <line x1="900"  y1="278" x2="900"  y2="358" stroke="#192535" stroke-width="1"/>
-          <line x1="970"  y1="278" x2="970"  y2="358" stroke="#192535" stroke-width="1"/>
+          <line x1="793" y1="303" x2="1100" y2="303" stroke="#192535" stroke-width="1.2"/>
+          <line x1="793" y1="328" x2="1100" y2="328" stroke="#192535" stroke-width="1.2"/>
+          <line x1="830" y1="278" x2="830" y2="358" stroke="#192535" stroke-width="1"/>
+          <line x1="900" y1="278" x2="900" y2="358" stroke="#192535" stroke-width="1"/>
+          <line x1="970" y1="278" x2="970" y2="358" stroke="#192535" stroke-width="1"/>
           <line x1="1045" y1="278" x2="1045" y2="358" stroke="#192535" stroke-width="1"/>
 
           <!-- LEFT GATE PANEL -->
@@ -286,14 +295,14 @@
           <!-- RIGHT GATE PANEL -->
           <g id="gateRight" clip-path="url(#rightPanelClip)">
             <rect x="550" y="155" width="175" height="190" fill="url(#gateIronR)"/>
-            <rect x="550" y="155" width="6"  height="190" rx="3" fill="#2a4870"/>
-            <rect x="570" y="155" width="5"  height="190" rx="2" fill="#253a5f" opacity="0.9"/>
-            <rect x="595" y="155" width="5"  height="190" rx="2" fill="#253a5f" opacity="0.9"/>
-            <rect x="620" y="155" width="5"  height="190" rx="2" fill="#253a5f" opacity="0.9"/>
-            <rect x="645" y="155" width="5"  height="190" rx="2" fill="#253a5f" opacity="0.9"/>
-            <rect x="670" y="155" width="5"  height="190" rx="2" fill="#253a5f" opacity="0.9"/>
-            <rect x="695" y="155" width="5"  height="190" rx="2" fill="#253a5f" opacity="0.9"/>
-            <rect x="719" y="155" width="6"  height="190" rx="3" fill="#2a4870"/>
+            <rect x="550" y="155" width="6" height="190" rx="3" fill="#2a4870"/>
+            <rect x="570" y="155" width="5" height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="595" y="155" width="5" height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="620" y="155" width="5" height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="645" y="155" width="5" height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="670" y="155" width="5" height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="695" y="155" width="5" height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="719" y="155" width="6" height="190" rx="3" fill="#2a4870"/>
             <rect x="550" y="155" width="175" height="12" rx="2" fill="#1e3560" opacity="0.95"/>
             <rect x="550" y="333" width="175" height="12" rx="2" fill="#1e3560" opacity="0.95"/>
             <rect x="550" y="244" width="175" height="10" rx="2" fill="#1e3560" opacity="0.8"/>
@@ -323,7 +332,7 @@
           <rect x="300" y="119" width="82" height="16" rx="5" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.45"/>
           <circle cx="341" cy="112" r="11" fill="#1b2e4a"/>
           <circle cx="341" cy="112" r="11" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.55"/>
-          <circle cx="341" cy="112" r="5"  fill="#2f80ed" opacity="0.45"/>
+          <circle cx="341" cy="112" r="5" fill="#2f80ed" opacity="0.45"/>
           <rect x="317" y="182" width="36" height="22" rx="3" fill="#111e30"/>
           <rect x="317" y="182" width="36" height="22" rx="3" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.38"/>
           <rect x="307" y="130" width="68" height="3" rx="1" fill="white" opacity="0.05"/>
@@ -335,7 +344,7 @@
           <rect x="718" y="119" width="82" height="16" rx="5" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.45"/>
           <circle cx="759" cy="112" r="11" fill="#1b2e4a"/>
           <circle cx="759" cy="112" r="11" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.55"/>
-          <circle cx="759" cy="112" r="5"  fill="#2f80ed" opacity="0.45"/>
+          <circle cx="759" cy="112" r="5" fill="#2f80ed" opacity="0.45"/>
           <rect x="747" y="182" width="36" height="22" rx="3" fill="#111e30"/>
           <rect x="747" y="182" width="36" height="22" rx="3" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.38"/>
           <rect x="725" y="130" width="68" height="3" rx="1" fill="white" opacity="0.05"/>
@@ -347,7 +356,7 @@
           <rect x="255" y="188" width="46" height="60" rx="6" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.65"/>
           <rect x="260" y="194" width="34" height="26" rx="3" fill="#060e18"/>
           <rect x="260" y="194" width="34" height="26" rx="3" fill="none" stroke="#1a3050" stroke-width="1"/>
-          <circle id="readerLed"     cx="278" cy="235" r="8"  fill="#cc2020" filter="url(#glow)"/>
+          <circle id="readerLed" cx="278" cy="235" r="8" fill="#cc2020" filter="url(#glow)"/>
           <circle id="readerLedGlow" cx="278" cy="235" r="18" fill="#cc2020" opacity="0.15"/>
           <rect x="275" y="181" width="6" height="11" rx="2" fill="#1e3050"/>
 
@@ -377,134 +386,135 @@
             <text x="921" y="70" font-size="7" fill="#7a8599" font-family="monospace">MODE</text>
             <text id="hudMode" x="965" y="70" font-size="7" fill="#cc4040" font-family="monospace">LOCKED</text>
             <text x="921" y="85" font-size="7" fill="#7a8599" font-family="monospace">TAG</text>
-            <text id="hudTag"  x="965" y="85" font-size="7" fill="#7a8599" font-family="monospace">SCANNING...</text>
+            <text id="hudTag" x="965" y="85" font-size="7" fill="#7a8599" font-family="monospace">SCANNING...</text>
           </g>
 
           <!-- Corner brackets -->
-          <path d="M0,0 L0,22 M0,0 L22,0"            stroke="#2f80ed" stroke-width="2" opacity="0.22" fill="none"/>
-          <path d="M1100,0 L1100,22 M1100,0 L1078,0"  stroke="#2f80ed" stroke-width="2" opacity="0.22" fill="none"/>
-          <path d="M0,500 L0,478 M0,500 L22,500"       stroke="#2f80ed" stroke-width="2" opacity="0.22" fill="none"/>
+          <path d="M0,0 L0,22 M0,0 L22,0" stroke="#2f80ed" stroke-width="2" opacity="0.22" fill="none"/>
+          <path d="M1100,0 L1100,22 M1100,0 L1078,0" stroke="#2f80ed" stroke-width="2" opacity="0.22" fill="none"/>
+          <path d="M0,500 L0,478 M0,500 L22,500" stroke="#2f80ed" stroke-width="2" opacity="0.22" fill="none"/>
           <path d="M1100,500 L1100,478 M1100,500 L1078,500" stroke="#2f80ed" stroke-width="2" opacity="0.22" fill="none"/>
 
-          <!-- POOL SERVICE PICKUP TRUCK -->
+          <!-- ============================================ -->
+          <!-- POOL SERVICE PICKUP TRUCK (redesigned)       -->
+          <!-- Faces RIGHT. Cab=right, Bed=left.            -->
+          <!-- ============================================ -->
           <g id="truckGroup" transform="translate(0,0)">
 
-            <polygon points="420,358 640,338 640,394 420,378" fill="url(#beamGrad)" opacity="0.2"/>
-            <ellipse cx="232" cy="454" rx="178" ry="12" fill="#000" opacity="0.28"/>
+            <!-- Headlight beams projecting forward -->
+            <polygon points="434,365 660,345 660,400 434,385" fill="url(#beamGrad)" opacity="0.18"/>
+            <!-- Ground shadow -->
+            <ellipse cx="270" cy="456" rx="210" ry="16" fill="#000" opacity="0.3"/>
 
-            <!-- Truck bed -->
-            <rect x="78" y="354" width="172" height="62" rx="3" fill="url(#bedGrad)"/>
-            <rect x="78" y="354" width="172" height="62" rx="3" fill="none" stroke="#5a6a78" stroke-width="1.5"/>
-            <rect x="83" y="357" width="162" height="54" rx="2" fill="#6a7a88"/>
-            <line x1="116" y1="354" x2="116" y2="416" stroke="#7a8a98" stroke-width="1"/>
-            <line x1="150" y1="354" x2="150" y2="416" stroke="#7a8a98" stroke-width="1"/>
-            <line x1="184" y1="354" x2="184" y2="416" stroke="#7a8a98" stroke-width="1"/>
-            <line x1="218" y1="354" x2="218" y2="416" stroke="#7a8a98" stroke-width="1"/>
-            <rect x="78" y="354" width="13" height="62" rx="2" fill="#7a8a98"/>
+            <!-- TRUCK BED (rear / left side) -->
+            <path d="M68,350 L68,418 L252,418 L252,350 Z" fill="url(#bedGrad)" stroke="#8a9aaa" stroke-width="1.2"/>
+            <rect x="74" y="358" width="172" height="56" rx="1" fill="url(#bedInnerGrad)"/>
+            <line x1="74" y1="374" x2="246" y2="374" stroke="#7a8a98" stroke-width="0.8" opacity="0.5"/>
+            <line x1="74" y1="390" x2="246" y2="390" stroke="#7a8a98" stroke-width="0.8" opacity="0.5"/>
+            <rect x="64" y="350" width="10" height="68" rx="2" fill="#b0bcc8" stroke="#8a9aaa" stroke-width="1"/>
+            <rect x="66" y="380" width="6" height="12" rx="2" fill="#8a9aaa"/>
+            <rect x="248" y="336" width="8" height="82" rx="1" fill="#b0bcc8" stroke="#8a9aaa" stroke-width="0.8"/>
+            <path d="M112,414 Q112,396 132,390 Q152,396 152,414" fill="#6a7a88" stroke="#5a6a78" stroke-width="0.8"/>
 
-            <!-- Pool skimmer pole (diagonal) -->
-            <line x1="96"  y1="410" x2="248" y2="274" stroke="#3a80b8" stroke-width="6" stroke-linecap="round"/>
-            <line x1="96"  y1="410" x2="248" y2="274" stroke="#6ab0e0" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
-            <!-- Net head -->
-            <rect x="239" y="266" width="24" height="12" rx="4" fill="#7bc8e8"/>
-            <rect x="239" y="266" width="24" height="12" rx="4" fill="none" stroke="#4a90c0" stroke-width="1"/>
-            <line x1="241" y1="278" x2="241" y2="286" stroke="#5a9ab0" stroke-width="1.5"/>
-            <line x1="246" y1="278" x2="246" y2="287" stroke="#5a9ab0" stroke-width="1.5"/>
-            <line x1="251" y1="278" x2="251" y2="286" stroke="#5a9ab0" stroke-width="1.5"/>
-            <line x1="257" y1="278" x2="257" y2="286" stroke="#5a9ab0" stroke-width="1.5"/>
+            <!-- POOL EQUIPMENT (correctly oriented in bed) -->
+            <line x1="78" y1="360" x2="244" y2="360" stroke="#2a70a8" stroke-width="5.5" stroke-linecap="round"/>
+            <line x1="78" y1="360" x2="244" y2="360" stroke="#4a9ad0" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+            <path d="M70,352 Q66,356 66,362 Q66,368 70,372 L90,372 L90,352 Z" fill="#60b8e0" stroke="#3a90c0" stroke-width="1"/>
+            <line x1="72" y1="358" x2="72" y2="370" stroke="#4aa0c8" stroke-width="0.8" opacity="0.6"/>
+            <line x1="76" y1="356" x2="76" y2="372" stroke="#4aa0c8" stroke-width="0.8" opacity="0.6"/>
+            <line x1="80" y1="355" x2="80" y2="372" stroke="#4aa0c8" stroke-width="0.8" opacity="0.6"/>
+            <line x1="84" y1="354" x2="84" y2="372" stroke="#4aa0c8" stroke-width="0.8" opacity="0.6"/>
+            <line x1="70" y1="362" x2="88" y2="362" stroke="#4aa0c8" stroke-width="0.7" opacity="0.5"/>
+            <line x1="70" y1="366" x2="88" y2="366" stroke="#4aa0c8" stroke-width="0.7" opacity="0.5"/>
+            <rect x="216" y="372" width="28" height="38" rx="4" fill="#e8f4e8" stroke="#80b880" stroke-width="1.2"/>
+            <rect x="220" y="366" width="20" height="8" rx="3" fill="#c0e0c0"/>
+            <text x="219" y="388" font-size="7.5" fill="#1a6a1a" font-family="Arial,Helvetica,sans-serif" font-weight="bold">POOL</text>
+            <text x="218" y="398" font-size="6" fill="#2a7a2a" font-family="Arial,Helvetica,sans-serif" font-weight="bold">CHEM</text>
+            <rect x="192" y="376" width="20" height="34" rx="3" fill="#d0e0f4" stroke="#90a8c8" stroke-width="1"/>
+            <rect x="195" y="370" width="14" height="8" rx="2" fill="#b0c4e0"/>
+            <text x="193" y="392" font-size="5.5" fill="#2a3a7a" font-family="Arial,Helvetica,sans-serif" font-weight="bold">ALGAE</text>
+            <ellipse cx="148" cy="396" rx="22" ry="14" fill="none" stroke="#4088b0" stroke-width="5" opacity="0.7"/>
+            <ellipse cx="148" cy="396" rx="14" ry="9" fill="none" stroke="#4088b0" stroke-width="4" opacity="0.5"/>
+            <ellipse cx="148" cy="396" rx="7" ry="4" fill="none" stroke="#4088b0" stroke-width="3" opacity="0.35"/>
+            <rect x="222" y="398" width="22" height="14" rx="2" fill="#c83030" stroke="#a02020" stroke-width="1"/>
+            <rect x="228" y="396" width="10" height="3" rx="1.5" fill="#e04040"/>
+            <circle cx="233" cy="405" r="2" fill="#801818"/>
 
-            <!-- Pool chemicals container -->
-            <rect x="90" y="366" width="26" height="38" rx="4" fill="#eaf4ea"/>
-            <rect x="90" y="366" width="26" height="38" rx="4" fill="none" stroke="#b0c8b0" stroke-width="1"/>
-            <rect x="95" y="360" width="16" height="8" rx="3" fill="#cce4cc"/>
-            <text x="93" y="379" font-size="5" fill="#2a6a2a" font-family="monospace" font-weight="bold">POOL</text>
-            <text x="93" y="386" font-size="4" fill="#2a6a2a" font-family="monospace">CHEM</text>
+            <!-- CAB (front / right side) -->
+            <rect x="254" y="370" width="180" height="48" rx="4" fill="url(#truckBodyGrad)"/>
+            <rect x="254" y="385" width="180" height="14" rx="0" fill="url(#truckStripe)" opacity="0.82"/>
+            <path d="M260,370 L260,312 Q260,304 266,298 L280,290 Q290,286 308,284 L384,284 Q400,286 408,294 L420,310 Q424,318 424,328 L424,370 Z" fill="url(#truckBodyGrad)"/>
+            <path d="M260,370 L260,312 Q260,304 266,298 L280,290 Q290,286 308,284 L384,284 Q400,286 408,294 L420,310 Q424,318 424,328 L424,370 Z" fill="none" stroke="#a0b4c4" stroke-width="1.2"/>
+            <path d="M260,348 L424,348 L424,358 L260,358 Z" fill="url(#truckStripe)" opacity="0.3"/>
+            <rect x="278" y="282" width="112" height="3" rx="1.5" fill="white" opacity="0.08"/>
+            <path d="M390,288 Q404,292 412,304 L420,324 L420,362 L374,362 L374,288 Z" fill="#081420" opacity="0.88"/>
+            <path d="M390,288 Q404,292 412,304 L420,324 L420,362 L374,362 L374,288 Z" fill="none" stroke="#7098b8" stroke-width="1" opacity="0.5"/>
+            <path d="M394,292 Q404,296 410,306 L414,318 L406,318 L382,292 Z" fill="url(#windowGrad)" opacity="0.4"/>
+            <path d="M264,308 Q266,300 272,296 L300,288 L308,288 L308,362 L264,362 Z" fill="#081420" opacity="0.8"/>
+            <path d="M264,308 Q266,300 272,296 L300,288 L308,288 L308,362 L264,362 Z" fill="none" stroke="#7098b8" stroke-width="0.8" opacity="0.35"/>
+            <rect x="368" y="286" width="8" height="76" fill="#c0d0de" opacity="0.7"/>
+            <rect x="314" y="292" width="52" height="68" rx="3" fill="#081420" opacity="0.82"/>
+            <rect x="314" y="292" width="52" height="68" rx="3" fill="none" stroke="#7098b8" stroke-width="0.8" opacity="0.3"/>
+            <rect x="306" y="288" width="8" height="74" fill="#c0d0de" opacity="0.6"/>
+            <line x1="340" y1="362" x2="340" y2="418" stroke="#a0b0c0" stroke-width="1" opacity="0.4"/>
+            <rect x="348" y="392" width="18" height="5" rx="2.5" fill="#8aa0b4"/>
+            <text x="268" y="403" font-size="12" fill="#0a5878" font-family="Arial,Helvetica,sans-serif" font-weight="bold" letter-spacing="0.8">BLUE WAVE</text>
+            <text x="268" y="415" font-size="9" fill="#1a7a9a" font-family="Arial,Helvetica,sans-serif" font-weight="bold" letter-spacing="0.5">POOL SERVICE</text>
+            <path d="M424,326 L434,322 L434,418 L424,418 Z" fill="#c8d6e0" stroke="#a0b0c0" stroke-width="0.8"/>
+            <rect x="430" y="358" width="10" height="14" rx="3" fill="#fffde0" opacity="0.95" filter="url(#headlightGlow)"/>
+            <rect x="430" y="376" width="10" height="10" rx="2" fill="#ffe080" opacity="0.7" filter="url(#glow)"/>
+            <rect x="428" y="356" width="14" height="18" rx="4" fill="none" stroke="#e8e0c0" stroke-width="0.8" opacity="0.4"/>
+            <rect x="58" y="360" width="10" height="14" rx="2" fill="#ff2020" opacity="0.9" filter="url(#glow)"/>
+            <rect x="58" y="378" width="10" height="8" rx="2" fill="#aa1515" opacity="0.7"/>
+            <rect x="432" y="408" width="8" height="14" rx="3" fill="#8a9aaa"/>
+            <rect x="410" y="412" width="26" height="8" rx="2" fill="#7a8a98"/>
+            <rect x="56" y="408" width="12" height="12" rx="3" fill="#8a9aaa"/>
+            <rect x="430" y="340" width="6" height="16" rx="2" fill="#90a0b0" opacity="0.6"/>
+            <line x1="431" y1="344" x2="435" y2="344" stroke="#6a7a88" stroke-width="0.8"/>
+            <line x1="431" y1="348" x2="435" y2="348" stroke="#6a7a88" stroke-width="0.8"/>
+            <line x1="431" y1="352" x2="435" y2="352" stroke="#6a7a88" stroke-width="0.8"/>
+            <rect x="284" y="278" width="104" height="8" rx="3" fill="#7a8a98" stroke="#6a7a88" stroke-width="0.8"/>
+            <rect x="300" y="278" width="3" height="8" fill="#6a7a88"/>
+            <rect x="365" y="278" width="3" height="8" fill="#6a7a88"/>
+            <circle cx="306" cy="277" r="4.5" fill="#ffaa20" opacity="0.82" filter="url(#glow)"/>
+            <circle cx="336" cy="277" r="4.5" fill="#ffaa20" opacity="0.82" filter="url(#glow)"/>
+            <circle cx="366" cy="277" r="4.5" fill="#ffaa20" opacity="0.82" filter="url(#glow)"/>
+            <line x1="424" y1="320" x2="440" y2="316" stroke="#8a9aaa" stroke-width="1.5"/>
+            <rect x="438" y="312" width="10" height="12" rx="2" fill="#6a7a88" stroke="#5a6a78" stroke-width="0.8"/>
 
-            <!-- Algaecide bottle -->
-            <rect x="120" y="370" width="24" height="34" rx="4" fill="#e8eef8"/>
-            <rect x="120" y="370" width="24" height="34" rx="4" fill="none" stroke="#b0b8d0" stroke-width="1"/>
-            <rect x="125" y="364" width="14" height="8" rx="2" fill="#c8d0e8"/>
-            <text x="122" y="383" font-size="4" fill="#2a3a6a" font-family="monospace">ALGAE</text>
+            <!-- FRONT WHEEL (with spinning spokes) -->
+            <g>
+              <circle cx="388" cy="444" r="32" fill="#0c1018"/>
+              <circle cx="388" cy="444" r="32" fill="none" stroke="#1a2838" stroke-width="3.5"/>
+              <circle cx="388" cy="444" r="29" fill="none" stroke="#141e2a" stroke-width="2" stroke-dasharray="5 5"/>
+              <circle cx="388" cy="444" r="20" fill="#121a24"/>
+              <circle cx="388" cy="444" r="20" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
+              <g id="frontSpokes" transform-origin="388 444">
+                <line x1="388" y1="426" x2="388" y2="462" stroke="#2a3a50" stroke-width="2.5"/>
+                <line x1="370" y1="444" x2="406" y2="444" stroke="#2a3a50" stroke-width="2.5"/>
+                <line x1="375" y1="431" x2="401" y2="457" stroke="#2a3a50" stroke-width="2"/>
+                <line x1="401" y1="431" x2="375" y2="457" stroke="#2a3a50" stroke-width="2"/>
+              </g>
+              <circle cx="388" cy="444" r="7" fill="#2f80ed" opacity="0.65"/>
+              <circle cx="388" cy="444" r="3.5" fill="#5ba4f5" opacity="0.5"/>
+            </g>
 
-            <!-- Pool hose reel -->
-            <ellipse cx="200" cy="392" rx="20" ry="13" fill="#9ab4c0" opacity="0.85"/>
-            <ellipse cx="200" cy="392" rx="20" ry="13" fill="none" stroke="#8a9aaa" stroke-width="1"/>
-            <line x1="184" y1="386" x2="216" y2="398" stroke="#8a9aaa" stroke-width="1" opacity="0.55"/>
-            <line x1="184" y1="392" x2="216" y2="392" stroke="#8a9aaa" stroke-width="1" opacity="0.55"/>
-
-            <!-- Toolbox -->
-            <rect x="220" y="374" width="24" height="22" rx="3" fill="#3a4a5a"/>
-            <rect x="220" y="374" width="24" height="22" rx="3" fill="none" stroke="#4a6080" stroke-width="1"/>
-            <circle cx="232" cy="385" r="5" fill="#2a3a4a"/>
-            <circle cx="232" cy="385" r="5" fill="none" stroke="#4a6080" stroke-width="1"/>
-            <circle cx="232" cy="385" r="2" fill="#00d4ff" opacity="0.6"/>
-
-            <!-- Cab body -->
-            <rect x="246" y="370" width="184" height="46" rx="5" fill="url(#truckWhiteGrad)"/>
-            <rect x="246" y="381" width="184" height="12" fill="url(#truckStripe)" opacity="0.88"/>
-
-            <!-- Cab top -->
-            <path d="M276,300 Q286,268 320,260 L400,260 Q426,268 430,300 L430,370 L246,370 Z" fill="url(#truckWhiteGrad)"/>
-            <path d="M276,300 Q286,268 320,260 L400,260 Q426,268 430,300 L430,370 L246,370 Z" fill="none" stroke="#c0d0e0" stroke-width="1.5"/>
-            <path d="M288,344 Q290,328 304,322 L430,322 L430,344 Z" fill="url(#truckStripe)" opacity="0.45"/>
-
-            <!-- Company name on cab -->
-            <text x="276" y="397" font-size="8" fill="#0e6080" font-family="sans-serif" font-weight="bold" opacity="0.9">BLUE WAVE</text>
-            <text x="276" y="408" font-size="6" fill="#1a8aaa" font-family="sans-serif">POOL SERVICE</text>
-
-            <!-- Windshield -->
-            <path d="M392,264 Q422,272 428,300 L428,340 L318,340 Q310,310 316,264 Z" fill="#0a1828" opacity="0.88"/>
-            <path d="M392,264 Q422,272 428,300 L428,340 L318,340 Q310,310 316,264 Z" fill="none" stroke="#b0c8d8" stroke-width="1.2" opacity="0.45"/>
-            <path d="M398,268 Q418,276 422,296 L420,318 L326,318 Q320,296 324,268 Z" fill="#1a3a5c" opacity="0.16"/>
-            <!-- Driver side window -->
-            <path d="M278,302 Q286,272 318,262 L320,262 L312,340 L250,340 Z" fill="#0a1828" opacity="0.78"/>
-            <path d="M278,302 Q286,272 318,262 L320,262 L312,340 L250,340 Z" fill="none" stroke="#b0c8d8" stroke-width="0.8" opacity="0.28"/>
-            <line x1="318" y1="340" x2="318" y2="416" stroke="#b0c0d0" stroke-width="1.5" opacity="0.45"/>
-
-            <!-- Door handle -->
-            <rect x="326" y="386" width="20" height="5" rx="2.5" fill="#a0b0c0"/>
-
-            <!-- Headlights -->
-            <rect x="420" y="357" width="12" height="10" rx="2" fill="#fffde0" opacity="0.96" filter="url(#glow)"/>
-            <rect x="420" y="371" width="12" height="8"  rx="2" fill="#ffe080" opacity="0.72" filter="url(#glow)"/>
-            <rect x="418" y="355" width="16" height="14" rx="3" fill="none" stroke="#fffde0" stroke-width="1" opacity="0.38"/>
-            <!-- Tail lights -->
-            <rect x="246" y="357" width="12" height="10" rx="2" fill="#ff3030" opacity="0.92" filter="url(#glow)"/>
-            <rect x="246" y="371" width="12" height="8"  rx="2" fill="#aa1010" opacity="0.72"/>
-
-            <!-- Bumpers -->
-            <rect x="424" y="402" width="10" height="14" rx="3" fill="#a0b0c0"/>
-            <rect x="404" y="406" width="22" height="10" rx="2" fill="#8a9aaa"/>
-            <rect x="244" y="402" width="10" height="14" rx="3" fill="#a0b0c0"/>
-
-            <!-- Roof rack -->
-            <rect x="290" y="254" width="120" height="9" rx="3" fill="#8a9aaa"/>
-            <rect x="290" y="254" width="120" height="9" rx="3" fill="none" stroke="#7a8a98" stroke-width="1"/>
-            <circle cx="310" cy="253" r="4.5" fill="#ffaa20" opacity="0.82" filter="url(#glow)"/>
-            <circle cx="350" cy="253" r="4.5" fill="#ffaa20" opacity="0.82" filter="url(#glow)"/>
-            <circle cx="390" cy="253" r="4.5" fill="#ffaa20" opacity="0.82" filter="url(#glow)"/>
-
-            <!-- Front wheel -->
-            <circle cx="376" cy="447" r="30" fill="#080c10"/>
-            <circle cx="376" cy="447" r="30" fill="none" stroke="#1a2535" stroke-width="3"/>
-            <circle cx="376" cy="447" r="21" fill="#0d1520"/>
-            <circle cx="376" cy="447" r="21" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
-            <line x1="376" y1="426" x2="376" y2="468" stroke="#2a3a50" stroke-width="2.5"/>
-            <line x1="355" y1="447" x2="397" y2="447" stroke="#2a3a50" stroke-width="2.5"/>
-            <line x1="361" y1="432" x2="391" y2="462" stroke="#2a3a50" stroke-width="2"/>
-            <line x1="391" y1="432" x2="361" y2="462" stroke="#2a3a50" stroke-width="2"/>
-            <circle cx="376" cy="447" r="6" fill="#2f80ed" opacity="0.7"/>
-
-            <!-- Rear wheel -->
-            <circle cx="164" cy="447" r="30" fill="#080c10"/>
-            <circle cx="164" cy="447" r="30" fill="none" stroke="#1a2535" stroke-width="3"/>
-            <circle cx="164" cy="447" r="21" fill="#0d1520"/>
-            <circle cx="164" cy="447" r="21" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
-            <line x1="164" y1="426" x2="164" y2="468" stroke="#2a3a50" stroke-width="2.5"/>
-            <line x1="143" y1="447" x2="185" y2="447" stroke="#2a3a50" stroke-width="2.5"/>
-            <line x1="149" y1="432" x2="179" y2="462" stroke="#2a3a50" stroke-width="2"/>
-            <line x1="179" y1="432" x2="149" y2="462" stroke="#2a3a50" stroke-width="2"/>
-            <circle cx="164" cy="447" r="6" fill="#2f80ed" opacity="0.7"/>
+            <!-- REAR WHEEL (with spinning spokes) -->
+            <g>
+              <circle cx="138" cy="444" r="32" fill="#0c1018"/>
+              <circle cx="138" cy="444" r="32" fill="none" stroke="#1a2838" stroke-width="3.5"/>
+              <circle cx="138" cy="444" r="29" fill="none" stroke="#141e2a" stroke-width="2" stroke-dasharray="5 5"/>
+              <circle cx="138" cy="444" r="20" fill="#121a24"/>
+              <circle cx="138" cy="444" r="20" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
+              <g id="rearSpokes" transform-origin="138 444">
+                <line x1="138" y1="426" x2="138" y2="462" stroke="#2a3a50" stroke-width="2.5"/>
+                <line x1="120" y1="444" x2="156" y2="444" stroke="#2a3a50" stroke-width="2.5"/>
+                <line x1="125" y1="431" x2="151" y2="457" stroke="#2a3a50" stroke-width="2"/>
+                <line x1="151" y1="431" x2="125" y2="457" stroke="#2a3a50" stroke-width="2"/>
+              </g>
+              <circle cx="138" cy="444" r="7" fill="#2f80ed" opacity="0.65"/>
+              <circle cx="138" cy="444" r="3.5" fill="#5ba4f5" opacity="0.5"/>
+            </g>
 
           </g>
 
@@ -641,41 +651,38 @@
     var hudMode = document.getElementById('hudMode');
     var hudTag  = document.getElementById('hudTag');
     var toast   = document.getElementById('notifToast');
+    var frontSpokes = document.getElementById('frontSpokes');
+    var rearSpokes  = document.getElementById('rearSpokes');
     if (!truck) return;
 
-    // ── SEAMLESS TIMING ──
-    // The truck NEVER stops. RFID reads at long range once truck is clearly in frame.
-    // Gate opens reactively after detecting the tag — truck is already visible.
-    var CYCLE         = 10000; // ms per loop
+    var CYCLE         = 10000;
+    var T_TRUCK_START = 0.03;
+    var T_RFID_DETECT = 0.28;
+    var T_LED_GREEN   = 0.34;
+    var T_GATE_START  = 0.34;
+    var T_GATE_DONE   = 0.50;
+    var T_TOAST_SHOW  = 0.48;
+    var T_TRUCK_THRU  = 0.60;
+    var T_TOAST_HIDE  = 0.80;
+    var T_HOLD_END    = 0.84;
+    var T_GATE_CLOSE  = 0.88;
+    var T_RESET_DONE  = 0.95;
 
-    // Phase 1: Approach — truck enters and drives a bit before RFID picks it up
-    var T_TRUCK_START = 0.03;  // truck begins entering from left
-    var T_RFID_DETECT = 0.28;  // RFID detects tag (~2.5s in, truck clearly visible)
-    var T_LED_GREEN   = 0.34;  // LED goes green, authorization confirmed
-    var T_GATE_START  = 0.34;  // gate starts opening on auth
-    var T_GATE_DONE   = 0.50;  // gate fully open (before truck arrives)
-    var T_TOAST_SHOW  = 0.48;  // notification appears as gate finishes opening
-
-    // Phase 2: Drive through — truck passes through open gate smoothly
-    var T_TRUCK_THRU  = 0.60;  // truck reaches rest position past gate
-
-    // Phase 3: Hold & Reset
-    var T_TOAST_HIDE  = 0.80;  // hide toast before reset
-    var T_HOLD_END    = 0.84;  // start resetting
-    var T_GATE_CLOSE  = 0.88;  // gate closes
-    var T_RESET_DONE  = 0.95;  // everything back to initial state
-
-    // Truck positions
-    var TRUCK_START_X = -660;   // off-screen left
-    var TRUCK_REST_X  = 200;    // truck well past the gate
-
-    // Gate hinge positions
+    var TRUCK_START_X = -660;
+    var TRUCK_REST_X  = 200;
     var HINGE_L = 375;
     var HINGE_R = 725;
+
+    var wheelAngle = 0;
+    var FRONT_WHEEL_CX = 388;
+    var FRONT_WHEEL_CY = 444;
+    var REAR_WHEEL_CX  = 138;
+    var REAR_WHEEL_CY  = 444;
 
     var ringTime = 0;
     var lastTs   = null;
     var startTs  = null;
+    var prevTruckX = TRUCK_START_X;
 
     function lerp(a,b,t){ return a+(b-a)*t; }
     function clamp(v,lo,hi){ return v<lo?lo:v>hi?hi:v; }
@@ -718,22 +725,27 @@
       lastTs = ts;
       var f = ((ts - startTs) % CYCLE) / CYCLE;
 
-      // ── Truck movement: ONE continuous smooth motion, no stops ──
       var truckX;
       if (f < T_TRUCK_START) {
         truckX = TRUCK_START_X;
       } else if (f < T_TRUCK_THRU) {
-        // Single smooth drive from off-screen to rest position — never pauses
         truckX = lerp(TRUCK_START_X, TRUCK_REST_X, easeSmooth(frac(f, T_TRUCK_START, T_TRUCK_THRU)));
       } else if (f < T_HOLD_END) {
         truckX = TRUCK_REST_X;
       } else {
-        // Reset truck to start for next cycle
         truckX = TRUCK_START_X;
       }
       truck.setAttribute('transform', 'translate('+truckX+',0)');
 
-      // ── LED colour: quick transition once truck is in frame ──
+      // Wheel spin proportional to truck movement
+      var truckDelta = truckX - prevTruckX;
+      prevTruckX = truckX;
+      if (Math.abs(truckDelta) > 0.01) {
+        wheelAngle += truckDelta * 1.79;
+      }
+      frontSpokes.setAttribute('transform', 'rotate(' + wheelAngle + ' ' + FRONT_WHEEL_CX + ' ' + FRONT_WHEEL_CY + ')');
+      rearSpokes.setAttribute('transform', 'rotate(' + wheelAngle + ' ' + REAR_WHEEL_CX + ' ' + REAR_WHEEL_CY + ')');
+
       if (f < T_RFID_DETECT) {
         setLed('rgb(204,32,32)', '0.15');
       } else if (f < T_LED_GREEN) {
@@ -751,7 +763,6 @@
         setLed('rgb(204,32,32)', '0.15');
       }
 
-      // ── RFID rings: pulse while detecting ──
       if (f >= T_RFID_DETECT && f < T_GATE_DONE) {
         var ringFade = f > T_LED_GREEN + 0.05 ? (1 - ease(frac(f, T_LED_GREEN + 0.05, T_GATE_DONE))) : 1;
         rfidRings.setAttribute('opacity', String(0.85 * ringFade));
@@ -761,7 +772,6 @@
         if (f < T_RFID_DETECT) ringTime = 0;
       }
 
-      // ── Gate: opens smoothly, stays open, then closes ──
       var sx;
       if (f < T_GATE_START) {
         sx = 1;
@@ -776,7 +786,6 @@
       }
       setGate(sx);
 
-      // ── HUD text ──
       if (f < T_RFID_DETECT) {
         hudMode.setAttribute('fill','#cc4040'); hudMode.textContent='LOCKED';
         hudTag.setAttribute('fill','#7a8599');  hudTag.textContent='SCANNING...';
@@ -791,7 +800,6 @@
         hudTag.setAttribute('fill','#7a8599');  hudTag.textContent='SCANNING...';
       }
 
-      // ── Toast notification ──
       if (f >= T_TOAST_SHOW && f < T_TOAST_HIDE) {
         toast.classList.add('visible');
       } else {
@@ -801,7 +809,6 @@
       requestAnimationFrame(tick);
     }
 
-    // Initialise gate as fully CLOSED
     setGate(1);
     requestAnimationFrame(tick);
   })();

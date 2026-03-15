@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Craison Digital - Smart Gate Access</title>
+  <title>Craison Digital – Smart Gate Access</title>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,7 +35,7 @@
     .notif-wrap { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; z-index: 10; pointer-events: none; }
     .notif-toast { background: rgba(8,18,32,0.96); border: 1px solid rgba(74,222,128,0.4); border-radius: 16px; padding: 1.1rem 1.6rem; display: flex; align-items: center; gap: 1rem; box-shadow: 0 0 40px rgba(74,222,128,0.2), 0 8px 40px rgba(0,0,0,0.6); opacity: 0; transform: translateY(16px) scale(0.96); transition: opacity 0.4s ease, transform 0.4s ease; max-width: 380px; width: 90%; }
     .notif-toast.visible { opacity: 1; transform: translateY(0) scale(1); }
-    .notif-icon { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #1a4a2a, #0d2a1a); border: 1.5px solid rgba(74,222,128,0.4); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    .notif-icon { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg,#1a4a2a,#0d2a1a); border: 1.5px solid rgba(74,222,128,0.4); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
     .notif-body { flex: 1; }
     .notif-title { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; color: #e8edf5; margin-bottom: 0.15rem; }
     .notif-sub { font-size: 0.78rem; color: #7a8599; }
@@ -46,8 +46,8 @@
     .hero-overlay { position: relative; z-index: 3; width: 100%; text-align: center; padding: 2rem 2rem 5rem; background: linear-gradient(0deg, #080c12 30%, transparent 100%); }
     .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(47,128,237,0.1); border: 1px solid rgba(47,128,237,0.25); color: var(--blue-bright); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.4rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; animation: fadeUp 0.6s ease both; }
     .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--cyan); border-radius: 50%; box-shadow: 0 0 8px var(--cyan); animation: pulse 2s infinite; }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-    .hero-overlay h1 { font-family: var(--font-display); font-size: clamp(2.4rem, 5.5vw, 4.5rem); font-weight: 800; line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 1.2rem; animation: fadeUp 0.6s 0.1s ease both; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .hero-overlay h1 { font-family: var(--font-display); font-size: clamp(2.4rem,5.5vw,4.5rem); font-weight: 800; line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 1.2rem; animation: fadeUp 0.6s 0.1s ease both; }
     .hero-overlay h1 em { font-style: normal; color: var(--blue-bright); }
     .hero-overlay p { font-size: 1.1rem; color: var(--muted); max-width: 540px; margin: 0 auto 2rem; animation: fadeUp 0.6s 0.2s ease both; }
     .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
@@ -55,7 +55,7 @@
     .btn-primary:hover { background: var(--blue-bright); transform: translateY(-1px); box-shadow: 0 0 36px rgba(47,128,237,0.45); }
     .btn-secondary { background: transparent; color: var(--text); padding: 0.85rem 2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.95rem; font-weight: 400; text-decoration: none; border: 1px solid var(--border); cursor: pointer; transition: border-color 0.2s, color 0.2s; }
     .btn-secondary:hover { border-color: rgba(255,255,255,0.2); color: #fff; }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
 
     .stats-bar { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--dark); display: flex; justify-content: center; }
     .stat { flex: 1; max-width: 260px; padding: 2rem 2.5rem; text-align: center; border-right: 1px solid var(--border); }
@@ -66,9 +66,9 @@
     section { position: relative; z-index: 1; }
     .section-inner { max-width: 1100px; margin: 0 auto; padding: 6rem 4rem; }
     .section-tag { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blue-bright); margin-bottom: 0.75rem; }
-    .section-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .section-title { font-family: var(--font-display); font-size: clamp(1.8rem,3.5vw,2.8rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1rem; }
     .section-sub { color: var(--muted); font-size: 1.05rem; max-width: 520px; margin-bottom: 3.5rem; }
-    .package-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .package-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 1.5px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
     .package-item { background: var(--card); padding: 2.2rem; transition: background 0.2s; }
     .package-item:hover { background: #161e2e; }
     .pkg-icon { width: 44px; height: 44px; background: var(--blue-glow); border: 1px solid rgba(47,128,237,0.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; font-size: 1.3rem; }
@@ -76,7 +76,7 @@
     .pkg-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
     #how { background: var(--dark); }
     .steps { display: flex; flex-direction: column; position: relative; }
-    .steps::before { content: ''; position: absolute; left: 22px; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--blue), transparent); }
+    .steps::before { content: ''; position: absolute; left: 22px; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom,var(--blue),transparent); }
     .step { display: grid; grid-template-columns: 48px 1fr; gap: 1.8rem; padding: 2rem 0; border-bottom: 1px solid var(--border); }
     .step:last-child { border-bottom: none; }
     .step-num { width: 44px; height: 44px; border-radius: 50%; background: var(--blue-glow); border: 1px solid var(--blue); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; color: var(--blue-bright); flex-shrink: 0; position: relative; z-index: 1; }
@@ -88,10 +88,10 @@
     .feature-check { width: 22px; height: 22px; border-radius: 50%; background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; font-size: 0.65rem; color: var(--cyan); }
     .feature-text strong { display: block; font-weight: 500; font-size: 0.95rem; margin-bottom: 0.2rem; }
     .feature-text span { font-size: 0.85rem; color: var(--muted); }
-    .dashboard-mockup { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(47,128,237,0.1); }
+    .dashboard-mockup { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 24px 80px rgba(0,0,0,0.5),0 0 0 1px rgba(47,128,237,0.1); }
     .mockup-bar { background: #0d1320; border-bottom: 1px solid var(--border); padding: 0.8rem 1.2rem; display: flex; align-items: center; gap: 0.5rem; }
     .dot { width: 10px; height: 10px; border-radius: 50%; }
-    .dot-r { background: #ff5f57; } .dot-y { background: #febc2e; } .dot-g { background: #28c840; }
+    .dot-r{background:#ff5f57} .dot-y{background:#febc2e} .dot-g{background:#28c840}
     .mockup-title { margin-left: auto; margin-right: auto; font-size: 0.75rem; color: var(--muted); }
     .mockup-body { padding: 1.5rem; }
     .mockup-row { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; background: rgba(255,255,255,0.03); border-radius: 8px; margin-bottom: 0.6rem; font-size: 0.82rem; }
@@ -99,19 +99,19 @@
     .tag-name { font-weight: 500; color: var(--text); }
     .tag-time { color: var(--muted); font-size: 0.75rem; }
     .tag-status { font-size: 0.72rem; padding: 0.2rem 0.7rem; border-radius: 100px; font-weight: 500; }
-    .status-in { background: rgba(40,200,100,0.12); color: #4ade80; border: 1px solid rgba(40,200,100,0.2); }
-    .status-out { background: rgba(251,113,133,0.1); color: #f87171; border: 1px solid rgba(251,113,133,0.2); }
-    .status-denied { background: rgba(251,191,36,0.1); color: #fbbf24; border: 1px solid rgba(251,191,36,0.2); }
+    .status-in{background:rgba(40,200,100,0.12);color:#4ade80;border:1px solid rgba(40,200,100,0.2)}
+    .status-out{background:rgba(251,113,133,0.1);color:#f87171;border:1px solid rgba(251,113,133,0.2)}
+    .status-denied{background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.2)}
     .mockup-notif { margin-top: 1rem; background: rgba(47,128,237,0.08); border: 1px solid rgba(47,128,237,0.15); border-radius: 8px; padding: 0.8rem 1rem; font-size: 0.78rem; color: var(--blue-bright); display: flex; gap: 0.6rem; align-items: center; }
     #pricing { background: var(--dark); }
     .pricing-card { max-width: 520px; margin: 0 auto; background: var(--card); border: 1px solid rgba(47,128,237,0.25); border-radius: 20px; padding: 3rem; position: relative; box-shadow: 0 0 60px rgba(47,128,237,0.08); text-align: center; }
-    .pricing-card::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 60%; height: 1px; background: linear-gradient(90deg, transparent, var(--blue), transparent); }
+    .pricing-card::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 60%; height: 1px; background: linear-gradient(90deg,transparent,var(--blue),transparent); }
     .price-label { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
     .price-amount { font-family: var(--font-display); font-size: 3rem; font-weight: 800; color: var(--text); line-height: 1; margin-bottom: 0.3rem; }
     .price-note { font-size: 0.82rem; color: var(--muted); margin-bottom: 2rem; }
     .price-includes { text-align: left; border-top: 1px solid var(--border); padding-top: 2rem; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.9rem; }
     .price-line { display: flex; align-items: center; gap: 0.8rem; font-size: 0.9rem; }
-    .price-line::before { content: '\2713'; color: var(--cyan); font-weight: 700; flex-shrink: 0; }
+    .price-line::before { content: '✓'; color: var(--cyan); font-weight: 700; flex-shrink: 0; }
     #contact { text-align: center; }
     .cta-box { max-width: 640px; margin: 0 auto; }
     .contact-form { display: flex; flex-direction: column; gap: 1rem; margin-top: 2.5rem; text-align: left; }
@@ -125,13 +125,13 @@
     .footer-logo { font-family: var(--font-display); font-weight: 800; font-size: 1rem; color: var(--text); }
     .footer-logo span { color: var(--cyan); }
     @media (max-width: 768px) {
-      nav { padding: 1rem 1.5rem; } nav ul { display: none; }
-      .section-inner { padding: 4rem 1.5rem; }
-      .features-layout { grid-template-columns: 1fr; }
-      .form-row { grid-template-columns: 1fr; }
-      .stats-bar { flex-wrap: wrap; }
-      .stat { min-width: 50%; border-right: none; border-bottom: 1px solid var(--border); }
-      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+      nav{padding:1rem 1.5rem} nav ul{display:none}
+      .section-inner{padding:4rem 1.5rem}
+      .features-layout{grid-template-columns:1fr}
+      .form-row{grid-template-columns:1fr}
+      .stats-bar{flex-wrap:wrap}
+      .stat{min-width:50%;border-right:none;border-bottom:1px solid var(--border)}
+      footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.5rem}
     }
   </style>
 </head>
@@ -156,155 +156,446 @@
       <div class="notif-wrap">
         <div class="notif-toast" id="notifToast">
           <div class="notif-dot"></div>
-          <div class="notif-icon">&#127946;</div>
+          <div class="notif-icon">🏊</div>
           <div class="notif-body">
             <div class="notif-title">Pool Service Arrived</div>
-            <div class="notif-sub">Blue Wave Pool Co. &middot; Gate opened &middot; 10:24 AM</div>
+            <div class="notif-sub">Blue Wave Pool Co. · Gate opened · 10:24 AM</div>
           </div>
-          <div class="notif-badge">&#10003; Authorized</div>
+          <div class="notif-badge">✓ Authorized</div>
         </div>
       </div>
 
+      <!--
+        viewBox: 0 0 1100 500
+        Scene is a straight-on view down the driveway.
+        Gate spans x=508 (left pillar inner edge) to x=592 (right pillar inner edge) = 84px gap each panel.
+        LEFT PILLAR:  outer x=440, inner x=508, width=68
+        RIGHT PILLAR: inner x=592, outer x=660, width=68
+        Gate centre: x=550
+
+        LEFT PANEL: drawn in local space x=0..84, y=0..190.
+          Hinge is at LEFT edge (x=0) = attaches to left pillar inner face.
+          Free end at x=84 = meets gate centre when closed.
+          Transform-origin for scaleX: left edge (x=0 in local = SVG x=508).
+          To open: scaleX shrinks from 1→0 anchored at x=508 → free end moves LEFT toward pillar = swings OUT toward viewer.
+
+        RIGHT PANEL: drawn in local space x=0..84, y=0..190.
+          Hinge at RIGHT edge (x=84) = attaches to right pillar inner face.
+          Free end at x=0 = meets gate centre when closed.
+          Transform-origin for scaleX: right edge (x=84 in local = SVG x=592 + 84 = wait, local x=84 maps to SVG x=592).
+          Actually: place group at SVG x=592, panel drawn x=-84..0. Hinge at local x=0 = SVG x=592.
+          ScaleX from SVG x=592: translate(592,0) scale(sx,1) translate(-592,0).
+          sx 1→0 collapses free end (x=-84) rightward toward x=592 = swings OUT.
+
+        Y layout: gate top y=155, gate bottom y=345, mid y=250. Height=190.
+        Pillar top y=130 (taller than gate).
+      -->
+
       <svg id="gateSVG" viewBox="0 0 1100 500" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
         <defs>
-          <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#05080f"/><stop offset="100%" stop-color="#0b1628"/></linearGradient>
-          <linearGradient id="roadGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#111820"/><stop offset="100%" stop-color="#080c10"/></linearGradient>
-          <linearGradient id="truckWhiteGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d8e8f0"/><stop offset="100%" stop-color="#a8c0d0"/></linearGradient>
-          <linearGradient id="truckStripe" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a8aaa"/><stop offset="100%" stop-color="#0e6080"/></linearGradient>
-          <linearGradient id="bedGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#8a9aaa"/><stop offset="100%" stop-color="#6a7a88"/></linearGradient>
-          <linearGradient id="gateIronGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#1a2a40"/><stop offset="50%" stop-color="#2a4060"/><stop offset="100%" stop-color="#1a2a40"/></linearGradient>
-          <linearGradient id="beamGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#fffbe0" stop-opacity="0.5"/><stop offset="100%" stop-color="#fffbe0" stop-opacity="0"/></linearGradient>
-          <linearGradient id="pillarGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#1a2535"/><stop offset="30%" stop-color="#243040"/><stop offset="70%" stop-color="#243040"/><stop offset="100%" stop-color="#1a2535"/></linearGradient>
-          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-          <filter id="softglow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#05080f"/><stop offset="100%" stop-color="#0b1628"/>
+          </linearGradient>
+          <linearGradient id="roadGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#111820"/><stop offset="100%" stop-color="#080c10"/>
+          </linearGradient>
+          <linearGradient id="truckWhiteGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#d8e8f0"/><stop offset="100%" stop-color="#a8c0d0"/>
+          </linearGradient>
+          <linearGradient id="truckStripe" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1a8aaa"/><stop offset="100%" stop-color="#0e6080"/>
+          </linearGradient>
+          <linearGradient id="bedGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#8a9aaa"/><stop offset="100%" stop-color="#6a7a88"/>
+          </linearGradient>
+          <!-- Iron gate panel gradient: darker at edges, lighter centre to show depth -->
+          <linearGradient id="gateIronL" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#1e3258"/><stop offset="60%" stop-color="#2a4878"/><stop offset="100%" stop-color="#162840"/>
+          </linearGradient>
+          <linearGradient id="gateIronR" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#162840"/><stop offset="40%" stop-color="#2a4878"/><stop offset="100%" stop-color="#1e3258"/>
+          </linearGradient>
+          <linearGradient id="pillarGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#1a2535"/><stop offset="35%" stop-color="#253348"/><stop offset="65%" stop-color="#253348"/><stop offset="100%" stop-color="#1a2535"/>
+          </linearGradient>
+          <linearGradient id="beamGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#fffbe0" stop-opacity="0.5"/><stop offset="100%" stop-color="#fffbe0" stop-opacity="0"/>
+          </linearGradient>
+          <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="softglow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
           <clipPath id="sceneClip"><rect width="1100" height="500"/></clipPath>
+          <!-- Clip panels so they don't poke outside their pillar edges when scaling has floating point issues -->
+          <clipPath id="leftPanelClip"><rect x="440" y="130" width="120" height="220"/></clipPath>
+          <clipPath id="rightPanelClip"><rect x="540" y="130" width="120" height="220"/></clipPath>
         </defs>
+
         <g clip-path="url(#sceneClip)">
+
+          <!-- SKY -->
           <rect width="1100" height="500" fill="url(#skyGrad)"/>
-          <ellipse cx="550" cy="355" rx="500" ry="60" fill="#0a1e3a" opacity="0.6"/>
-          <circle cx="60" cy="35" r="1" fill="white" opacity="0.5"/><circle cx="140" cy="18" r="1.2" fill="white" opacity="0.6"/><circle cx="230" cy="55" r="0.8" fill="white" opacity="0.7"/><circle cx="340" cy="25" r="1" fill="white" opacity="0.4"/><circle cx="450" cy="12" r="1.2" fill="white" opacity="0.6"/><circle cx="650" cy="20" r="0.8" fill="white" opacity="0.5"/><circle cx="760" cy="48" r="1" fill="white" opacity="0.6"/><circle cx="880" cy="15" r="1.2" fill="white" opacity="0.4"/><circle cx="990" cy="42" r="0.8" fill="white" opacity="0.7"/><circle cx="1070" cy="28" r="1" fill="white" opacity="0.5"/>
+          <ellipse cx="550" cy="355" rx="500" ry="65" fill="#0a1e3a" opacity="0.55"/>
+          <circle cx="60"  cy="32" r="1"   fill="white" opacity="0.55"/>
+          <circle cx="150" cy="16" r="1.2" fill="white" opacity="0.6"/>
+          <circle cx="240" cy="52" r="0.8" fill="white" opacity="0.65"/>
+          <circle cx="330" cy="22" r="1"   fill="white" opacity="0.4"/>
+          <circle cx="460" cy="10" r="1.2" fill="white" opacity="0.6"/>
+          <circle cx="640" cy="18" r="0.8" fill="white" opacity="0.5"/>
+          <circle cx="760" cy="44" r="1"   fill="white" opacity="0.6"/>
+          <circle cx="870" cy="14" r="1.2" fill="white" opacity="0.4"/>
+          <circle cx="980" cy="40" r="0.8" fill="white" opacity="0.7"/>
+          <circle cx="1060" cy="26" r="1"  fill="white" opacity="0.5"/>
+
+          <!-- ROAD -->
           <rect x="0" y="355" width="1100" height="145" fill="url(#roadGrad)"/>
           <rect x="0" y="355" width="1100" height="2" fill="#1e2d40" opacity="0.9"/>
-          <rect x="0" y="420" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/><rect x="130" y="420" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/><rect x="260" y="420" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/><rect x="390" y="420" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/><rect x="520" y="420" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/><rect x="650" y="420" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/><rect x="780" y="420" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/><rect x="910" y="420" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/><rect x="1040" y="420" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
-          <rect x="0" y="280" width="380" height="78" fill="#131f2e"/>
-          <line x1="0" y1="305" x2="380" y2="305" stroke="#1a2a3a" stroke-width="1"/><line x1="0" y1="330" x2="380" y2="330" stroke="#1a2a3a" stroke-width="1"/>
-          <line x1="60" y1="280" x2="60" y2="358" stroke="#1a2a3a" stroke-width="1"/><line x1="130" y1="280" x2="130" y2="358" stroke="#1a2a3a" stroke-width="1"/><line x1="200" y1="280" x2="200" y2="358" stroke="#1a2a3a" stroke-width="1"/><line x1="280" y1="280" x2="280" y2="358" stroke="#1a2a3a" stroke-width="1"/><line x1="340" y1="280" x2="340" y2="358" stroke="#1a2a3a" stroke-width="1"/>
-          <rect x="720" y="280" width="380" height="78" fill="#131f2e"/>
-          <line x1="720" y1="305" x2="1100" y2="305" stroke="#1a2a3a" stroke-width="1"/><line x1="720" y1="330" x2="1100" y2="330" stroke="#1a2a3a" stroke-width="1"/>
-          <line x1="760" y1="280" x2="760" y2="358" stroke="#1a2a3a" stroke-width="1"/><line x1="820" y1="280" x2="820" y2="358" stroke="#1a2a3a" stroke-width="1"/><line x1="900" y1="280" x2="900" y2="358" stroke="#1a2a3a" stroke-width="1"/><line x1="970" y1="280" x2="970" y2="358" stroke="#1a2a3a" stroke-width="1"/><line x1="1040" y1="280" x2="1040" y2="358" stroke="#1a2a3a" stroke-width="1"/>
+          <!-- Dashed centre line -->
+          <rect x="0"    y="418" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
+          <rect x="130"  y="418" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
+          <rect x="260"  y="418" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
+          <rect x="390"  y="418" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
+          <rect x="520"  y="418" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
+          <rect x="650"  y="418" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
+          <rect x="780"  y="418" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
+          <rect x="910"  y="418" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
+          <rect x="1040" y="418" width="80" height="4" rx="2" fill="#2a3a4a" opacity="0.4"/>
 
-          <!-- LEFT GATE PANEL: hinge x=480, spans x=342..480. scaleX from hinge collapses panel left = outward swing -->
-          <g id="gateLeft" transform="translate(480,0) scale(1,1) translate(-480,0)">
-            <rect x="342" y="165" width="138" height="190" fill="url(#gateIronGrad)" opacity="0.95"/>
-            <line x1="365" y1="165" x2="365" y2="355" stroke="#2f80ed" stroke-width="2" opacity="0.6"/>
-            <line x1="388" y1="165" x2="388" y2="355" stroke="#2f80ed" stroke-width="1.5" opacity="0.45"/>
-            <line x1="411" y1="165" x2="411" y2="355" stroke="#2f80ed" stroke-width="1.5" opacity="0.45"/>
-            <line x1="434" y1="165" x2="434" y2="355" stroke="#2f80ed" stroke-width="1.5" opacity="0.45"/>
-            <line x1="457" y1="165" x2="457" y2="355" stroke="#2f80ed" stroke-width="1.5" opacity="0.45"/>
-            <rect x="342" y="165" width="138" height="12" fill="#1e3555" opacity="0.9"/>
-            <rect x="342" y="343" width="138" height="12" fill="#1e3555" opacity="0.9"/>
-            <rect x="342" y="253" width="138" height="10" fill="#1e3555" opacity="0.7"/>
-            <polygon points="352,165 357,148 362,165" fill="#2a4060"/><polygon points="375,165 380,148 385,165" fill="#2a4060"/><polygon points="398,165 403,148 408,165" fill="#2a4060"/><polygon points="421,165 426,148 431,165" fill="#2a4060"/><polygon points="444,165 449,148 454,165" fill="#2a4060"/><polygon points="467,165 472,148 477,165" fill="#2a4060"/>
-            <rect x="342" y="165" width="138" height="190" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.55"/>
-            <rect x="342" y="165" width="138" height="4" fill="#2f80ed" opacity="0.35"/>
+          <!-- STONE WALLS (residential driveway boundary walls) -->
+          <!-- Left wall -->
+          <rect x="0" y="278" width="440" height="80" fill="#121d2c"/>
+          <line x1="0"   y1="303" x2="440" y2="303" stroke="#192535" stroke-width="1.2"/>
+          <line x1="0"   y1="328" x2="440" y2="328" stroke="#192535" stroke-width="1.2"/>
+          <line x1="55"  y1="278" x2="55"  y2="358" stroke="#192535" stroke-width="1"/>
+          <line x1="120" y1="278" x2="120" y2="358" stroke="#192535" stroke-width="1"/>
+          <line x1="195" y1="278" x2="195" y2="358" stroke="#192535" stroke-width="1"/>
+          <line x1="270" y1="278" x2="270" y2="358" stroke="#192535" stroke-width="1"/>
+          <line x1="345" y1="278" x2="345" y2="358" stroke="#192535" stroke-width="1"/>
+          <line x1="405" y1="278" x2="405" y2="358" stroke="#192535" stroke-width="1"/>
+          <!-- Right wall -->
+          <rect x="660" y="278" width="440" height="80" fill="#121d2c"/>
+          <line x1="660"  y1="303" x2="1100" y2="303" stroke="#192535" stroke-width="1.2"/>
+          <line x1="660"  y1="328" x2="1100" y2="328" stroke="#192535" stroke-width="1.2"/>
+          <line x1="695"  y1="278" x2="695"  y2="358" stroke="#192535" stroke-width="1"/>
+          <line x1="755"  y1="278" x2="755"  y2="358" stroke="#192535" stroke-width="1"/>
+          <line x1="825"  y1="278" x2="825"  y2="358" stroke="#192535" stroke-width="1"/>
+          <line x1="905"  y1="278" x2="905"  y2="358" stroke="#192535" stroke-width="1"/>
+          <line x1="975"  y1="278" x2="975"  y2="358" stroke="#192535" stroke-width="1"/>
+          <line x1="1045" y1="278" x2="1045" y2="358" stroke="#192535" stroke-width="1"/>
+
+          <!--
+            ═══════════════════════════════════════════════════
+            GATE PANELS — drawn BEFORE pillars so pillars cover hinge seams
+            ═══════════════════════════════════════════════════
+
+            LEFT PANEL
+            • In local coordinates: rect from x=0,y=0 to x=84,y=190
+            • Hinge: local x=0 → SVG x=508 (inner face of left pillar)
+            • Free end: local x=84 → SVG x=592 (gate centre) when sx=1 (closed)
+            • Open: scale(sx) from SVG x=508 collapses free end toward x=508
+              transform = translate(508,155) scale(sx,1) translate(-508,-155)
+              But since we only scale x and not y, simpler:
+              translate(508,0) scale(sx,1) translate(-508,0)
+            • Panel is drawn at absolute SVG coords 508..592, y=155..345
+          -->
+          <g id="gateLeft" clip-path="url(#leftPanelClip)">
+            <!-- transform applied by JS: translate(508,0) scaleX(sx) translate(-508,0) -->
+            <!-- Iron panel body -->
+            <rect x="508" y="155" width="84" height="190" fill="url(#gateIronL)"/>
+            <!-- Vertical bars (iron spindles) -->
+            <rect x="512" y="155" width="6" height="190" rx="3" fill="#2a4870"/>
+            <rect x="526" y="155" width="5" height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="540" y="155" width="5" height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="554" y="155" width="5" height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="568" y="155" width="5" height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="582" y="155" width="6" height="190" rx="3" fill="#2a4870"/>
+            <!-- Horizontal rails top/bottom/mid -->
+            <rect x="508" y="155" width="84" height="12" rx="2" fill="#1e3560" opacity="0.95"/>
+            <rect x="508" y="333" width="84" height="12" rx="2" fill="#1e3560" opacity="0.95"/>
+            <rect x="508" y="244" width="84" height="10" rx="2" fill="#1e3560" opacity="0.8"/>
+            <!-- Decorative spear tips on top rail -->
+            <polygon points="515,155 518,140 521,155" fill="#2a4268"/>
+            <polygon points="529,155 532,140 535,155" fill="#2a4268"/>
+            <polygon points="543,155 546,140 549,155" fill="#2a4268"/>
+            <polygon points="557,155 560,140 563,155" fill="#2a4268"/>
+            <polygon points="571,155 574,140 577,155" fill="#2a4268"/>
+            <polygon points="585,155 588,140 591,155" fill="#2a4268"/>
+            <!-- Blue accent glow on bars -->
+            <line x1="515" y1="170" x2="515" y2="332" stroke="#2f80ed" stroke-width="1" opacity="0.35"/>
+            <line x1="529" y1="170" x2="529" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
+            <line x1="543" y1="170" x2="543" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
+            <line x1="557" y1="170" x2="557" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
+            <line x1="571" y1="170" x2="571" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
+            <line x1="585" y1="170" x2="585" y2="332" stroke="#2f80ed" stroke-width="1" opacity="0.35"/>
+            <!-- Panel outline -->
+            <rect x="508" y="155" width="84" height="190" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.5"/>
           </g>
 
-          <!-- RIGHT GATE PANEL: hinge x=620, spans x=620..758. scaleX from hinge collapses panel right = outward swing -->
-          <g id="gateRight" transform="translate(620,0) scale(1,1) translate(-620,0)">
-            <rect x="620" y="165" width="138" height="190" fill="url(#gateIronGrad)" opacity="0.95"/>
-            <line x1="643" y1="165" x2="643" y2="355" stroke="#2f80ed" stroke-width="1.5" opacity="0.45"/>
-            <line x1="666" y1="165" x2="666" y2="355" stroke="#2f80ed" stroke-width="1.5" opacity="0.45"/>
-            <line x1="689" y1="165" x2="689" y2="355" stroke="#2f80ed" stroke-width="1.5" opacity="0.45"/>
-            <line x1="712" y1="165" x2="712" y2="355" stroke="#2f80ed" stroke-width="1.5" opacity="0.45"/>
-            <line x1="735" y1="165" x2="735" y2="355" stroke="#2f80ed" stroke-width="2" opacity="0.6"/>
-            <rect x="620" y="165" width="138" height="12" fill="#1e3555" opacity="0.9"/>
-            <rect x="620" y="343" width="138" height="12" fill="#1e3555" opacity="0.9"/>
-            <rect x="620" y="253" width="138" height="10" fill="#1e3555" opacity="0.7"/>
-            <polygon points="621,165 626,148 631,165" fill="#2a4060"/><polygon points="644,165 649,148 654,165" fill="#2a4060"/><polygon points="667,165 672,148 677,165" fill="#2a4060"/><polygon points="690,165 695,148 700,165" fill="#2a4060"/><polygon points="713,165 718,148 723,165" fill="#2a4060"/><polygon points="736,165 741,148 746,165" fill="#2a4060"/>
-            <rect x="620" y="165" width="138" height="190" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.55"/>
-            <rect x="620" y="165" width="138" height="4" fill="#2f80ed" opacity="0.35"/>
+          <!--
+            RIGHT PANEL
+            • In SVG coords: rect from x=508..592, y=155..345 (same width, mirror image)
+            • Hinge: SVG x=592 (inner face of right pillar)
+            • Free end: SVG x=508 (gate centre) when sx=1 (closed)
+            • Open: scale(sx) from SVG x=592 collapses free end toward x=592
+              transform = translate(592,0) scale(sx,1) translate(-592,0)
+            • NOTE: since the rect is drawn x=508..592, scaling from x=592 means:
+              new_x = 592 + (old_x - 592)*sx
+              When sx=1: x=508 stays at 508, x=592 stays at 592. ✓ Closed.
+              When sx=0: x=508 maps to 592, x=592 maps to 592. ✓ Fully open (collapsed to hinge).
+          -->
+          <g id="gateRight" clip-path="url(#rightPanelClip)">
+            <rect x="508" y="155" width="84" height="190" fill="url(#gateIronR)"/>
+            <rect x="512" y="155" width="6"  height="190" rx="3" fill="#2a4870"/>
+            <rect x="526" y="155" width="5"  height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="540" y="155" width="5"  height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="554" y="155" width="5"  height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="568" y="155" width="5"  height="190" rx="2" fill="#253a5f" opacity="0.9"/>
+            <rect x="582" y="155" width="6"  height="190" rx="3" fill="#2a4870"/>
+            <rect x="508" y="155" width="84" height="12" rx="2" fill="#1e3560" opacity="0.95"/>
+            <rect x="508" y="333" width="84" height="12" rx="2" fill="#1e3560" opacity="0.95"/>
+            <rect x="508" y="244" width="84" height="10" rx="2" fill="#1e3560" opacity="0.8"/>
+            <polygon points="515,155 518,140 521,155" fill="#2a4268"/>
+            <polygon points="529,155 532,140 535,155" fill="#2a4268"/>
+            <polygon points="543,155 546,140 549,155" fill="#2a4268"/>
+            <polygon points="557,155 560,140 563,155" fill="#2a4268"/>
+            <polygon points="571,155 574,140 577,155" fill="#2a4268"/>
+            <polygon points="585,155 588,140 591,155" fill="#2a4268"/>
+            <line x1="515" y1="170" x2="515" y2="332" stroke="#2f80ed" stroke-width="1" opacity="0.35"/>
+            <line x1="529" y1="170" x2="529" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
+            <line x1="543" y1="170" x2="543" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
+            <line x1="557" y1="170" x2="557" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
+            <line x1="571" y1="170" x2="571" y2="332" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
+            <line x1="585" y1="170" x2="585" y2="332" stroke="#2f80ed" stroke-width="1" opacity="0.35"/>
+            <rect x="508" y="155" width="84" height="190" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.5"/>
           </g>
 
-          <!-- PILLARS drawn over panels to cover hinge edges -->
-          <rect x="480" y="140" width="48" height="215" rx="4" fill="url(#pillarGrad)"/><rect x="480" y="140" width="48" height="215" rx="4" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.4"/>
-          <rect x="474" y="130" width="60" height="16" rx="4" fill="#1e3050"/><rect x="474" y="130" width="60" height="16" rx="4" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.5"/>
-          <circle cx="504" cy="124" r="10" fill="#1e3555"/><circle cx="504" cy="124" r="10" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.6"/><circle cx="504" cy="124" r="4" fill="#2f80ed" opacity="0.5"/>
-          <rect x="488" y="185" width="32" height="20" rx="3" fill="#111e30"/><rect x="488" y="185" width="32" height="20" rx="3" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.4"/>
-          <rect x="572" y="140" width="48" height="215" rx="4" fill="url(#pillarGrad)"/><rect x="572" y="140" width="48" height="215" rx="4" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.4"/>
-          <rect x="566" y="130" width="60" height="16" rx="4" fill="#1e3050"/><rect x="566" y="130" width="60" height="16" rx="4" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.5"/>
-          <circle cx="596" cy="124" r="10" fill="#1e3555"/><circle cx="596" cy="124" r="10" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.6"/><circle cx="596" cy="124" r="4" fill="#2f80ed" opacity="0.5"/>
-          <rect x="580" y="185" width="32" height="20" rx="3" fill="#111e30"/><rect x="580" y="185" width="32" height="20" rx="3" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.4"/>
+          <!--
+            ═══════════════════════════════════════════════════
+            PILLARS — drawn OVER gate panels to mask hinge edge
+            ═══════════════════════════════════════════════════
+            LEFT PILLAR:  x=440..508, y=130..355
+            RIGHT PILLAR: x=592..660, y=130..355
+          -->
+          <!-- LEFT PILLAR -->
+          <rect x="440" y="130" width="68" height="225" rx="4" fill="url(#pillarGrad)"/>
+          <rect x="440" y="130" width="68" height="225" rx="4" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.38"/>
+          <!-- Cap -->
+          <rect x="433" y="119" width="82" height="16" rx="5" fill="#1e3050"/>
+          <rect x="433" y="119" width="82" height="16" rx="5" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.45"/>
+          <!-- Orb finial -->
+          <circle cx="474" cy="112" r="11" fill="#1b2e4a"/>
+          <circle cx="474" cy="112" r="11" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.55"/>
+          <circle cx="474" cy="112" r="5"  fill="#2f80ed" opacity="0.45"/>
+          <!-- Address plate -->
+          <rect x="450" y="182" width="36" height="22" rx="3" fill="#111e30"/>
+          <rect x="450" y="182" width="36" height="22" rx="3" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.38"/>
+          <!-- Highlight stripe -->
+          <rect x="440" y="130" width="68" height="3" rx="1" fill="white" opacity="0.05"/>
 
-          <!-- RFID READER -->
-          <rect x="440" y="225" width="20" height="130" rx="4" fill="#0f1c2e"/><rect x="440" y="225" width="20" height="130" rx="4" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.4"/>
-          <rect x="428" y="195" width="44" height="58" rx="6" fill="#0d1e35"/><rect x="428" y="195" width="44" height="58" rx="6" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.7"/>
-          <rect x="433" y="201" width="32" height="24" rx="3" fill="#060e18"/><rect x="433" y="201" width="32" height="24" rx="3" fill="none" stroke="#1a3050" stroke-width="1"/>
-          <circle id="readerLed" cx="450" cy="240" r="8" fill="#cc2020" filter="url(#glow)"/>
-          <circle id="readerLedGlow" cx="450" cy="240" r="16" fill="#cc2020" opacity="0.15"/>
-          <rect x="447" y="188" width="6" height="11" rx="2" fill="#1e3050"/>
+          <!-- RIGHT PILLAR -->
+          <rect x="592" y="130" width="68" height="225" rx="4" fill="url(#pillarGrad)"/>
+          <rect x="592" y="130" width="68" height="225" rx="4" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.38"/>
+          <rect x="585" y="119" width="82" height="16" rx="5" fill="#1e3050"/>
+          <rect x="585" y="119" width="82" height="16" rx="5" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.45"/>
+          <circle cx="626" cy="112" r="11" fill="#1b2e4a"/>
+          <circle cx="626" cy="112" r="11" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.55"/>
+          <circle cx="626" cy="112" r="5"  fill="#2f80ed" opacity="0.45"/>
+          <rect x="614" y="182" width="36" height="22" rx="3" fill="#111e30"/>
+          <rect x="614" y="182" width="36" height="22" rx="3" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.38"/>
+          <rect x="592" y="130" width="68" height="3" rx="1" fill="white" opacity="0.05"/>
 
-          <!-- RFID rings -->
+          <!-- ═══════════════════════════════════════════
+               RFID READER POST — mounted on left pillar face
+               ═══════════════════════════════════════════ -->
+          <!-- Post column -->
+          <rect x="400" y="220" width="20" height="135" rx="4" fill="#0e1b2c"/>
+          <rect x="400" y="220" width="20" height="135" rx="4" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.35"/>
+          <!-- Reader head -->
+          <rect x="388" y="188" width="46" height="60" rx="6" fill="#0d1e35"/>
+          <rect x="388" y="188" width="46" height="60" rx="6" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.65"/>
+          <!-- Screen -->
+          <rect x="393" y="194" width="34" height="26" rx="3" fill="#060e18"/>
+          <rect x="393" y="194" width="34" height="26" rx="3" fill="none" stroke="#1a3050" stroke-width="1"/>
+          <!-- Status LED -->
+          <circle id="readerLed"     cx="411" cy="235" r="8"  fill="#cc2020" filter="url(#glow)"/>
+          <circle id="readerLedGlow" cx="411" cy="235" r="18" fill="#cc2020" opacity="0.15"/>
+          <!-- Antenna nub -->
+          <rect x="408" y="181" width="6" height="11" rx="2" fill="#1e3050"/>
+
+          <!-- RFID signal rings (emit leftward toward approaching truck) -->
           <g id="rfidRings" opacity="0" filter="url(#softglow)">
-            <ellipse id="ring1" cx="450" cy="218" rx="20" ry="13" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0"/>
-            <ellipse id="ring2" cx="450" cy="218" rx="38" ry="26" fill="none" stroke="#00d4ff" stroke-width="1.2" opacity="0"/>
-            <ellipse id="ring3" cx="450" cy="218" rx="58" ry="40" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0"/>
-            <ellipse id="ring4" cx="450" cy="218" rx="78" ry="56" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0"/>
+            <ellipse id="ring1" cx="411" cy="210" rx="20" ry="13" fill="none" stroke="#00d4ff" stroke-width="1.8" opacity="0"/>
+            <ellipse id="ring2" cx="411" cy="210" rx="38" ry="26" fill="none" stroke="#00d4ff" stroke-width="1.4" opacity="0"/>
+            <ellipse id="ring3" cx="411" cy="210" rx="58" ry="40" fill="none" stroke="#2f80ed" stroke-width="1.1" opacity="0"/>
+            <ellipse id="ring4" cx="411" cy="210" rx="78" ry="54" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0"/>
           </g>
 
-          <!-- HUDs -->
-          <g opacity="0.85"><rect x="28" y="28" width="165" height="75" rx="6" fill="#060e1c" opacity="0.9"/><rect x="28" y="28" width="165" height="75" rx="6" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.35"/><text x="42" y="50" font-size="8" fill="#5ba4f5" font-family="monospace" font-weight="bold" letter-spacing="1">RFID SYSTEM</text><rect x="42" y="55" width="65" height="1" fill="#2f80ed" opacity="0.3"/><text x="42" y="70" font-size="7" fill="#7a8599" font-family="monospace">STATUS</text><text x="92" y="70" font-size="7" fill="#4ade80" font-family="monospace">ACTIVE</text><text x="42" y="85" font-size="7" fill="#7a8599" font-family="monospace">RANGE</text><text x="92" y="85" font-size="7" fill="#00d4ff" font-family="monospace">20 FT UHF</text></g>
-          <g opacity="0.85"><rect x="907" y="28" width="165" height="75" rx="6" fill="#060e1c" opacity="0.9"/><rect x="907" y="28" width="165" height="75" rx="6" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.35"/><text x="921" y="50" font-size="8" fill="#5ba4f5" font-family="monospace" font-weight="bold" letter-spacing="1">GATE STATUS</text><rect x="921" y="55" width="65" height="1" fill="#2f80ed" opacity="0.3"/><text x="921" y="70" font-size="7" fill="#7a8599" font-family="monospace">MODE</text><text id="hudMode" x="965" y="70" font-size="7" fill="#cc4040" font-family="monospace">LOCKED</text><text x="921" y="85" font-size="7" fill="#7a8599" font-family="monospace">TAG</text><text id="hudTag" x="965" y="85" font-size="7" fill="#7a8599" font-family="monospace">SCANNING...</text></g>
+          <!-- HUD overlays -->
+          <g opacity="0.85">
+            <rect x="28" y="28" width="165" height="75" rx="6" fill="#060e1c" opacity="0.92"/>
+            <rect x="28" y="28" width="165" height="75" rx="6" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.3"/>
+            <text x="42" y="50" font-size="8" fill="#5ba4f5" font-family="monospace" font-weight="bold" letter-spacing="1">RFID SYSTEM</text>
+            <rect x="42" y="55" width="65" height="1" fill="#2f80ed" opacity="0.3"/>
+            <text x="42" y="70" font-size="7" fill="#7a8599" font-family="monospace">STATUS</text>
+            <text x="92" y="70" font-size="7" fill="#4ade80" font-family="monospace">ACTIVE</text>
+            <text x="42" y="85" font-size="7" fill="#7a8599" font-family="monospace">RANGE</text>
+            <text x="92" y="85" font-size="7" fill="#00d4ff" font-family="monospace">20 FT UHF</text>
+          </g>
+          <g opacity="0.85">
+            <rect x="907" y="28" width="165" height="75" rx="6" fill="#060e1c" opacity="0.92"/>
+            <rect x="907" y="28" width="165" height="75" rx="6" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.3"/>
+            <text x="921" y="50" font-size="8" fill="#5ba4f5" font-family="monospace" font-weight="bold" letter-spacing="1">GATE STATUS</text>
+            <rect x="921" y="55" width="65" height="1" fill="#2f80ed" opacity="0.3"/>
+            <text x="921" y="70" font-size="7" fill="#7a8599" font-family="monospace">MODE</text>
+            <text id="hudMode" x="965" y="70" font-size="7" fill="#cc4040" font-family="monospace">LOCKED</text>
+            <text x="921" y="85" font-size="7" fill="#7a8599" font-family="monospace">TAG</text>
+            <text id="hudTag"  x="965" y="85" font-size="7" fill="#7a8599" font-family="monospace">SCANNING...</text>
+          </g>
 
-          <path d="M0,0 L0,22 M0,0 L22,0" stroke="#2f80ed" stroke-width="2" opacity="0.25" fill="none"/><path d="M1100,0 L1100,22 M1100,0 L1078,0" stroke="#2f80ed" stroke-width="2" opacity="0.25" fill="none"/><path d="M0,500 L0,478 M0,500 L22,500" stroke="#2f80ed" stroke-width="2" opacity="0.25" fill="none"/><path d="M1100,500 L1100,478 M1100,500 L1078,500" stroke="#2f80ed" stroke-width="2" opacity="0.25" fill="none"/>
+          <!-- Corner brackets -->
+          <path d="M0,0 L0,22 M0,0 L22,0"            stroke="#2f80ed" stroke-width="2" opacity="0.22" fill="none"/>
+          <path d="M1100,0 L1100,22 M1100,0 L1078,0"  stroke="#2f80ed" stroke-width="2" opacity="0.22" fill="none"/>
+          <path d="M0,500 L0,478 M0,500 L22,500"       stroke="#2f80ed" stroke-width="2" opacity="0.22" fill="none"/>
+          <path d="M1100,500 L1100,478 M1100,500 L1078,500" stroke="#2f80ed" stroke-width="2" opacity="0.22" fill="none"/>
 
-          <!-- POOL TRUCK -->
+          <!-- ═══════════════════════════════════════════
+               POOL SERVICE PICKUP TRUCK
+               Faces right. Front (headlights) on right side.
+               Resting x: front of cab at ~x=420, just left of reader at x=388.
+               Drive-in: starts at TRUCK_START_X offset, slides to 0.
+               ═══════════════════════════════════════════ -->
           <g id="truckGroup" transform="translate(0,0)">
-            <polygon points="420,358 620,340 620,390 420,375" fill="url(#beamGrad)" opacity="0.18"/>
-            <ellipse cx="230" cy="453" rx="175" ry="12" fill="#000" opacity="0.3"/>
-            <rect x="80" y="355" width="168" height="60" rx="3" fill="url(#bedGrad)"/><rect x="80" y="355" width="168" height="60" rx="3" fill="none" stroke="#5a6a78" stroke-width="1.5"/>
-            <rect x="85" y="358" width="158" height="52" rx="2" fill="#6a7a88"/>
-            <line x1="120" y1="355" x2="120" y2="415" stroke="#7a8a98" stroke-width="1"/><line x1="155" y1="355" x2="155" y2="415" stroke="#7a8a98" stroke-width="1"/><line x1="190" y1="355" x2="190" y2="415" stroke="#7a8a98" stroke-width="1"/><line x1="225" y1="355" x2="225" y2="415" stroke="#7a8a98" stroke-width="1"/>
-            <rect x="80" y="355" width="13" height="60" rx="2" fill="#7a8a98"/>
-            <line x1="100" y1="408" x2="248" y2="280" stroke="#4a90c0" stroke-width="5" stroke-linecap="round"/><line x1="100" y1="408" x2="248" y2="280" stroke="#6ab0e0" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
-            <rect x="240" y="273" width="22" height="10" rx="3" fill="#80c0e0"/>
-            <line x1="242" y1="283" x2="242" y2="290" stroke="#60a0c0" stroke-width="1.5"/><line x1="247" y1="283" x2="247" y2="291" stroke="#60a0c0" stroke-width="1.5"/><line x1="252" y1="283" x2="252" y2="290" stroke="#60a0c0" stroke-width="1.5"/><line x1="257" y1="283" x2="257" y2="290" stroke="#60a0c0" stroke-width="1.5"/>
-            <rect x="92" y="368" width="26" height="36" rx="4" fill="#e8f4e8"/><rect x="92" y="368" width="26" height="36" rx="4" fill="none" stroke="#b0c8b0" stroke-width="1"/><rect x="97" y="362" width="16" height="8" rx="3" fill="#c8e0c8"/>
-            <text x="95" y="381" font-size="5" fill="#2a6a2a" font-family="monospace" font-weight="bold">POOL</text><text x="95" y="388" font-size="4" fill="#2a6a2a" font-family="monospace">CHEM</text>
-            <rect x="122" y="372" width="24" height="32" rx="4" fill="#e8eef8"/><rect x="122" y="372" width="24" height="32" rx="4" fill="none" stroke="#b0b8d0" stroke-width="1"/><rect x="127" y="366" width="14" height="8" rx="2" fill="#c8d0e8"/>
-            <text x="124" y="385" font-size="4" fill="#2a3a6a" font-family="monospace">ALGAE</text>
-            <ellipse cx="202" cy="392" rx="19" ry="13" fill="#a0b4c0" opacity="0.8"/><ellipse cx="202" cy="392" rx="19" ry="13" fill="none" stroke="#8a9aaa" stroke-width="1"/>
-            <rect x="220" y="376" width="24" height="22" rx="3" fill="#3a4a5a"/><rect x="220" y="376" width="24" height="22" rx="3" fill="none" stroke="#4a6080" stroke-width="1"/>
-            <circle cx="232" cy="387" r="6" fill="#2a3a4a"/><circle cx="232" cy="387" r="2" fill="#00d4ff" opacity="0.6"/>
-            <rect x="246" y="370" width="185" height="45" rx="5" fill="url(#truckWhiteGrad)"/>
-            <rect x="246" y="382" width="185" height="12" fill="url(#truckStripe)" opacity="0.9"/>
-            <path d="M276,300 Q286,268 318,260 L398,260 Q424,268 428,300 L428,370 L246,370 Z" fill="url(#truckWhiteGrad)"/>
-            <path d="M276,300 Q286,268 318,260 L398,260 Q424,268 428,300 L428,370 L246,370 Z" fill="none" stroke="#c0d0e0" stroke-width="1.5"/>
-            <path d="M286,344 Q288,328 302,322 L428,322 L428,344 Z" fill="url(#truckStripe)" opacity="0.5"/>
-            <text x="274" y="398" font-size="8" fill="#0e6080" font-family="sans-serif" font-weight="bold" opacity="0.9">BLUE WAVE</text>
-            <text x="274" y="408" font-size="6" fill="#1a8aaa" font-family="sans-serif">POOL SERVICE</text>
-            <path d="M390,264 Q420,272 426,298 L426,340 L316,340 Q308,310 314,264 Z" fill="#0a1828" opacity="0.85"/>
-            <path d="M390,264 Q420,272 426,298 L426,340 L316,340 Q308,310 314,264 Z" fill="none" stroke="#b0c8d8" stroke-width="1.2" opacity="0.5"/>
-            <path d="M276,302 Q284,272 316,264 L318,264 L312,340 L250,340 Z" fill="#0a1828" opacity="0.75"/>
-            <line x1="318" y1="340" x2="318" y2="415" stroke="#b0c0d0" stroke-width="1.5" opacity="0.5"/>
-            <rect x="326" y="386" width="20" height="5" rx="2" fill="#a0b0c0"/>
-            <rect x="418" y="358" width="12" height="10" rx="2" fill="#fffde0" opacity="0.95" filter="url(#glow)"/><rect x="418" y="372" width="12" height="8" rx="2" fill="#ffe080" opacity="0.7" filter="url(#glow)"/>
-            <rect x="246" y="358" width="12" height="10" rx="2" fill="#ff3030" opacity="0.9" filter="url(#glow)"/><rect x="246" y="372" width="12" height="7" rx="2" fill="#aa1010" opacity="0.7"/>
-            <rect x="422" y="402" width="10" height="13" rx="3" fill="#a0b0c0"/><rect x="402" y="407" width="22" height="9" rx="2" fill="#8a9aaa"/><rect x="244" y="402" width="10" height="13" rx="3" fill="#a0b0c0"/>
-            <rect x="290" y="255" width="120" height="8" rx="3" fill="#8a9aaa"/>
-            <circle cx="310" cy="254" r="4" fill="#ffaa20" opacity="0.8" filter="url(#glow)"/><circle cx="350" cy="254" r="4" fill="#ffaa20" opacity="0.8" filter="url(#glow)"/><circle cx="390" cy="254" r="4" fill="#ffaa20" opacity="0.8" filter="url(#glow)"/>
-            <circle cx="376" cy="445" r="29" fill="#080c10"/><circle cx="376" cy="445" r="29" fill="none" stroke="#1a2535" stroke-width="3"/><circle cx="376" cy="445" r="20" fill="#0d1520"/><circle cx="376" cy="445" r="20" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
-            <line x1="376" y1="425" x2="376" y2="465" stroke="#2a3a50" stroke-width="2.5"/><line x1="356" y1="445" x2="396" y2="445" stroke="#2a3a50" stroke-width="2.5"/><line x1="362" y1="431" x2="390" y2="459" stroke="#2a3a50" stroke-width="2"/><line x1="390" y1="431" x2="362" y2="459" stroke="#2a3a50" stroke-width="2"/><circle cx="376" cy="445" r="6" fill="#2f80ed" opacity="0.7"/>
-            <circle cx="168" cy="445" r="29" fill="#080c10"/><circle cx="168" cy="445" r="29" fill="none" stroke="#1a2535" stroke-width="3"/><circle cx="168" cy="445" r="20" fill="#0d1520"/><circle cx="168" cy="445" r="20" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
-            <line x1="168" y1="425" x2="168" y2="465" stroke="#2a3a50" stroke-width="2.5"/><line x1="148" y1="445" x2="188" y2="445" stroke="#2a3a50" stroke-width="2.5"/><line x1="154" y1="431" x2="182" y2="459" stroke="#2a3a50" stroke-width="2"/><line x1="182" y1="431" x2="154" y2="459" stroke="#2a3a50" stroke-width="2"/><circle cx="168" cy="445" r="6" fill="#2f80ed" opacity="0.7"/>
-          </g>
-        </g>
+
+            <!-- Headlight beam (from front of cab) -->
+            <polygon points="420,358 640,338 640,394 420,378" fill="url(#beamGrad)" opacity="0.2"/>
+
+            <!-- Ground shadow -->
+            <ellipse cx="232" cy="454" rx="178" ry="12" fill="#000" opacity="0.28"/>
+
+            <!-- BED (rear/left side): x=78..248 -->
+            <rect x="78" y="354" width="172" height="62" rx="3" fill="url(#bedGrad)"/>
+            <rect x="78" y="354" width="172" height="62" rx="3" fill="none" stroke="#5a6a78" stroke-width="1.5"/>
+            <!-- Bed floor surface -->
+            <rect x="83" y="357" width="162" height="54" rx="2" fill="#6a7a88"/>
+            <!-- Bed slat lines -->
+            <line x1="116" y1="354" x2="116" y2="416" stroke="#7a8a98" stroke-width="1"/>
+            <line x1="150" y1="354" x2="150" y2="416" stroke="#7a8a98" stroke-width="1"/>
+            <line x1="184" y1="354" x2="184" y2="416" stroke="#7a8a98" stroke-width="1"/>
+            <line x1="218" y1="354" x2="218" y2="416" stroke="#7a8a98" stroke-width="1"/>
+            <!-- Tailgate (left / rear face) -->
+            <rect x="78" y="354" width="13" height="62" rx="2" fill="#7a8a98"/>
+
+            <!-- POOL EQUIPMENT IN BED -->
+            <!-- Telescoping pole (diagonal, long, leaning against cab wall) -->
+            <line x1="96"  y1="410" x2="248" y2="274" stroke="#3a80b8" stroke-width="6" stroke-linecap="round"/>
+            <line x1="96"  y1="410" x2="248" y2="274" stroke="#6ab0e0" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+            <!-- Pool brush at tip -->
+            <rect x="239" y="266" width="24" height="12" rx="4" fill="#7bc8e8"/>
+            <rect x="239" y="266" width="24" height="12" rx="4" fill="none" stroke="#4a90c0" stroke-width="1"/>
+            <line x1="241" y1="278" x2="241" y2="286" stroke="#5a9ab0" stroke-width="1.5"/>
+            <line x1="246" y1="278" x2="246" y2="287" stroke="#5a9ab0" stroke-width="1.5"/>
+            <line x1="251" y1="278" x2="251" y2="286" stroke="#5a9ab0" stroke-width="1.5"/>
+            <line x1="257" y1="278" x2="257" y2="286" stroke="#5a9ab0" stroke-width="1.5"/>
+            <!-- Chlorine/chemical jug 1 (white) -->
+            <rect x="90" y="366" width="26" height="38" rx="4" fill="#eaf4ea"/>
+            <rect x="90" y="366" width="26" height="38" rx="4" fill="none" stroke="#b0c8b0" stroke-width="1"/>
+            <rect x="95" y="360" width="16" height="8" rx="3" fill="#cce4cc"/>
+            <text x="93" y="379" font-size="5" fill="#2a6a2a" font-family="monospace" font-weight="bold">POOL</text>
+            <text x="93" y="386" font-size="4" fill="#2a6a2a" font-family="monospace">CHEM</text>
+            <!-- Chemical jug 2 (blue tint) -->
+            <rect x="120" y="370" width="24" height="34" rx="4" fill="#e8eef8"/>
+            <rect x="120" y="370" width="24" height="34" rx="4" fill="none" stroke="#b0b8d0" stroke-width="1"/>
+            <rect x="125" y="364" width="14" height="8" rx="2" fill="#c8d0e8"/>
+            <text x="122" y="383" font-size="4" fill="#2a3a6a" font-family="monospace">ALGAE</text>
+            <!-- Skimmer net / bag (rolled) -->
+            <ellipse cx="200" cy="392" rx="20" ry="13" fill="#9ab4c0" opacity="0.85"/>
+            <ellipse cx="200" cy="392" rx="20" ry="13" fill="none" stroke="#8a9aaa" stroke-width="1"/>
+            <line x1="184" y1="386" x2="216" y2="398" stroke="#8a9aaa" stroke-width="1" opacity="0.55"/>
+            <line x1="184" y1="392" x2="216" y2="392" stroke="#8a9aaa" stroke-width="1" opacity="0.55"/>
+            <!-- Small pump/equipment box -->
+            <rect x="220" y="374" width="24" height="22" rx="3" fill="#3a4a5a"/>
+            <rect x="220" y="374" width="24" height="22" rx="3" fill="none" stroke="#4a6080" stroke-width="1"/>
+            <circle cx="232" cy="385" r="5" fill="#2a3a4a"/>
+            <circle cx="232" cy="385" r="5" fill="none" stroke="#4a6080" stroke-width="1"/>
+            <circle cx="232" cy="385" r="2" fill="#00d4ff" opacity="0.6"/>
+
+            <!-- CAB BODY (lower sill): x=246..428 -->
+            <rect x="246" y="370" width="184" height="46" rx="5" fill="url(#truckWhiteGrad)"/>
+            <!-- Blue accent stripe along door -->
+            <rect x="246" y="381" width="184" height="12" fill="url(#truckStripe)" opacity="0.88"/>
+            <!-- Cab upper / roof shape -->
+            <path d="M276,300 Q286,268 320,260 L400,260 Q426,268 430,300 L430,370 L246,370 Z" fill="url(#truckWhiteGrad)"/>
+            <path d="M276,300 Q286,268 320,260 L400,260 Q426,268 430,300 L430,370 L246,370 Z" fill="none" stroke="#c0d0e0" stroke-width="1.5"/>
+            <!-- Stripe on upper cab -->
+            <path d="M288,344 Q290,328 304,322 L430,322 L430,344 Z" fill="url(#truckStripe)" opacity="0.45"/>
+            <!-- Company name on door -->
+            <text x="276" y="397" font-size="8" fill="#0e6080" font-family="sans-serif" font-weight="bold" opacity="0.9">BLUE WAVE</text>
+            <text x="276" y="408" font-size="6" fill="#1a8aaa" font-family="sans-serif">POOL SERVICE</text>
+            <!-- Front windshield (right/front face) -->
+            <path d="M392,264 Q422,272 428,300 L428,340 L318,340 Q310,310 316,264 Z" fill="#0a1828" opacity="0.88"/>
+            <path d="M392,264 Q422,272 428,300 L428,340 L318,340 Q310,310 316,264 Z" fill="none" stroke="#b0c8d8" stroke-width="1.2" opacity="0.45"/>
+            <!-- Windshield glare -->
+            <path d="M398,268 Q418,276 422,296 L420,318 L326,318 Q320,296 324,268 Z" fill="#1a3a5c" opacity="0.16"/>
+            <!-- Rear window (left face) -->
+            <path d="M278,302 Q286,272 318,262 L320,262 L312,340 L250,340 Z" fill="#0a1828" opacity="0.78"/>
+            <path d="M278,302 Q286,272 318,262 L320,262 L312,340 L250,340 Z" fill="none" stroke="#b0c8d8" stroke-width="0.8" opacity="0.28"/>
+            <!-- Door line divider -->
+            <line x1="318" y1="340" x2="318" y2="416" stroke="#b0c0d0" stroke-width="1.5" opacity="0.45"/>
+            <!-- Door handle -->
+            <rect x="326" y="386" width="20" height="5" rx="2.5" fill="#a0b0c0"/>
+            <!-- HEADLIGHTS (right/front side) -->
+            <rect x="420" y="357" width="12" height="10" rx="2" fill="#fffde0" opacity="0.96" filter="url(#glow)"/>
+            <rect x="420" y="371" width="12" height="8"  rx="2" fill="#ffe080" opacity="0.72" filter="url(#glow)"/>
+            <rect x="418" y="355" width="16" height="14" rx="3" fill="none" stroke="#fffde0" stroke-width="1" opacity="0.38"/>
+            <!-- TAIL LIGHTS (left/rear) -->
+            <rect x="246" y="357" width="12" height="10" rx="2" fill="#ff3030" opacity="0.92" filter="url(#glow)"/>
+            <rect x="246" y="371" width="12" height="8"  rx="2" fill="#aa1010" opacity="0.72"/>
+            <!-- Bumpers -->
+            <rect x="424" y="402" width="10" height="14" rx="3" fill="#a0b0c0"/>
+            <rect x="404" y="406" width="22" height="10" rx="2" fill="#8a9aaa"/>
+            <rect x="244" y="402" width="10" height="14" rx="3" fill="#a0b0c0"/>
+            <!-- Roof rack / light bar -->
+            <rect x="290" y="254" width="120" height="9" rx="3" fill="#8a9aaa"/>
+            <rect x="290" y="254" width="120" height="9" rx="3" fill="none" stroke="#7a8a98" stroke-width="1"/>
+            <!-- Amber work lights on rack -->
+            <circle cx="310" cy="253" r="4.5" fill="#ffaa20" opacity="0.82" filter="url(#glow)"/>
+            <circle cx="350" cy="253" r="4.5" fill="#ffaa20" opacity="0.82" filter="url(#glow)"/>
+            <circle cx="390" cy="253" r="4.5" fill="#ffaa20" opacity="0.82" filter="url(#glow)"/>
+
+            <!-- FRONT WHEEL -->
+            <circle cx="376" cy="447" r="30" fill="#080c10"/>
+            <circle cx="376" cy="447" r="30" fill="none" stroke="#1a2535" stroke-width="3"/>
+            <circle cx="376" cy="447" r="21" fill="#0d1520"/>
+            <circle cx="376" cy="447" r="21" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
+            <line x1="376" y1="426" x2="376" y2="468" stroke="#2a3a50" stroke-width="2.5"/>
+            <line x1="355" y1="447" x2="397" y2="447" stroke="#2a3a50" stroke-width="2.5"/>
+            <line x1="361" y1="432" x2="391" y2="462" stroke="#2a3a50" stroke-width="2"/>
+            <line x1="391" y1="432" x2="361" y2="462" stroke="#2a3a50" stroke-width="2"/>
+            <circle cx="376" cy="447" r="6" fill="#2f80ed" opacity="0.7"/>
+
+            <!-- REAR WHEEL -->
+            <circle cx="164" cy="447" r="30" fill="#080c10"/>
+            <circle cx="164" cy="447" r="30" fill="none" stroke="#1a2535" stroke-width="3"/>
+            <circle cx="164" cy="447" r="21" fill="#0d1520"/>
+            <circle cx="164" cy="447" r="21" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.4"/>
+            <line x1="164" y1="426" x2="164" y2="468" stroke="#2a3a50" stroke-width="2.5"/>
+            <line x1="143" y1="447" x2="185" y2="447" stroke="#2a3a50" stroke-width="2.5"/>
+            <line x1="149" y1="432" x2="179" y2="462" stroke="#2a3a50" stroke-width="2"/>
+            <line x1="179" y1="432" x2="149" y2="462" stroke="#2a3a50" stroke-width="2"/>
+            <circle cx="164" cy="447" r="6" fill="#2f80ed" opacity="0.7"/>
+
+          </g><!-- /truckGroup -->
+
+        </g><!-- /sceneClip -->
       </svg>
     </div>
 
     <div class="hero-overlay">
       <div class="hero-badge">Smart Gate Access System</div>
       <h1>Your Gate.<br/><em>Fully Intelligent.</em></h1>
-      <p>Upgrade your existing gate opener with long-range RFID, keypad access, and real-time Home Assistant automation - professionally installed and configured.</p>
+      <p>Upgrade your existing gate opener with long-range RFID, keypad access, and real-time Home Assistant automation — professionally installed and configured.</p>
       <div class="hero-actions">
         <a href="#contact" class="btn-primary">Request a Quote</a>
         <a href="#package" class="btn-secondary">See What's Included</a>
@@ -319,17 +610,101 @@
     <div class="stat"><div class="stat-number">1 day</div><div class="stat-label">Professional install</div></div>
   </div>
 
-  <section id="package"><div class="section-inner"><div class="section-tag">What's Included</div><h2 class="section-title">Everything in one package.</h2><p class="section-sub">Hardware, installation, and full Home Assistant configuration - done for you.</p><div class="package-grid"><div class="package-item"><div class="pkg-icon">&#128225;</div><div class="pkg-title">Long-Range UHF RFID Reader</div><div class="pkg-desc">Reads authorized tags from up to 20 feet away - no stopping to roll down your window.</div></div><div class="package-item"><div class="pkg-icon">&#9000;&#65039;</div><div class="pkg-title">Wiegand Keypad</div><div class="pkg-desc">PIN code backup access for guests, deliveries, or anyone without a tag.</div></div><div class="package-item"><div class="pkg-icon">&#127968;</div><div class="pkg-title">Home Assistant Integration</div><div class="pkg-desc">Full HA setup with a clean dashboard to add, remove, and manage tags and PINs in seconds.</div></div><div class="package-item"><div class="pkg-icon">&#128203;</div><div class="pkg-title">Complete Access Logging</div><div class="pkg-desc">Every entry and exit is timestamped and logged - always know who came and went.</div></div><div class="package-item"><div class="pkg-icon">&#128276;</div><div class="pkg-title">Real-Time Notifications</div><div class="pkg-desc">Get instant alerts on your phone when someone arrives, leaves, or tries an invalid code.</div></div><div class="package-item"><div class="pkg-icon">&#128295;</div><div class="pkg-title">Professional Installation</div><div class="pkg-desc">We handle everything - hardware mounting, wiring, and complete system configuration.</div></div></div></div></section>
+  <section id="package"><div class="section-inner">
+    <div class="section-tag">What's Included</div>
+    <h2 class="section-title">Everything in one package.</h2>
+    <p class="section-sub">Hardware, installation, and full Home Assistant configuration — done for you.</p>
+    <div class="package-grid">
+      <div class="package-item"><div class="pkg-icon">📡</div><div class="pkg-title">Long-Range UHF RFID Reader</div><div class="pkg-desc">Reads authorized tags from up to 20 feet away — no stopping to roll down your window.</div></div>
+      <div class="package-item"><div class="pkg-icon">⌨️</div><div class="pkg-title">Wiegand Keypad</div><div class="pkg-desc">PIN code backup access for guests, deliveries, or anyone without a tag.</div></div>
+      <div class="package-item"><div class="pkg-icon">🏠</div><div class="pkg-title">Home Assistant Integration</div><div class="pkg-desc">Full HA setup with a clean dashboard to add, remove, and manage tags and PINs in seconds.</div></div>
+      <div class="package-item"><div class="pkg-icon">📋</div><div class="pkg-title">Complete Access Logging</div><div class="pkg-desc">Every entry and exit is timestamped and logged — always know who came and went.</div></div>
+      <div class="package-item"><div class="pkg-icon">🔔</div><div class="pkg-title">Real-Time Notifications</div><div class="pkg-desc">Get instant alerts on your phone when someone arrives, leaves, or tries an invalid code.</div></div>
+      <div class="package-item"><div class="pkg-icon">🔧</div><div class="pkg-title">Professional Installation</div><div class="pkg-desc">We handle everything — hardware mounting, wiring, and complete system configuration.</div></div>
+    </div>
+  </div></section>
 
-  <section id="how"><div class="section-inner"><div class="section-tag">The Process</div><h2 class="section-title">Simple from day one.</h2><p class="section-sub">We take care of the technical work. You end up with a system that's genuinely easy to manage.</p><div class="steps"><div class="step"><div class="step-num">01</div><div><div class="step-title">We assess your existing setup</div><div class="step-desc">We evaluate your current gate opener and confirm compatibility. Most standard openers with a Wiegand input work out of the box.</div></div></div><div class="step"><div class="step-num">02</div><div><div class="step-title">Hardware installation</div><div class="step-desc">We mount the UHF RFID reader and keypad at the right position for your driveway, wire everything cleanly, and connect to your opener.</div></div></div><div class="step"><div class="step-num">03</div><div><div class="step-title">Home Assistant configuration</div><div class="step-desc">We set up or connect to your existing Home Assistant instance, configure all integrations, build your access dashboard, and set up notifications.</div></div></div><div class="step"><div class="step-num">04</div><div><div class="step-title">You take control</div><div class="step-desc">We walk you through the dashboard - adding tags, setting PINs, viewing logs. It's straightforward enough that anyone in the household can manage it.</div></div></div></div></div></section>
+  <section id="how"><div class="section-inner">
+    <div class="section-tag">The Process</div>
+    <h2 class="section-title">Simple from day one.</h2>
+    <p class="section-sub">We take care of the technical work. You end up with a system that's genuinely easy to manage.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><div><div class="step-title">We assess your existing setup</div><div class="step-desc">We evaluate your current gate opener and confirm compatibility. Most standard openers with a Wiegand input work out of the box.</div></div></div>
+      <div class="step"><div class="step-num">02</div><div><div class="step-title">Hardware installation</div><div class="step-desc">We mount the UHF RFID reader and keypad at the right position for your driveway, wire everything cleanly, and connect to your opener.</div></div></div>
+      <div class="step"><div class="step-num">03</div><div><div class="step-title">Home Assistant configuration</div><div class="step-desc">We set up or connect to your existing Home Assistant instance, configure all integrations, build your access dashboard, and set up notifications.</div></div></div>
+      <div class="step"><div class="step-num">04</div><div><div class="step-title">You take control</div><div class="step-desc">We walk you through the dashboard — adding tags, setting PINs, viewing logs. It's straightforward enough that anyone in the household can manage it.</div></div></div>
+    </div>
+  </div></section>
 
-  <section id="features"><div class="section-inner"><div class="features-layout"><div><div class="section-tag">Access Management</div><h2 class="section-title">Full control from your phone.</h2><p class="section-sub" style="margin-bottom:2rem;">Your Home Assistant dashboard gives you a clear, real-time view of everything happening at your gate.</p><div class="feature-list"><div class="feature-item"><div class="feature-check">&#10003;</div><div class="feature-text"><strong>Add or revoke tags instantly</strong><span>Assign RFID tags to family, staff, or regular visitors. Remove access in seconds if a tag is lost.</span></div></div><div class="feature-item"><div class="feature-check">&#10003;</div><div class="feature-text"><strong>Manage PINs for guests</strong><span>Create temporary or permanent PIN codes for the keypad - no physical tag required.</span></div></div><div class="feature-item"><div class="feature-check">&#10003;</div><div class="feature-text"><strong>Arrival &amp; departure alerts</strong><span>Push notifications sent directly to your phone the moment the gate is triggered.</span></div></div><div class="feature-item"><div class="feature-check">&#10003;</div><div class="feature-text"><strong>Full audit log</strong><span>Every access event is stored with a timestamp, name, and method (RFID or PIN).</span></div></div></div></div><div class="dashboard-mockup"><div class="mockup-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><div class="mockup-title">Gate Access Log</div></div><div class="mockup-body"><div class="mockup-row"><div><div class="tag-name">John (Tag #1)</div><div class="tag-time">Today, 8:14 AM &middot; RFID</div></div><div class="tag-status status-in">Entered</div></div><div class="mockup-row"><div><div class="tag-name">Housekeeper</div><div class="tag-time">Today, 9:02 AM &middot; PIN</div></div><div class="tag-status status-in">Entered</div></div><div class="mockup-row"><div><div class="tag-name">Housekeeper</div><div class="tag-time">Today, 1:45 PM &middot; PIN</div></div><div class="tag-status status-out">Exited</div></div><div class="mockup-row"><div><div class="tag-name">Blue Wave Pool Co.</div><div class="tag-time">Today, 10:24 AM &middot; RFID</div></div><div class="tag-status status-in">Entered</div></div><div class="mockup-notif">&#128276; &nbsp;<span><strong>Gate opened</strong> - Pool Service arrived at 10:24 AM</span></div></div></div></div></div></section>
+  <section id="features"><div class="section-inner">
+    <div class="features-layout">
+      <div>
+        <div class="section-tag">Access Management</div>
+        <h2 class="section-title">Full control from your phone.</h2>
+        <p class="section-sub" style="margin-bottom:2rem;">Your Home Assistant dashboard gives you a clear, real-time view of everything happening at your gate.</p>
+        <div class="feature-list">
+          <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Add or revoke tags instantly</strong><span>Assign RFID tags to family, staff, or regular visitors. Remove access in seconds if a tag is lost.</span></div></div>
+          <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Manage PINs for guests</strong><span>Create temporary or permanent PIN codes for the keypad — no physical tag required.</span></div></div>
+          <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Arrival &amp; departure alerts</strong><span>Push notifications sent directly to your phone the moment the gate is triggered.</span></div></div>
+          <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Full audit log</strong><span>Every access event is stored with a timestamp, name, and method (RFID or PIN).</span></div></div>
+        </div>
+      </div>
+      <div class="dashboard-mockup">
+        <div class="mockup-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><div class="mockup-title">Gate Access Log</div></div>
+        <div class="mockup-body">
+          <div class="mockup-row"><div><div class="tag-name">John (Tag #1)</div><div class="tag-time">Today, 8:14 AM · RFID</div></div><div class="tag-status status-in">Entered</div></div>
+          <div class="mockup-row"><div><div class="tag-name">Housekeeper</div><div class="tag-time">Today, 9:02 AM · PIN</div></div><div class="tag-status status-in">Entered</div></div>
+          <div class="mockup-row"><div><div class="tag-name">Housekeeper</div><div class="tag-time">Today, 1:45 PM · PIN</div></div><div class="tag-status status-out">Exited</div></div>
+          <div class="mockup-row"><div><div class="tag-name">Blue Wave Pool Co.</div><div class="tag-time">Today, 10:24 AM · RFID</div></div><div class="tag-status status-in">Entered</div></div>
+          <div class="mockup-notif">🔔 &nbsp;<span><strong>Gate opened</strong> — Pool Service arrived at 10:24 AM</span></div>
+        </div>
+      </div>
+    </div>
+  </div></section>
 
-  <section id="pricing"><div class="section-inner" style="text-align:center;"><div class="section-tag">Pricing</div><h2 class="section-title">One flat rate. No surprises.</h2><p class="section-sub" style="margin:0 auto 3rem;">Everything included - hardware, installation, and full setup.</p><div class="pricing-card"><div class="price-label">Complete Package</div><div class="price-amount">Contact for Pricing</div><div class="price-note">Pricing varies by property. Get a custom quote.</div><div class="price-includes"><div class="price-line">Long-range UHF RFID reader + tags</div><div class="price-line">Wiegand keypad installation</div><div class="price-line">Full Home Assistant setup &amp; configuration</div><div class="price-line">Access logging &amp; notification setup</div><div class="price-line">Custom dashboard for easy management</div><div class="price-line">Walkthrough &amp; handoff training</div></div><a href="#contact" class="btn-primary" style="display:block;text-align:center;">Request a Quote</a></div></div></section>
+  <section id="pricing"><div class="section-inner" style="text-align:center;">
+    <div class="section-tag">Pricing</div>
+    <h2 class="section-title">One flat rate. No surprises.</h2>
+    <p class="section-sub" style="margin:0 auto 3rem;">Everything included — hardware, installation, and full setup.</p>
+    <div class="pricing-card">
+      <div class="price-label">Complete Package</div>
+      <div class="price-amount">Contact for Pricing</div>
+      <div class="price-note">Pricing varies by property. Get a custom quote.</div>
+      <div class="price-includes">
+        <div class="price-line">Long-range UHF RFID reader + tags</div>
+        <div class="price-line">Wiegand keypad installation</div>
+        <div class="price-line">Full Home Assistant setup &amp; configuration</div>
+        <div class="price-line">Access logging &amp; notification setup</div>
+        <div class="price-line">Custom dashboard for easy management</div>
+        <div class="price-line">Walkthrough &amp; handoff training</div>
+      </div>
+      <a href="#contact" class="btn-primary" style="display:block;text-align:center;">Request a Quote</a>
+    </div>
+  </div></section>
 
-  <section id="contact"><div class="section-inner"><div class="cta-box"><div class="section-tag">Get Started</div><h2 class="section-title">Ready to upgrade your gate?</h2><p class="section-sub" style="margin-bottom:0;">Tell us a bit about your property and we'll get back to you with a quote.</p><form class="contact-form" onsubmit="return false;"><div class="form-row"><div class="form-group"><label>First Name</label><input type="text" placeholder="John"/></div><div class="form-group"><label>Last Name</label><input type="text" placeholder="Smith"/></div></div><div class="form-group"><label>Email</label><input type="email" placeholder="john@example.com"/></div><div class="form-group"><label>Phone</label><input type="tel" placeholder="(555) 000-0000"/></div><div class="form-group"><label>Tell us about your gate setup</label><textarea placeholder="What gate opener do you have? Any other details..."></textarea></div><button type="submit" class="btn-primary" style="margin-top:0.5rem;">Send My Request</button></form></div></div></section>
+  <section id="contact"><div class="section-inner">
+    <div class="cta-box">
+      <div class="section-tag">Get Started</div>
+      <h2 class="section-title">Ready to upgrade your gate?</h2>
+      <p class="section-sub" style="margin-bottom:0;">Tell us a bit about your property and we'll get back to you with a quote.</p>
+      <form class="contact-form" onsubmit="return false;">
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" placeholder="John"/></div>
+          <div class="form-group"><label>Last Name</label><input type="text" placeholder="Smith"/></div>
+        </div>
+        <div class="form-group"><label>Email</label><input type="email" placeholder="john@example.com"/></div>
+        <div class="form-group"><label>Phone</label><input type="tel" placeholder="(555) 000-0000"/></div>
+        <div class="form-group"><label>Tell us about your gate setup</label><textarea placeholder="What gate opener do you have? Any other details..."></textarea></div>
+        <button type="submit" class="btn-primary" style="margin-top:0.5rem;">Send My Request</button>
+      </form>
+    </div>
+  </div></section>
 
-  <footer><div class="footer-logo">Craison<span>Digital</span></div><div>&copy; 2025 Craison Digital. All rights reserved.</div><div>Smart Home Consulting</div></footer>
+  <footer>
+    <div class="footer-logo">Craison<span>Digital</span></div>
+    <div>© 2025 Craison Digital. All rights reserved.</div>
+    <div>Smart Home Consulting</div>
+  </footer>
 
   <script>
   (function() {
@@ -348,88 +723,133 @@
     var toast   = document.getElementById('notifToast');
     if (!truck) return;
 
-    var CYCLE         = 9000;
-    var T_TRUCK_START = 0.05;
-    var T_TRUCK_STOP  = 0.38;
-    var T_SCAN_START  = 0.28;
-    var T_LED_GREEN   = 0.38;
-    var T_GATE_OPEN   = 0.42;
-    var T_GATE_FULL   = 0.60;
-    var T_NOTIF       = 0.62;
-    var T_HOLD        = 0.92;
+    // ── Timing ──
+    var CYCLE         = 9000;  // ms
+    var T_TRUCK_START = 0.05;  // truck begins moving
+    var T_TRUCK_STOP  = 0.38;  // truck reaches reader
+    var T_SCAN_START  = 0.28;  // RFID rings start
+    var T_LED_GREEN   = 0.38;  // LED turns green
+    var T_GATE_OPEN   = 0.42;  // gate begins opening
+    var T_GATE_FULL   = 0.60;  // gate fully open
+    var T_NOTIF       = 0.62;  // notification slides in
+    var T_HOLD        = 0.92;  // hold until loop reset
 
     var TRUCK_START_X = -540;
     var TRUCK_REST_X  = 0;
+
+    // Gate hinge x-coords in SVG space
+    // Left panel: hinge at LEFT edge (x=508), panel extends RIGHT to x=592
+    //   To open: scaleX from x=508. new_x = 508 + (old_x-508)*sx
+    //   sx=1: free end stays at 592. sx=0: free end collapses to 508. ✓
+    // Right panel: hinge at RIGHT edge (x=592), panel extends LEFT to x=508
+    //   To open: scaleX from x=592. new_x = 592 + (old_x-592)*sx
+    //   sx=1: free end stays at 508. sx=0: free end collapses to 592. ✓
+    var HINGE_L = 508;  // left panel hinge (pivot on left pillar inner face)
+    var HINGE_R = 592;  // right panel hinge (pivot on right pillar inner face)
+
     var ringTime = 0;
     var lastTs   = null;
-    var startTs  = null; // anchors the cycle to page load so f always starts at 0
+    var startTs  = null;
 
     function lerp(a,b,t){ return a+(b-a)*t; }
     function clamp(v,lo,hi){ return v<lo?lo:v>hi?hi:v; }
     function ease(t){ return t<0.5?2*t*t:-1+(4-2*t)*t; }
     function frac(t,a,b){ return clamp((t-a)/(b-a),0,1); }
-    function lerpColor(c1,c2,t){ return 'rgb('+Math.round(lerp(c1[0],c2[0],t))+','+Math.round(lerp(c1[1],c2[1],t))+','+Math.round(lerp(c1[2],c2[2],t))+')'; }
+    function lerpColor(c1,c2,t){
+      return 'rgb('+Math.round(lerp(c1[0],c2[0],t))+','+Math.round(lerp(c1[1],c2[1],t))+','+Math.round(lerp(c1[2],c2[2],t))+')';
+    }
     var RED=[204,32,32], AMBER=[220,160,20], GREEN=[74,222,128];
 
-    function setLed(col,ga){ led.setAttribute('fill',col); ledGlow.setAttribute('fill',col); ledGlow.setAttribute('opacity',ga); }
+    function setLed(col,ga){
+      led.setAttribute('fill',col);
+      ledGlow.setAttribute('fill',col);
+      ledGlow.setAttribute('opacity',ga);
+    }
 
     function animateRings(dt){
       ringTime += dt;
       var t = (ringTime % 2000) / 2000;
       [ring1,ring2,ring3,ring4].forEach(function(r,i){
         var rt = ((t - i*0.25 + 1) % 1);
-        r.setAttribute('opacity', rt < 0.7 ? (1-rt/0.7)*0.85 : 0);
+        r.setAttribute('opacity', rt < 0.7 ? String((1-rt/0.7)*0.85) : '0');
       });
     }
 
-    // scaleX perspective gate swing.
-    // SX=1: gate fully closed (full width visible).
-    // SX=0: gate fully open (edge-on, invisible = swung toward viewer).
-    // Left panel hinge x=480: scale collapses free end leftward (outward).
-    // Right panel hinge x=620: scale collapses free end rightward (outward).
     function setGate(sx) {
-      gateL.setAttribute('transform', 'translate(480,0) scale('+sx+',1) translate(-480,0)');
-      gateR.setAttribute('transform', 'translate(620,0) scale('+sx+',1) translate(-620,0)');
-      gateL.setAttribute('opacity', 0.55 + 0.45*sx);
-      gateR.setAttribute('opacity', 0.55 + 0.45*sx);
+      // Left panel: translate hinge to origin, scale, translate back
+      gateL.setAttribute('transform',
+        'translate('+HINGE_L+',0) scale('+sx+',1) translate('+(−HINGE_L)+',0)');
+      // Right panel: translate hinge to origin, scale, translate back
+      gateR.setAttribute('transform',
+        'translate('+HINGE_R+',0) scale('+sx+',1) translate('+(−HINGE_R)+',0)');
+      // Dim slightly as open (edge-on = darker)
+      var op = String(0.5 + 0.5*sx);
+      gateL.setAttribute('opacity', op);
+      gateR.setAttribute('opacity', op);
     }
 
     function tick(ts){
-      // Anchor cycle start to first frame so f always begins at 0
       if (startTs === null) startTs = ts;
       var dt = lastTs ? ts - lastTs : 16;
       lastTs = ts;
       var f = ((ts - startTs) % CYCLE) / CYCLE;
 
       // Truck
-      truck.setAttribute('transform', 'translate('+lerp(TRUCK_START_X, TRUCK_REST_X, ease(frac(f, T_TRUCK_START, T_TRUCK_STOP)))+',0)');
+      var truckX = lerp(TRUCK_START_X, TRUCK_REST_X, ease(frac(f, T_TRUCK_START, T_TRUCK_STOP)));
+      truck.setAttribute('transform', 'translate('+truckX+',0)');
 
-      // LED
-      if (f < T_SCAN_START) { setLed('rgb(204,32,32)', '0.15'); }
-      else if (f < T_LED_GREEN) { setLed(lerpColor(RED,AMBER,frac(f,T_SCAN_START,T_LED_GREEN)), '0.2'); }
-      else if (f < T_GATE_OPEN) { var t2=frac(f,T_LED_GREEN,T_GATE_OPEN); setLed(lerpColor(AMBER,GREEN,t2), String(0.2+0.15*t2)); }
-      else { setLed('rgb(74,222,128)', '0.35'); }
+      // LED colour
+      if (f < T_SCAN_START) {
+        setLed('rgb(204,32,32)', '0.15');
+      } else if (f < T_LED_GREEN) {
+        setLed(lerpColor(RED, AMBER, frac(f, T_SCAN_START, T_LED_GREEN)), '0.2');
+      } else if (f < T_GATE_OPEN) {
+        var t2 = frac(f, T_LED_GREEN, T_GATE_OPEN);
+        setLed(lerpColor(AMBER, GREEN, t2), String(0.2 + 0.15*t2));
+      } else {
+        setLed('rgb(74,222,128)', '0.35');
+      }
 
       // RFID rings
-      if (f >= T_SCAN_START && f < T_GATE_OPEN) { rfidRings.setAttribute('opacity','0.85'); animateRings(dt); }
-      else { rfidRings.setAttribute('opacity','0'); if (f < T_SCAN_START) ringTime = 0; }
+      if (f >= T_SCAN_START && f < T_GATE_OPEN) {
+        rfidRings.setAttribute('opacity', '0.85');
+        animateRings(dt);
+      } else {
+        rfidRings.setAttribute('opacity', '0');
+        if (f < T_SCAN_START) ringTime = 0;
+      }
 
-      // Gate: sx 1->0 as it opens
-      setGate(1 - ease(frac(f, T_GATE_OPEN, T_GATE_FULL)));
+      // Gate: sx goes 1 (closed) → 0 (open)
+      var sx = 1 - ease(frac(f, T_GATE_OPEN, T_GATE_FULL));
+      setGate(sx);
 
-      // HUD
-      if (f < T_SCAN_START) { hudMode.setAttribute('fill','#cc4040'); hudMode.textContent='LOCKED'; hudTag.setAttribute('fill','#7a8599'); hudTag.textContent='SCANNING...'; }
-      else if (f < T_LED_GREEN) { hudMode.setAttribute('fill','#ddaa20'); hudMode.textContent='READING'; hudTag.setAttribute('fill','#ddaa20'); hudTag.textContent='TAG FOUND'; }
-      else if (f < T_GATE_OPEN) { hudMode.setAttribute('fill','#4ade80'); hudMode.textContent='AUTHORIZED'; hudTag.setAttribute('fill','#4ade80'); hudTag.textContent='POOL SVC'; }
-      else { hudMode.setAttribute('fill','#4ade80'); hudMode.textContent='OPEN'; hudTag.setAttribute('fill','#4ade80'); hudTag.textContent='POOL SVC'; }
+      // HUD text
+      if (f < T_SCAN_START) {
+        hudMode.setAttribute('fill','#cc4040'); hudMode.textContent='LOCKED';
+        hudTag.setAttribute('fill','#7a8599');  hudTag.textContent='SCANNING...';
+      } else if (f < T_LED_GREEN) {
+        hudMode.setAttribute('fill','#ddaa20'); hudMode.textContent='READING';
+        hudTag.setAttribute('fill','#ddaa20');  hudTag.textContent='TAG FOUND';
+      } else if (f < T_GATE_OPEN) {
+        hudMode.setAttribute('fill','#4ade80'); hudMode.textContent='AUTHORIZED';
+        hudTag.setAttribute('fill','#4ade80');  hudTag.textContent='POOL SVC';
+      } else {
+        hudMode.setAttribute('fill','#4ade80'); hudMode.textContent='OPEN';
+        hudTag.setAttribute('fill','#4ade80');  hudTag.textContent='POOL SVC';
+      }
 
       // Toast
-      if (f >= T_NOTIF && f < T_HOLD) { toast.classList.add('visible'); } else { toast.classList.remove('visible'); }
+      if (f >= T_NOTIF && f < T_HOLD) {
+        toast.classList.add('visible');
+      } else {
+        toast.classList.remove('visible');
+      }
 
       requestAnimationFrame(tick);
     }
 
-    setGate(1); // ensure gate is visually closed before first frame
+    // Initialise gate as fully closed before first frame renders
+    setGate(1);
     requestAnimationFrame(tick);
   })();
   </script>

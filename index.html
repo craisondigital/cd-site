@@ -644,24 +644,24 @@
     if (!truck) return;
 
     // ── SEAMLESS TIMING ──
-    // The truck NEVER stops. RFID reads at long range as truck enters.
-    // Gate opens early so truck drives straight through without pausing.
+    // The truck NEVER stops. RFID reads at long range once truck is clearly in frame.
+    // Gate opens reactively after detecting the tag — truck is already visible.
     var CYCLE         = 10000; // ms per loop
 
-    // Phase 1: Approach — truck enters, RFID detects at long range
+    // Phase 1: Approach — truck enters and drives a bit before RFID picks it up
     var T_TRUCK_START = 0.03;  // truck begins entering from left
-    var T_RFID_DETECT = 0.08;  // RFID detects tag at long range (truck just visible)
-    var T_LED_GREEN   = 0.12;  // LED goes green, authorization confirmed
-    var T_GATE_START  = 0.12;  // gate starts opening immediately on auth
-    var T_GATE_DONE   = 0.32;  // gate fully open (well before truck arrives)
-    var T_TOAST_SHOW  = 0.30;  // notification appears as truck approaches gate
+    var T_RFID_DETECT = 0.28;  // RFID detects tag (~2.5s in, truck clearly visible)
+    var T_LED_GREEN   = 0.34;  // LED goes green, authorization confirmed
+    var T_GATE_START  = 0.34;  // gate starts opening on auth
+    var T_GATE_DONE   = 0.50;  // gate fully open (before truck arrives)
+    var T_TOAST_SHOW  = 0.48;  // notification appears as gate finishes opening
 
     // Phase 2: Drive through — truck passes through open gate smoothly
-    var T_TRUCK_THRU  = 0.52;  // truck reaches rest position past gate
+    var T_TRUCK_THRU  = 0.60;  // truck reaches rest position past gate
 
     // Phase 3: Hold & Reset
-    var T_TOAST_HIDE  = 0.78;  // hide toast before reset
-    var T_HOLD_END    = 0.82;  // start resetting
+    var T_TOAST_HIDE  = 0.80;  // hide toast before reset
+    var T_HOLD_END    = 0.84;  // start resetting
     var T_GATE_CLOSE  = 0.88;  // gate closes
     var T_RESET_DONE  = 0.95;  // everything back to initial state
 
@@ -733,7 +733,7 @@
       }
       truck.setAttribute('transform', 'translate('+truckX+',0)');
 
-      // ── LED colour: quick transition as truck enters ──
+      // ── LED colour: quick transition once truck is in frame ──
       if (f < T_RFID_DETECT) {
         setLed('rgb(204,32,32)', '0.15');
       } else if (f < T_LED_GREEN) {

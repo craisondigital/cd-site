@@ -13,12 +13,13 @@
 
 ---
 
-## FILE INVENTORY (2 files, all in root)
+## FILE INVENTORY (3 files, all in root)
 
 | File | Purpose | Size |
 |---|---|---|
 | `gate.html` | **Primary gate product page** — Smart Gate Access for Large Properties | ~73KB |
 | `fountains.html` | **Lake fountain control product page** — Smart Lake Fountain Control | ~71KB |
+| `pool.html` | **Pool automation product page** — Smart Pool Automation (Pentair/Hayward/Jandy integration) | ~66KB |
 
 > **Note:** `index.html` was removed on 2026-03-18. No homepage/landing page currently exists.
 
@@ -29,12 +30,12 @@
 - **Single-file architecture** — each page has HTML + CSS + JS all inline in one `.html` file
 - **Fonts:** Google Fonts — `Syne` (display/headings, weight 400-800) + `DM Sans` (body, weight 300-600)
 - **No external CSS or JS libraries** — everything is custom
-- **SVG illustrations** — complex inline SVGs with JavaScript animations (gate scene, fountain scene)
+- **SVG illustrations** — complex inline SVGs with JavaScript animations (gate scene, fountain scene, pool scene)
 - **No backend / no form handling** — forms use `onsubmit="return false;"` (placeholder)
 
 ---
 
-## DESIGN SYSTEM (consistent across both pages)
+## DESIGN SYSTEM (consistent across all pages)
 
 ### CSS Variables (`:root`)
 ```css
@@ -79,7 +80,7 @@
 
 ---
 
-## PAGE STRUCTURE (both pages share this pattern)
+## PAGE STRUCTURE (all pages share this pattern)
 
 1. **Nav** — fixed top, blur backdrop, logo left, links right, CTA button, mobile hamburger toggle
 2. **Hero** — layered backgrounds (gradient + grid + glow), headline ABOVE illustration, SVG animation, content overlay below with eyebrow badge + subtitle + CTA buttons
@@ -110,11 +111,18 @@
 - Key element IDs: `sprayGroup`, `waterGlowEl`, `phoneGroup`, `anemometer`, `notifToast2`, `hudStatus`, `hudWind`
 - LED lights around fountain base shimmer when running
 
+### Pool Animation (pool.html)
+- **14-second cycle** looping via `requestAnimationFrame`
+- Phone slides in → tap pump button (tap indicator pulses) → pump turns on (spinner rotates, caustics intensify, ripples animate) → tap heater button → temp rises 78°→84°F on phone + HUD → green toast "Pool Heated to 84°F" → pool lights fade on → amber toast "Switching to Off-Peak" → everything fades → reset
+- Key element IDs: `poolSVG`, `pumpSpinner`, `heaterFlame`, `poolLights`, `caustics`, `ripples`, `phoneGroup`, `phoneTemp`, `phoneTempLabel`, `hudPump`, `hudTemp`, `tapIndicator`, `notifToast`, `notifToast2`
+- Pool scene: deck with rounded corners, water with caustic light patterns + ripple lines, 3 underwater lights, equipment pad (pump/heater/chlorinator), phone mockup with control buttons
+- HUD panels: left = POOL SYSTEM (pump status + temp), right = CHEMISTRY (pH + chlorine)
+
 ---
 
 ## NOTIFICATION TOAST COMPONENT
 - Default (green) — for authorized/success events
-- Amber variant (class `.amber`) — for weather alerts
+- Amber variant (class `.amber`) — for weather alerts or automation events
 - Structure: dot + icon + body (title + sub) + badge
 - Controlled by adding/removing `.visible` class in JS animation loop
 
@@ -130,6 +138,7 @@
 ## NAMING CONVENTIONS
 - CSS classes use kebab-case: `.section-inner`, `.btn-primary`, `.exp-card`
 - Section IDs match nav anchors: `#package`, `#how`, `#pricing`, `#contact`, `#experience`, `#features`, `#beyond`
+- Pool page adds: `#compat` (compatibility section with brand logos)
 - Package grid items: `.package-item` with `.pkg-icon`, `.pkg-title`, `.pkg-desc`
 - Step items: `.step` with `.step-num`, `.step-title`, `.step-desc`
 
@@ -141,7 +150,7 @@
 3. **SVG animations are handcrafted** — they use raw `requestAnimationFrame` loops with normalized time fractions (0.0-1.0 mapped to cycle phases)
 4. **No cross-page navigation exists yet** — each page is standalone; nav links are in-page anchors only
 5. **Forms are non-functional** — `onsubmit="return false;"` means no actual form submission is wired up
-6. **Copyright year:** both pages show © 2026
+6. **Copyright year:** all pages show © 2026
 7. **Favicon:** SVG inline data URI — dark rounded rect with cyan "C"
 8. **The logo** is text-based: "Craison" in white + "Digital" in cyan (`var(--cyan)`)
 9. **No homepage currently exists** — `index.html` was removed; site only has product-specific pages

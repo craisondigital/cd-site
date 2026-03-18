@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Craison Digital – Smart Lake Fountain Control for Large Properties</title>
+  <meta name="description" content="Control your lake fountain from your phone. Integrate with any manufacturer, automate shutoffs with a local weather station, and manage everything from one app."/>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230d1320'/><text x='4' y='24' font-size='22' font-weight='bold' fill='%2300d4ff'>C</text></svg>"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #060a10; --dark: #0b1018; --card: #0f1724;
+      --card-hover: #141d2e; --border: rgba(255,255,255,0.06);
+      --blue: #2f80ed; --blue-bright: #5ba4f5;
+      --blue-glow: rgba(47,128,237,0.15); --cyan: #00d4ff;
+      --green: #4ade80; --green-glow: rgba(74,222,128,0.15);
+      --text: #e4e9f2; --muted: #6b7a8d; --white: #f4f7fb;
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--text); font-family: var(--font-body); font-weight: 300; line-height: 1.75; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+    /* Noise overlay */
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.5; }
+
+    /* ── NAVIGATION ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem 4rem; background: rgba(6,10,16,0.82); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); transition: padding 0.3s; }
+    .nav-logo { font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; letter-spacing: 0.03em; color: var(--white); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+    .nav-logo span { color: var(--cyan); }
+    .nav-links { display: flex; align-items: center; gap: 2.2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 400; letter-spacing: 0.01em; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { background: var(--blue); color: var(--white) !important; padding: 0.5rem 1.4rem; border-radius: 6px; font-weight: 500 !important; transition: background 0.2s, transform 0.15s; }
+    .nav-cta:hover { background: var(--blue-bright) !important; transform: translateY(-1px); }
+
+    /* Mobile hamburger */
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--text); margin: 5px 0; transition: all 0.3s; border-radius: 2px; }
+
+    /* ── HERO ── */
+    .hero { position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; overflow: hidden; padding-top: 80px; }
+    .hero-bg { position: absolute; inset: 0; background: linear-gradient(180deg, #040710 0%, #081525 40%, #0a1a30 100%); }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(47,128,237,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(47,128,237,0.04) 1px, transparent 1px); background-size: 56px 56px; mask-image: radial-gradient(ellipse 85% 75% at 50% 55%, black 15%, transparent 100%); -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 55%, black 15%, transparent 100%); }
+    .hero-glow { position: absolute; top: 5%; left: 50%; transform: translateX(-50%); width: 700px; height: 400px; background: radial-gradient(ellipse, rgba(47,128,237,0.08) 0%, transparent 70%); pointer-events: none; }
+
+    .fountain-illustration { position: relative; z-index: 2; width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
+
+    /* Notification toast */
+    .notif-wrap { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; z-index: 10; pointer-events: none; }
+    .notif-toast { background: rgba(8,18,32,0.96); border: 1px solid rgba(74,222,128,0.35); border-radius: 14px; padding: 1rem 1.4rem; display: flex; align-items: center; gap: 0.9rem; box-shadow: 0 0 40px rgba(74,222,128,0.15), 0 8px 40px rgba(0,0,0,0.5); opacity: 0; transform: translateY(14px) scale(0.97); transition: opacity 0.5s ease, transform 0.5s ease; max-width: 360px; width: 90%; }
+    .notif-toast.visible { opacity: 1; transform: translateY(0) scale(1); }
+    .notif-icon { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg,#1a4a2a,#0d2a1a); border: 1.5px solid rgba(74,222,128,0.35); display: flex; align-items: center; justify-content: center; font-size: 1.15rem; flex-shrink: 0; }
+    .notif-body { flex: 1; }
+    .notif-title { font-family: var(--font-display); font-size: 0.88rem; font-weight: 700; color: var(--text); margin-bottom: 0.1rem; }
+    .notif-sub { font-size: 0.72rem; color: var(--muted); }
+    .notif-badge { background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.25); color: var(--green); font-size: 0.65rem; font-weight: 600; padding: 0.2rem 0.55rem; border-radius: 100px; white-space: nowrap; }
+    .notif-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); flex-shrink: 0; animation: blink 1s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    /* Amber toast variant */
+    .notif-toast.amber { border-color: rgba(251,191,36,0.35); box-shadow: 0 0 40px rgba(251,191,36,0.12), 0 8px 40px rgba(0,0,0,0.5); }
+    .notif-toast.amber .notif-icon { background: linear-gradient(135deg,#4a3a1a,#2a2010); border-color: rgba(251,191,36,0.35); }
+    .notif-toast.amber .notif-badge { background: rgba(251,191,36,0.1); border-color: rgba(251,191,36,0.25); color: #fbbf24; }
+    .notif-toast.amber .notif-dot { background: #fbbf24; box-shadow: 0 0 8px #fbbf24; }
+
+    /* Hero content overlay */
+    .hero-header { position: relative; z-index: 3; text-align: center; padding: 0 2rem 1rem; max-width: 1000px; margin: 0 auto; }
+    .hero-content { position: relative; z-index: 3; width: 100%; text-align: center; padding: 1.5rem 2rem 4rem; background: linear-gradient(0deg, var(--black) 28%, transparent 100%); }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(47,128,237,0.08); border: 1px solid rgba(47,128,237,0.2); color: var(--blue-bright); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 0.9rem; border-radius: 100px; margin-bottom: 1.5rem; animation: fadeUp 0.6s ease both; }
+    .hero-eyebrow::before { content: ''; width: 5px; height: 5px; background: var(--cyan); border-radius: 50%; box-shadow: 0 0 8px var(--cyan); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .hero-header h1 { font-family: var(--font-display); font-size: clamp(2.2rem,5.2vw,4.2rem); font-weight: 800; line-height: 1.06; letter-spacing: -0.025em; margin-bottom: 0; animation: fadeUp 0.6s 0.1s ease both; color: var(--white); }
+    .hero-header h1 em { font-style: normal; background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-content .hero-sub { font-size: 1.08rem; color: var(--muted); max-width: 760px; margin: 0 auto 2.2rem; animation: fadeUp 0.6s 0.2s ease both; line-height: 1.7; }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+    /* Buttons */
+    .btn-primary { background: var(--blue); color: var(--white); padding: 0.8rem 2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 500; text-decoration: none; border: none; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 20px rgba(47,128,237,0.25); display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-primary:hover { background: var(--blue-bright); transform: translateY(-1px); box-shadow: 0 0 32px rgba(47,128,237,0.4); }
+    .btn-secondary { background: transparent; color: var(--text); padding: 0.8rem 2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 400; text-decoration: none; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.15); color: var(--white); }
+
+    /* ── STATS BAR ── */
+    .stats-bar { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--dark); display: flex; justify-content: center; position: relative; z-index: 1; }
+    .stat { flex: 1; max-width: 280px; padding: 2rem 2.5rem; text-align: center; border-right: 1px solid var(--border); }
+    .stat:last-child { border-right: none; }
+    .stat-number { font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: var(--blue-bright); line-height: 1; margin-bottom: 0.3rem; }
+    .stat-label { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ── SECTIONS ── */
+    section { position: relative; z-index: 1; }
+    .section-inner { max-width: 1100px; margin: 0 auto; padding: 6rem 4rem; }
+    .section-tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue-bright); margin-bottom: 0.7rem; }
+    .section-title { font-family: var(--font-display); font-size: clamp(1.7rem,3.2vw,2.6rem); font-weight: 800; line-height: 1.12; letter-spacing: -0.02em; margin-bottom: 1rem; color: var(--white); }
+    .section-sub { color: var(--muted); font-size: 1rem; max-width: 520px; margin-bottom: 3rem; line-height: 1.7; }
+
+    /* ── PROBLEM / SOLUTION ── */
+    #problem { background: var(--dark); }
+    .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .problem-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; }
+    .problem-card h3 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; margin-bottom: 1.2rem; color: var(--white); display: flex; align-items: center; gap: 0.7rem; }
+    .problem-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+    .problem-card li { font-size: 0.9rem; color: var(--muted); display: flex; align-items: flex-start; gap: 0.7rem; line-height: 1.6; }
+    .problem-card li::before { content: '—'; color: rgba(255,255,255,0.15); flex-shrink: 0; margin-top: 1px; }
+    .solution-card li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+    .solution-card { border-color: rgba(47,128,237,0.15); background: linear-gradient(135deg, var(--card) 0%, rgba(47,128,237,0.04) 100%); }
+
+    /* ── EXPERIENCE SECTION ── */
+    .experience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .exp-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; transition: all 0.3s; position: relative; overflow: hidden; }
+    .exp-card:hover { background: var(--card-hover); border-color: rgba(47,128,237,0.15); transform: translateY(-2px); }
+    .exp-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--blue), transparent); opacity: 0; transition: opacity 0.3s; }
+    .exp-card:hover::before { opacity: 1; }
+    .exp-icon { width: 48px; height: 48px; background: var(--blue-glow); border: 1px solid rgba(47,128,237,0.18); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; font-size: 1.3rem; }
+    .exp-card h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--white); }
+    .exp-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+    .exp-card .exp-tag { display: inline-block; margin-top: 0.8rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cyan); opacity: 0.7; }
+
+    /* ── PACKAGE SECTION ── */
+    #package { background: var(--dark); }
+    .package-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .package-item { background: var(--card); padding: 2rem; transition: background 0.2s; }
+    .package-item:hover { background: var(--card-hover); }
+    .pkg-icon { width: 42px; height: 42px; background: var(--blue-glow); border: 1px solid rgba(47,128,237,0.18); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-size: 1.2rem; }
+    .pkg-title { font-family: var(--font-display); font-size: 0.98rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--white); }
+    .pkg-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+    .pkg-optional { display: inline-block; background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2); color: var(--cyan); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.15rem 0.5rem; border-radius: 4px; margin-bottom: 0.6rem; }
+
+    /* ── HOW IT WORKS ── */
+    .steps { display: flex; flex-direction: column; position: relative; }
+    .steps::before { content: ''; position: absolute; left: 22px; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--blue), transparent); }
+    .step { display: grid; grid-template-columns: 48px 1fr; gap: 1.6rem; padding: 1.8rem 0; border-bottom: 1px solid var(--border); }
+    .step:last-child { border-bottom: none; }
+    .step-num { width: 44px; height: 44px; border-radius: 50%; background: var(--blue-glow); border: 1px solid var(--blue); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 0.82rem; font-weight: 700; color: var(--blue-bright); flex-shrink: 0; position: relative; z-index: 1; }
+    .step-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem; color: var(--white); }
+    .step-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── FEATURES / DASHBOARD ── */
+    #features { background: var(--dark); }
+    .features-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .feature-list { display: flex; flex-direction: column; gap: 1.4rem; }
+    .feature-item { display: flex; gap: 0.9rem; align-items: flex-start; }
+    .feature-check { width: 20px; height: 20px; border-radius: 50%; background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.25); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 3px; font-size: 0.6rem; color: var(--cyan); }
+    .feature-text strong { display: block; font-weight: 500; font-size: 0.92rem; margin-bottom: 0.15rem; color: var(--white); }
+    .feature-text span { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
+
+    /* Dashboard mockup */
+    .dashboard-mockup { background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: 0 20px 70px rgba(0,0,0,0.5), 0 0 0 1px rgba(47,128,237,0.08); }
+    .mockup-bar { background: #0a0f18; border-bottom: 1px solid var(--border); padding: 0.7rem 1rem; display: flex; align-items: center; gap: 0.45rem; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; }
+    .dot-r{background:#ff5f57} .dot-y{background:#febc2e} .dot-g{background:#28c840}
+    .mockup-title { margin-left: auto; margin-right: auto; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.03em; }
+    .mockup-body { padding: 1.2rem; }
+    .mockup-row { display: flex; justify-content: space-between; align-items: center; padding: 0.65rem 0.9rem; background: rgba(255,255,255,0.02); border-radius: 8px; margin-bottom: 0.5rem; font-size: 0.78rem; }
+    .mockup-row:last-child { margin-bottom: 0; }
+    .tag-name { font-weight: 500; color: var(--text); font-size: 0.8rem; }
+    .tag-time { color: var(--muted); font-size: 0.68rem; }
+    .tag-status { font-size: 0.68rem; padding: 0.15rem 0.6rem; border-radius: 100px; font-weight: 500; }
+    .status-on{background:rgba(40,200,100,0.1);color:#4ade80;border:1px solid rgba(40,200,100,0.18)}
+    .status-off{background:rgba(251,113,133,0.08);color:#f87171;border:1px solid rgba(251,113,133,0.18)}
+    .status-auto{background:rgba(47,128,237,0.08);color:#5ba4f5;border:1px solid rgba(47,128,237,0.18)}
+    .mockup-notif { margin-top: 0.8rem; background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.15); border-radius: 8px; padding: 0.65rem 0.9rem; font-size: 0.72rem; color: #fbbf24; display: flex; gap: 0.5rem; align-items: center; }
+
+    /* ── COMPATIBILITY ── */
+    .compat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .compat-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.8rem 1.2rem; text-align: center; transition: all 0.3s; }
+    .compat-card:hover { border-color: rgba(47,128,237,0.15); background: var(--card-hover); }
+    .compat-name { font-family: var(--font-display); font-size: 0.92rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
+    .compat-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── BEYOND THE FOUNTAIN ── */
+    .beyond-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .beyond-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.6rem; text-align: center; transition: all 0.3s; }
+    .beyond-card:hover { border-color: rgba(47,128,237,0.15); background: var(--card-hover); }
+    .beyond-icon { font-size: 1.8rem; margin-bottom: 0.8rem; display: block; }
+    .beyond-card h4 { font-family: var(--font-display); font-size: 0.88rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
+    .beyond-card p { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── PRICING ── */
+    #pricing { background: var(--dark); }
+    .pricing-card { max-width: 520px; margin: 0 auto; background: var(--card); border: 1px solid rgba(47,128,237,0.2); border-radius: 18px; padding: 2.8rem; position: relative; box-shadow: 0 0 50px rgba(47,128,237,0.06); text-align: center; }
+    .pricing-card::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 50%; height: 1px; background: linear-gradient(90deg, transparent, var(--blue), transparent); }
+    .price-label { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+    .price-amount { font-family: var(--font-display); font-size: 2.6rem; font-weight: 800; color: var(--white); line-height: 1; margin-bottom: 0.3rem; }
+    .price-note { font-size: 0.8rem; color: var(--muted); margin-bottom: 2rem; }
+    .price-includes { text-align: left; border-top: 1px solid var(--border); padding-top: 1.8rem; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.8rem; }
+    .price-line { display: flex; align-items: center; gap: 0.7rem; font-size: 0.88rem; color: var(--text); }
+    .price-line::before { content: '✓'; color: var(--cyan); font-weight: 700; flex-shrink: 0; }
+
+    /* ── CONTACT ── */
+    #contact { text-align: center; }
+    .cta-box { max-width: 600px; margin: 0 auto; }
+    .contact-form { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 2rem; text-align: left; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+    label { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.04em; font-weight: 400; }
+    input, textarea, select { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 0.7rem 0.9rem; color: var(--text); font-family: var(--font-body); font-size: 0.88rem; outline: none; transition: border-color 0.2s; width: 100%; }
+    input:focus, textarea:focus, select:focus { border-color: rgba(47,128,237,0.4); }
+    textarea { resize: vertical; min-height: 100px; }
+    select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7a8d' fill='none' stroke-width='1.5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.9rem center; padding-right: 2.2rem; }
+    select option { background: var(--card); color: var(--text); }
+    .form-submit-row { display: flex; align-items: center; gap: 1rem; margin-top: 0.5rem; }
+    .form-submit-row .btn-primary { flex-shrink: 0; }
+    .form-note { font-size: 0.72rem; color: var(--muted); }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); background: var(--black); padding: 2.5rem 4rem; display: flex; align-items: center; justify-content: space-between; font-size: 0.78rem; color: var(--muted); }
+    .footer-logo { font-family: var(--font-display); font-weight: 800; font-size: 0.95rem; color: var(--white); }
+    .footer-logo span { color: var(--cyan); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .experience-grid { grid-template-columns: 1fr 1fr; }
+      .beyond-grid { grid-template-columns: 1fr 1fr; }
+      .compat-grid { grid-template-columns: 1fr 1fr; }
+      .features-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .problem-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0.9rem 1.5rem; }
+      .nav-links { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(6,10,16,0.97); backdrop-filter: blur(20px); flex-direction: column; justify-content: center; align-items: center; gap: 2rem; z-index: 200; }
+      .nav-links.open { display: flex; }
+      .nav-links.open a { font-size: 1.1rem; color: var(--text); }
+      .nav-toggle { display: block; z-index: 300; }
+      .section-inner { padding: 4rem 1.5rem; }
+      .experience-grid { grid-template-columns: 1fr; }
+      .beyond-grid { grid-template-columns: 1fr 1fr; }
+      .compat-grid { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .stats-bar { flex-wrap: wrap; }
+      .stat { min-width: 50%; border-right: none; border-bottom: 1px solid var(--border); }
+      footer { flex-direction: column; gap: 0.8rem; text-align: center; padding: 2rem 1.5rem; }
+      .notif-toast { padding: 0.6rem 0.7rem; gap: 0.4rem; max-width: 270px; border-radius: 10px; }
+      .notif-icon { width: 28px; height: 28px; font-size: 0.85rem; }
+      .notif-title { font-size: 0.72rem; }
+      .notif-sub { font-size: 0.6rem; }
+      .notif-badge { font-size: 0.52rem; padding: 0.12rem 0.4rem; }
+      .notif-dot { width: 5px; height: 5px; }
+      .form-submit-row { flex-direction: column; align-items: stretch; }
+    }
+    @media (max-width: 480px) {
+      .beyond-grid { grid-template-columns: 1fr; }
+      .compat-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════ NAVIGATION ═══════════════ -->
+  <nav>
+    <a href="#" class="nav-logo">Craison<span>Digital</span></a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#experience">The Experience</a></li>
+      <li><a href="#package">What's Included</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══════════════ HERO ═══════════════ -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+
+    <div class="hero-header">
+      <div class="hero-eyebrow">Smart Property Consulting</div>
+      <h1>Control your fountain<br/>from <em>anywhere.</em></h1>
+    </div>
+
+    <div class="fountain-illustration" style="position:relative;max-width:1000px;">
+      <!-- Wind shutoff notification toast -->
+      <div class="notif-wrap">
+        <div class="notif-toast amber" id="notifToast2">
+          <div class="notif-dot"></div>
+          <div class="notif-icon">🌬️</div>
+          <div class="notif-body">
+            <div class="notif-title">Wind Alert — Auto Shutoff</div>
+            <div class="notif-sub">Weather Station · Wind 28 mph (threshold: 25 mph) · 2:14 PM</div>
+          </div>
+          <div class="notif-badge">⚡ Protected</div>
+        </div>
+      </div>
+
+      <svg id="fountainSVG" viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+        <defs>
+          <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#05080f"/><stop offset="100%" stop-color="#0b1628"/>
+          </linearGradient>
+          <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#0a1e3a"/><stop offset="50%" stop-color="#071830"/><stop offset="100%" stop-color="#050e1e"/>
+          </linearGradient>
+          <linearGradient id="sprayGrad" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0%" stop-color="#5ba4f5" stop-opacity="0.7"/><stop offset="40%" stop-color="#00d4ff" stop-opacity="0.45"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="sprayGradSide" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0%" stop-color="#2f80ed" stop-opacity="0.5"/><stop offset="60%" stop-color="#00d4ff" stop-opacity="0.25"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+          </linearGradient>
+          <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="waterGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <clipPath id="sceneClip"><rect width="900" height="380"/></clipPath>
+        </defs>
+        <g clip-path="url(#sceneClip)">
+          <!-- Sky -->
+          <rect width="900" height="380" fill="url(#skyGrad)"/>
+
+          <!-- Stars -->
+          <circle cx="55" cy="18" r="0.8" fill="white" opacity="0.5"/><circle cx="160" cy="10" r="1" fill="white" opacity="0.55"/><circle cx="310" cy="24" r="0.7" fill="white" opacity="0.6"/><circle cx="470" cy="6" r="1" fill="white" opacity="0.5"/><circle cx="620" cy="20" r="0.8" fill="white" opacity="0.55"/><circle cx="750" cy="8" r="1" fill="white" opacity="0.45"/><circle cx="850" cy="22" r="0.7" fill="white" opacity="0.6"/>
+
+          <!-- Treeline silhouette -->
+          <path d="M0,185 Q55,165 110,180 Q165,155 220,175 Q275,148 330,170 Q385,140 440,165 Q495,135 550,160 Q605,140 660,168 Q715,150 770,172 Q825,158 900,180 L900,215 L0,215 Z" fill="#060e1c" opacity="0.9"/>
+
+          <!-- Shoreline -->
+          <path d="M0,212 Q130,203 280,210 Q440,216 560,206 Q680,198 820,208 L900,206 L900,228 L0,228 Z" fill="#0d1a2c"/>
+
+          <!-- Lake water body -->
+          <ellipse cx="450" cy="310" rx="480" ry="100" fill="url(#waterGrad)"/>
+          <ellipse cx="450" cy="310" rx="480" ry="100" fill="none" stroke="#1a2e48" stroke-width="0.6" opacity="0.5"/>
+
+          <!-- Water shimmer -->
+          <line x1="110" y1="290" x2="180" y2="290" stroke="#1e3a5a" stroke-width="0.6" opacity="0.35"/><line x1="620" y1="300" x2="700" y2="300" stroke="#1e3a5a" stroke-width="0.5" opacity="0.3"/><line x1="280" y1="320" x2="340" y2="320" stroke="#1e3a5a" stroke-width="0.5" opacity="0.25"/><line x1="720" y1="320" x2="770" y2="320" stroke="#1e3a5a" stroke-width="0.4" opacity="0.2"/>
+
+          <!-- Fountain glow on water -->
+          <ellipse id="waterGlowEl" cx="450" cy="268" rx="110" ry="26" fill="#2f80ed" opacity="0.07" filter="url(#waterGlow)"/>
+
+          <!-- Fountain float/base -->
+          <ellipse cx="450" cy="260" rx="30" ry="8" fill="#1a2e48" stroke="#2f80ed" stroke-width="1" opacity="0.7"/>
+          <rect x="436" y="252" width="28" height="10" rx="3" fill="#121e30" stroke="#2f80ed" stroke-width="0.7" opacity="0.5"/>
+
+          <!-- LED lights around fountain base -->
+          <g id="ledGroup" opacity="0">
+            <!-- Uplight glow cones illuminating the spray -->
+            <ellipse cx="450" cy="248" rx="22" ry="6" fill="#2f80ed" opacity="0.15" filter="url(#waterGlow)"/>
+            <path d="M440,254 L432,140 L450,100 L468,140 L460,254 Z" fill="url(#sprayGrad)" opacity="0.06"/>
+            <!-- Individual LED points around the base ring -->
+            <circle cx="422" cy="258" r="2.5" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/>
+            <circle cx="432" cy="254" r="2.5" fill="#2f80ed" opacity="0.85" filter="url(#glow)"/>
+            <circle cx="443" cy="252" r="2.5" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/>
+            <circle cx="457" cy="252" r="2.5" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/>
+            <circle cx="468" cy="254" r="2.5" fill="#2f80ed" opacity="0.85" filter="url(#glow)"/>
+            <circle cx="478" cy="258" r="2.5" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/>
+            <!-- Color wash on water surface from LEDs -->
+            <ellipse cx="450" cy="266" rx="50" ry="12" fill="#2f80ed" opacity="0.1" filter="url(#waterGlow)"/>
+            <ellipse cx="435" cy="264" rx="18" ry="5" fill="#00d4ff" opacity="0.07"/>
+            <ellipse cx="465" cy="264" rx="18" ry="5" fill="#00d4ff" opacity="0.07"/>
+          </g>
+
+          <!-- FOUNTAIN SPRAY GROUP (animated) -->
+          <g id="sprayGroup">
+            <!-- Center jet — tall and prominent -->
+            <line id="centerJet" x1="450" y1="255" x2="450" y2="55" stroke="url(#sprayGrad)" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+            <line x1="450" y1="255" x2="450" y2="75" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.2"/>
+            <!-- Center splash -->
+            <g id="splashCenter" opacity="0.6">
+              <circle cx="444" cy="60" r="2" fill="#00d4ff" opacity="0.6"/><circle cx="456" cy="65" r="1.5" fill="#5ba4f5" opacity="0.5"/><circle cx="440" cy="72" r="1.2" fill="#00d4ff" opacity="0.4"/><circle cx="460" cy="68" r="1.6" fill="#5ba4f5" opacity="0.45"/><circle cx="447" cy="52" r="1.2" fill="white" opacity="0.3"/><circle cx="453" cy="48" r="1" fill="white" opacity="0.2"/>
+            </g>
+
+            <!-- Left fan spray — wider arc -->
+            <path d="M450,255 Q410,180 355,220" stroke="url(#sprayGradSide)" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.55"/>
+            <path d="M450,255 Q400,165 330,210" stroke="url(#sprayGradSide)" stroke-width="2.8" fill="none" stroke-linecap="round" opacity="0.4"/>
+            <path d="M450,255 Q388,150 300,200" stroke="url(#sprayGradSide)" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.28"/>
+
+            <!-- Right fan spray — wider arc -->
+            <path d="M450,255 Q490,180 545,220" stroke="url(#sprayGradSide)" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.55"/>
+            <path d="M450,255 Q500,165 570,210" stroke="url(#sprayGradSide)" stroke-width="2.8" fill="none" stroke-linecap="round" opacity="0.4"/>
+            <path d="M450,255 Q512,150 600,200" stroke="url(#sprayGradSide)" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.28"/>
+
+            <!-- Droplets -->
+            <g id="droplets">
+              <circle cx="360" cy="224" r="1.5" fill="#00d4ff" opacity="0.4"/><circle cx="540" cy="224" r="1.5" fill="#00d4ff" opacity="0.4"/><circle cx="335" cy="215" r="1" fill="#2f80ed" opacity="0.3"/><circle cx="565" cy="215" r="1" fill="#2f80ed" opacity="0.3"/><circle cx="308" cy="206" r="0.8" fill="#2f80ed" opacity="0.2"/><circle cx="592" cy="206" r="0.8" fill="#2f80ed" opacity="0.2"/>
+            </g>
+
+            <!-- Ripple rings -->
+            <ellipse id="ripple1" cx="450" cy="264" rx="35" ry="8" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.3"/>
+            <ellipse id="ripple2" cx="450" cy="267" rx="58" ry="13" fill="none" stroke="#2f80ed" stroke-width="0.6" opacity="0.2"/>
+            <ellipse id="ripple3" cx="450" cy="270" rx="85" ry="18" fill="none" stroke="#1a4a7a" stroke-width="0.5" opacity="0.12"/>
+          </g>
+
+          <!-- Weather station at front of lake -->
+          <g transform="translate(145,228)">
+            <rect x="0" y="0" width="3.5" height="58" rx="1.5" fill="#1e3050"/><rect x="0" y="0" width="3.5" height="58" rx="1.5" fill="none" stroke="#2f80ed" stroke-width="0.6" opacity="0.35"/>
+            <g id="anemometer" transform-origin="1.75 0">
+              <line x1="1.75" y1="0" x2="16" y2="-6" stroke="#2a4060" stroke-width="1.5"/><line x1="1.75" y1="0" x2="-12" y2="-6" stroke="#2a4060" stroke-width="1.5"/><line x1="1.75" y1="0" x2="1.75" y2="13" stroke="#2a4060" stroke-width="1.5"/>
+              <circle cx="16" cy="-6" r="4" fill="#1a2e48" stroke="#2f80ed" stroke-width="0.8" opacity="0.65"/><circle cx="-12" cy="-6" r="4" fill="#1a2e48" stroke="#2f80ed" stroke-width="0.8" opacity="0.65"/><circle cx="1.75" cy="13" r="4" fill="#1a2e48" stroke="#2f80ed" stroke-width="0.8" opacity="0.65"/>
+            </g>
+            <circle cx="1.75" cy="0" r="2.2" fill="#2f80ed" opacity="0.55"/>
+            <line x1="1.75" y1="18" x2="20" y2="14" stroke="#2a4060" stroke-width="1.2"/><polygon points="20,11 20,17 26,14" fill="#2f80ed" opacity="0.45"/>
+            <rect x="-8" y="32" width="20" height="14" rx="3" fill="#0d1e35" stroke="#2f80ed" stroke-width="0.8" opacity="0.55"/><rect x="-5" y="35" width="14" height="3.5" rx="1" fill="#060e18"/>
+            <circle id="wxLed" cx="1.75" cy="42" r="2.2" fill="#4ade80" filter="url(#glow)" opacity="0.85"/>
+          </g>
+
+          <!-- HUD panels -->
+          <g opacity="0.85">
+            <rect x="20" y="18" width="145" height="62" rx="5" fill="#060e1c" opacity="0.92"/><rect x="20" y="18" width="145" height="62" rx="5" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.3"/>
+            <text x="31" y="37" font-size="7.5" fill="#5ba4f5" font-family="monospace" font-weight="bold" letter-spacing="0.8">FOUNTAIN CTL</text>
+            <rect x="31" y="42" width="55" height="1" fill="#2f80ed" opacity="0.3"/>
+            <text x="31" y="55" font-size="6.5" fill="#7a8599" font-family="monospace">STATUS</text><text id="hudStatus" x="78" y="55" font-size="6.5" fill="#4ade80" font-family="monospace">RUNNING</text>
+            <text x="31" y="68" font-size="6.5" fill="#7a8599" font-family="monospace">MODE</text><text id="hudMode" x="78" y="68" font-size="6.5" fill="#00d4ff" font-family="monospace">SCHEDULED</text>
+          </g>
+          <g opacity="0.85">
+            <rect x="735" y="18" width="145" height="62" rx="5" fill="#060e1c" opacity="0.92"/><rect x="735" y="18" width="145" height="62" rx="5" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.3"/>
+            <text x="746" y="37" font-size="7.5" fill="#5ba4f5" font-family="monospace" font-weight="bold" letter-spacing="0.8">WEATHER STA</text>
+            <rect x="746" y="42" width="55" height="1" fill="#2f80ed" opacity="0.3"/>
+            <text x="746" y="55" font-size="6.5" fill="#7a8599" font-family="monospace">WIND</text><text id="hudWind" x="782" y="55" font-size="6.5" fill="#4ade80" font-family="monospace">12 MPH NW</text>
+            <text x="746" y="68" font-size="6.5" fill="#7a8599" font-family="monospace">TEMP</text><text id="hudTemp" x="782" y="68" font-size="6.5" fill="#00d4ff" font-family="monospace">78°F</text>
+          </g>
+
+          <!-- Phone mockup bottom-right -->
+          <g id="phoneGroup" opacity="0">
+            <g transform="translate(720,220)">
+              <!-- Phone body -->
+              <rect x="0" y="0" width="62" height="110" rx="8" fill="#0a1220" stroke="#2a3e58" stroke-width="1.5"/>
+              <rect x="0" y="0" width="62" height="110" rx="8" fill="none" stroke="#2f80ed" stroke-width="0.6" opacity="0.3"/>
+              <!-- Screen -->
+              <rect x="4" y="12" width="54" height="84" rx="3" fill="#060e1c"/>
+              <!-- Notch -->
+              <rect x="20" y="2" width="22" height="4" rx="2" fill="#141e2c"/>
+              <!-- Screen content: fountain label -->
+              <text x="10" y="28" font-size="5.5" fill="#5ba4f5" font-family="monospace" font-weight="bold" letter-spacing="0.5">LAKE FOUNTAIN</text>
+              <rect x="10" y="32" width="36" height="0.8" fill="#2f80ed" opacity="0.25"/>
+              <!-- Status text -->
+              <text id="phoneStatus" x="10" y="44" font-size="5" fill="#f87171" font-family="monospace">● OFF</text>
+              <!-- Power button -->
+              <circle id="phoneBtnBg" cx="31" cy="66" r="16" fill="#0d1a2c" stroke="#2f80ed" stroke-width="1" opacity="0.6"/>
+              <g id="phonePowerIcon" transform="translate(31,66)">
+                <path d="M0,-8 L0,-4" stroke="#5ba4f5" stroke-width="2" stroke-linecap="round"/>
+                <path d="M-5.5,-5.5 A7.5,7.5 0 1,0 5.5,-5.5" stroke="#5ba4f5" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              </g>
+              <!-- Tap ring (pulse animation) -->
+              <circle id="tapRing1" cx="31" cy="66" r="16" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0"/>
+              <circle id="tapRing2" cx="31" cy="66" r="16" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0"/>
+              <!-- Finger tap indicator -->
+              <circle id="fingerDot" cx="31" cy="66" r="5" fill="#5ba4f5" opacity="0"/>
+              <!-- Home bar -->
+              <rect x="20" y="100" width="22" height="3" rx="1.5" fill="#1a2838"/>
+            </g>
+          </g>
+
+          <!-- Corner markers -->
+          <path d="M0,0 L0,18 M0,0 L18,0" stroke="#2f80ed" stroke-width="1.5" opacity="0.22" fill="none"/><path d="M900,0 L900,18 M900,0 L882,0" stroke="#2f80ed" stroke-width="1.5" opacity="0.22" fill="none"/><path d="M0,380 L0,362 M0,380 L18,380" stroke="#2f80ed" stroke-width="1.5" opacity="0.22" fill="none"/><path d="M900,380 L900,362 M900,380 L882,380" stroke="#2f80ed" stroke-width="1.5" opacity="0.22" fill="none"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="hero-content">
+      <p class="hero-sub">No more walking to the control box. No more running the fountain in a storm. We integrate with your existing lake fountain — any brand — and give you remote control, scheduling, and automatic weather-based shutoffs from one app.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Request a Quote →</a>
+        <a href="#experience" class="btn-secondary">See How It Works</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ STATS ═══════════════ -->
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-number">ANY</div><div class="stat-label">Works with all major brands</div></div>
+    <div class="stat"><div class="stat-number">AUTO</div><div class="stat-label">Weather-based shutoff</div></div>
+    <div class="stat"><div class="stat-number">24/7</div><div class="stat-label">Scheduling &amp; logging</div></div>
+    <div class="stat"><div class="stat-number">MOBILE</div><div class="stat-label">Control from anywhere</div></div>
+  </div>
+
+  <!-- ═══════════════ PROBLEM / SOLUTION ═══════════════ -->
+  <section id="problem"><div class="section-inner">
+    <div class="section-tag">Why Upgrade</div>
+    <h2 class="section-title">You already have a fountain. We make it smart.</h2>
+    <p class="section-sub">Your lake fountain runs fine — but it could be a lot easier to live with.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <h3>😤 The way it is now</h3>
+        <ul>
+          <li>Walking out to the control box every time you want to turn it on or off</li>
+          <li>Forgetting to shut it off before a storm — risking damage from wind and debris</li>
+          <li>No way to schedule it without a basic timer that barely works</li>
+          <li>Running it when nobody's around — wasting energy all night</li>
+          <li>No idea if the fountain is actually running or if something failed</li>
+        </ul>
+      </div>
+      <div class="problem-card solution-card">
+        <h3>✨ The way it should be</h3>
+        <ul>
+          <li>Turn the fountain on and off from your phone — anywhere in the world</li>
+          <li>Automatic shutoff when wind speed exceeds your preset threshold</li>
+          <li>Set schedules that work — sunrise to sunset, weekdays only, or custom</li>
+          <li>Get notified when the fountain starts, stops, or triggers a weather shutoff</li>
+          <li>See real-time status, run history, and weather data in one dashboard</li>
+        </ul>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- ═══════════════ THE EXPERIENCE ═══════════════ -->
+  <section id="experience"><div class="section-inner">
+    <div class="section-tag">The Experience</div>
+    <h2 class="section-title">Smart control. Weather protection. Total visibility.</h2>
+    <p class="section-sub">Your fountain works harder and smarter — without you having to think about it.</p>
+    <div class="experience-grid">
+      <div class="exp-card">
+        <div class="exp-icon">📱</div>
+        <h3>Remote On/Off Control</h3>
+        <p>Turn your lake fountain on or off from your phone — whether you're on the porch or across the country. No more walking to the control panel. One tap is all it takes.</p>
+        <div class="exp-tag">Core Feature</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-icon">🌬️</div>
+        <h3>Weather-Based Auto Shutoff</h3>
+        <p>A local weather station monitors real-time wind speed, gusts, and conditions. When wind exceeds your preset threshold, the fountain shuts off automatically — and restarts when conditions are safe.</p>
+        <div class="exp-tag">Core Feature</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-icon">🕐</div>
+        <h3>Smart Scheduling</h3>
+        <p>Set daily, weekly, or seasonal schedules that actually work. Run the fountain sunrise to sunset, only on weekdays, or on a completely custom schedule. Adjust anytime from your phone.</p>
+        <div class="exp-tag">Core Feature</div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- ═══════════════ COMPATIBILITY ═══════════════ -->
+  <section id="compat" style="background:var(--dark);"><div class="section-inner" style="text-align:center;">
+    <div class="section-tag">Compatibility</div>
+    <h2 class="section-title">Works with your existing fountain.</h2>
+    <p class="section-sub" style="margin:0 auto 3rem;">We integrate with all major lake fountain manufacturers. No need to replace your fountain — we work with what you already have.</p>
+    <div class="compat-grid">
+      <div class="compat-card">
+        <div class="compat-name">Kasco Marine</div>
+        <div class="compat-desc">J Series, VFX, and all aerating fountains</div>
+      </div>
+      <div class="compat-card">
+        <div class="compat-name">Otterbine</div>
+        <div class="compat-desc">Aerating fountains, Fractional Series, and display models</div>
+      </div>
+      <div class="compat-card">
+        <div class="compat-name">AquaMaster</div>
+        <div class="compat-desc">Masters, Celestial, and all decorative series</div>
+      </div>
+      <div class="compat-card">
+        <div class="compat-name">Scott Aerator</div>
+        <div class="compat-desc">Display, North Star, and all residential models</div>
+      </div>
+    </div>
+    <p style="color:var(--muted);font-size:0.85rem;margin-top:1.8rem;">Plus AirMax, AquaControl, PentAir, and more. If it has a control panel, we can integrate it.</p>
+  </div></section>
+
+  <!-- ═══════════════ WHAT'S INCLUDED ═══════════════ -->
+  <section id="package"><div class="section-inner">
+    <div class="section-tag">What's Included</div>
+    <h2 class="section-title">Everything in one package.</h2>
+    <p class="section-sub">Hardware, professional installation, and full system configuration — done for you.</p>
+    <div class="package-grid">
+      <div class="package-item">
+        <div class="pkg-icon">📱</div>
+        <div class="pkg-title">Remote Phone Control</div>
+        <div class="pkg-desc">Turn your fountain on and off from anywhere using your phone. Works from any smartphone — no special app to download.</div>
+      </div>
+      <div class="package-item">
+        <div class="pkg-icon">🌬️</div>
+        <div class="pkg-title">Local Weather Station</div>
+        <div class="pkg-desc">Professional-grade weather station installed on your property. Monitors wind speed, gusts, temperature, humidity, and rainfall in real time.</div>
+      </div>
+      <div class="package-item">
+        <div class="pkg-icon">⚡</div>
+        <div class="pkg-title">Automatic Weather Shutoff</div>
+        <div class="pkg-desc">Set your wind speed threshold. The fountain shuts off automatically when conditions exceed it — and restarts when it's safe. Protects your equipment 24/7.</div>
+      </div>
+      <div class="package-item">
+        <div class="pkg-icon">📅</div>
+        <div class="pkg-title">Smart Scheduling</div>
+        <div class="pkg-desc">Set flexible schedules — sunrise to sunset, specific days, seasonal adjustments. The system follows your schedule and overrides only for weather protection.</div>
+      </div>
+      <div class="package-item">
+        <div class="pkg-icon">🔔</div>
+        <div class="pkg-title">Real-Time Notifications</div>
+        <div class="pkg-desc">Get instant alerts when the fountain starts, stops, or triggers a weather-based shutoff. Know what's happening without checking.</div>
+      </div>
+      <div class="package-item">
+        <div class="pkg-icon">🏠</div>
+        <div class="pkg-title">Home Assistant Dashboard</div>
+        <div class="pkg-desc">A clean dashboard to view fountain status, weather data, run history, and scheduled events — all in one place, from any device.</div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- ═══════════════ HOW IT WORKS ═══════════════ -->
+  <section id="how"><div class="section-inner">
+    <div class="section-tag">The Process</div>
+    <h2 class="section-title">Simple from day one.</h2>
+    <p class="section-sub">We take care of the technical work. You end up with a system that's easy to manage.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><div><div class="step-title">We assess your existing setup</div><div class="step-desc">We evaluate your current fountain, control panel, and wiring. We confirm the manufacturer, model, and power configuration to determine the best integration approach.</div></div></div>
+      <div class="step"><div class="step-num">02</div><div><div class="step-title">Hardware installation</div><div class="step-desc">We install the smart relay controller at your fountain's control panel and mount the local weather station in an optimal position on your property — clean wiring, no shortcuts.</div></div></div>
+      <div class="step"><div class="step-num">03</div><div><div class="step-title">System configuration</div><div class="step-desc">We set up or connect to your Home Assistant instance, configure the fountain controller, integrate the weather station, build your dashboard, and set up automations, schedules, and notifications.</div></div></div>
+      <div class="step"><div class="step-num">04</div><div><div class="step-title">You take control</div><div class="step-desc">We walk you through the dashboard — how to adjust schedules, change your wind threshold, view history, and control the fountain from your phone. It's simple enough for anyone in the household.</div></div></div>
+    </div>
+  </div></section>
+
+  <!-- ═══════════════ FEATURES / DASHBOARD ═══════════════ -->
+  <section id="features"><div class="section-inner">
+    <div class="features-layout">
+      <div>
+        <div class="section-tag">Weather Intelligence</div>
+        <h2 class="section-title">Protection that runs itself.</h2>
+        <p class="section-sub" style="margin-bottom:2rem;">Your weather station feeds real-time data into the system — so your fountain responds to conditions automatically.</p>
+        <div class="feature-list">
+          <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Wind speed threshold</strong><span>Set your limit (e.g., 25 mph). The fountain shuts off automatically when wind exceeds it — preventing spray drift and motor strain.</span></div></div>
+          <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Automatic restart</strong><span>When wind drops below your threshold for a set period, the fountain restarts on its own. No manual intervention needed.</span></div></div>
+          <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Storm &amp; freeze protection</strong><span>Automatically shuts down during heavy rain, lightning risk, or freezing temperatures to protect your equipment.</span></div></div>
+          <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Full weather dashboard</strong><span>View current wind speed, direction, temperature, humidity, and rainfall — all from the same app that controls your fountain.</span></div></div>
+        </div>
+      </div>
+      <div class="dashboard-mockup">
+        <div class="mockup-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><div class="mockup-title">Fountain Control &amp; Weather</div></div>
+        <div class="mockup-body">
+          <div class="mockup-row"><div><div class="tag-name">Lake Fountain</div><div class="tag-time">Running since 7:00 AM · Schedule</div></div><div class="tag-status status-on">● Running</div></div>
+          <div class="mockup-row"><div><div class="tag-name">Wind Speed</div><div class="tag-time">Current · NW gusting</div></div><div class="tag-status status-auto">12 mph</div></div>
+          <div class="mockup-row"><div><div class="tag-name">Wind Threshold</div><div class="tag-time">Auto shutoff limit</div></div><div class="tag-status status-auto">25 mph</div></div>
+          <div class="mockup-row"><div><div class="tag-name">Temperature</div><div class="tag-time">Outdoor · Weather station</div></div><div class="tag-status status-auto">78°F</div></div>
+          <div class="mockup-row"><div><div class="tag-name">Next Shutoff</div><div class="tag-time">Scheduled · Today</div></div><div class="tag-status status-off">8:30 PM</div></div>
+          <div class="mockup-notif">🌬️ &nbsp;<span><strong>Wind shutoff triggered</strong> — 28 mph at 2:14 PM · Restarted at 2:42 PM</span></div>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- ═══════════════ BEYOND THE FOUNTAIN ═══════════════ -->
+  <section id="beyond"><div class="section-inner" style="text-align:center;">
+    <div class="section-tag">Beyond the Fountain</div>
+    <h2 class="section-title">One app. Your entire property.</h2>
+    <p class="section-sub" style="margin:0 auto 1.5rem;">Your fountain is just the starting point. The same dashboard can grow to control every system across every building on your property — all from a single app on your phone.</p>
+    <p class="section-sub" style="margin:0 auto 3rem; max-width: 520px;">No juggling five different apps from five different vendors. Craison Digital integrates everything into one unified platform that you already know how to use.</p>
+    <div class="beyond-grid">
+      <div class="beyond-card">
+        <div class="beyond-icon">🚪</div>
+        <h4>Smart Gate Access</h4>
+        <p>Hands-free RFID entry, mobile control, and full access logging for your property gate</p>
+      </div>
+      <div class="beyond-card">
+        <div class="beyond-icon">👁️</div>
+        <h4>Security Cameras</h4>
+        <p>View every camera on your property from the same app — with motion alerts and recording</p>
+      </div>
+      <div class="beyond-card">
+        <div class="beyond-icon">💡</div>
+        <h4>Lighting Control</h4>
+        <p>Control lights in every building from one place — schedules, scenes, and automation included</p>
+      </div>
+      <div class="beyond-card">
+        <div class="beyond-icon">🌡️</div>
+        <h4>Climate &amp; HVAC</h4>
+        <p>Manage thermostats across your main home, guest house, barn, or shop — all in one view</p>
+      </div>
+      <div class="beyond-card">
+        <div class="beyond-icon">🏊</div>
+        <h4>Pool Automation</h4>
+        <p>Control your pool pump, heater, lights, and chemical levels from the same app</p>
+      </div>
+      <div class="beyond-card">
+        <div class="beyond-icon">🌿</div>
+        <h4>Irrigation &amp; Sensors</h4>
+        <p>Automated watering, soil sensors, water leak detection — monitored and controlled alongside everything else</p>
+      </div>
+    </div>
+    <p style="color:var(--text);font-size:0.95rem;margin-top:2.5rem;font-weight:400;">One app. One dashboard. Every building. Every system.</p>
+    <p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem;">Ready to go beyond the fountain? <a href="#contact" style="color:var(--blue-bright);text-decoration:none;">Let's talk about what's possible.</a></p>
+  </div></section>
+
+  <!-- ═══════════════ PRICING ═══════════════ -->
+  <section id="pricing"><div class="section-inner" style="text-align:center;">
+    <div class="section-tag">Pricing</div>
+    <h2 class="section-title">One flat rate. No surprises.</h2>
+    <p class="section-sub" style="margin:0 auto 3rem;">Everything included — hardware, installation, and full system setup. Add optional packages to fit your property.</p>
+    <div class="pricing-card">
+      <div class="price-label">Smart Fountain Control Package</div>
+      <div class="price-amount">Contact for Pricing</div>
+      <div class="price-note">Pricing varies by property. Get a custom quote.</div>
+      <div class="price-includes">
+        <div class="price-line">Smart relay controller for your existing fountain</div>
+        <div class="price-line">Professional-grade local weather station</div>
+        <div class="price-line">Automatic wind-based shutoff automation</div>
+        <div class="price-line">Remote phone control from anywhere</div>
+        <div class="price-line">Smart scheduling with seasonal adjustments</div>
+        <div class="price-line">Full Home Assistant dashboard &amp; notification setup</div>
+        <div class="price-line">Professional installation &amp; walkthrough training</div>
+      </div>
+      <a href="#contact" class="btn-primary" style="display:block;text-align:center;justify-content:center;">Request a Quote →</a>
+    </div>
+
+    <div style="margin-top:3rem;">
+      <div class="section-tag">Optional Add-Ons</div>
+      <p style="color:var(--muted);font-size:0.95rem;margin:0.5rem auto 2rem;max-width:480px;">Enhance your fountain system with any of these packages — installed and configured alongside your core setup.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;max-width:900px;margin:0 auto;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem;text-align:left;">
+        <div style="font-size:1.5rem;margin-bottom:0.8rem;">💡</div>
+        <div style="font-family:var(--font-display);font-size:0.95rem;font-weight:700;color:var(--white);margin-bottom:0.4rem;">Fountain Lighting Control</div>
+        <p style="font-size:0.83rem;color:var(--muted);line-height:1.6;margin-bottom:0;">Integrate your fountain's LED light system into the same app. Control colors, brightness, and schedules — or sync lighting with fountain on/off automatically.</p>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem;text-align:left;">
+        <div style="font-size:1.5rem;margin-bottom:0.8rem;">📹</div>
+        <div style="font-family:var(--font-display);font-size:0.95rem;font-weight:700;color:var(--white);margin-bottom:0.4rem;">Lake Camera</div>
+        <p style="font-size:0.83rem;color:var(--muted);line-height:1.6;margin-bottom:0;">A camera aimed at your fountain so you can see it running from anywhere. Live video feed in your dashboard — perfect for confirming it's on before guests arrive.</p>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem;text-align:left;">
+        <div style="font-size:1.5rem;margin-bottom:0.8rem;">⚡</div>
+        <div style="font-family:var(--font-display);font-size:0.95rem;font-weight:700;color:var(--white);margin-bottom:0.4rem;">Energy Monitoring</div>
+        <p style="font-size:0.83rem;color:var(--muted);line-height:1.6;margin-bottom:0;">Track exactly how much energy your fountain uses — daily, weekly, and monthly. See the impact of your schedule changes in real time and optimize for efficiency.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- ═══════════════ CONTACT ═══════════════ -->
+  <section id="contact"><div class="section-inner">
+    <div class="cta-box">
+      <div class="section-tag">Get Started</div>
+      <h2 class="section-title">Ready to upgrade your fountain?</h2>
+      <p class="section-sub" style="margin-bottom:0;">Tell us about your property and we'll get back to you with a custom quote.</p>
+      <form class="contact-form" onsubmit="return false;">
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" placeholder="John"/></div>
+          <div class="form-group"><label>Last Name</label><input type="text" placeholder="Smith"/></div>
+        </div>
+        <div class="form-group"><label>Email</label><input type="email" placeholder="john@example.com"/></div>
+        <div class="form-group"><label>Phone</label><input type="tel" placeholder="(555) 000-0000"/></div>
+        <div class="form-group">
+          <label>Fountain Manufacturer</label>
+          <select>
+            <option value="" disabled selected>Select your fountain brand</option>
+            <option>Kasco Marine</option>
+            <option>Otterbine</option>
+            <option>AquaMaster</option>
+            <option>Scott Aerator</option>
+            <option>AirMax</option>
+            <option>AquaControl</option>
+            <option>PentAir</option>
+            <option>Other / Not Sure</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Tell us about your fountain and property</label><textarea placeholder="What fountain do you have? How large is the lake or pond? Do you already have a Home Assistant setup? Any other details..."></textarea></div>
+        <div class="form-submit-row">
+          <button type="submit" class="btn-primary">Send My Request →</button>
+          <span class="form-note">We typically respond within 24 hours.</span>
+        </div>
+      </form>
+    </div>
+  </div></section>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer>
+    <div class="footer-logo">Craison<span>Digital</span></div>
+    <div>© 2026 Craison Digital. All rights reserved.</div>
+    <div>Smart Property Consulting</div>
+  </footer>
+
+  <!-- ═══════════════ ANIMATION SCRIPT ═══════════════ -->
+  <script>
+  (function() {
+    var sprayGroup = document.getElementById('sprayGroup');
+    var waterGlowEl = document.getElementById('waterGlowEl');
+    var hudStatus = document.getElementById('hudStatus');
+    var hudMode = document.getElementById('hudMode');
+    var hudWind = document.getElementById('hudWind');
+    var toast2 = document.getElementById('notifToast2');
+    var phoneGroup = document.getElementById('phoneGroup');
+    var phoneStatus = document.getElementById('phoneStatus');
+    var phoneBtnBg = document.getElementById('phoneBtnBg');
+    var phonePowerIcon = document.getElementById('phonePowerIcon');
+    var tapRing1 = document.getElementById('tapRing1');
+    var tapRing2 = document.getElementById('tapRing2');
+    var fingerDot = document.getElementById('fingerDot');
+    if (!sprayGroup) return;
+
+    var CYCLE = 14000;
+    // Timeline:
+    // 0.00 - 0.05  : phone fades in, fountain OFF
+    // 0.05 - 0.08  : finger tap animation
+    // 0.08 - 0.12  : fountain turns on (fade in)
+    // 0.12 - 0.16  : phone fades out
+    // 0.12 - 0.34  : fountain running steady (~3 seconds)
+    // 0.34 - 0.50  : wind rises
+    // 0.50         : fountain shuts off
+    // 0.52         : wind toast appears
+    // 0.68         : toast hides
+    // 0.68 - 1.00  : stays off, cycle resets
+
+    var T_PHONE_IN = 0.02;
+    var T_TAP = 0.07;
+    var T_FOUNTAIN_ON = 0.10;
+    var T_PHONE_OUT = 0.15;
+    var T_WIND_RISE = 0.34;
+    var T_SHUTOFF = 0.50;
+    var T_TOAST = 0.52;
+    var T_TOAST_HIDE = 0.68;
+
+    var startTs = null;
+    var ripple1 = document.getElementById('ripple1');
+    var ripple2 = document.getElementById('ripple2');
+    var ripple3 = document.getElementById('ripple3');
+    var splashCenter = document.getElementById('splashCenter');
+    var droplets = document.getElementById('droplets');
+
+    function lerp(a,b,t){ return a+(b-a)*t; }
+    function clamp(v,lo,hi){ return v<lo?lo:v>hi?hi:v; }
+    function ease(t){ return t<0.5?2*t*t:-1+(4-2*t)*t; }
+    function frac(t,a,b){ return clamp((t-a)/(b-a),0,1); }
+
+    var anemAngle = 0;
+    var lastTs = null;
+
+    function tick(ts) {
+      if (startTs === null) startTs = ts;
+      if (lastTs === null) lastTs = ts;
+      var dt = ts - lastTs;
+      lastTs = ts;
+      var f = ((ts - startTs) % CYCLE) / CYCLE;
+
+      // ── PHONE VISIBILITY ──
+      var phoneOp = 0;
+      if (f < T_PHONE_IN) {
+        phoneOp = 0;
+      } else if (f < T_TAP) {
+        phoneOp = ease(frac(f, T_PHONE_IN, T_TAP));
+      } else if (f < T_PHONE_OUT) {
+        phoneOp = 1;
+      } else if (f < T_PHONE_OUT + 0.04) {
+        phoneOp = 1 - ease(frac(f, T_PHONE_OUT, T_PHONE_OUT + 0.04));
+      }
+      phoneGroup.setAttribute('opacity', String(phoneOp));
+
+      // ── FINGER TAP + RING PULSE ──
+      if (f >= T_TAP && f < T_TAP + 0.02) {
+        // Finger presses down
+        var tapIn = ease(frac(f, T_TAP, T_TAP + 0.01));
+        fingerDot.setAttribute('opacity', String(0.5 * tapIn));
+        fingerDot.setAttribute('r', String(5 + 2 * tapIn));
+        phoneBtnBg.setAttribute('fill', '#142a40');
+      } else if (f >= T_TAP + 0.02 && f < T_TAP + 0.04) {
+        // Finger releases
+        var tapOut = ease(frac(f, T_TAP + 0.02, T_TAP + 0.04));
+        fingerDot.setAttribute('opacity', String(0.5 * (1 - tapOut)));
+        fingerDot.setAttribute('r', String(7 - 2 * tapOut));
+        phoneBtnBg.setAttribute('fill', '#0d1a2c');
+      } else {
+        fingerDot.setAttribute('opacity', '0');
+      }
+
+      // Tap rings expanding outward
+      if (f >= T_TAP + 0.01 && f < T_TAP + 0.06) {
+        var ringT = frac(f, T_TAP + 0.01, T_TAP + 0.06);
+        tapRing1.setAttribute('r', String(16 + 12 * ringT));
+        tapRing1.setAttribute('opacity', String(0.6 * (1 - ringT)));
+        tapRing2.setAttribute('r', String(16 + 8 * ringT));
+        tapRing2.setAttribute('opacity', String(0.4 * (1 - ringT)));
+      } else {
+        tapRing1.setAttribute('opacity', '0');
+        tapRing2.setAttribute('opacity', '0');
+      }
+
+      // Phone status text and button color
+      if (f >= T_FOUNTAIN_ON && f < T_SHUTOFF) {
+        phoneStatus.textContent = '● ON';
+        phoneStatus.setAttribute('fill', '#4ade80');
+        phonePowerIcon.querySelectorAll('path').forEach(function(p){ p.setAttribute('stroke','#4ade80'); });
+      } else {
+        phoneStatus.textContent = '● OFF';
+        phoneStatus.setAttribute('fill', '#f87171');
+        phonePowerIcon.querySelectorAll('path').forEach(function(p){ p.setAttribute('stroke','#5ba4f5'); });
+      }
+
+      // ── FOUNTAIN SPRAY ──
+      var sprayOp = 0;
+      if (f < T_FOUNTAIN_ON) {
+        sprayOp = 0;
+      } else if (f < T_FOUNTAIN_ON + 0.04) {
+        // Fade in after tap
+        sprayOp = ease(frac(f, T_FOUNTAIN_ON, T_FOUNTAIN_ON + 0.04));
+      } else if (f < T_SHUTOFF - 0.03) {
+        sprayOp = 1;
+      } else if (f < T_SHUTOFF) {
+        // Quick fade for wind shutoff
+        sprayOp = 1 - ease(frac(f, T_SHUTOFF - 0.03, T_SHUTOFF));
+      }
+      // stays 0 after shutoff until cycle resets
+
+      sprayGroup.setAttribute('opacity', String(sprayOp));
+      waterGlowEl.setAttribute('opacity', String(0.07 * sprayOp));
+
+      // LED lights — follow fountain on/off with a gentle shimmer
+      var ledGroup = document.getElementById('ledGroup');
+      if (ledGroup) {
+        var ledShimmer = 0.85 + Math.sin(ts / 400) * 0.15;
+        ledGroup.setAttribute('opacity', String(sprayOp * ledShimmer));
+      }
+
+      // Ripples
+      var rTime = (ts / 2000) % 1;
+      if (sprayOp > 0.1) {
+        var rScale = 1 + rTime * 0.3;
+        ripple1.setAttribute('rx', String(35 * rScale)); ripple1.setAttribute('ry', String(8 * rScale)); ripple1.setAttribute('opacity', String(0.3 * (1 - rTime) * sprayOp));
+        ripple2.setAttribute('rx', String(58 + rTime * 14)); ripple2.setAttribute('ry', String(13 + rTime * 4)); ripple2.setAttribute('opacity', String(0.2 * sprayOp));
+        ripple3.setAttribute('rx', String(85 + rTime * 18)); ripple3.setAttribute('ry', String(18 + rTime * 5)); ripple3.setAttribute('opacity', String(0.12 * sprayOp));
+      } else {
+        ripple1.setAttribute('opacity', '0'); ripple2.setAttribute('opacity', '0'); ripple3.setAttribute('opacity', '0');
+      }
+
+      // Splash shimmer
+      var shimmer = 0.4 + Math.sin(ts / 200) * 0.25;
+      if (splashCenter) splashCenter.setAttribute('opacity', String(shimmer * sprayOp));
+      if (droplets) droplets.setAttribute('opacity', String((0.3 + Math.sin(ts / 300) * 0.15) * sprayOp));
+
+      // No spray drift
+      sprayGroup.removeAttribute('transform');
+
+      // ── ANEMOMETER ──
+      var anem = document.getElementById('anemometer');
+      if (anem) {
+        var degreesPerMs = 0.1; // base: gentle spin
+        if (f >= T_WIND_RISE && f < T_SHUTOFF) {
+          var wi = ease(frac(f, T_WIND_RISE, T_SHUTOFF));
+          degreesPerMs = lerp(0.1, 2.0, wi);
+        } else if (f >= T_SHUTOFF) {
+          degreesPerMs = lerp(2.0, 0.12, ease(frac(f, T_SHUTOFF, 0.95)));
+        }
+        anemAngle = (anemAngle + degreesPerMs * dt) % 360;
+        anem.setAttribute('transform', 'rotate(' + anemAngle + ' 1.75 0)');
+      }
+
+      // Weather station LED
+      var wxLed = document.getElementById('wxLed');
+      if (wxLed) {
+        if (f >= T_SHUTOFF) {
+          wxLed.setAttribute('fill', '#fbbf24');
+        } else {
+          wxLed.setAttribute('fill', '#4ade80');
+        }
+      }
+
+      // ── HUD ──
+      if (f < T_FOUNTAIN_ON) {
+        hudStatus.textContent = 'STANDBY'; hudStatus.setAttribute('fill', '#6b7a8d');
+        hudMode.textContent = 'MANUAL'; hudMode.setAttribute('fill', '#6b7a8d');
+      } else if (f < T_SHUTOFF) {
+        hudStatus.textContent = 'RUNNING'; hudStatus.setAttribute('fill', '#4ade80');
+        hudMode.textContent = 'REMOTE ON'; hudMode.setAttribute('fill', '#00d4ff');
+      } else {
+        hudStatus.textContent = 'STOPPED'; hudStatus.setAttribute('fill', '#f87171');
+        hudMode.textContent = 'WIND SHUTOFF'; hudMode.setAttribute('fill', '#fbbf24');
+      }
+
+      // Wind speed HUD
+      if (f < T_WIND_RISE) {
+        hudWind.textContent = '12 MPH NW'; hudWind.setAttribute('fill', '#4ade80');
+      } else if (f < T_SHUTOFF) {
+        var mph = Math.round(lerp(12, 28, ease(frac(f, T_WIND_RISE, T_SHUTOFF))));
+        hudWind.textContent = mph + ' MPH NW'; hudWind.setAttribute('fill', mph > 20 ? '#fbbf24' : '#4ade80');
+      } else {
+        var mphD = Math.round(lerp(28, 18, ease(frac(f, T_SHUTOFF, 0.95))));
+        hudWind.textContent = mphD + ' MPH NW'; hudWind.setAttribute('fill', mphD > 20 ? '#fbbf24' : '#4ade80');
+      }
+
+      // Toast
+      if (f >= T_TOAST && f < T_TOAST_HIDE) toast2.classList.add('visible');
+      else toast2.classList.remove('visible');
+
+      requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+
+    // Close mobile nav on link click
+    document.querySelectorAll('.nav-links a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        document.querySelector('.nav-links').classList.remove('open');
+      });
+    });
+  })();
+  </script>
+
+</body>
+</html>

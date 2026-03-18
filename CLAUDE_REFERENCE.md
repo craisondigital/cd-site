@@ -13,13 +13,14 @@
 
 ---
 
-## FILE INVENTORY (3 files, all in root)
+## FILE INVENTORY (2 files, all in root)
 
-| File | Purpose | Size | Key Feature |
-|---|---|---|---|
-| `index.html` | Original landing page — Smart Gate Access | ~60KB | Older version, simpler layout |
-| `gate.html` | **Primary gate product page** — redesigned & expanded | ~73KB | Full gate product page with problem/solution, experience, beyond-gate, add-ons |
-| `fountains.html` | **Lake fountain control product page** | ~71KB | Fountain product page with weather station integration |
+| File | Purpose | Size |
+|---|---|---|
+| `gate.html` | **Primary gate product page** — Smart Gate Access for Large Properties | ~73KB |
+| `fountains.html` | **Lake fountain control product page** — Smart Lake Fountain Control | ~71KB |
+
+> **Note:** `index.html` was removed on 2026-03-18. No homepage/landing page currently exists.
 
 ---
 
@@ -33,7 +34,7 @@
 
 ---
 
-## DESIGN SYSTEM (consistent across gate.html & fountains.html)
+## DESIGN SYSTEM (consistent across both pages)
 
 ### CSS Variables (`:root`)
 ```css
@@ -78,10 +79,10 @@
 
 ---
 
-## PAGE STRUCTURE (gate.html & fountains.html share this pattern)
+## PAGE STRUCTURE (both pages share this pattern)
 
 1. **Nav** — fixed top, blur backdrop, logo left, links right, CTA button, mobile hamburger toggle
-2. **Hero** — full viewport, layered backgrounds (gradient + grid + glow), headline ABOVE illustration, SVG animation, content overlay below with eyebrow badge + subtitle + CTA buttons
+2. **Hero** — layered backgrounds (gradient + grid + glow), headline ABOVE illustration, SVG animation, content overlay below with eyebrow badge + subtitle + CTA buttons
 3. **Stats Bar** — 4 stats in a row, border top/bottom
 4. **Problem/Solution** — 2-column grid, pain points vs benefits
 5. **Experience** — 3-column card grid (features with icons)
@@ -97,7 +98,7 @@
 
 ## SVG ANIMATIONS
 
-### Gate Animation (index.html & gate.html)
+### Gate Animation (gate.html)
 - **10-second cycle** looping via `requestAnimationFrame`
 - Truck approaches → RFID reader detects → LED changes red→amber→green → gate opens (scale transform on hinge points) → truck passes through → notification toast appears → gate closes → reset
 - Key element IDs: `truckGroup`, `gateLeft`, `gateRight`, `readerLed`, `rfidRings`, `hudMode`, `hudTag`, `notifToast`
@@ -137,10 +138,10 @@
 ## IMPORTANT NOTES FOR EDITING
 1. **Each file is self-contained** — CSS and JS are inline, not shared across files
 2. **When creating a new page**, copy `gate.html` as the template (it's the most polished version)
-3. **index.html is the older design** — `gate.html` has the improved layout (headline above SVG, better mobile, problem/solution section, beyond section, add-ons)
-4. **SVG animations are handcrafted** — they use raw `requestAnimationFrame` loops with normalized time fractions (0.0-1.0 mapped to cycle phases)
-5. **No cross-page navigation exists yet** — each page is standalone; nav links are in-page anchors only
-6. **Forms are non-functional** — `onsubmit="return false;"` means no actual form submission is wired up
-7. **Copyright year:** `gate.html` and `fountains.html` show © 2026; `index.html` shows © 2025
-8. **Favicon:** SVG inline data URI — dark rounded rect with cyan "C"
-9. **The logo** is text-based: "Craison" in white + "Digital" in cyan (`var(--cyan)`)
+3. **SVG animations are handcrafted** — they use raw `requestAnimationFrame` loops with normalized time fractions (0.0-1.0 mapped to cycle phases)
+4. **No cross-page navigation exists yet** — each page is standalone; nav links are in-page anchors only
+5. **Forms are non-functional** — `onsubmit="return false;"` means no actual form submission is wired up
+6. **Copyright year:** both pages show © 2026
+7. **Favicon:** SVG inline data URI — dark rounded rect with cyan "C"
+8. **The logo** is text-based: "Craison" in white + "Digital" in cyan (`var(--cyan)`)
+9. **No homepage currently exists** — `index.html` was removed; site only has product-specific pages

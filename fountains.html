@@ -234,7 +234,7 @@
       .beyond-grid { grid-template-columns: 1fr 1fr; }
       .compat-grid { grid-template-columns: 1fr 1fr; }
       .form-row { grid-template-columns: 1fr; }
-      .stats-bar { display: grid; grid-template-columns: 1fr 1fr; }
+      .stats-bar { display: grid; grid-template-columns: 1fr 1fr; justify-items: center; }
       .stat { border-right: none; border-bottom: 1px solid var(--border); }
       .stat:nth-child(odd) { border-right: 1px solid var(--border); }
       footer { flex-direction: column; gap: 0.8rem; text-align: center; padding: 2rem 1.5rem; }
@@ -249,7 +249,7 @@
     @media (max-width: 480px) {
       .beyond-grid { grid-template-columns: 1fr; }
       .compat-grid { grid-template-columns: 1fr; }
-      .stats-bar { grid-template-columns: 1fr; }
+      .stats-bar { grid-template-columns: 1fr; justify-items: center; }
       .stat { border-right: none !important; }
     }
   </style>

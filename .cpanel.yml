@@ -1,0 +1,10 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/$USER/public_html/
+    - /bin/cp -f index.html $DEPLOYPATH
+    - /bin/cp -f gate.html $DEPLOYPATH
+    - /bin/cp -f pool.html $DEPLOYPATH
+    - /bin/cp -f fountains.html $DEPLOYPATH
+    - /bin/cp -f 404.html $DEPLOYPATH
+    - /bin/cp -f .htaccess $DEPLOYPATH

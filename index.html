@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Craison Digital – Smart Property Consulting</title>
+  <meta name="description" content="Craison Digital integrates every system on your property into one simple app. Gates, pools, lighting, cameras, HVAC — finally working together. Built custom for large estates and high-end homes in the Miami area."/>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230d1320'/><text x='4' y='24' font-size='22' font-weight='bold' fill='%2300d4ff'>C</text></svg>"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #060a10; --dark: #0b1018; --card: #0f1724;
+      --card-hover: #141d2e; --border: rgba(255,255,255,0.06);
+      --blue: #2f80ed; --blue-bright: #5ba4f5;
+      --blue-glow: rgba(47,128,237,0.15); --cyan: #00d4ff;
+      --green: #4ade80; --green-glow: rgba(74,222,128,0.15);
+      --text: #e4e9f2; --muted: #6b7a8d; --white: #f4f7fb;
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--text); font-family: var(--font-body); font-weight: 300; line-height: 1.75; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.5; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem 4rem; background: rgba(6,10,16,0.82); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--cyan); }
+    .nav-links { display: flex; align-items: center; gap: 2.2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 400; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { background: var(--blue); color: var(--white) !important; padding: 0.5rem 1.4rem; border-radius: 6px; font-weight: 500 !important; transition: background 0.2s, transform 0.15s; }
+    .nav-cta:hover { background: var(--blue-bright) !important; transform: translateY(-1px); }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--text); margin: 5px 0; border-radius: 2px; }
+    .hero { position: relative; width: 100%; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; overflow: hidden; padding-top: 70px; }
+    .hero-bg { position: absolute; inset: 0; background: linear-gradient(180deg, #040710 0%, #081525 40%, #0a1a30 100%); }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(47,128,237,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(47,128,237,0.04) 1px, transparent 1px); background-size: 56px 56px; mask-image: radial-gradient(ellipse 85% 75% at 50% 55%, black 15%, transparent 100%); -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 55%, black 15%, transparent 100%); }
+    .hero-glow { position: absolute; top: 15%; left: 50%; transform: translateX(-50%); width: 800px; height: 500px; background: radial-gradient(ellipse, rgba(47,128,237,0.1) 0%, transparent 70%); pointer-events: none; }
+    .hero-headline-above { position: relative; z-index: 3; text-align: center; padding: 2.5rem 2rem 1.2rem; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(47,128,237,0.08); border: 1px solid rgba(47,128,237,0.2); color: var(--blue-bright); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 0.9rem; border-radius: 100px; margin-bottom: 1.2rem; animation: fadeUp 0.6s ease both; }
+    .hero-eyebrow::before { content: ''; width: 5px; height: 5px; background: var(--cyan); border-radius: 50%; box-shadow: 0 0 8px var(--cyan); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .hero-headline-above h1 { font-family: var(--font-display); font-size: clamp(2.2rem,5.2vw,4.2rem); font-weight: 800; line-height: 1.06; letter-spacing: -0.025em; color: var(--white); animation: fadeUp 0.6s 0.1s ease both; }
+    .hero-headline-above h1 em { font-style: normal; background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .estate-illustration { position: relative; z-index: 2; width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
+    .hero-content { position: relative; z-index: 3; width: 100%; text-align: center; padding: 2.5rem 2rem 5rem; background: linear-gradient(0deg, var(--black) 28%, transparent 100%); }
+    .hero-content .hero-sub { font-size: 1.08rem; color: var(--muted); max-width: 750px; margin: 0 auto 2.2rem; animation: fadeUp 0.6s 0.2s ease both; line-height: 1.7; }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+    .btn-primary { background: var(--blue); color: var(--white); padding: 0.85rem 2.2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 500; text-decoration: none; border: none; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 20px rgba(47,128,237,0.25); display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-primary:hover { background: var(--blue-bright); transform: translateY(-1px); box-shadow: 0 0 32px rgba(47,128,237,0.4); }
+    .btn-secondary { background: transparent; color: var(--text); padding: 0.85rem 2.2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 400; text-decoration: none; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.15); color: var(--white); }
+    section { position: relative; z-index: 1; }
+    .section-inner { max-width: 1100px; margin: 0 auto; padding: 6rem 4rem; }
+    .section-tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue-bright); margin-bottom: 0.7rem; }
+    .section-title { font-family: var(--font-display); font-size: clamp(1.7rem,3.2vw,2.6rem); font-weight: 800; line-height: 1.12; letter-spacing: -0.02em; margin-bottom: 1rem; color: var(--white); }
+    .section-sub { color: var(--muted); font-size: 1rem; max-width: 560px; margin-bottom: 3rem; line-height: 1.7; }
+    .app-graveyard { position: relative; z-index: 1; }
+    .app-graveyard-inner { max-width: 1100px; margin: 0 auto; padding: 7rem 4rem 6rem; text-align: center; }
+    .graveyard-apps { display: flex; justify-content: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .ghost-app { width: 52px; height: 52px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.015); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; opacity: 0.35; position: relative; }
+    .ghost-app::after { content: ''; position: absolute; inset: -1px; border-radius: 12px; background: linear-gradient(135deg, rgba(220,60,60,0.12), transparent 60%); pointer-events: none; }
+    .graveyard-label { font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(220,60,60,0.55); font-weight: 600; margin-bottom: 1.8rem; }
+    .graveyard-title { font-family: var(--font-display); font-size: clamp(1.5rem,3vw,2.4rem); font-weight: 800; color: var(--white); line-height: 1.15; margin-bottom: 1.2rem; }
+    .graveyard-sub { font-size: 1rem; color: var(--muted); max-width: 620px; margin: 0 auto; line-height: 1.75; }
+    #whatwedo { background: var(--dark); }
+    .narrative-flow { display: flex; flex-direction: column; gap: 2.5rem; }
+    .narrative-step { display: grid; grid-template-columns: 56px 1fr; gap: 1.8rem; align-items: start; }
+    .narrative-num { width: 48px; height: 48px; border-radius: 50%; background: var(--blue-glow); border: 1px solid rgba(47,128,237,0.25); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; color: var(--blue-bright); }
+    .narrative-content h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
+    .narrative-content p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; max-width: 620px; }
+    .automate-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .automate-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; transition: all 0.3s; position: relative; overflow: hidden; text-decoration: none; color: inherit; display: block; }
+    .automate-card:hover { background: var(--card-hover); border-color: rgba(47,128,237,0.15); transform: translateY(-3px); }
+    .automate-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--blue), transparent); opacity: 0; transition: opacity 0.3s; }
+    .automate-card:hover::before { opacity: 1; }
+    .automate-icon { font-size: 1.6rem; margin-bottom: 1rem; display: block; }
+    .automate-card h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
+    .automate-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin-bottom: 0.8rem; }
+    .automate-status { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.15rem 0.6rem; border-radius: 100px; display: inline-block; }
+    .status-live { background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.2); color: var(--green); }
+    .status-soon { background: rgba(47,128,237,0.08); border: 1px solid rgba(47,128,237,0.15); color: var(--blue-bright); }
+    #different { background: var(--dark); }
+    .diff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .diff-card { padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); }
+    .diff-num { font-family: var(--font-display); font-size: 4rem; font-weight: 800; color: rgba(47,128,237,0.07); line-height: 1; margin-bottom: 0.5rem; }
+    .diff-card h3 { font-family: var(--font-display); font-size: 1.12rem; font-weight: 700; color: var(--white); margin-bottom: 0.8rem; line-height: 1.3; }
+    .diff-card p { font-size: 0.86rem; color: var(--muted); line-height: 1.7; }
+    #dayinlife { background: var(--dark); }
+    .timeline { position: relative; max-width: 700px; }
+    .timeline::before { content: ''; position: absolute; left: 22px; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--cyan), var(--blue), transparent); }
+    .tl-item { display: grid; grid-template-columns: 48px 1fr; gap: 1.6rem; padding: 1.4rem 0; }
+    .tl-time { width: 44px; height: 44px; border-radius: 50%; background: rgba(0,212,255,0.06); border: 1px solid rgba(0,212,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 0.6rem; font-weight: 600; color: var(--cyan); font-family: var(--font-display); position: relative; z-index: 1; }
+    .tl-content h4 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 0.2rem; }
+    .tl-content p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+    .tl-auto { display: inline-block; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.15); padding: 0.1rem 0.45rem; border-radius: 4px; margin-top: 0.3rem; }
+    .plan-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .plan-card { background: var(--card); border: 1px solid rgba(0,212,255,0.12); border-radius: 18px; padding: 2.8rem; position: relative; box-shadow: 0 0 60px rgba(0,212,255,0.04); }
+    .plan-card::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 40%; height: 1px; background: linear-gradient(90deg, transparent, var(--cyan), transparent); }
+    .plan-badge { display: inline-block; background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2); color: var(--cyan); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.7rem; border-radius: 100px; margin-bottom: 1.2rem; }
+    .plan-card h3 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; color: var(--white); margin-bottom: 0.6rem; }
+    .plan-card > p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.8rem; }
+    .plan-features { display: flex; flex-direction: column; gap: 0.7rem; }
+    .plan-feature { display: flex; align-items: center; gap: 0.7rem; font-size: 0.88rem; color: var(--text); }
+    .plan-feature::before { content: '✓'; color: var(--cyan); font-weight: 700; }
+    #contact { text-align: center; }
+    .cta-box { max-width: 600px; margin: 0 auto; }
+    .contact-form { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 2rem; text-align: left; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+    label { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.04em; }
+    input, textarea, select { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 0.7rem 0.9rem; color: var(--text); font-family: var(--font-body); font-size: 0.88rem; outline: none; transition: border-color 0.2s; width: 100%; }
+    input:focus, textarea:focus, select:focus { border-color: rgba(47,128,237,0.4); }
+    textarea { resize: vertical; min-height: 100px; }
+    select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7a8d' fill='none' stroke-width='1.5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.9rem center; padding-right: 2.2rem; }
+    select option { background: var(--card); color: var(--text); }
+    .form-submit-row { display: flex; align-items: center; gap: 1rem; margin-top: 0.5rem; }
+    .form-note { font-size: 0.72rem; color: var(--muted); }
+    footer { border-top: 1px solid var(--border); background: var(--black); padding: 2.5rem 4rem; display: flex; align-items: center; justify-content: space-between; font-size: 0.78rem; color: var(--muted); }
+    .footer-logo { font-family: var(--font-display); font-weight: 800; font-size: 0.95rem; color: var(--white); }
+    .footer-logo span { color: var(--cyan); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 960px) {
+      .automate-grid { grid-template-columns: 1fr 1fr; }
+      .diff-grid { grid-template-columns: 1fr; }
+      .plan-layout { grid-template-columns: 1fr; gap: 3rem; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0.9rem 1.5rem; }
+      .nav-links { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(6,10,16,0.97); backdrop-filter: blur(20px); flex-direction: column; justify-content: center; align-items: center; gap: 2rem; z-index: 200; }
+      .nav-links.open { display: flex; }
+      .nav-links.open a { font-size: 1.1rem; color: var(--text); }
+      .nav-toggle { display: block; z-index: 300; }
+      .section-inner { padding: 4rem 1.5rem; }
+      .app-graveyard-inner { padding: 5rem 1.5rem 4rem; }
+      .automate-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 0.8rem; text-align: center; padding: 2rem 1.5rem; }
+      .form-submit-row { flex-direction: column; align-items: stretch; }
+    }
+    @media (max-width: 480px) {
+      .graveyard-apps { gap: 0.4rem; }
+      .ghost-app { width: 42px; height: 42px; font-size: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#" class="nav-logo">Craison<span>Digital</span></a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="#whatwedo">What We Do</a></li>
+      <li><a href="#automate">Solutions</a></li>
+      <li><a href="#different">Why Us</a></li>
+      <li><a href="#plans">Plans</a></li>
+      <li><a href="#contact" class="nav-cta">Get Started</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-bg"></div><div class="hero-grid"></div><div class="hero-glow"></div>
+    <div class="hero-headline-above">
+      <div class="hero-eyebrow">Smart Property Consulting · Miami</div>
+      <h1>Your property has a dozen systems.<br/><em>You should only need one app.</em></h1>
+    </div>
+    <div class="estate-illustration">
+      <svg id="estateSVG" viewBox="0 0 1100 440" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+        <defs>
+          <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#05080f"/><stop offset="100%" stop-color="#0b1628"/></linearGradient>
+          <linearGradient id="groundGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0e1a28"/><stop offset="100%" stop-color="#0a1420"/></linearGradient>
+          <linearGradient id="houseWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#161f2e"/><stop offset="100%" stop-color="#111928"/></linearGradient>
+          <linearGradient id="roofGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a2640"/><stop offset="100%" stop-color="#141e30"/></linearGradient>
+          <linearGradient id="poolWater" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#040e1a" stop-opacity="0.95"/><stop offset="100%" stop-color="#030a12" stop-opacity="0.98"/></linearGradient>
+          <linearGradient id="poolGlowG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4ade80" stop-opacity="0.15"/><stop offset="100%" stop-color="#22c55e" stop-opacity="0.03"/></linearGradient>
+          <linearGradient id="gatePost" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1e2d44"/><stop offset="100%" stop-color="#141e30"/></linearGradient>
+          <linearGradient id="driveGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0f1a28"/><stop offset="100%" stop-color="#111e2c"/></linearGradient>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="glowStrong" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="softGlow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="8"/></filter>
+          <filter id="waterRipple" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="1.2"/></filter>
+          <pattern id="groundPaver" x="0" y="0" width="40" height="20" patternUnits="userSpaceOnUse">
+            <rect width="40" height="20" fill="#0e1a28"/><rect x="1" y="1" width="18" height="8" rx="1" fill="#121e2c" opacity="0.5"/><rect x="21" y="1" width="18" height="8" rx="1" fill="#101c28" opacity="0.5"/><rect x="11" y="11" width="18" height="8" rx="1" fill="#121e2c" opacity="0.4"/>
+            <line x1="0" y1="10" x2="40" y2="10" stroke="#091218" stroke-width="1"/><line x1="20" y1="0" x2="20" y2="10" stroke="#091218" stroke-width="1"/><line x1="10" y1="10" x2="10" y2="20" stroke="#091218" stroke-width="1"/><line x1="30" y1="10" x2="30" y2="20" stroke="#091218" stroke-width="1"/>
+          </pattern>
+          <linearGradient id="lakeWater" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#082a48" stop-opacity="0.95"/><stop offset="50%" stop-color="#061e38"/><stop offset="100%" stop-color="#041428" stop-opacity="0.98"/></linearGradient>
+          <linearGradient id="lakeGlow" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5ba4f5" stop-opacity="0.1"/><stop offset="100%" stop-color="#2f80ed" stop-opacity="0.02"/></linearGradient>
+          <linearGradient id="sprayGrad" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#5ba4f5" stop-opacity="0.95"/><stop offset="30%" stop-color="#00d4ff" stop-opacity="0.7"/><stop offset="70%" stop-color="#b8e4ff" stop-opacity="0.35"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0.08"/></linearGradient>
+          <linearGradient id="sprayGradSide" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#2f80ed" stop-opacity="0.8"/><stop offset="40%" stop-color="#00d4ff" stop-opacity="0.5"/><stop offset="80%" stop-color="#b8e4ff" stop-opacity="0.2"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+          <radialGradient id="mistGrad" cx="50%" cy="70%" r="50%"><stop offset="0%" stop-color="#00d4ff" stop-opacity="0.12"/><stop offset="60%" stop-color="#2f80ed" stop-opacity="0.05"/><stop offset="100%" stop-color="#2f80ed" stop-opacity="0"/></radialGradient>
+          <filter id="sprayBlur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="waterGlowF" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <clipPath id="poolClip"><rect x="700" y="165" width="220" height="90" rx="10"/></clipPath>
+          <clipPath id="lakeClip"><ellipse cx="960" cy="330" rx="140" ry="70"/></clipPath>
+          <clipPath id="sceneClip"><rect width="1100" height="440"/></clipPath>
+        </defs>
+        <g clip-path="url(#sceneClip)">
+          <rect width="1100" height="440" fill="url(#skyGrad)"/>
+          <circle cx="60" cy="20" r="1" fill="white" opacity="0.5"/><circle cx="180" cy="12" r="1.2" fill="white" opacity="0.55"/><circle cx="310" cy="28" r="0.8" fill="white" opacity="0.6"/><circle cx="470" cy="15" r="1" fill="white" opacity="0.4"/><circle cx="620" cy="8" r="1.2" fill="white" opacity="0.55"/><circle cx="760" cy="22" r="0.8" fill="white" opacity="0.5"/><circle cx="880" cy="10" r="1" fill="white" opacity="0.6"/><circle cx="1010" cy="30" r="1.2" fill="white" opacity="0.4"/><circle cx="140" cy="45" r="0.7" fill="white" opacity="0.35"/><circle cx="550" cy="38" r="0.9" fill="white" opacity="0.45"/>
+          <rect x="0" y="150" width="1100" height="290" fill="url(#groundGrad)"/>
+          <rect x="0" y="150" width="1100" height="290" fill="url(#groundPaver)" opacity="0.5"/>
+          <path id="driveway" d="M0,305 Q80,305 120,298 Q200,286 320,270 Q400,260 480,255 L480,295 Q400,300 320,310 Q200,325 120,335 Q80,340 0,340 Z" fill="url(#driveGrad)" stroke="#1a2a3e" stroke-width="0.5" opacity="0.7"/>
+
+          <!-- GATE SYSTEM: Two pillars on opposite sides of driveway at x≈110 -->
+          <!-- Driveway at x=110: top edge ≈ y=299, bottom edge ≈ y=334, center ≈ y=316 -->
+
+          <!-- LAYER 1: Bottom pillar (near/viewer side) + bottom gate half — drawn FIRST (behind car) -->
+          <g id="gateNearSide">
+            <!-- Bottom pillar sits just below driveway bottom edge -->
+            <rect x="98" y="336" width="24" height="55" rx="3" fill="url(#gatePost)" stroke="#1e3050" stroke-width="1"/>
+            <rect x="102" y="350" width="16" height="16" rx="3" fill="#0a1520" stroke="#1a3050" stroke-width="1"/>
+            <circle id="gateLed" cx="110" cy="355" r="2.5" fill="#dc3c3c" opacity="0.7" filter="url(#glow)"/>
+            <circle id="pillarLight1" cx="110" cy="336" r="4" fill="#f0c060" opacity="0" filter="url(#glowStrong)"/>
+            <!-- Bottom gate panel — bars spanning from bottom pillar toward driveway center -->
+            <g id="gateLeft">
+              <rect x="95" y="298" width="50" height="38" rx="2" fill="none" stroke="#1a3050" stroke-width="1.2"/>
+              <line x1="95" y1="306" x2="145" y2="306" stroke="#1a3050" stroke-width="1"/>
+              <line x1="95" y1="314" x2="145" y2="314" stroke="#1a3050" stroke-width="1"/>
+              <line x1="95" y1="322" x2="145" y2="322" stroke="#1a3050" stroke-width="1"/>
+              <line x1="95" y1="330" x2="145" y2="330" stroke="#1a3050" stroke-width="1"/>
+              <line x1="103" y1="298" x2="103" y2="336" stroke="#1a3050" stroke-width="1"/>
+              <line x1="111" y1="298" x2="111" y2="336" stroke="#1a3050" stroke-width="1"/>
+              <line x1="119" y1="298" x2="119" y2="336" stroke="#1a3050" stroke-width="1"/>
+              <line x1="127" y1="298" x2="127" y2="336" stroke="#1a3050" stroke-width="1"/>
+              <line x1="135" y1="298" x2="135" y2="336" stroke="#1a3050" stroke-width="1"/>
+            </g>
+          </g>
+
+          <!-- LAYER 2: CAR -->
+          <g id="carGroup" opacity="0">
+            <rect x="-26" y="-9" width="52" height="18" rx="4" fill="#1a2535" stroke="#2a3a55" stroke-width="1"/>
+            <rect x="-21" y="-15" width="26" height="10" rx="3" fill="#151e2e" stroke="#2a3a55" stroke-width="0.8"/>
+            <rect x="-18" y="-13" width="10" height="6" rx="1" fill="#0a2a4a" opacity="0.7"/>
+            <rect x="-5" y="-13" width="10" height="6" rx="1" fill="#0a2a4a" opacity="0.7"/>
+            <circle cx="-14" cy="11" r="4" fill="#0a0f18" stroke="#1a2a40" stroke-width="1.5"/>
+            <circle cx="-14" cy="11" r="1.5" fill="#1a2a40"/>
+            <circle cx="14" cy="11" r="4" fill="#0a0f18" stroke="#1a2a40" stroke-width="1.5"/>
+            <circle cx="14" cy="11" r="1.5" fill="#1a2a40"/>
+            <circle id="headlightL" cx="26" cy="-2" r="2.5" fill="#f0e070" opacity="0.8" filter="url(#glow)"/>
+            <circle id="headlightR" cx="26" cy="4" r="2.5" fill="#f0e070" opacity="0.8" filter="url(#glow)"/>
+            <rect x="-28" y="-1" width="3" height="5" rx="1" fill="#dc3c3c" opacity="0.5"/>
+          </g>
+
+          <!-- LAYER 3: Top pillar (far side) + top gate half — drawn LAST (in front of car) -->
+          <g id="gateFarSide">
+            <!-- Top gate panel — bars spanning from top pillar toward driveway center -->
+            <g id="gateRight">
+              <rect x="95" y="260" width="50" height="38" rx="2" fill="none" stroke="#1a3050" stroke-width="1.2"/>
+              <line x1="95" y1="268" x2="145" y2="268" stroke="#1a3050" stroke-width="1"/>
+              <line x1="95" y1="276" x2="145" y2="276" stroke="#1a3050" stroke-width="1"/>
+              <line x1="95" y1="284" x2="145" y2="284" stroke="#1a3050" stroke-width="1"/>
+              <line x1="95" y1="292" x2="145" y2="292" stroke="#1a3050" stroke-width="1"/>
+              <line x1="103" y1="260" x2="103" y2="298" stroke="#1a3050" stroke-width="1"/>
+              <line x1="111" y1="260" x2="111" y2="298" stroke="#1a3050" stroke-width="1"/>
+              <line x1="119" y1="260" x2="119" y2="298" stroke="#1a3050" stroke-width="1"/>
+              <line x1="127" y1="260" x2="127" y2="298" stroke="#1a3050" stroke-width="1"/>
+              <line x1="135" y1="260" x2="135" y2="298" stroke="#1a3050" stroke-width="1"/>
+            </g>
+            <!-- Top pillar sits just above driveway top edge -->
+            <rect x="98" y="238" width="24" height="55" rx="3" fill="url(#gatePost)" stroke="#1e3050" stroke-width="1"/>
+            <circle id="pillarLight2" cx="110" cy="238" r="4" fill="#f0c060" opacity="0" filter="url(#glowStrong)"/>
+          </g>
+          <!-- POOL — behind/right of house, on the ground plane (drawn first so house/garage is in front) -->
+          <g id="poolGroup">
+            <!-- Pool deck/coping -->
+            <rect x="695" y="160" width="230" height="100" rx="12" fill="#0e1a28" stroke="#1a2a3e" stroke-width="3" opacity="0.4"/>
+            <!-- Pool base (very dark when off) -->
+            <rect x="700" y="165" width="220" height="90" rx="10" fill="#020810"/>
+            <g clip-path="url(#poolClip)">
+              <rect x="700" y="165" width="220" height="90" fill="url(#poolWater)"/>
+              <rect id="poolGlowOverlay" x="700" y="165" width="220" height="90" fill="url(#poolGlowG)" opacity="0"/>
+              <g id="poolCaustics" opacity="0"><ellipse cx="770" cy="195" rx="25" ry="9" fill="#4ade80" opacity="0.1" filter="url(#waterRipple)"/><ellipse cx="840" cy="215" rx="35" ry="11" fill="#22c55e" opacity="0.08" filter="url(#waterRipple)"/><ellipse cx="880" cy="190" rx="22" ry="8" fill="#4ade80" opacity="0.09" filter="url(#waterRipple)"/></g>
+              <g id="poolRipples" opacity="0"><path d="M705,190 Q770,186 835,190 Q880,194 915,190" fill="none" stroke="#6ee7a0" stroke-width="0.5" opacity="0.3"/><path d="M705,208 Q780,204 850,208 Q895,212 915,208" fill="none" stroke="#6ee7a0" stroke-width="0.4" opacity="0.2"/><path d="M705,226 Q785,222 860,226 Q900,230 915,226" fill="none" stroke="#6ee7a0" stroke-width="0.4" opacity="0.18"/></g>
+              <g id="poolLightsGroup" opacity="0"><circle cx="750" cy="243" r="4.5" fill="#4ade80" opacity="0.7" filter="url(#glowStrong)"/><circle cx="810" cy="243" r="4.5" fill="#4ade80" opacity="0.7" filter="url(#glowStrong)"/><circle cx="870" cy="243" r="4.5" fill="#4ade80" opacity="0.7" filter="url(#glowStrong)"/><ellipse cx="750" cy="234" rx="22" ry="14" fill="#4ade80" opacity="0.04"/><ellipse cx="810" cy="234" rx="22" ry="14" fill="#4ade80" opacity="0.04"/><ellipse cx="870" cy="234" rx="22" ry="14" fill="#4ade80" opacity="0.04"/></g>
+            </g>
+          </g>
+          <!-- GARAGE WING — to the right of house, slightly behind -->
+          <rect x="640" y="180" width="100" height="100" rx="3" fill="url(#houseWall)" stroke="#1e3050" stroke-width="0.8"/>
+          <rect x="640" y="180" width="100" height="6" fill="url(#roofGrad)"/>
+          <rect id="win5" x="660" y="200" width="25" height="28" rx="2" fill="#0a1a2e" stroke="#1a3050" stroke-width="0.8"/><rect id="winGlow5" x="660" y="200" width="25" height="28" rx="2" fill="#f0c060" opacity="0"/>
+          <rect id="win6" x="700" y="200" width="25" height="28" rx="2" fill="#0a1a2e" stroke="#1a3050" stroke-width="0.8"/><rect id="winGlow6" x="700" y="200" width="25" height="28" rx="2" fill="#f0c060" opacity="0"/>
+          <!-- MAIN HOUSE — in front of pool -->
+          <g id="houseGroup">
+            <rect x="360" y="140" width="280" height="140" rx="4" fill="url(#houseWall)" stroke="#1e3050" stroke-width="1"/>
+            <path d="M345,140 L500,75 L655,140 Z" fill="url(#roofGrad)" stroke="#1e3050" stroke-width="1"/>
+            <rect x="580" y="85" width="22" height="55" fill="#161f2e" stroke="#1e3050" stroke-width="0.8"/>
+            <rect id="win1" x="385" y="160" width="35" height="40" rx="3" fill="#0a1a2e" stroke="#1a3050" stroke-width="1"/><rect id="winGlow1" x="385" y="160" width="35" height="40" rx="3" fill="#f0c060" opacity="0"/>
+            <rect id="win2" x="440" y="160" width="35" height="40" rx="3" fill="#0a1a2e" stroke="#1a3050" stroke-width="1"/><rect id="winGlow2" x="440" y="160" width="35" height="40" rx="3" fill="#f0c060" opacity="0"/>
+            <rect id="win3" x="525" y="160" width="35" height="40" rx="3" fill="#0a1a2e" stroke="#1a3050" stroke-width="1"/><rect id="winGlow3" x="525" y="160" width="35" height="40" rx="3" fill="#f0c060" opacity="0"/>
+            <rect id="win4" x="580" y="160" width="35" height="40" rx="3" fill="#0a1a2e" stroke="#1a3050" stroke-width="1"/><rect id="winGlow4" x="580" y="160" width="35" height="40" rx="3" fill="#f0c060" opacity="0"/>
+            <rect x="482" y="220" width="36" height="60" rx="3" fill="#0d1822" stroke="#1e3050" stroke-width="1.2"/>
+            <circle id="porchLight" cx="475" cy="228" r="3" fill="#f0c060" opacity="0" filter="url(#glowStrong)"/>
+            <circle id="porchLight2" cx="525" cy="228" r="3" fill="#f0c060" opacity="0" filter="url(#glowStrong)"/>
+            <rect id="windowAmbient" x="370" y="150" width="260" height="60" rx="8" fill="#f0c060" opacity="0" filter="url(#softGlow)"/>
+          </g>
+          <g id="fountainGroup">
+            <!-- Lake body -->
+            <ellipse cx="960" cy="330" rx="145" ry="73" fill="none" stroke="#1a3050" stroke-width="3" opacity="0.3"/>
+            <ellipse cx="960" cy="330" rx="140" ry="70" fill="#041428"/>
+            <g clip-path="url(#lakeClip)">
+              <ellipse cx="960" cy="330" rx="140" ry="70" fill="url(#lakeWater)"/>
+              <ellipse cx="960" cy="330" rx="140" ry="70" fill="url(#lakeGlow)"/>
+              <!-- Lake caustics -->
+              <g id="lakeCaustics" opacity="0">
+                <ellipse cx="920" cy="315" rx="35" ry="14" fill="#5ba4f5" opacity="0.08" filter="url(#waterRipple)"/>
+                <ellipse cx="1000" cy="345" rx="40" ry="16" fill="#2f80ed" opacity="0.06" filter="url(#waterRipple)"/>
+                <ellipse cx="940" cy="355" rx="30" ry="12" fill="#5ba4f5" opacity="0.07" filter="url(#waterRipple)"/>
+                <ellipse cx="1020" cy="310" rx="25" ry="10" fill="#2f80ed" opacity="0.05" filter="url(#waterRipple)"/>
+              </g>
+              <!-- Lake ripples -->
+              <g id="lakeRipples" opacity="0">
+                <ellipse cx="960" cy="305" rx="100" ry="12" fill="none" stroke="#5ba4f5" stroke-width="0.6" opacity="0.3"/>
+                <ellipse cx="960" cy="325" rx="110" ry="14" fill="none" stroke="#5ba4f5" stroke-width="0.5" opacity="0.25"/>
+                <ellipse cx="960" cy="345" rx="105" ry="13" fill="none" stroke="#5ba4f5" stroke-width="0.5" opacity="0.2"/>
+                <ellipse cx="960" cy="360" rx="90" ry="10" fill="none" stroke="#5ba4f5" stroke-width="0.4" opacity="0.15"/>
+              </g>
+            </g>
+            <!-- Lake shore edge highlight -->
+            <ellipse cx="960" cy="330" rx="140" ry="70" fill="none" stroke="#1a3a55" stroke-width="1.5" opacity="0.3"/>
+            <!-- Natural grass/reeds around lake -->
+            <ellipse cx="840" cy="310" rx="12" ry="18" fill="#0a1a1e" opacity="0.4"/>
+            <ellipse cx="1080" cy="315" rx="10" ry="15" fill="#0a1a1e" opacity="0.35"/>
+            <ellipse cx="860" cy="365" rx="8" ry="12" fill="#0a1a1e" opacity="0.3"/>
+            <!-- Fountain pedestal in lake center -->
+            <ellipse cx="960" cy="318" rx="22" ry="8" fill="#1a2e48" stroke="#2f80ed" stroke-width="1" opacity="0.6"/>
+            <rect x="948" y="306" width="24" height="14" rx="4" fill="#121e30" stroke="#2f80ed" stroke-width="0.6" opacity="0.5"/>
+            <rect x="954" y="300" width="12" height="8" rx="2" fill="#1a2e48" stroke="#5ba4f5" stroke-width="0.5" opacity="0.4"/>
+            <!-- Water glow on lake surface -->
+            <ellipse id="waterGlowEl" cx="960" cy="316" rx="100" ry="30" fill="#2f80ed" opacity="0" filter="url(#waterGlowF)"/>
+            <ellipse id="waterGlowInner" cx="960" cy="312" rx="50" ry="16" fill="#00d4ff" opacity="0" filter="url(#waterGlowF)"/>
+            <!-- LED group around fountain base -->
+            <g id="ftnLedGroup" opacity="0">
+              <ellipse cx="960" cy="304" rx="28" ry="8" fill="#2f80ed" opacity="0.2" filter="url(#waterGlowF)"/>
+              <circle cx="930" cy="315" r="3" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/>
+              <circle cx="942" cy="310" r="3" fill="#2f80ed" opacity="0.85" filter="url(#glow)"/>
+              <circle cx="954" cy="307" r="3" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/>
+              <circle cx="966" cy="307" r="3" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/>
+              <circle cx="978" cy="310" r="3" fill="#2f80ed" opacity="0.85" filter="url(#glow)"/>
+              <circle cx="990" cy="315" r="3" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/>
+              <ellipse cx="960" cy="320" rx="50" ry="14" fill="#2f80ed" opacity="0.1" filter="url(#waterGlowF)"/>
+            </g>
+            <!-- ★ ENHANCED FOUNTAIN SPRAY (from fountains.html) ★ -->
+            <g id="fountainSpray" opacity="0">
+              <!-- Mist haze -->
+              <ellipse cx="960" cy="230" rx="80" ry="60" fill="url(#mistGrad)" opacity="0.7"/>
+              <!-- Center jet — tall and bold -->
+              <line id="centerJet" x1="960" y1="305" x2="960" y2="190" stroke="url(#sprayGrad)" stroke-width="6" stroke-linecap="round" opacity="0.9"/>
+              <line x1="960" y1="305" x2="960" y2="195" stroke="#b8e4ff" stroke-width="2.5" stroke-linecap="round" opacity="0.3"/>
+              <line x1="960" y1="305" x2="960" y2="200" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" opacity="0.2"/>
+              <ellipse cx="960" cy="192" rx="12" ry="6" fill="#00d4ff" opacity="0.1" filter="url(#sprayBlur)"/>
+              <!-- Splash particles at top -->
+              <g id="splashCenter" opacity="0.7">
+                <circle cx="952" cy="198" r="2" fill="#00d4ff" opacity="0.65"/><circle cx="968" cy="202" r="1.8" fill="#5ba4f5" opacity="0.55"/>
+                <circle cx="948" cy="208" r="1.6" fill="#00d4ff" opacity="0.5"/><circle cx="972" cy="205" r="1.8" fill="#5ba4f5" opacity="0.45"/>
+                <circle cx="955" cy="192" r="1.5" fill="white" opacity="0.35"/><circle cx="965" cy="190" r="1.2" fill="white" opacity="0.3"/>
+                <circle cx="944" cy="218" r="1.2" fill="#00d4ff" opacity="0.35"/><circle cx="976" cy="215" r="1.2" fill="#00d4ff" opacity="0.35"/>
+                <circle cx="938" cy="230" r="1" fill="#5ba4f5" opacity="0.25"/><circle cx="982" cy="226" r="1" fill="#5ba4f5" opacity="0.25"/>
+              </g>
+              <!-- Left fan spray -->
+              <path d="M960,305 Q930,240 900,272" stroke="url(#sprayGradSide)" stroke-width="4.5" fill="none" stroke-linecap="round" opacity="0.65"/>
+              <path d="M960,305 Q920,225 880,260" stroke="url(#sprayGradSide)" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+              <path d="M960,305 Q910,210 860,250" stroke="url(#sprayGradSide)" stroke-width="2.8" fill="none" stroke-linecap="round" opacity="0.35"/>
+              <path d="M960,305 Q900,200 845,242" stroke="url(#sprayGradSide)" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.2"/>
+              <!-- Right fan spray -->
+              <path d="M960,305 Q990,240 1020,272" stroke="url(#sprayGradSide)" stroke-width="4.5" fill="none" stroke-linecap="round" opacity="0.65"/>
+              <path d="M960,305 Q1000,225 1040,260" stroke="url(#sprayGradSide)" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+              <path d="M960,305 Q1010,210 1060,250" stroke="url(#sprayGradSide)" stroke-width="2.8" fill="none" stroke-linecap="round" opacity="0.35"/>
+              <path d="M960,305 Q1020,200 1075,242" stroke="url(#sprayGradSide)" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.2"/>
+              <!-- Droplets -->
+              <g id="ftnDroplets">
+                <circle cx="905" cy="275" r="1.6" fill="#00d4ff" opacity="0.45"/><circle cx="1015" cy="275" r="1.6" fill="#00d4ff" opacity="0.45"/>
+                <circle cx="885" cy="264" r="1.4" fill="#2f80ed" opacity="0.35"/><circle cx="1035" cy="264" r="1.4" fill="#2f80ed" opacity="0.35"/>
+                <circle cx="865" cy="255" r="1.2" fill="#2f80ed" opacity="0.25"/><circle cx="1055" cy="255" r="1.2" fill="#2f80ed" opacity="0.25"/>
+                <circle cx="920" cy="290" r="1.2" fill="#5ba4f5" opacity="0.25"/><circle cx="1000" cy="290" r="1.2" fill="#5ba4f5" opacity="0.25"/>
+              </g>
+              <!-- Ripple rings -->
+              <ellipse id="ftnRipple1" cx="960" cy="316" rx="35" ry="9" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.35"/>
+              <ellipse id="ftnRipple2" cx="960" cy="319" rx="60" ry="15" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
+              <ellipse id="ftnRipple3" cx="960" cy="322" rx="90" ry="22" fill="none" stroke="#1a4a7a" stroke-width="0.6" opacity="0.15"/>
+              <ellipse id="ftnRipple4" cx="960" cy="325" rx="120" ry="30" fill="none" stroke="#1a4a7a" stroke-width="0.4" opacity="0.08"/>
+            </g>
+          </g>
+          <g id="landscapeLights">
+            <line x1="200" y1="295" x2="200" y2="280" stroke="#1e3050" stroke-width="1.5"/><circle id="lLight1" cx="200" cy="278" r="3" fill="#f0c060" opacity="0" filter="url(#glow)"/>
+            <line x1="280" y1="288" x2="280" y2="273" stroke="#1e3050" stroke-width="1.5"/><circle id="lLight2" cx="280" cy="271" r="3" fill="#f0c060" opacity="0" filter="url(#glow)"/>
+            <line x1="360" y1="282" x2="360" y2="267" stroke="#1e3050" stroke-width="1.5"/><circle id="lLight3" cx="360" cy="265" r="3" fill="#f0c060" opacity="0" filter="url(#glow)"/>
+            <line x1="630" y1="260" x2="630" y2="245" stroke="#1e3050" stroke-width="1.5"/><circle id="lLight4" cx="630" cy="243" r="3" fill="#f0c060" opacity="0" filter="url(#glow)"/>
+            <ellipse cx="250" cy="250" rx="22" ry="28" fill="#0a1a20" opacity="0.5"/><rect x="248" y="270" width="4" height="18" fill="#0d1a22" opacity="0.4"/>
+          </g>
+          <g id="estateToast" opacity="0" transform="translate(420,380)">
+            <rect width="260" height="48" rx="10" fill="rgba(8,18,32,0.95)" stroke="rgba(74,222,128,0.35)" stroke-width="1"/>
+            <circle cx="16" cy="24" r="4" fill="#4ade80" opacity="0.8"/><circle cx="36" cy="24" r="12" fill="#0d2a1a" stroke="rgba(74,222,128,0.3)" stroke-width="1"/><text x="36" y="29" font-size="11" text-anchor="middle" fill="#4ade80">🏠</text>
+            <text id="toastTitle" x="56" y="20" font-size="8.5" fill="#e4e9f2" font-family="'Syne',sans-serif" font-weight="700">System Online</text>
+            <text id="toastSub" x="56" y="33" font-size="6.5" fill="#6b7a8d" font-family="monospace">All systems connected</text>
+            <rect x="210" y="14" width="38" height="16" rx="8" fill="rgba(74,222,128,0.1)" stroke="rgba(74,222,128,0.25)" stroke-width="0.8"/><text x="229" y="25" font-size="6" fill="#4ade80" font-weight="600" font-family="monospace" text-anchor="middle">Live</text>
+          </g>
+          <path d="M0,0 L0,18 M0,0 L18,0" stroke="#2f80ed" stroke-width="2" opacity="0.18" fill="none"/><path d="M1100,0 L1100,18 M1100,0 L1082,0" stroke="#2f80ed" stroke-width="2" opacity="0.18" fill="none"/><path d="M0,440 L0,422 M0,440 L18,440" stroke="#2f80ed" stroke-width="2" opacity="0.18" fill="none"/><path d="M1100,440 L1100,422 M1100,440 L1082,440" stroke="#2f80ed" stroke-width="2" opacity="0.18" fill="none"/>
+          <rect x="0" y="405" width="1100" height="35" fill="url(#skyGrad)" opacity="0.8"/>
+        </g>
+      </svg>
+    </div>
+    <div class="hero-content">
+      <p class="hero-sub">Gates, pools, lighting, cameras, fountains, HVAC — we connect everything you already own into one clean system that actually works. Custom-built for large estates and high-end homes. No templates. No generic installs. Just your property, finally simple.</p>
+      <div class="hero-actions"><a href="#contact" class="btn-primary">Schedule a Consultation →</a><a href="#whatwedo" class="btn-secondary">See How It Works</a></div>
+    </div>
+  </section>
+
+  <section class="app-graveyard"><div class="app-graveyard-inner">
+    <div class="graveyard-apps reveal"><div class="ghost-app">🚪</div><div class="ghost-app">💡</div><div class="ghost-app">📹</div><div class="ghost-app">🌡️</div><div class="ghost-app">🔒</div><div class="ghost-app">🌊</div><div class="ghost-app">⛲</div><div class="ghost-app">🔊</div><div class="ghost-app">🌿</div><div class="ghost-app">☀️</div><div class="ghost-app">🏠</div><div class="ghost-app">📱</div></div>
+    <div class="graveyard-label reveal">Sound familiar?</div>
+    <h2 class="graveyard-title reveal">Twelve apps. Six remotes.<br/>Nothing talks to anything else.</h2>
+    <p class="graveyard-sub reveal">Your gate has one app. Your pool has another. Your lights use a third. Half of them barely work. The other half you've forgotten the password to. You paid for a "smart" home — and it's anything but. That's where we come in.</p>
+  </div></section>
+
+  <section id="whatwedo"><div class="section-inner">
+    <div class="section-tag">What We Do</div>
+    <h2 class="section-title">We make everything work together.</h2>
+    <p class="section-sub">We don't sell boxes and leave. We learn how you live, connect every system on your property, and build you something that actually makes sense.</p>
+    <div class="narrative-flow">
+      <div class="narrative-step reveal"><div class="narrative-num">01</div><div class="narrative-content"><h3>We walk your property and learn what you have</h3><p>Every estate is different. Different brands, different eras, different installers who came and went. We audit every system — gate, pool, lighting, cameras, HVAC, audio, irrigation — and figure out what works, what doesn't, and what can be connected.</p></div></div>
+      <div class="narrative-step reveal"><div class="narrative-num">02</div><div class="narrative-content"><h3>We learn how you actually live</h3><p>This is the part most integrators skip. We ask what matters — when you swim, how you entertain, what annoys you, what you've given up on. Then we build around your life, not around a product manual.</p></div></div>
+      <div class="narrative-step reveal"><div class="narrative-num">03</div><div class="narrative-content"><h3>We connect everything into one system</h3><p>We integrate your existing equipment — whatever brand, whatever age. We don't rip and replace. We make what you have work together, controlled from one app with only the buttons you actually use.</p></div></div>
+      <div class="narrative-step reveal"><div class="narrative-num">04</div><div class="narrative-content"><h3>We stay. We improve. We get it right.</h3><p>We're not a contractor who disappears after the install. Your system is a living thing — habits change, seasons change, new ideas come up. We're here monthly, tuning and improving, making sure everything keeps working exactly how you want it.</p></div></div>
+    </div>
+  </div></section>
+
+  <section id="automate"><div class="section-inner">
+    <div class="section-tag">Solutions</div><h2 class="section-title">What we automate.</h2><p class="section-sub">Every property is different. Here's what we bring into your system — and we're always adding more.</p>
+    <div class="automate-grid">
+      <a href="gate.html" class="automate-card reveal"><div class="automate-icon">🚪</div><h3>Smart Gate Access</h3><p>RFID entry, phone access, visitor logging, automatic opening — your gate finally works the way it should.</p><span class="automate-status status-live">Live</span></a>
+      <a href="pool.html" class="automate-card reveal"><div class="automate-icon">🌊</div><h3>Pool & Spa Automation</h3><p>One tap to heat the spa. Voice commands for the lights. Any equipment, any brand — or no automation at all.</p><span class="automate-status status-live">Live</span></a>
+      <a href="fountains.html" class="automate-card reveal"><div class="automate-icon">⛲</div><h3>Lake & Fountain Control</h3><p>Turn fountains on from your phone, set schedules, auto-shutoff in high wind.</p><span class="automate-status status-live">Live</span></a>
+      <div class="automate-card reveal"><div class="automate-icon">💡</div><h3>Lighting & Scenes</h3><p>Every light on your property — inside, outside, landscape, pool — in one app with scenes and voice control.</p><span class="automate-status status-soon">Coming Soon</span></div>
+      <div class="automate-card reveal"><div class="automate-icon">📹</div><h3>Cameras & Security</h3><p>View every camera from one app. Motion triggers lights, locks the gate, sends you alerts.</p><span class="automate-status status-soon">Coming Soon</span></div>
+      <div class="automate-card reveal"><div class="automate-icon">🌡️</div><h3>Climate & HVAC</h3><p>Manage thermostats across every building — main home, guest house, barn, shop — all in one view.</p><span class="automate-status status-soon">Coming Soon</span></div>
+    </div>
+  </div></section>
+
+  <section id="different"><div class="section-inner" style="text-align:center;">
+    <div class="section-tag">Why Craison Digital</div><h2 class="section-title">We're not like other integrators.</h2><p class="section-sub" style="margin:0 auto 3.5rem;">Most integrators install the same equipment the same way every time. They avoid the hard stuff. We don't.</p>
+    <div class="diff-grid">
+      <div class="diff-card reveal"><div class="diff-num">01</div><h3>We automate what others won't.</h3><p>Mixed brands? Legacy equipment? Systems from three different installers that were never meant to work together? That's our specialty. While most integrators are scared of the unknown, we figure it out.</p></div>
+      <div class="diff-card reveal"><div class="diff-num">02</div><h3>We build relationships, not invoices.</h3><p>We're not in and out. Your system is ongoing — your life changes, technology changes. We're here every month, tuning and improving. You're not buying a product. You're gaining a partner.</p></div>
+      <div class="diff-card reveal"><div class="diff-num">03</div><h3>Every system is custom. Every single one.</h3><p>We don't have a "standard package." Your dashboard, your automations, your controls — all built around how you actually use your property. No two Craison systems look the same.</p></div>
+    </div>
+  </div></section>
+
+  <section id="dayinlife"><div class="section-inner">
+    <div class="section-tag">The Experience</div><h2 class="section-title">A day with Craison Digital.</h2><p class="section-sub">This is what it feels like when your property works as one system.</p>
+    <div class="timeline">
+      <div class="tl-item reveal"><div class="tl-time">6 AM</div><div class="tl-content"><h4>Pool pump switches to off-peak</h4><p>Your pump schedule was built around your electric rate plan. It ran during the cheapest hours and switches automatically at dawn.</p><div class="tl-auto">Automated</div></div></div>
+      <div class="tl-item reveal"><div class="tl-time">7 AM</div><div class="tl-content"><h4>Landscape lights fade off at sunrise</h4><p>Your lighting tracks actual sunrise — not a fixed timer that drifts out of sync every few weeks.</p><div class="tl-auto">Automated</div></div></div>
+      <div class="tl-item reveal"><div class="tl-time">3 PM</div><div class="tl-content"><h4>Delivery truck arrives — gate opens automatically</h4><p>The truck's RFID tag is recognized. Gate opens, you get a notification with a timestamp. No call, no buzzer.</p><div class="tl-auto">Automated</div></div></div>
+      <div class="tl-item reveal"><div class="tl-time">5 PM</div><div class="tl-content"><h4>"Hey Siri, start the spa"</h4><p>Spa starts heating. Porch lights turn red — a visual cue. When it hits 102°F, the lights go back to normal and the speakers announce "the spa is ready."</p></div></div>
+      <div class="tl-item reveal"><div class="tl-time">8 PM</div><div class="tl-content"><h4>One tap: "Pool Night"</h4><p>Pool lights on. Landscape dimmed to warm amber. Patio speakers playing. Fountain at 50%. The entire scene — one button.</p></div></div>
+      <div class="tl-item reveal"><div class="tl-time">11 PM</div><div class="tl-content"><h4>Everyone's inside — the property winds down</h4><p>Pool camera sees no motion for 20 minutes. Spa off. Lights dim. Fountain stops. Gate locks. You didn't touch a thing.</p><div class="tl-auto">Automated</div></div></div>
+    </div>
+  </div></section>
+
+  <section id="plans"><div class="section-inner">
+    <div class="plan-layout">
+      <div><div class="section-tag">Ongoing Support</div><h2 class="section-title">Your system is alive.<br/>So is our relationship.</h2><p style="color:var(--muted);font-size:0.95rem;line-height:1.75;margin-bottom:1.5rem;">Most integrators finish the install and move on. You're left with a system that slowly falls behind — new devices don't get added, automations don't get updated, and when something breaks, you're starting from scratch.</p><p style="color:var(--muted);font-size:0.95rem;line-height:1.75;">We offer monthly plans because your property isn't static. Seasons change. Routines change. New ideas come up. Your system should evolve with you — and we're here to make that happen.</p></div>
+      <div class="plan-card reveal"><div class="plan-badge">Monthly Plan</div><h3>Always improving. Always supported.</h3><p>Your Craison system isn't a one-time install — it's an ongoing service, tuned and refined as your life evolves.</p>
+        <div class="plan-features"><div class="plan-feature">Priority support — we pick up when you call</div><div class="plan-feature">Monthly check-ins to tune automations</div><div class="plan-feature">New devices added and integrated</div><div class="plan-feature">Seasonal adjustments (schedules, lighting, pool)</div><div class="plan-feature">Dashboard updates as your needs change</div><div class="plan-feature">Remote troubleshooting and monitoring</div></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section id="contact" style="background:var(--dark);"><div class="section-inner"><div class="cta-box">
+    <div class="section-tag">Get Started</div><h2 class="section-title">Let's talk about your property.</h2><p class="section-sub" style="margin:0 auto 0;">Tell us what you have and what's frustrating. We'll figure out the rest.</p>
+    <form class="contact-form" onsubmit="return false;">
+      <div class="form-row"><div class="form-group"><label>First Name</label><input type="text" placeholder="John"/></div><div class="form-group"><label>Last Name</label><input type="text" placeholder="Smith"/></div></div>
+      <div class="form-group"><label>Email</label><input type="email" placeholder="john@example.com"/></div>
+      <div class="form-group"><label>Phone</label><input type="tel" placeholder="(305) 000-0000"/></div>
+      <div class="form-group"><label>What are you looking to automate?</label><select><option value="" disabled selected>Select one</option><option>Gate / Access Control</option><option>Pool &amp; Spa</option><option>Lighting &amp; Scenes</option><option>Cameras &amp; Security</option><option>Full property — everything</option><option>Not sure yet — I just want it to work</option></select></div>
+      <div class="form-group"><label>Tell us about your property</label><textarea placeholder="What systems do you have? What's frustrating? What would make your life easier?"></textarea></div>
+      <div class="form-submit-row"><button type="submit" class="btn-primary">Send My Request →</button><span class="form-note">We typically respond within 24 hours.</span></div>
+    </form>
+  </div></div></section>
+
+  <footer><div class="footer-logo">Craison<span>Digital</span></div><div>© 2026 Craison Digital. All rights reserved.</div><div>Smart Property Consulting</div></footer>
+
+  <script>
+  (function(){
+    var poolCaustics=document.getElementById('poolCaustics'),poolRipples=document.getElementById('poolRipples'),poolGlowOverlay=document.getElementById('poolGlowOverlay'),fountainSpray=document.getElementById('fountainSpray'),gateLed=document.getElementById('gateLed'),gateLeft=document.getElementById('gateLeft'),gateRight=document.getElementById('gateRight'),estateToast=document.getElementById('estateToast'),toastTitle=document.getElementById('toastTitle'),toastSub=document.getElementById('toastSub'),pillarLight1=document.getElementById('pillarLight1'),pillarLight2=document.getElementById('pillarLight2'),porchLight=document.getElementById('porchLight'),porchLight2=document.getElementById('porchLight2'),windowAmbient=document.getElementById('windowAmbient');
+    var lakeCaustics=document.getElementById('lakeCaustics'),lakeRipples=document.getElementById('lakeRipples');
+    var carGroup=document.getElementById('carGroup');
+    var winGlows=[],lLights=[];
+    for(var i=1;i<=6;i++)winGlows.push(document.getElementById('winGlow'+i));
+    for(var i=1;i<=4;i++)lLights.push(document.getElementById('lLight'+i));
+    if(!poolCaustics)return;
+    var CYCLE=20000,startTs=null;
+    function lerp(a,b,t){return a+(b-a)*t}
+    function clamp(v,lo,hi){return v<lo?lo:v>hi?hi:v}
+    function ease(t){return t*t*(3-2*t)}
+    function frac(t,a,b){return clamp((t-a)/(b-a),0,1)}
+
+    // Animation phases (20s cycle):
+    // 0.00-0.10: dark estate, lights start coming on
+    // 0.10-0.22: windows light up, porch/landscape lights on
+    // 0.15-0.24: car approaches from left (headlights visible)
+    // 0.24-0.27: car stops at gate, LED amber→green
+    // 0.27-0.33: gate opens
+    // 0.33-0.40: car drives through gate, up driveway toward house
+    // 0.40-0.46: gate closes, car parks
+    // 0.42-0.48: toast "Gate: Vehicle Arrived"
+    // 0.48-0.55: fountain turns on
+    // 0.55-0.72: everything lit — pool, fountain, lights, full estate alive
+    // 0.72-0.80: toast "Pool Night Activated"
+    // 0.80-0.90: everything running beautifully
+    // 0.90-0.97: wind down — lights fade, fountain off, car fades
+    // 0.97-1.00: reset
+
+    function tick(ts){
+      if(startTs===null)startTs=ts;
+      var f=((ts-startTs)%CYCLE)/CYCLE;
+
+      // Pool caustics (move always, but opacity controlled)
+      var pcx=Math.sin(ts*0.0007)*10,pcy=Math.cos(ts*0.0005)*6;
+      poolCaustics.setAttribute('transform','translate('+pcx+','+pcy+')');
+      poolRipples.setAttribute('transform','translate(0,'+Math.sin(ts*0.0009)*2.5+')');
+
+      // Pool lights — OFF until gate opens at 0.27, then fade on
+      var poolLightOn=0;
+      if(f>=0.27&&f<0.35)poolLightOn=ease(frac(f,0.27,0.35));
+      else if(f>=0.35&&f<0.90)poolLightOn=1;
+      else if(f>=0.90&&f<0.96)poolLightOn=1-ease(frac(f,0.90,0.96));
+      var poolShimmer=poolLightOn*(0.5+0.2*Math.sin(ts*0.003));
+      document.getElementById('poolLightsGroup').setAttribute('opacity',String(poolShimmer));
+      // Pool caustics visibility tied to pool lights
+      poolCaustics.setAttribute('opacity',String(0.25*poolLightOn));
+      poolRipples.setAttribute('opacity',String(0.25*poolLightOn));
+      // Green glow overlay on water — makes pool look illuminated when on
+      poolGlowOverlay.setAttribute('opacity',String(poolLightOn));
+
+      // Lake caustics (move always, but opacity controlled)
+      var lcx=Math.sin(ts*0.0005)*12,lcy=Math.cos(ts*0.0004)*7;
+      lakeCaustics.setAttribute('transform','translate('+lcx+','+lcy+')');
+      var lry=Math.sin(ts*0.0006)*3;
+      lakeRipples.setAttribute('transform','translate(0,'+lry+')');
+      // Lake caustics dim until fountain comes on at 0.27
+      var lakeVis=0;
+      if(f>=0.27&&f<0.35)lakeVis=ease(frac(f,0.27,0.35))*0.2;
+      else if(f>=0.35&&f<0.90)lakeVis=0.2+0.05*(fOn>0.5?1:0);
+      else if(f>=0.90)lakeVis=0.25*(1-ease(frac(f,0.90,0.96)));
+      lakeCaustics.setAttribute('opacity',String(lakeVis));
+      lakeRipples.setAttribute('opacity',String(lakeVis));
+
+      // ── PILLAR LIGHTS — come on as car approaches (0.18), before gate opens ──
+      var plOn=0;
+      if(f>=0.18&&f<0.92)plOn=ease(frac(f,0.18,0.23));
+      if(f>=0.92)plOn=1-ease(frac(f,0.92,0.97));
+      var plF=0.6+0.15*Math.sin(ts*0.0035);
+      pillarLight1.setAttribute('opacity',String(plOn*plF));
+      pillarLight2.setAttribute('opacity',String(plOn*plF));
+
+      // ── ALL OTHER LIGHTS come on as gate opens (0.27+) ──
+
+      // House windows — staggered starting at 0.27
+      var winTargets=[0.27,0.29,0.31,0.33,0.35,0.37];
+      for(var w=0;w<6;w++){
+        var wOn=0;
+        if(f>=winTargets[w]&&f<0.90)wOn=ease(frac(f,winTargets[w],winTargets[w]+0.04));
+        if(f>=0.90&&f<0.96)wOn=1-ease(frac(f,0.90,0.96));
+        if(f>=0.96)wOn=0;
+        winGlows[w].setAttribute('opacity',String(wOn*(0.12+0.08*Math.sin(ts*0.002+w*1.3))));
+      }
+      var ambOn=0;
+      if(f>=0.30&&f<0.90)ambOn=ease(frac(f,0.30,0.38))*0.06;
+      if(f>=0.90)ambOn=0.06*(1-ease(frac(f,0.90,0.96)));
+      windowAmbient.setAttribute('opacity',String(ambOn));
+
+      // Porch lights — come on at 0.28
+      var pOn=0;
+      if(f>=0.28&&f<0.90)pOn=ease(frac(f,0.28,0.33));
+      if(f>=0.90)pOn=1-ease(frac(f,0.90,0.95));
+      var pF=0.7+0.15*Math.sin(ts*0.004);
+      porchLight.setAttribute('opacity',String(pOn*pF));
+      porchLight2.setAttribute('opacity',String(pOn*pF));
+
+      // Landscape lights — staggered starting at 0.29
+      var llT=[0.29,0.32,0.35,0.38];
+      for(var l=0;l<4;l++){
+        var lOn=0;
+        if(f>=llT[l]&&f<0.92)lOn=ease(frac(f,llT[l],llT[l]+0.04));
+        if(f>=0.92)lOn=1-ease(frac(f,0.92,0.97));
+        lLights[l].setAttribute('opacity',String(lOn*(0.65+0.15*Math.sin(ts*0.003+l*2))));
+      }
+
+      // ── CAR ANIMATION ──
+      // Car drawn centered at (0,0). Translate places car center on driveway.
+      //
+      // Exact driveway path from SVG (widened):
+      // Top edge:    M0,305  Q80,305  120,298  Q200,286  320,270  Q400,260  480,255
+      // Bottom edge: L480,295 Q400,300 320,310  Q200,325  120,335  Q80,340   0,340
+      //
+      // Centerline (avg of top & bottom):
+      //   x=0   → (305+340)/2 = 322.5
+      //   x=120 → (298+335)/2 = 316.5
+      //   x=320 → (270+310)/2 = 290
+      //   x=480 → (255+295)/2 = 275
+
+      function driveCenterY(x){
+        if(x<=0) return 322;
+        if(x<=120) return lerp(322,316,x/120);
+        if(x<=320) return lerp(316,290,(x-120)/200);
+        if(x<=480) return lerp(290,275,(x-320)/160);
+        return 275;
+      }
+
+      var carOp=0;
+      if(f>=0.15&&f<0.24){
+        // Approaching gate from off-screen left, stopping just before gate bars
+        var ct=ease(frac(f,0.15,0.24));
+        var cx=lerp(-40,68,ct); // car front (at +26) reaches x=94, just before gate bars at x=95
+        var cy=driveCenterY(Math.max(cx,0));
+        carGroup.setAttribute('transform','translate('+cx+','+cy+')');
+        carOp=f<0.17?ease(frac(f,0.15,0.17)):1;
+      }else if(f>=0.24&&f<0.33){
+        // Waiting at gate while it opens
+        var cy=driveCenterY(68);
+        carGroup.setAttribute('transform','translate(68,'+cy+')');
+        carOp=1;
+      }else if(f>=0.33&&f<0.50){
+        // Driving through open gate and along driveway to front of house
+        var ct2=ease(frac(f,0.33,0.50));
+        var cx=lerp(68,480,ct2);
+        var cy=driveCenterY(cx);
+        var sc=lerp(1,0.75,ct2);
+        carGroup.setAttribute('transform','translate('+cx+','+cy+') scale('+sc+')');
+        carOp=1;
+      }else if(f>=0.50&&f<0.90){
+        // Parked in front of house
+        var cy=driveCenterY(480);
+        var fadeOp=f<0.87?1:(1-ease(frac(f,0.87,0.90)));
+        carGroup.setAttribute('transform','translate(480,'+cy+') scale(0.75)');
+        carOp=fadeOp;
+      }else{
+        carOp=0;
+      }
+      carGroup.setAttribute('opacity',String(carOp));
+
+      // ── GATE ANIMATION (triggered by car arrival) ──
+      // Gate spans vertically across driveway. Bottom panel (gateLeft) retracts DOWN toward bottom pillar.
+      // Top panel (gateRight) retracts UP toward top pillar.
+      // Bottom panel: y=298 to y=336, hinges at y=336 (pillar edge)
+      // Top panel: y=260 to y=298, hinges at y=260 (pillar edge)
+      var HINGE_BOT=336, HINGE_TOP=260;
+      function setGate(sx){
+        // sx: 1=closed, 0=open
+        // Bottom half scales from bottom (hinge at y=336)
+        gateLeft.setAttribute('transform','translate(0,'+HINGE_BOT+') scale(1,'+sx+') translate(0,'+(-HINGE_BOT)+')');
+        // Top half scales from top (hinge at y=260)
+        gateRight.setAttribute('transform','translate(0,'+HINGE_TOP+') scale(1,'+sx+') translate(0,'+(-HINGE_TOP)+')');
+      }
+      var gateSx=1;
+      if(f>=0.24&&f<0.27){
+        // LED amber→green
+        var gf=frac(f,0.24,0.27);
+        gateLed.setAttribute('fill',gf<0.5?'#dcaa14':'#4ade80');
+        gateLed.setAttribute('opacity','0.9');
+        gateSx=1;
+      }else if(f>=0.27&&f<0.33){
+        // Gate opens
+        gateLed.setAttribute('fill','#4ade80');
+        gateLed.setAttribute('opacity','0.9');
+        gateSx=1-ease(frac(f,0.27,0.32));
+      }else if(f>=0.33&&f<0.52){
+        // Gate stays open while car drives through
+        gateSx=0;
+        gateLed.setAttribute('fill','#4ade80');
+        gateLed.setAttribute('opacity','0.9');
+      }else if(f>=0.52&&f<0.58){
+        // Gate closes after car is through
+        gateSx=ease(frac(f,0.52,0.58));
+        var closeF=frac(f,0.52,0.58);
+        gateLed.setAttribute('fill',closeF>0.5?'#dc3c3c':'#4ade80');
+        gateLed.setAttribute('opacity',closeF>0.5?'0.7':'0.9');
+      }else{
+        gateSx=1;
+        gateLed.setAttribute('fill','#dc3c3c');gateLed.setAttribute('opacity','0.7');
+      }
+      setGate(gateSx);
+
+      // ── FOUNTAIN (enhanced, from fountains.html style) — comes on with gate at 0.27 ──
+      var fOn=0;
+      if(f>=0.27&&f<0.35)fOn=ease(frac(f,0.27,0.35));
+      else if(f>=0.35&&f<0.88)fOn=1;
+      else if(f>=0.88&&f<0.94)fOn=1-ease(frac(f,0.88,0.94));
+      fountainSpray.setAttribute('opacity',String(fOn));
+
+      // Water glow on lake
+      var wgEl=document.getElementById('waterGlowEl');
+      var wgIn=document.getElementById('waterGlowInner');
+      if(wgEl)wgEl.setAttribute('opacity',String(0.18*fOn));
+      if(wgIn)wgIn.setAttribute('opacity',String(0.12*fOn));
+
+      // LED group shimmer
+      var ftnLed=document.getElementById('ftnLedGroup');
+      if(ftnLed){
+        var ledShim=0.9+Math.sin(ts/350)*0.1;
+        ftnLed.setAttribute('opacity',String(fOn*ledShim));
+      }
+
+      // Ripple animation
+      var rTime=(ts/2000)%1;
+      var r1=document.getElementById('ftnRipple1'),r2=document.getElementById('ftnRipple2'),r3=document.getElementById('ftnRipple3'),r4=document.getElementById('ftnRipple4');
+      if(fOn>0.1){
+        var rSc=1+rTime*0.35;
+        if(r1){r1.setAttribute('rx',String(35*rSc));r1.setAttribute('ry',String(9*rSc));r1.setAttribute('opacity',String(0.35*(1-rTime)*fOn));}
+        if(r2){r2.setAttribute('rx',String(60+rTime*15));r2.setAttribute('ry',String(15+rTime*4));r2.setAttribute('opacity',String(0.25*fOn));}
+        if(r3){r3.setAttribute('rx',String(90+rTime*18));r3.setAttribute('ry',String(22+rTime*6));r3.setAttribute('opacity',String(0.15*fOn));}
+        if(r4){r4.setAttribute('rx',String(120+rTime*22));r4.setAttribute('ry',String(30+rTime*8));r4.setAttribute('opacity',String(0.08*fOn));}
+      }else{
+        if(r1)r1.setAttribute('opacity','0');if(r2)r2.setAttribute('opacity','0');
+        if(r3)r3.setAttribute('opacity','0');if(r4)r4.setAttribute('opacity','0');
+      }
+
+      // Splash shimmer
+      var splC=document.getElementById('splashCenter');
+      var ftnDr=document.getElementById('ftnDroplets');
+      var shimmer=0.55+Math.sin(ts/180)*0.3;
+      if(splC)splC.setAttribute('opacity',String(shimmer*fOn));
+      if(ftnDr)ftnDr.setAttribute('opacity',String((0.5+Math.sin(ts/250)*0.2)*fOn));
+
+      // Subtle sway
+      if(fOn>0){
+        var sway=Math.sin(ts/1800)*1.5;
+        fountainSpray.setAttribute('transform','translate('+sway+',0)');
+      }
+
+      // ── TOASTS ──
+      var tOp=0;
+      if(f>=0.51&&f<0.61){
+        tOp=f<0.53?ease(frac(f,0.51,0.53)):(f>0.58?1-ease(frac(f,0.58,0.61)):1);
+        toastTitle.textContent='Gate: Vehicle Arrived';toastSub.textContent='RFID recognized · 3:12 PM';
+      }else if(f>=0.72&&f<0.82){
+        tOp=f<0.74?ease(frac(f,0.72,0.74)):(f>0.79?1-ease(frac(f,0.79,0.82)):1);
+        toastTitle.textContent='Pool Night Activated';toastSub.textContent='Lights · Fountain · Music · Spa';
+      }
+      estateToast.setAttribute('opacity',String(tOp));
+      if(tOp>0)estateToast.setAttribute('transform','translate(420,'+(380+lerp(8,0,Math.min(tOp*2,1)))+')');
+
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    var els=document.querySelectorAll('.reveal');
+    var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.15,rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(el){obs.observe(el)});
+    document.querySelectorAll('.nav-links a').forEach(function(a){a.addEventListener('click',function(){document.querySelector('.nav-links').classList.remove('open')})});
+  })();
+  </script>
+</body>
+</html>

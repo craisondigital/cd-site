@@ -394,25 +394,34 @@
             <text x="746" y="68" font-size="6.5" fill="#7a8599" font-family="monospace">TEMP</text><text id="hudTemp" x="782" y="68" font-size="6.5" fill="#00d4ff" font-family="monospace">78°F</text>
           </g>
 
-          <!-- Phone mockup -->
+          <!-- Phone mockup — ENLARGED ~1.7x -->
           <g id="phoneGroup" opacity="0">
-            <g transform="translate(720,220)">
-              <rect x="0" y="0" width="62" height="110" rx="8" fill="#0a1220" stroke="#2a3e58" stroke-width="1.5"/>
-              <rect x="0" y="0" width="62" height="110" rx="8" fill="none" stroke="#2f80ed" stroke-width="0.6" opacity="0.3"/>
-              <rect x="4" y="12" width="54" height="84" rx="3" fill="#060e1c"/>
-              <rect x="20" y="2" width="22" height="4" rx="2" fill="#141e2c"/>
-              <text x="10" y="28" font-size="5.5" fill="#5ba4f5" font-family="monospace" font-weight="bold" letter-spacing="0.5">LAKE FOUNTAIN</text>
-              <rect x="10" y="32" width="36" height="0.8" fill="#2f80ed" opacity="0.25"/>
-              <text id="phoneStatus" x="10" y="44" font-size="5" fill="#f87171" font-family="monospace">● OFF</text>
-              <circle id="phoneBtnBg" cx="31" cy="66" r="16" fill="#0d1a2c" stroke="#2f80ed" stroke-width="1" opacity="0.6"/>
-              <g id="phonePowerIcon" transform="translate(31,66)">
-                <path d="M0,-8 L0,-4" stroke="#5ba4f5" stroke-width="2" stroke-linecap="round"/>
-                <path d="M-5.5,-5.5 A7.5,7.5 0 1,0 5.5,-5.5" stroke="#5ba4f5" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <g transform="translate(672,148)">
+              <!-- Phone body — 105x187 (was 62x110) -->
+              <rect x="0" y="0" width="105" height="187" rx="14" fill="#0a1220" stroke="#2a3e58" stroke-width="2"/>
+              <rect x="0" y="0" width="105" height="187" rx="14" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.3"/>
+              <!-- Screen -->
+              <rect x="7" y="20" width="91" height="143" rx="5" fill="#060e1c"/>
+              <!-- Notch -->
+              <rect x="34" y="4" width="37" height="7" rx="3.5" fill="#141e2c"/>
+              <!-- Screen content -->
+              <text x="17" y="47" font-size="9.5" fill="#5ba4f5" font-family="monospace" font-weight="bold" letter-spacing="0.8">LAKE FOUNTAIN</text>
+              <rect x="17" y="53" width="61" height="1.3" fill="#2f80ed" opacity="0.25"/>
+              <!-- Status text -->
+              <text id="phoneStatus" x="17" y="72" font-size="8.5" fill="#f87171" font-family="monospace">● OFF</text>
+              <!-- Power button — centered, larger -->
+              <circle id="phoneBtnBg" cx="52.5" cy="112" r="27" fill="#0d1a2c" stroke="#2f80ed" stroke-width="1.5" opacity="0.6"/>
+              <g id="phonePowerIcon" transform="translate(52.5,112)">
+                <path d="M0,-14 L0,-7" stroke="#5ba4f5" stroke-width="3" stroke-linecap="round"/>
+                <path d="M-9.5,-9.5 A13,13 0 1,0 9.5,-9.5" stroke="#5ba4f5" stroke-width="2.5" fill="none" stroke-linecap="round"/>
               </g>
-              <circle id="tapRing1" cx="31" cy="66" r="16" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0"/>
-              <circle id="tapRing2" cx="31" cy="66" r="16" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0"/>
-              <circle id="fingerDot" cx="31" cy="66" r="5" fill="#5ba4f5" opacity="0"/>
-              <rect x="20" y="100" width="22" height="3" rx="1.5" fill="#1a2838"/>
+              <!-- Tap rings -->
+              <circle id="tapRing1" cx="52.5" cy="112" r="27" fill="none" stroke="#2f80ed" stroke-width="2" opacity="0"/>
+              <circle id="tapRing2" cx="52.5" cy="112" r="27" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0"/>
+              <!-- Finger tap indicator -->
+              <circle id="fingerDot" cx="52.5" cy="112" r="8.5" fill="#5ba4f5" opacity="0"/>
+              <!-- Home bar -->
+              <rect x="34" y="170" width="37" height="5" rx="2.5" fill="#1a2838"/>
             </g>
           </g>
 
@@ -698,21 +707,21 @@
       if (f >= T_TAP && f < T_TAP + 0.02) {
         var tapIn = ease(frac(f, T_TAP, T_TAP + 0.01));
         fingerDot.setAttribute('opacity', String(0.5 * tapIn));
-        fingerDot.setAttribute('r', String(5 + 2 * tapIn));
+        fingerDot.setAttribute('r', String(8.5 + 3.5 * tapIn));
         phoneBtnBg.setAttribute('fill', '#142a40');
       } else if (f >= T_TAP + 0.02 && f < T_TAP + 0.04) {
         var tapOut = ease(frac(f, T_TAP + 0.02, T_TAP + 0.04));
         fingerDot.setAttribute('opacity', String(0.5 * (1 - tapOut)));
-        fingerDot.setAttribute('r', String(7 - 2 * tapOut));
+        fingerDot.setAttribute('r', String(12 - 3.5 * tapOut));
         phoneBtnBg.setAttribute('fill', '#0d1a2c');
       } else { fingerDot.setAttribute('opacity', '0'); }
 
       // Tap rings
       if (f >= T_TAP + 0.01 && f < T_TAP + 0.06) {
         var ringT = frac(f, T_TAP + 0.01, T_TAP + 0.06);
-        tapRing1.setAttribute('r', String(16 + 12 * ringT));
+        tapRing1.setAttribute('r', String(27 + 20 * ringT));
         tapRing1.setAttribute('opacity', String(0.6 * (1 - ringT)));
-        tapRing2.setAttribute('r', String(16 + 8 * ringT));
+        tapRing2.setAttribute('r', String(27 + 14 * ringT));
         tapRing2.setAttribute('opacity', String(0.4 * (1 - ringT)));
       } else { tapRing1.setAttribute('opacity', '0'); tapRing2.setAttribute('opacity', '0'); }
 

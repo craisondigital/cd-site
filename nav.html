@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nav Prototype v3 — Craison Digital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #060a10; --dark: #0b1018; --card: #0f1724;
+      --card-hover: #141d2e; --border: rgba(255,255,255,0.06);
+      --blue: #2f80ed; --blue-bright: #5ba4f5;
+      --cyan: #00d4ff; --green: #4ade80;
+      --text: #e4e9f2; --muted: #6b7a8d; --white: #f4f7fb;
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black); color: var(--text);
+      font-family: var(--font-body); font-weight: 300; line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ═══════════════════════════════════════
+       NAV BAR
+       ═══════════════════════════════════════ */
+    .site-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(6,10,16,0.92);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 4rem; max-width: 1400px; margin: 0 auto;
+    }
+    .nav-logo {
+      font-family: var(--font-display); font-weight: 800; font-size: 1.1rem;
+      color: var(--white); text-decoration: none; z-index: 101;
+    }
+    .nav-logo span { color: var(--cyan); }
+
+    /* Hamburger — hidden on desktop */
+    .nav-toggle {
+      display: none; background: none; border: none;
+      cursor: pointer; padding: 0.5rem; z-index: 101;
+    }
+    .nav-toggle span {
+      display: block; width: 22px; height: 2px; background: var(--text);
+      margin: 5px 0; border-radius: 2px; transition: all 0.3s;
+    }
+
+    /* ═══════════════════════════════════════
+       DESKTOP NAV LINKS
+       ═══════════════════════════════════════ */
+    .nav-links {
+      display: flex; align-items: center; gap: 2.2rem; list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.85rem;
+      font-weight: 400; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.nav-active { color: var(--text); }
+    .nav-divider { width: 1px; height: 14px; background: var(--border); }
+    .nav-cta {
+      background: var(--blue); color: var(--white) !important;
+      padding: 0.5rem 1.4rem; border-radius: 6px; font-weight: 500 !important;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: var(--blue-bright) !important; transform: translateY(-1px); }
+
+    /* ═══════════════════════════════════════
+       DESKTOP DROPDOWN
+       ═══════════════════════════════════════ */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a {
+      display: inline-flex; align-items: center; gap: 0.3rem; cursor: default;
+    }
+    .nav-dropdown > a svg { transition: transform 0.2s; }
+
+    /* The dropdown-panel wraps the actual menu.
+       padding-top creates a hover bridge so the mouse can
+       travel from the trigger to the menu without a gap. */
+    .dropdown-panel {
+      visibility: hidden; opacity: 0;
+      position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%);
+      padding-top: 0.75rem;
+      z-index: 110;
+      transition: visibility 0.15s, opacity 0.15s;
+    }
+    .nav-dropdown:hover .dropdown-panel { visibility: visible; opacity: 1; }
+    .nav-dropdown:hover > a svg { transform: rotate(180deg); }
+
+    .dropdown-inner {
+      background: rgba(11,16,24,0.97);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px; padding: 0.5rem 0; min-width: 240px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.6);
+      list-style: none;
+    }
+    .dropdown-inner li a {
+      display: flex; align-items: center; gap: 0.65rem;
+      padding: 0.65rem 1.2rem; font-size: 0.84rem; color: var(--muted);
+      transition: all 0.15s; white-space: nowrap;
+    }
+    .dropdown-inner li a:hover { color: var(--white); background: rgba(47,128,237,0.08); }
+    .dropdown-inner li a.dropdown-active { color: var(--blue-bright); }
+    .dropdown-inner li a .dd-icon { font-size: 1rem; width: 1.2rem; text-align: center; flex-shrink: 0; }
+
+    /* ═══════════════════════════════════════
+       MOBILE MENU — 768px
+       ═══════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .nav-bar { padding: 0.9rem 1.5rem; }
+      .nav-toggle { display: block; }
+
+      /* The entire menu is a full-viewport overlay anchored to 0,0,0,0
+         with its own scroll context. The key fix: we use a wrapper div
+         INSIDE the overlay for the actual items, with padding-top that
+         matches the nav bar height so items don't hide behind it. */
+      .nav-links {
+        display: none;
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(6,10,16,0.98);
+        flex-direction: column;
+        align-items: center;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        z-index: 99;
+        padding: 80px 2rem 3rem;
+      }
+      .nav-links.open { display: flex; }
+
+      /* All items equally sized and spaced */
+      .nav-links > li { width: 100%; text-align: center; }
+
+      .nav-links > li > a,
+      .dropdown-inner li a {
+        display: block;
+        padding: 0.75rem 0;
+        font-size: 1.1rem;
+        color: var(--text);
+        justify-content: center;
+      }
+      .dropdown-inner li a { color: var(--muted); }
+      .dropdown-inner li a:hover { background: transparent; color: var(--text); }
+      .dropdown-inner li a.dropdown-active { color: var(--blue-bright); }
+      .dropdown-inner li a .dd-icon { display: none; }
+
+      /* Divider */
+      .nav-divider { width: 40px; height: 1px; background: var(--border); margin: 0.4rem auto; }
+
+      /* CTA */
+      .nav-cta { display: inline-block !important; margin-top: 0.3rem; padding: 0.7rem 2rem; font-size: 1.1rem !important; }
+
+      /* Dropdown: "Services" becomes a label, sub-items always visible */
+      .nav-dropdown > a {
+        display: block; padding: 0.5rem 0 0;
+        font-size: 0.68rem !important; font-weight: 600;
+        letter-spacing: 0.14em; text-transform: uppercase;
+        color: var(--blue-bright) !important;
+        pointer-events: none;
+      }
+      .nav-dropdown > a svg { display: none; }
+
+      .dropdown-panel {
+        visibility: visible; opacity: 1;
+        position: static; transform: none; padding-top: 0;
+      }
+      .dropdown-inner {
+        background: transparent; border: none;
+        box-shadow: none; backdrop-filter: none;
+        padding: 0; min-width: auto;
+      }
+    }
+
+    /* ═══════════════════════════════════════
+       TEST PAGE CONTENT
+       ═══════════════════════════════════════ */
+    .page-content { padding: 100px 2rem 4rem; max-width: 800px; margin: 0 auto; }
+    .page-content h1 { font-family: var(--font-display); font-weight: 800; font-size: 2rem; color: var(--white); margin-bottom: 1rem; }
+    .page-content p { color: var(--muted); margin-bottom: 1rem; line-height: 1.7; }
+    .test-box { height: 300px; display: flex; align-items: center; justify-content: center; border: 1px dashed var(--border); border-radius: 12px; margin: 2rem 0; color: var(--muted); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="nav-bar">
+      <a href="index.html" class="nav-logo">Craison<span>Digital</span></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li class="nav-dropdown">
+          <a class="nav-active">Services <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+          <div class="dropdown-panel">
+            <ul class="dropdown-inner">
+              <li><a href="gate.html" class="dropdown-active"><span class="dd-icon">🚪</span> Smart Gate Access</a></li>
+              <li><a href="pool.html"><span class="dd-icon">🌊</span> Pool &amp; Spa Automation</a></li>
+              <li><a href="fountains.html"><span class="dd-icon">⛲</span> Lake &amp; Fountain Control</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-divider"></li>
+        <li><a href="#experience">The Experience</a></li>
+        <li><a href="#package">What's Included</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="page-content">
+    <h1>Nav Prototype v3 — Gate Page</h1>
+    <p><strong>Desktop:</strong> Hover over "Services" — dropdown appears with a hover bridge so it stays open as your mouse travels down to it.</p>
+    <p><strong>Mobile:</strong> Tap hamburger — full-screen overlay with 80px top padding to clear the nav bar. "Services" is a small blue label. All links are the same 1.1rem size. Background is opaque dark.</p>
+    <div class="test-box" id="experience">The Experience</div>
+    <div class="test-box" id="package">What's Included</div>
+    <div class="test-box" id="pricing">Pricing</div>
+    <div class="test-box" id="contact">Contact</div>
+  </div>
+
+  <script>
+  (function(){
+    var toggle = document.getElementById('navToggle');
+    var links = document.getElementById('navLinks');
+
+    toggle.addEventListener('click', function(){
+      links.classList.toggle('open');
+    });
+
+    links.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(e){
+        // Don't act on the Services label
+        if(a.closest('.nav-dropdown') && a.parentElement.classList.contains('nav-dropdown')){
+          e.preventDefault();
+          return;
+        }
+        links.classList.remove('open');
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

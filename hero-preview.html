@@ -65,10 +65,8 @@
     .btn-secondary { background: transparent; color: var(--text); padding: 0.85rem 2.2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 400; text-decoration: none; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; }
     .btn-secondary:hover { border-color: rgba(255,255,255,0.15); color: var(--white); }
 
-    /* ═══ ANIMATION STAGE ═══ */
     .animation-stage { position: relative; width: 100%; max-width: 520px; height: 320px; margin: 0 auto 3rem; z-index: 5; }
 
-    /* App icons */
     .app-icon { position: absolute; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; border: 1px solid rgba(255,255,255,0.04); background: rgba(15,23,36,0.7); box-shadow: 0 4px 16px rgba(0,0,0,0.25); transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1); opacity: 0; z-index: 1; }
     .app-icon .app-label { position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); font-size: 0.48rem; color: rgba(107,122,141,0.6); white-space: nowrap; font-weight: 500; letter-spacing: 0.04em; transition: opacity 0.4s; }
     .app-icon::after { content: '✕'; position: absolute; top: -5px; right: -5px; width: 14px; height: 14px; border-radius: 50%; background: rgba(239,68,68,0.7); color: white; font-size: 0.45rem; font-weight: 700; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 6px rgba(239,68,68,0.3); transition: all 0.6s ease; opacity: 0; }
@@ -94,73 +92,45 @@
     @keyframes jitter { 0%{translate:0 0} 25%{translate:3px -2px} 50%{translate:-2px 3px} 75%{translate:3px 1px} 100%{translate:-1px -3px} }
 
     .chaos-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; pointer-events: none; text-align: center; opacity: 0; transition: opacity 0.6s; }
-    .chaos-label .cl-main { font-family: var(--font-display); font-size: clamp(1.1rem, 2.8vw, 1.5rem); font-weight: 800; color: var(--white); line-height: 1.3; margin-bottom: 0.5rem; text-shadow: 0 0 40px rgba(6,10,16,0.95), 0 0 80px rgba(6,10,16,0.9); }
-    .chaos-label .cl-sub { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(239,68,68,0.7); font-weight: 600; }
-    .chaos-label::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 320px; height: 160px; background: radial-gradient(ellipse, rgba(6,10,16,0.85) 0%, rgba(6,10,16,0.5) 50%, transparent 75%); z-index: -1; border-radius: 50%; }
+    .chaos-label .cl-main { font-family: var(--font-display); font-size: clamp(1.1rem, 2.8vw, 1.5rem); font-weight: 800; color: var(--white); line-height: 1.3; margin-bottom: 0.6rem; text-shadow: 0 0 40px rgba(6,10,16,0.95), 0 0 80px rgba(6,10,16,0.9); }
+    /* ★ BIGGER "Sound familiar?" */
+    .chaos-label .cl-sub { font-family: var(--font-display); font-size: clamp(0.95rem, 2.2vw, 1.15rem); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(239,68,68,0.85); text-shadow: 0 0 30px rgba(6,10,16,0.9); }
+    .chaos-label::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 340px; height: 180px; background: radial-gradient(ellipse, rgba(6,10,16,0.88) 0%, rgba(6,10,16,0.55) 50%, transparent 75%); z-index: -1; border-radius: 50%; }
     .phase-chaos .chaos-label { opacity: 1; }
 
     .confusion-lines { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0; transition: opacity 0.5s; }
     .phase-chaos .confusion-lines { opacity: 1; }
 
-    /* ═══ PHASE 2: CONVERGE — icons fly to center ═══ */
+    /* ═══ PHASE 2: CONVERGE ═══ */
     .phase-converge .app-icon { top: 50% !important; left: 50% !important; transform: translate(-50%, -50%) scale(0.3) !important; opacity: 0 !important; transition: all 0.9s cubic-bezier(0.34, 1.56, 0.64, 1); animation: none !important; }
     .phase-converge .app-icon::after { opacity: 0; }
     .phase-converge .app-icon .app-label { opacity: 0; }
     .phase-converge .chaos-label { opacity: 0; }
     .phase-converge .confusion-lines { opacity: 0; }
 
-    /* ═══ PHASE 3: "WE CAN HELP" — logo + message ═══ */
-    .help-message {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      z-index: 15; text-align: center;
-      opacity: 0; transition: opacity 0.8s ease;
-      pointer-events: none;
-    }
-    .help-logo {
-      font-family: var(--font-display); font-weight: 800;
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
-      color: var(--white);
-      margin-bottom: 0.8rem;
-      transform: translateY(10px);
-      transition: transform 0.8s ease, opacity 0.8s ease;
-      opacity: 0;
-    }
+    /* ═══ PHASE 3: "WE CAN HELP" ═══ */
+    .help-message { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 15; text-align: center; opacity: 0; transition: opacity 0.8s ease; pointer-events: none; width: 90%; max-width: 440px; }
+    .help-logo { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--white); margin-bottom: 0.6rem; transform: translateY(10px); transition: transform 0.8s ease, opacity 0.8s ease; opacity: 0; }
     .help-logo span { color: var(--cyan); }
-    .help-text {
-      font-family: var(--font-display);
-      font-size: clamp(1rem, 2.5vw, 1.4rem);
-      font-weight: 700;
-      color: var(--blue-bright);
-      transform: translateY(10px);
-      transition: transform 0.8s ease 0.25s, opacity 0.8s ease 0.25s;
-      opacity: 0;
-    }
-    /* Subtle glow behind the help message */
-    .help-glow {
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 300px; height: 200px;
-      background: radial-gradient(ellipse, rgba(0,212,255,0.08) 0%, rgba(47,128,237,0.04) 40%, transparent 70%);
-      border-radius: 50%;
-      opacity: 0; transition: opacity 1s ease;
-      z-index: 0;
-    }
+    .help-text { font-family: var(--font-display); font-size: clamp(1rem, 2.5vw, 1.4rem); font-weight: 700; color: var(--blue-bright); margin-bottom: 0.8rem; transform: translateY(10px); transition: transform 0.8s ease 0.25s, opacity 0.8s ease 0.25s; opacity: 0; }
+    /* ★ NEW tagline under "We can help" */
+    .help-tagline { font-family: var(--font-body); font-size: clamp(0.65rem, 1.5vw, 0.78rem); font-weight: 400; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; transform: translateY(10px); transition: transform 0.8s ease 0.5s, opacity 0.8s ease 0.5s; opacity: 0; }
+    .help-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; height: 200px; background: radial-gradient(ellipse, rgba(0,212,255,0.08) 0%, rgba(47,128,237,0.04) 40%, transparent 70%); border-radius: 50%; opacity: 0; transition: opacity 1s ease; z-index: 0; }
 
     .phase-help .help-message { opacity: 1; }
     .phase-help .help-logo { opacity: 1; transform: translateY(0); }
     .phase-help .help-text { opacity: 1; transform: translateY(0); }
+    .phase-help .help-tagline { opacity: 1; transform: translateY(0); }
     .phase-help .help-glow { opacity: 1; }
-    /* Keep everything else hidden during help phase */
     .phase-help .app-icon { top: 50% !important; left: 50% !important; transform: translate(-50%, -50%) scale(0.3) !important; opacity: 0 !important; animation: none !important; }
     .phase-help .app-icon::after { opacity: 0; }
     .phase-help .app-icon .app-label { opacity: 0; }
     .phase-help .chaos-label { opacity: 0; }
     .phase-help .confusion-lines { opacity: 0; }
 
-    /* ═══ PHASE 4: CALM — phone dashboard ═══ */
+    /* ═══ PHASE 4: CALM ═══ */
     .phone-frame { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.5); width: 200px; height: 300px; background: #0a1220; border: 2px solid rgba(47,128,237,0.3); border-radius: 28px; box-shadow: 0 0 60px rgba(47,128,237,0.15), 0 0 120px rgba(0,212,255,0.05), 0 20px 60px rgba(0,0,0,0.5); opacity: 0; transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 10; overflow: hidden; }
     .phase-calm .phone-frame { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-    /* Hide help message in calm phase */
     .phase-calm .help-message { opacity: 0; }
     .phase-calm .help-glow { opacity: 0; }
 
@@ -229,7 +199,7 @@
       .app-icon { width: 40px; height: 40px; font-size: 1.05rem; border-radius: 10px; }
       .app-icon .app-label { font-size: 0.42rem; bottom: -14px; }
       .chaos-label .cl-main { font-size: clamp(1rem, 3.5vw, 1.3rem); }
-      .chaos-label::before { width: 260px; height: 130px; }
+      .chaos-label::before { width: 280px; height: 160px; }
       .phone-frame { width: 170px; height: 260px; }
       .ps-greeting { font-size: 0.6rem; }
       .ps-grid { gap: 4px; }
@@ -249,10 +219,11 @@
       .app-icon .app-label { display: none; }
       .animation-stage { height: 260px; max-width: 320px; }
       .chaos-label .cl-main { font-size: 1rem; }
-      .chaos-label .cl-sub { font-size: 0.58rem; }
-      .chaos-label::before { width: 220px; height: 110px; }
+      .chaos-label .cl-sub { font-size: 0.8rem; }
+      .chaos-label::before { width: 240px; height: 140px; }
       .help-logo { font-size: 1.6rem; }
       .help-text { font-size: 0.95rem; }
+      .help-tagline { font-size: 0.58rem; }
       .phone-frame { width: 150px; height: 230px; border-radius: 22px; }
       .phone-notch { width: 60px; height: 4px; }
       .phone-screen { padding: 10px 8px 8px; }
@@ -331,11 +302,11 @@
         <div class="app-icon">☀️<span class="app-label">Hunter</span></div>
         <div class="app-icon">🏠<span class="app-label">SmartThings</span></div>
 
-        <!-- "WE CAN HELP" interstitial -->
         <div class="help-glow"></div>
         <div class="help-message">
           <div class="help-logo">Craison<span>Digital</span></div>
           <div class="help-text">We can help.</div>
+          <div class="help-tagline">Fully Intelligent Smart Home Consulting &amp; Integration</div>
         </div>
 
         <div class="phone-glow"></div>
@@ -365,7 +336,6 @@
         </div>
       </div>
 
-      <!-- 4 phase dots now -->
       <div class="phase-dots" id="phaseDots">
         <div class="phase-dot active" data-phase="0"></div>
         <div class="phase-dot" data-phase="1"></div>
@@ -400,34 +370,27 @@
   (function(){
     var stage = document.getElementById('animStage');
     var dots = document.querySelectorAll('.phase-dot');
-    // 4 phases: chaos → converge → help → calm
     var phases = ['phase-chaos', 'phase-converge', 'phase-help', 'phase-calm'];
 
     var CHAOS_DURATION = 4000;
     var CONVERGE_DURATION = 1200;
-    var HELP_DURATION = 3000;
+    var HELP_DURATION = 3500;
     var CALM_DURATION = 5500;
     var RESET_PAUSE = 800;
 
     function setPhase(idx) {
       phases.forEach(function(p){ stage.classList.remove(p); });
       stage.classList.add(phases[idx]);
-      dots.forEach(function(d, i){
-        d.classList.toggle('active', i === idx);
-      });
+      dots.forEach(function(d, i){ d.classList.toggle('active', i === idx); });
     }
 
     function runCycle() {
-      // Phase 0: Chaos
       setPhase(0);
       setTimeout(function(){
-        // Phase 1: Converge
         setPhase(1);
         setTimeout(function(){
-          // Phase 2: "We can help"
           setPhase(2);
           setTimeout(function(){
-            // Phase 3: Calm (phone dashboard)
             setPhase(3);
             setTimeout(function(){
               setTimeout(runCycle, RESET_PAUSE);

@@ -1,6 +1,6 @@
 # CLAUDE_REFERENCE.md
 > **Purpose:** Read this file FIRST every session to understand the codebase before making changes.
-> Last updated: 2026-03-18
+> Last updated: 2026-03-19
 
 ---
 
@@ -19,7 +19,7 @@
 |---|---|---|
 | `gate.html` | **Primary gate product page** — Smart Gate Access for Large Properties | ~73KB |
 | `fountains.html` | **Lake fountain control product page** — Smart Lake Fountain Control | ~71KB |
-| `pool.html` | **Pool automation product page** — Smart Pool Automation (Pentair/Hayward/Jandy integration) | ~66KB |
+| `pool.html` | **Pool automation product page** — Smart Pool Automation (any brand, or no automation at all) | ~77KB |
 
 > **Note:** `index.html` was removed on 2026-03-18. No homepage/landing page currently exists.
 
@@ -30,7 +30,7 @@
 - **Single-file architecture** — each page has HTML + CSS + JS all inline in one `.html` file
 - **Fonts:** Google Fonts — `Syne` (display/headings, weight 400-800) + `DM Sans` (body, weight 300-600)
 - **No external CSS or JS libraries** — everything is custom
-- **SVG illustrations** — complex inline SVGs with JavaScript animations (gate scene, fountain scene, pool scene)
+- **SVG illustrations** — complex inline SVGs with JavaScript animations (gate scene, fountain scene, pool+spa scene)
 - **No backend / no form handling** — forms use `onsubmit="return false;"` (placeholder)
 
 ---
@@ -80,20 +80,26 @@
 
 ---
 
-## PAGE STRUCTURE (all pages share this pattern)
+## PAGE STRUCTURES
 
-1. **Nav** — fixed top, blur backdrop, logo left, links right, CTA button, mobile hamburger toggle
-2. **Hero** — layered backgrounds (gradient + grid + glow), headline ABOVE illustration, SVG animation, content overlay below with eyebrow badge + subtitle + CTA buttons
-3. **Stats Bar** — 4 stats in a row, border top/bottom
-4. **Problem/Solution** — 2-column grid, pain points vs benefits
-5. **Experience** — 3-column card grid (features with icons)
-6. **What's Included (Package)** — 6-item grid with 1.5px gap borders (looks like a unified grid block)
-7. **How It Works** — 4-step vertical timeline with numbered circles + blue connecting line
-8. **Features/Dashboard** — 2-column layout, feature checklist left + mockup dashboard right
-9. **Beyond Section** — 3-column grid showing other services (cross-sell)
-10. **Pricing** — centered card with "Contact for Pricing" + includes list + optional add-on cards below
-11. **Contact Form** — centered form with name, email, phone, select dropdown, textarea, submit button
-12. **Footer** — simple 3-column: logo, copyright, tagline
+### Gate & Fountain Pages (shared pattern)
+1. Nav → 2. Hero (SVG animation) → 3. Stats Bar → 4. Problem/Solution → 5. Experience (3-col) → 6. What's Included → 7. How It Works → 8. Features/Dashboard → 9. Beyond Section → 10. Pricing → 11. Contact Form → 12. Footer
+
+### Pool Page (pool.html) — different section order
+1. **Nav** — fixed top, blur backdrop, logo left, links right, CTA button, mobile hamburger
+2. **Hero** — headline "Your pool, finally simple." + centered pool/spa SVG animation + phone mockup
+3. **Stats Bar** — 1 APP / 4 WAYS / 24/7 / 100%
+4. **Problem/Solution** — brand-agnostic: "Your pool works. Using it shouldn't be this hard."
+5. **Experience** — **4-column (2×2) grid**: Phone, Voice, Automation, Physical Buttons
+6. **Compatibility** — 3 cards: Existing Automation / No Automation / Mixed Equipment (brand-agnostic)
+7. **Whole-House Integration** — 6-card grid showing pool+home automations (porch lights, speaker announcements, Pool Night scene, camera auto-shutoff spa, safety alerts, kid detection)
+8. **What's Included** — 6-item package grid (Equipment Integration, Custom App Dashboard, Voice Setup, Automations Built for You, Temp & Chemistry, Smart Home Integration)
+9. **How It Works** — 4 steps: assess → learn how you use it → build system → enjoy
+10. **Features/Dashboard** — "Built for you. Not a template." + dashboard mockup
+11. **Beyond the Pool** — cross-sell grid (gate, cameras, lighting, HVAC, fountains, irrigation)
+12. **Pricing** — contact for pricing card + single add-on: Pool Camera & Smart Sensing
+13. **Contact Form** — dropdown: "What best describes your setup?" (has automation / no automation / pool+spa / mixed / not sure)
+14. **Footer**
 
 ---
 
@@ -111,12 +117,15 @@
 - Key element IDs: `sprayGroup`, `waterGlowEl`, `phoneGroup`, `anemometer`, `notifToast2`, `hudStatus`, `hudWind`
 - LED lights around fountain base shimmer when running
 
-### Pool Animation (pool.html)
+### Pool + Spa Animation (pool.html)
 - **14-second cycle** looping via `requestAnimationFrame`
-- Phone slides in → tap pump button (tap indicator pulses) → pump turns on (spinner rotates, caustics intensify, ripples animate) → tap heater button → temp rises 78°→84°F on phone + HUD → green toast "Pool Heated to 84°F" → pool lights fade on → amber toast "Switching to Off-Peak" → everything fades → reset
-- Key element IDs: `poolSVG`, `pumpSpinner`, `heaterFlame`, `poolLights`, `caustics`, `ripples`, `phoneGroup`, `phoneTemp`, `phoneTempLabel`, `hudPump`, `hudTemp`, `tapIndicator`, `notifToast`, `notifToast2`
-- Pool scene: deck with rounded corners, water with caustic light patterns + ripple lines, 3 underwater lights, equipment pad (pump/heater/chlorinator), phone mockup with control buttons
-- HUD panels: left = POOL SYSTEM (pump status + temp), right = CHEMISTRY (pH + chlorine)
+- **Scene:** Centered pool (large rectangular) + circular spa/hot tub connected on the right, luxury paver deck (SVG pattern with staggered stone pavers and grout lines), stone coping borders around both pool and spa
+- **Pool lights:** Bright green (#4ade80) with `glowStrong` double-blur filter, 3 lights along pool bottom with large glow halos. Green-tinted water (overlay + caustics + ripple lines all green)
+- **Spa lights:** Start green (matching pool) → transition to red during heating → back to green when ready. Water color overlay matches light color throughout
+- **Phone:** Large, centered vertically and horizontally over the scene. Shows only temperature (96°→102°F) and "START SPA" button. Button changes state: purple "START SPA" → red "HEATING..." → green "SPA ON". Phone stays on screen entire cycle, fades in/out at start/end only
+- **Animation flow:** Phone fades in → tap indicator pulses on SPA button → jets turn on (prominent bubble clusters with foam/turbulence, 3 nozzle positions + center) → spa lights/water go red → temp rises 96→102 → lights/water transition red→green → in-phone notification slides down from top ("Spa Heated · 102°F") → phone fades out → jets wind down → reset
+- **Key element IDs:** `poolSVG`, `phoneGroup`, `phoneTemp`, `phoneTempLabel`, `phoneStatus`, `phoneNotif`, `spaBtnBg`, `spaBtnText`, `tapIndicator`, `spaJets`, `spaRipples`, `spaCaustics`, `spaWaterOverlay`, `spaCaustic1`, `spaCaustic2`, `spaLight1-3`, `spaLightGlow1-3`, `caustics`, `ripples`, `poolLights`, `poolWaterOverlay`
+- **No HUD panels, no equipment pad** — clean scene with just pool, spa, deck, and phone
 
 ---
 
@@ -125,6 +134,17 @@
 - Amber variant (class `.amber`) — for weather alerts or automation events
 - Structure: dot + icon + body (title + sub) + badge
 - Controlled by adding/removing `.visible` class in JS animation loop
+- **Pool page uses in-SVG notification** inside the phone mockup instead of HTML overlay
+
+---
+
+## POOL PAGE COPY NOTES
+- **Brand-agnostic:** Not focused on Pentair/Hayward/Jandy — emphasizes "any system or no system at all"
+- **Custom-built messaging:** "We build around how you actually use your pool" / "Built for you. Not a template."
+- **4 control methods:** Phone, Voice, Smart Automation, Physical Buttons
+- **Compatibility section:** 3 approaches — Existing Automation (any brand), No Automation (just pump & switches), Mixed Equipment
+- **Whole-House Integration section:** Shows pool talking to lights, speakers, cameras, locks (porch lights turn red while spa heats, speaker announcements, camera auto-shutoff spa, kid detection alerts)
+- **Single add-on:** Pool Camera & Smart Sensing (camera as automation sensor, not just recording)
 
 ---
 
@@ -138,9 +158,10 @@
 ## NAMING CONVENTIONS
 - CSS classes use kebab-case: `.section-inner`, `.btn-primary`, `.exp-card`
 - Section IDs match nav anchors: `#package`, `#how`, `#pricing`, `#contact`, `#experience`, `#features`, `#beyond`
-- Pool page adds: `#compat` (compatibility section with brand logos)
+- Pool page adds: `#compat` (compatibility), `#integration` (whole-house integration)
 - Package grid items: `.package-item` with `.pkg-icon`, `.pkg-title`, `.pkg-desc`
 - Step items: `.step` with `.step-num`, `.step-title`, `.step-desc`
+- Pool page experience grid uses 2×2 layout (`repeat(2, 1fr)`) for 4 cards
 
 ---
 
@@ -154,3 +175,4 @@
 7. **Favicon:** SVG inline data URI — dark rounded rect with cyan "C"
 8. **The logo** is text-based: "Craison" in white + "Digital" in cyan (`var(--cyan)`)
 9. **No homepage currently exists** — `index.html` was removed; site only has product-specific pages
+10. **Pool page has a broken push** — the pool.html on GitHub may have a placeholder instead of the full file. The full working version is in the local build at `/home/claude/pool-updated.html`. It needs to be re-uploaded manually if the GitHub version is truncated.

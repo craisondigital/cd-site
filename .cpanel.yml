@@ -2,10 +2,5 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home4/craisond/public_html/
-    - /bin/cp index.html $DEPLOYPATH
-    - /bin/cp gate.html $DEPLOYPATH
-    - /bin/cp pool.html $DEPLOYPATH
-    - /bin/cp fountains.html $DEPLOYPATH
-    - /bin/cp 404.html $DEPLOYPATH
+    - /bin/cp *.html $DEPLOYPATH
     - /bin/cp .htaccess $DEPLOYPATH
-    - /bin/cp nav.html $DEPLOYPATH

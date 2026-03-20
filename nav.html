@@ -3,16 +3,15 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Nav Prototype v4 — Craison Digital</title>
+  <title>Nav v5 — Craison Digital</title>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --black: #060a10; --dark: #0b1018; --card: #0f1724;
-      --card-hover: #141d2e; --border: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.06);
       --blue: #2f80ed; --blue-bright: #5ba4f5;
-      --cyan: #00d4ff; --green: #4ade80;
-      --text: #e4e9f2; --muted: #6b7a8d; --white: #f4f7fb;
+      --cyan: #00d4ff; --text: #e4e9f2; --muted: #6b7a8d; --white: #f4f7fb;
       --font-display: 'Syne', sans-serif;
       --font-body: 'DM Sans', sans-serif;
     }
@@ -23,10 +22,10 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ═══════════════════════════════════════
-       NAV BAR
-       ═══════════════════════════════════════ */
-    .site-header {
+    /* ═══════════════════════════════════
+       NAV — DESKTOP
+       ═══════════════════════════════════ */
+    nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: rgba(6,10,16,0.92);
       backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
@@ -34,25 +33,21 @@
     }
     .nav-bar {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1rem 4rem; max-width: 1400px; margin: 0 auto;
+      padding: 1rem 4rem;
     }
     .nav-logo {
       font-family: var(--font-display); font-weight: 800; font-size: 1.1rem;
-      color: var(--white); text-decoration: none; z-index: 101;
+      color: var(--white); text-decoration: none;
     }
     .nav-logo span { color: var(--cyan); }
     .nav-toggle {
       display: none; background: none; border: none;
-      cursor: pointer; padding: 0.5rem; z-index: 101;
+      cursor: pointer; padding: 0.5rem;
     }
     .nav-toggle span {
       display: block; width: 22px; height: 2px; background: var(--text);
-      margin: 5px 0; border-radius: 2px; transition: all 0.3s;
+      margin: 5px 0; border-radius: 2px;
     }
-
-    /* ═══════════════════════════════════════
-       DESKTOP NAV
-       ═══════════════════════════════════════ */
     .nav-links {
       display: flex; align-items: center; gap: 2.2rem; list-style: none;
     }
@@ -70,9 +65,9 @@
     }
     .nav-cta:hover { background: var(--blue-bright) !important; transform: translateY(-1px); }
 
-    /* ═══════════════════════════════════════
+    /* ═══════════════════════════════════
        DESKTOP DROPDOWN
-       ═══════════════════════════════════════ */
+       ═══════════════════════════════════ */
     .nav-dropdown { position: relative; }
     .nav-dropdown > a {
       display: inline-flex; align-items: center; gap: 0.3rem; cursor: default;
@@ -82,8 +77,7 @@
       visibility: hidden; opacity: 0;
       position: absolute; top: 100%; left: 50%;
       transform: translateX(-50%);
-      padding-top: 0.75rem;
-      z-index: 110;
+      padding-top: 0.75rem; z-index: 110;
       transition: visibility 0.15s, opacity 0.15s;
     }
     .nav-dropdown:hover .dropdown-panel { visibility: visible; opacity: 1; }
@@ -105,85 +99,85 @@
     .dropdown-inner li a.dropdown-active { color: var(--blue-bright); }
     .dropdown-inner li a .dd-icon { font-size: 1rem; width: 1.2rem; text-align: center; flex-shrink: 0; }
 
-    /* ═══════════════════════════════════════
+    /* Mobile menu panel — hidden on desktop */
+    .mobile-menu { display: none; }
+
+    /* ═══════════════════════════════════
        MOBILE — 768px
-       ═══════════════════════════════════════ */
+       ═══════════════════════════════════ */
     @media (max-width: 768px) {
       .nav-bar { padding: 0.9rem 1.5rem; }
       .nav-toggle { display: block; }
 
-      .nav-links {
+      /* Hide the desktop nav links entirely */
+      .nav-links { display: none !important; }
+
+      /* Mobile menu: lives INSIDE the fixed nav, below the bar.
+         This way it inherits the nav's position:fixed and background. */
+      .mobile-menu {
         display: none;
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: var(--black);
         flex-direction: column;
-        justify-content: center;
         align-items: center;
-        gap: 0;
-        z-index: 99;
-        padding: 56px 2rem 2rem;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
+        padding: 1.2rem 2rem 1.8rem;
+        border-top: 1px solid var(--border);
+        background: var(--black);
       }
-      .nav-links.open { display: flex; }
+      .mobile-menu.open { display: flex; }
 
-      .nav-links > li { width: 100%; text-align: center; line-height: 1.3; }
-
-      .nav-links > li > a,
-      .dropdown-inner li a {
-        display: block;
-        padding: 0.5rem 0;
-        font-size: 1rem;
-        color: var(--text);
-        line-height: 1.3;
+      .mobile-menu a {
+        display: block; width: 100%; text-align: center;
+        padding: 0.55rem 0;
+        font-size: 1rem; color: var(--text);
+        text-decoration: none;
+        transition: color 0.15s;
       }
-      .dropdown-inner li a { color: var(--muted); }
-      .dropdown-inner li a:hover { background: transparent; color: var(--text); }
-      .dropdown-inner li a.dropdown-active { color: var(--blue-bright); }
-      .dropdown-inner li a .dd-icon { display: none; }
+      .mobile-menu a:active { color: var(--blue-bright); }
 
-      .nav-divider { width: 32px; height: 1px; background: var(--border); margin: 0.35rem auto; }
-
-      .nav-cta {
-        display: inline-block !important; margin-top: 0.25rem;
-        padding: 0.6rem 1.8rem; font-size: 1rem !important;
-      }
-
-      .nav-dropdown > a {
-        display: block; padding: 0.35rem 0 0.1rem;
-        font-size: 0.65rem !important; font-weight: 600;
+      .mobile-menu .mm-label {
+        display: block; width: 100%; text-align: center;
+        padding: 0.6rem 0 0.15rem;
+        font-size: 0.62rem; font-weight: 600;
         letter-spacing: 0.14em; text-transform: uppercase;
-        color: var(--blue-bright) !important;
-        pointer-events: none;
+        color: var(--blue-bright);
       }
-      .nav-dropdown > a svg { display: none; }
 
-      .dropdown-panel {
-        visibility: visible; opacity: 1;
-        position: static; transform: none; padding-top: 0;
+      .mobile-menu .mm-sub a {
+        color: var(--muted); font-size: 1rem;
+        padding: 0.45rem 0;
       }
-      .dropdown-inner {
-        background: transparent; border: none;
-        box-shadow: none; backdrop-filter: none;
-        padding: 0; min-width: auto;
+      .mobile-menu .mm-sub a:active { color: var(--text); }
+      .mobile-menu .mm-sub a.dropdown-active { color: var(--blue-bright); }
+
+      .mobile-menu .mm-divider {
+        width: 32px; height: 1px; background: var(--border);
+        margin: 0.4rem auto;
+      }
+
+      .mobile-menu .nav-cta {
+        display: inline-block; margin-top: 0.4rem;
+        padding: 0.6rem 1.8rem; font-size: 1rem;
       }
     }
 
+    /* ═══════════════════════════════════
+       TEST CONTENT
+       ═══════════════════════════════════ */
     .page-content { padding: 100px 2rem 4rem; max-width: 800px; margin: 0 auto; }
     .page-content h1 { font-family: var(--font-display); font-weight: 800; font-size: 2rem; color: var(--white); margin-bottom: 1rem; }
-    .page-content p { color: var(--muted); margin-bottom: 1rem; line-height: 1.7; }
-    .test-box { height: 300px; display: flex; align-items: center; justify-content: center; border: 1px dashed var(--border); border-radius: 12px; margin: 2rem 0; color: var(--muted); font-size: 0.9rem; }
+    .page-content p { color: var(--muted); margin-bottom: 1rem; }
+    .test-box { height: 300px; display: flex; align-items: center; justify-content: center; border: 1px dashed var(--border); border-radius: 12px; margin: 2rem 0; color: var(--muted); }
   </style>
 </head>
 <body>
 
-  <header class="site-header">
+  <nav>
     <div class="nav-bar">
       <a href="index.html" class="nav-logo">Craison<span>Digital</span></a>
       <button class="nav-toggle" id="navToggle" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
-      <ul class="nav-links" id="navLinks">
+      <!-- Desktop nav -->
+      <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li class="nav-dropdown">
           <a class="nav-active">Services <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></a>
@@ -202,11 +196,26 @@
         <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
       </ul>
     </div>
-  </header>
+    <!-- Mobile menu: separate element, inside the fixed nav -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <div class="mm-label">Services</div>
+      <div class="mm-sub">
+        <a href="gate.html" class="dropdown-active">Smart Gate Access</a>
+        <a href="pool.html">Pool &amp; Spa Automation</a>
+        <a href="fountains.html">Lake &amp; Fountain Control</a>
+      </div>
+      <div class="mm-divider"></div>
+      <a href="#experience">The Experience</a>
+      <a href="#package">What's Included</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact" class="nav-cta">Get a Quote</a>
+    </div>
+  </nav>
 
   <div class="page-content">
-    <h1>Nav Prototype v4 — Gate Page</h1>
-    <p>Testing desktop dropdown and mobile overlay.</p>
+    <h1>Nav v5 — Gate Page</h1>
+    <p>Desktop: hover dropdown with bridge. Mobile: menu panel drops down from the nav bar itself.</p>
     <div class="test-box" id="experience">The Experience</div>
     <div class="test-box" id="package">What's Included</div>
     <div class="test-box" id="pricing">Pricing</div>
@@ -216,14 +225,13 @@
   <script>
   (function(){
     var toggle = document.getElementById('navToggle');
-    var links = document.getElementById('navLinks');
-    toggle.addEventListener('click', function(){ links.classList.toggle('open'); });
-    links.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', function(e){
-        if(a.closest('.nav-dropdown') && a.parentElement.classList.contains('nav-dropdown')){
-          e.preventDefault(); return;
-        }
-        links.classList.remove('open');
+    var menu = document.getElementById('mobileMenu');
+    toggle.addEventListener('click', function(){
+      menu.classList.toggle('open');
+    });
+    menu.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        menu.classList.remove('open');
       });
     });
   })();

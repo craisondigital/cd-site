@@ -175,4 +175,4 @@
 7. **Favicon:** SVG inline data URI — dark rounded rect with cyan "C"
 8. **The logo** is text-based: "Craison" in white + "Digital" in cyan (`var(--cyan)`)
 9. **No homepage currently exists** — `index.html` was removed; site only has product-specific pages
-10. **Pool page has a broken push** — the pool.html on GitHub may have a placeholder instead of the full file. The full working version is in the local build at `/home/claude/pool-updated.html`. It needs to be re-uploaded manually if the GitHub version is truncated.
+10. **Pool page confirmed** — the pool.html on GitHub is the full, working version as of 2026-03-19.

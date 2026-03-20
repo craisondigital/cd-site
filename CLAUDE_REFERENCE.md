@@ -1,6 +1,6 @@
 # CLAUDE_REFERENCE.md
 > **Purpose:** Read this file FIRST every session to understand the codebase before making changes.
-> Last updated: 2026-03-19
+> Last updated: 2026-03-20
 
 ---
 
@@ -13,15 +13,14 @@
 
 ---
 
-## FILE INVENTORY (3 files, all in root)
+## FILE INVENTORY (4 files, all in root)
 
 | File | Purpose | Size |
 |---|---|---|
+| `index.html` | **Homepage** — Animated estate SVG hero with full property automation showcase | ~75KB |
 | `gate.html` | **Primary gate product page** — Smart Gate Access for Large Properties | ~73KB |
 | `fountains.html` | **Lake fountain control product page** — Smart Lake Fountain Control | ~71KB |
 | `pool.html` | **Pool automation product page** — Smart Pool Automation (any brand, or no automation at all) | ~77KB |
-
-> **Note:** `index.html` was removed on 2026-03-18. No homepage/landing page currently exists.
 
 ---
 
@@ -30,7 +29,7 @@
 - **Single-file architecture** — each page has HTML + CSS + JS all inline in one `.html` file
 - **Fonts:** Google Fonts — `Syne` (display/headings, weight 400-800) + `DM Sans` (body, weight 300-600)
 - **No external CSS or JS libraries** — everything is custom
-- **SVG illustrations** — complex inline SVGs with JavaScript animations (gate scene, fountain scene, pool+spa scene)
+- **SVG illustrations** — complex inline SVGs with JavaScript animations (gate scene, fountain scene, pool+spa scene, estate overview scene)
 - **No backend / no form handling** — forms use `onsubmit="return false;"` (placeholder)
 
 ---
@@ -80,7 +79,102 @@
 
 ---
 
-## PAGE STRUCTURES
+## HOMEPAGE (index.html)
+
+### Section Structure
+1. **Hero** — Animated estate SVG + bold headline "Your property has a dozen systems. You should only need one app."
+2. **The Problem** — App graveyard (12 disconnected apps visual)
+3. **What We Do** — Narrative flow: walk property → learn how you live → connect everything → stay and improve
+4. **What We Automate** — Card grid (Gate/Pool/Fountains = Live, Lighting/Cameras/HVAC = Coming Soon)
+5. **Why We're Different** — 3 statements: automate what others won't / build relationships not invoices / custom for every customer
+6. **Day in the Life** — Timeline 6AM-11PM showing automated estate scenarios
+7. **Monthly Plans** — Ongoing partnership section
+8. **Contact** — Form with dropdown
+
+### Animated Estate SVG (viewBox 0 0 1100 440)
+
+#### Layout (left to right):
+- **Gate pillars** (x≈98-122): Two pillars on opposite sides of the driveway. Bottom pillar at y=336 (near side, drawn BEHIND car), top pillar at y=238 (far side, drawn IN FRONT of car). Gate bars span vertically across driveway between pillars.
+- **Driveway**: Curved path from x=0 to x=480, top edge y=305→255, bottom edge y=340→295. ~35px wide.
+- **Pool** (trapezoid, x=100-325, y=155-230): Perspective shape (narrower at top, wider at bottom), LEFT of house. Brick paver deck extends from x=0 to x=365 above the driveway. Dark (#020810) when off, green glow when lit.
+- **House** (x=360-640, y=140-280): Main house with 4 windows + front door at x=482-518. Roof peak at y=75.
+- **Garage wing** (x=640-740, y=180-280): To the right of the house with 2 windows.
+- **Oak tree** (x=640, canopy center y=262): Large spreading oak between house and fountain. Organic irregular canopy (paths, not ellipses) ~185px wide, flat-topped. 3 angled spotlights at base (fixtures at x=608,640,672).
+- **Palm trees** (3): Behind fountain/garage at x=750,890,1010. Brown trunks (#5a3c20/#6e4c2a) with ring segments. Green fronds. Each has angled spotlight.
+- **Lake/fountain** (centered at x=960,y=330 with transform="translate(-60,-30)" making effective center ~(900,300)): Large elliptical lake (rx=140,ry=70). Enhanced fountain spray from fountains.html: tall center jet, wide fan sprays both sides, splash particles, ripple rings, LED ring, mist haze, water glow.
+- **Car** (84×28 body): Centered at origin, translated by JS. Stops at x=52 before gate, drives to x=320 (in front of house).
+- **Notification toasts**: SVG overlay at y≈380.
+- **Landscape lights**: 4 lights in a row along the bottom (near) edge of the driveway from gate to house.
+
+#### Ground Surfaces:
+- **Grass**: Entire ground (y=150-440) covered with grass texture pattern + ground gradient
+- **Brick pavers**: Only on the pool patio area (x=0 to x=365, y=150 down to driveway top edge)
+- **Driveway**: Separate fill with driveGrad
+
+#### Animation Cycle (20 seconds):
+- 0.00-0.15: Dark estate, everything off
+- 0.15-0.24: Car approaches from left, headlights visible
+- 0.18: Pillar lights come on (car detected approaching)
+- 0.24-0.27: Car stops at gate, LED amber→green
+- 0.27-0.33: Gate opens (scaleY). ALL lights come on simultaneously:
+  - Windows (staggered 0.27-0.37)
+  - Porch lights (0.28)
+  - Oak tree spotlights (0.28)
+  - Landscape lights (0.29-0.38)
+  - Palm tree spotlights (0.29-0.36)
+  - Pool lights + caustics + glow (0.27-0.35)
+  - Fountain spray + LEDs + ripples (0.27-0.35)
+  - Lake caustics (0.27-0.35)
+- 0.33-0.50: Car drives through gate along driveway to x=320, scaling to 0.8
+- 0.48-0.58: Gate closes behind car
+- 0.50+: Car parked in front of house
+- 0.51-0.61: Toast "Gate: Vehicle Arrived"
+- 0.72-0.82: Toast "Pool Night Activated"
+- 0.88-0.96: Everything fades to dark
+- 0.97-1.00: Reset
+
+#### Gate Animation:
+```js
+// Gate panels retract vertically toward their respective pillars
+var HINGE_BOT=336, HINGE_TOP=260;
+function setGate(sx){
+  gateLeft.setAttribute('transform','translate(0,'+HINGE_BOT+') scale(1,'+sx+') translate(0,'+(-HINGE_BOT)+')');
+  gateRight.setAttribute('transform','translate(0,'+HINGE_TOP+') scale(1,'+sx+') translate(0,'+(-HINGE_TOP)+')');
+}
+```
+
+#### Driveway Tracking Function:
+```js
+function driveCenterY(x){
+  if(x<=0) return 322;
+  if(x<=120) return lerp(322,316,x/120);
+  if(x<=320) return lerp(316,290,(x-120)/200);
+  if(x<=480) return lerp(290,275,(x-320)/160);
+  return 275;
+}
+```
+
+#### Responsive:
+- **Tablet (≤960px):** CSS filter `brightness(1.3) contrast(1.1)` on SVG, viewBox `0 80 1100 380`
+- **Mobile (≤768px):** CSS filter `brightness(1.6) contrast(1.15)` on SVG, viewBox `30 90 1080 360`
+- **Phone (≤480px):** viewBox `30 90 1080 360` (tight crop, gate+house+pool+lake bigger)
+- Dynamic viewBox set via JS `updateViewBox()` on load and resize
+
+#### Key SVG Colors (brightened for mobile visibility):
+- House walls: #1e2a3e / #152235
+- Roof: #223050 / #1a2640
+- Gate posts: #253a55 / #1a2a40
+- Driveway: #152535 / #182838, stroke #2a3e55
+- Car body: #1e2d42, stroke #3a5068
+- Ground: #121e2e / #0c1824
+- All strokes: #2a4060 (globally brightened)
+- Palm trunks: #5a3c20 / #6e4c2a (brown) with #4a3018 ring segments
+- Oak canopy: #081410 / #0c1a14 / #0e1c16 (dark greens, layered paths)
+- Pool off: #020810 (nearly black), pool water gradient #040e1a / #030a12
+
+---
+
+## OTHER PAGE STRUCTURES
 
 ### Gate & Fountain Pages (shared pattern)
 1. Nav → 2. Hero (SVG animation) → 3. Stats Bar → 4. Problem/Solution → 5. Experience (3-col) → 6. What's Included → 7. How It Works → 8. Features/Dashboard → 9. Beyond Section → 10. Pricing → 11. Contact Form → 12. Footer
@@ -92,18 +186,24 @@
 4. **Problem/Solution** — brand-agnostic: "Your pool works. Using it shouldn't be this hard."
 5. **Experience** — **4-column (2×2) grid**: Phone, Voice, Automation, Physical Buttons
 6. **Compatibility** — 3 cards: Existing Automation / No Automation / Mixed Equipment (brand-agnostic)
-7. **Whole-House Integration** — 6-card grid showing pool+home automations (porch lights, speaker announcements, Pool Night scene, camera auto-shutoff spa, safety alerts, kid detection)
-8. **What's Included** — 6-item package grid (Equipment Integration, Custom App Dashboard, Voice Setup, Automations Built for You, Temp & Chemistry, Smart Home Integration)
-9. **How It Works** — 4 steps: assess → learn how you use it → build system → enjoy
+7. **Whole-House Integration** — 6-card grid showing pool+home automations
+8. **What's Included** — 6-item package grid
+9. **How It Works** — 4 steps
 10. **Features/Dashboard** — "Built for you. Not a template." + dashboard mockup
-11. **Beyond the Pool** — cross-sell grid (gate, cameras, lighting, HVAC, fountains, irrigation)
-12. **Pricing** — contact for pricing card + single add-on: Pool Camera & Smart Sensing
-13. **Contact Form** — dropdown: "What best describes your setup?" (has automation / no automation / pool+spa / mixed / not sure)
+11. **Beyond the Pool** — cross-sell grid
+12. **Pricing** — contact for pricing card + single add-on
+13. **Contact Form** — dropdown for setup type
 14. **Footer**
 
 ---
 
 ## SVG ANIMATIONS
+
+### Estate Animation (index.html)
+- **20-second cycle** looping via `requestAnimationFrame`
+- Car approaches → pillar lights detect → gate opens → all lights come on (windows, porch, landscape, oak spotlights, palm spotlights, pool lights, fountain spray + LEDs) → car drives through to house → notification toasts → everything fades to dark → reset
+- **Enhanced fountain** adapted from fountains.html: tall center jet, wide fan sprays, splash particles, 4 animated ripple rings, LED ring, mist haze, water glow, organic sway
+- Key element IDs: `carGroup`, `gateLeft`, `gateRight`, `gateLed`, `pillarLight1/2`, `porchLight/2`, `windowAmbient`, `winGlow1-6`, `lLight1-4`, `oakSpotBeams`, `oakCanopyLit`, `palmSpot1-3`, `poolCaustics`, `poolRipples`, `poolGlowOverlay`, `poolLightsGroup`, `fountainSpray`, `ftnLedGroup`, `ftnRipple1-4`, `splashCenter`, `ftnDroplets`, `waterGlowEl`, `waterGlowInner`, `lakeCaustics`, `lakeRipples`, `estateToast`, `toastTitle`, `toastSub`
 
 ### Gate Animation (gate.html)
 - **10-second cycle** looping via `requestAnimationFrame`
@@ -113,19 +213,13 @@
 
 ### Fountain Animation (fountains.html)
 - **14-second cycle** looping via `requestAnimationFrame`
-- Phone slides in → tap animation → fountain turns on (spray opacity fades in) → wind picks up (anemometer spins faster, HUD wind speed increases) → fountain auto-shutoffs → amber toast appears → cycle resets
+- Phone slides in → tap animation → fountain turns on → wind picks up → fountain auto-shutoffs → amber toast appears → cycle resets
 - Key element IDs: `sprayGroup`, `waterGlowEl`, `phoneGroup`, `anemometer`, `notifToast2`, `hudStatus`, `hudWind`
-- LED lights around fountain base shimmer when running
 
 ### Pool + Spa Animation (pool.html)
 - **14-second cycle** looping via `requestAnimationFrame`
-- **Scene:** Centered pool (large rectangular) + circular spa/hot tub connected on the right, luxury paver deck (SVG pattern with staggered stone pavers and grout lines), stone coping borders around both pool and spa
-- **Pool lights:** Bright green (#4ade80) with `glowStrong` double-blur filter, 3 lights along pool bottom with large glow halos. Green-tinted water (overlay + caustics + ripple lines all green)
-- **Spa lights:** Start green (matching pool) → transition to red during heating → back to green when ready. Water color overlay matches light color throughout
-- **Phone:** Large, centered vertically and horizontally over the scene. Shows only temperature (96°→102°F) and "START SPA" button. Button changes state: purple "START SPA" → red "HEATING..." → green "SPA ON". Phone stays on screen entire cycle, fades in/out at start/end only
-- **Animation flow:** Phone fades in → tap indicator pulses on SPA button → jets turn on (prominent bubble clusters with foam/turbulence, 3 nozzle positions + center) → spa lights/water go red → temp rises 96→102 → lights/water transition red→green → in-phone notification slides down from top ("Spa Heated · 102°F") → phone fades out → jets wind down → reset
-- **Key element IDs:** `poolSVG`, `phoneGroup`, `phoneTemp`, `phoneTempLabel`, `phoneStatus`, `phoneNotif`, `spaBtnBg`, `spaBtnText`, `tapIndicator`, `spaJets`, `spaRipples`, `spaCaustics`, `spaWaterOverlay`, `spaCaustic1`, `spaCaustic2`, `spaLight1-3`, `spaLightGlow1-3`, `caustics`, `ripples`, `poolLights`, `poolWaterOverlay`
-- **No HUD panels, no equipment pad** — clean scene with just pool, spa, deck, and phone
+- Phone fades in → tap indicator pulses on SPA button → jets turn on → spa lights/water go red → temp rises 96→102 → lights/water transition red→green → in-phone notification → phone fades out → jets wind down → reset
+- Key element IDs: `poolSVG`, `phoneGroup`, `phoneTemp`, `phoneStatus`, `spaJets`, `spaRipples`, `spaCaustics`, `spaWaterOverlay`, `spaLight1-3`
 
 ---
 
@@ -138,20 +232,10 @@
 
 ---
 
-## POOL PAGE COPY NOTES
-- **Brand-agnostic:** Not focused on Pentair/Hayward/Jandy — emphasizes "any system or no system at all"
-- **Custom-built messaging:** "We build around how you actually use your pool" / "Built for you. Not a template."
-- **4 control methods:** Phone, Voice, Smart Automation, Physical Buttons
-- **Compatibility section:** 3 approaches — Existing Automation (any brand), No Automation (just pump & switches), Mixed Equipment
-- **Whole-House Integration section:** Shows pool talking to lights, speakers, cameras, locks (porch lights turn red while spa heats, speaker announcements, camera auto-shutoff spa, kid detection alerts)
-- **Single add-on:** Pool Camera & Smart Sensing (camera as automation sensor, not just recording)
-
----
-
 ## RESPONSIVE BREAKPOINTS
-- **960px:** grids collapse to 2-col
-- **768px:** nav becomes hamburger, grids to 1-col, stats wrap, form rows stack
-- **480px:** beyond/compat grids to 1-col, stats to 1-col
+- **960px:** grids collapse to 2-col, estate SVG gets brightness(1.3) contrast(1.1)
+- **768px:** nav becomes hamburger, grids to 1-col, estate SVG gets brightness(1.6) contrast(1.15), viewBox crops to zoom in
+- **480px:** beyond/compat grids to 1-col, estate SVG viewBox tight crop
 
 ---
 
@@ -159,9 +243,6 @@
 - CSS classes use kebab-case: `.section-inner`, `.btn-primary`, `.exp-card`
 - Section IDs match nav anchors: `#package`, `#how`, `#pricing`, `#contact`, `#experience`, `#features`, `#beyond`
 - Pool page adds: `#compat` (compatibility), `#integration` (whole-house integration)
-- Package grid items: `.package-item` with `.pkg-icon`, `.pkg-title`, `.pkg-desc`
-- Step items: `.step` with `.step-num`, `.step-title`, `.step-desc`
-- Pool page experience grid uses 2×2 layout (`repeat(2, 1fr)`) for 4 cards
 
 ---
 
@@ -174,5 +255,8 @@
 6. **Copyright year:** all pages show © 2026
 7. **Favicon:** SVG inline data URI — dark rounded rect with cyan "C"
 8. **The logo** is text-based: "Craison" in white + "Digital" in cyan (`var(--cyan)`)
-9. **No homepage currently exists** — `index.html` was removed; site only has product-specific pages
-10. **Pool page confirmed** — the pool.html on GitHub is the full, working version as of 2026-03-19.
+9. **index.html homepage exists** — built 2026-03-20 with animated estate SVG hero
+10. **Pool page confirmed** — the pool.html on GitHub is the full, working version as of 2026-03-19
+11. **Homepage SVG element draw order matters** — pool → garage → house → gate (bottom pillar) → car → gate (top pillar) → oak tree → palm trees → fountain → landscape lights. This layering creates correct depth/perspective.
+12. **Fountain in index.html** uses enhanced spray adapted from fountains.html — center jet, fan sprays, splash particles, ripple rings, LEDs, mist, water glow
+13. **Homepage not yet pushed to GitHub** — exists at /mnt/user-data/outputs/index.html, needs to be committed

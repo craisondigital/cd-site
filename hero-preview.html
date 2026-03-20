@@ -65,18 +65,12 @@
     .btn-secondary { background: transparent; color: var(--text); padding: 0.85rem 2.2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 400; text-decoration: none; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; }
     .btn-secondary:hover { border-color: rgba(255,255,255,0.15); color: var(--white); }
 
-    /* ═══ ANIMATION STAGE — uses flexbox centering for all phases ═══ */
-    .animation-stage {
-      position: relative; width: 100%; max-width: 520px; height: 320px;
-      margin: 0 auto 3rem; z-index: 5;
-      display: flex; align-items: center; justify-content: center;
-    }
+    .animation-stage { position: relative; width: 100%; max-width: 520px; height: 320px; margin: 0 auto 3rem; z-index: 5; display: flex; align-items: center; justify-content: center; }
 
     .app-icon { position: absolute; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; border: 1px solid rgba(255,255,255,0.04); background: rgba(15,23,36,0.7); box-shadow: 0 4px 16px rgba(0,0,0,0.25); transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1); opacity: 0; z-index: 1; }
     .app-icon .app-label { position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); font-size: 0.48rem; color: rgba(107,122,141,0.6); white-space: nowrap; font-weight: 500; letter-spacing: 0.04em; transition: opacity 0.4s; }
     .app-icon::after { content: '✕'; position: absolute; top: -5px; right: -5px; width: 14px; height: 14px; border-radius: 50%; background: rgba(239,68,68,0.7); color: white; font-size: 0.45rem; font-weight: 700; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 6px rgba(239,68,68,0.3); transition: all 0.6s ease; opacity: 0; }
 
-    /* ═══ PHASE 1: CHAOS ═══ */
     .phase-chaos .app-icon { opacity: 0.4; }
     .phase-chaos .app-icon::after { opacity: 0.7; }
     .phase-chaos .app-icon:nth-child(1)  { top: 6%;  left: 14%; transform: rotate(-6deg); }
@@ -96,39 +90,22 @@
     .phase-chaos .app-icon:nth-child(5n) { animation-delay: -0.8s; }
     @keyframes jitter { 0%{translate:0 0} 25%{translate:3px -2px} 50%{translate:-2px 3px} 75%{translate:3px 1px} 100%{translate:-1px -3px} }
 
-    /* ★ FIX 1: Chaos label — true center of stage using flexbox fallback + explicit centering */
-    .chaos-label {
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 10; pointer-events: none; text-align: center;
-      width: 90%; max-width: 400px;
-      opacity: 0; transition: opacity 0.6s;
-    }
+    .chaos-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; pointer-events: none; text-align: center; width: 90%; max-width: 400px; opacity: 0; transition: opacity 0.6s; }
     .chaos-label .cl-main { font-family: var(--font-display); font-size: clamp(1.1rem, 2.8vw, 1.5rem); font-weight: 800; color: var(--white); line-height: 1.3; margin-bottom: 0.6rem; text-shadow: 0 0 40px rgba(6,10,16,0.95), 0 0 80px rgba(6,10,16,0.9); }
-    .chaos-label .cl-sub { font-family: var(--font-display); font-size: clamp(0.95rem, 2.2vw, 1.15rem); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(239,68,68,0.85); text-shadow: 0 0 30px rgba(6,10,16,0.9); }
+    .chaos-label .cl-sub { font-family: var(--font-display); font-size: clamp(1.05rem, 2.5vw, 1.3rem); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(239,68,68,0.85); text-shadow: 0 0 30px rgba(6,10,16,0.9); }
     .chaos-label::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 360px; height: 200px; background: radial-gradient(ellipse, rgba(6,10,16,0.92) 0%, rgba(6,10,16,0.6) 45%, transparent 75%); z-index: -1; border-radius: 50%; }
     .phase-chaos .chaos-label { opacity: 1; }
 
     .confusion-lines { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0; transition: opacity 0.5s; }
     .phase-chaos .confusion-lines { opacity: 1; }
 
-    /* ═══ PHASE 2: CONVERGE ═══ */
     .phase-converge .app-icon { top: 50% !important; left: 50% !important; transform: translate(-50%, -50%) scale(0.3) !important; opacity: 0 !important; transition: all 0.9s cubic-bezier(0.34, 1.56, 0.64, 1); animation: none !important; }
     .phase-converge .app-icon::after { opacity: 0; }
     .phase-converge .app-icon .app-label { opacity: 0; }
     .phase-converge .chaos-label { opacity: 0; }
     .phase-converge .confusion-lines { opacity: 0; }
 
-    /* ═══ PHASE 3: "WE CAN HELP" ═══ */
-    /* ★ FIX 2: Help message — proper absolute centering, no overflow issues */
-    .help-message {
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 15; text-align: center;
-      width: 92%; max-width: 480px;
-      opacity: 0; transition: opacity 0.8s ease;
-      pointer-events: none;
-    }
+    .help-message { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 15; text-align: center; width: 92%; max-width: 480px; opacity: 0; transition: opacity 0.8s ease; pointer-events: none; }
     .help-logo { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.6rem, 3.5vw, 2.4rem); color: var(--white); margin-bottom: 0.6rem; transform: translateY(10px); transition: transform 0.8s ease, opacity 0.8s ease; opacity: 0; line-height: 1.2; }
     .help-logo span { color: var(--cyan); }
     .help-text { font-family: var(--font-display); font-size: clamp(1rem, 2.5vw, 1.4rem); font-weight: 700; color: var(--blue-bright); margin-bottom: 0.8rem; transform: translateY(10px); transition: transform 0.8s ease 0.25s, opacity 0.8s ease 0.25s; opacity: 0; }
@@ -146,15 +123,7 @@
     .phase-help .chaos-label { opacity: 0; }
     .phase-help .confusion-lines { opacity: 0; }
 
-    /* ═══ PHASE 4: CALM ═══ */
-    /* ★ FIX 3: Phone + tagline centered as a group using a wrapper */
-    .calm-wrap {
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      display: flex; flex-direction: column; align-items: center;
-      z-index: 10; width: 100%;
-      opacity: 0; transition: opacity 1s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
+    .calm-wrap { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; z-index: 10; width: 100%; opacity: 0; transition: opacity 1s cubic-bezier(0.34, 1.56, 0.64, 1); }
     .phase-calm .calm-wrap { opacity: 1; }
     .phase-calm .help-message { opacity: 0; }
     .phase-calm .help-glow { opacity: 0; }
@@ -186,7 +155,6 @@
     .ps-card-status { font-size: 0.38rem; color: var(--green); font-weight: 500; }
     .ps-card-status.off { color: var(--muted); }
 
-    /* ★ FIX 3: Tagline is now inside calm-wrap, right below phone, bigger text */
     .calm-tagline { text-align: center; margin-top: 1rem; opacity: 0; transition: opacity 0.8s ease 0.5s; }
     .phase-calm .calm-tagline { opacity: 1; }
     .calm-tagline .tag-main { font-family: var(--font-display); font-size: clamp(0.9rem, 2vw, 1.1rem); font-weight: 700; color: var(--white); letter-spacing: -0.01em; }
@@ -246,7 +214,7 @@
       .app-icon .app-label { display: none; }
       .animation-stage { height: 260px; max-width: 320px; }
       .chaos-label .cl-main { font-size: 1rem; }
-      .chaos-label .cl-sub { font-size: 0.8rem; }
+      .chaos-label .cl-sub { font-size: 0.9rem; }
       .chaos-label::before { width: 260px; height: 150px; }
       .help-logo { font-size: 1.4rem; }
       .help-text { font-size: 0.9rem; }
@@ -313,7 +281,7 @@
         </svg>
 
         <div class="chaos-label">
-          <div class="cl-main">Twelve apps. Six remotes.<br/>Half of it barely works.</div>
+          <div class="cl-main">12 apps. 6 remotes.<br/>Nothing works.</div>
           <div class="cl-sub">Sound familiar?</div>
         </div>
 
@@ -338,7 +306,6 @@
 
         <div class="phone-glow"></div>
 
-        <!-- ★ FIX 3: Phone + tagline wrapped together so they center as a unit -->
         <div class="calm-wrap">
           <div class="phone-frame">
             <div class="phone-notch"></div>
@@ -360,8 +327,8 @@
             </div>
           </div>
           <div class="calm-tagline">
-            <div class="tag-main">One app. One relationship. One system.</div>
-            <div class="tag-sub">Everything you already own — finally working together.</div>
+            <div class="tag-main">One App for All.</div>
+            <div class="tag-sub">Everything you already own finally working together.</div>
           </div>
         </div>
       </div>
@@ -393,7 +360,7 @@
   </footer>
 
   <div class="preview-banner">
-    <strong>⚡ HERO PREVIEW</strong> — 4-phase animation: Chaos → Converge → "We can help" → One App. Loops automatically.
+    <strong>⚡ HERO PREVIEW</strong> — 4-phase animation: Chaos → Converge → "We can help" → One App for All. Loops automatically.
   </div>
 
   <script>

@@ -23,7 +23,7 @@
     body { background: var(--black); color: var(--text); font-family: var(--font-body); font-weight: 300; line-height: 1.75; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
     body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.5; }
 
-    /* NAV — v5 pattern from CLAUDE_REFERENCE */
+    /* NAV — v5 pattern */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: rgba(6,10,16,0.92);
@@ -134,89 +134,119 @@
       z-index: 5;
     }
 
-    /* App icons — chaos phase */
+    /* App icons — smaller, faded, background supporting cast */
     .app-icon {
       position: absolute;
-      width: 56px; height: 56px;
-      border-radius: 14px;
+      width: 48px; height: 48px;
+      border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem;
-      border: 1px solid rgba(255,255,255,0.06);
-      background: rgba(15,23,36,0.9);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      font-size: 1.25rem;
+      border: 1px solid rgba(255,255,255,0.04);
+      background: rgba(15,23,36,0.7);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
       transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
       opacity: 0;
-      z-index: 2;
+      z-index: 1;
     }
     .app-icon .app-label {
-      position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%);
-      font-size: 0.52rem; color: var(--muted); white-space: nowrap;
+      position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%);
+      font-size: 0.48rem; color: rgba(107,122,141,0.6); white-space: nowrap;
       font-weight: 500; letter-spacing: 0.04em;
       transition: opacity 0.4s;
     }
 
-    /* Red X badges in chaos */
+    /* Red X badges — subtler */
     .app-icon::after {
-      content: '✕'; position: absolute; top: -6px; right: -6px;
-      width: 16px; height: 16px; border-radius: 50%;
-      background: rgba(239,68,68,0.9); color: white;
-      font-size: 0.5rem; font-weight: 700;
+      content: '✕'; position: absolute; top: -5px; right: -5px;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: rgba(239,68,68,0.7); color: white;
+      font-size: 0.45rem; font-weight: 700;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 0 8px rgba(239,68,68,0.4);
+      box-shadow: 0 0 6px rgba(239,68,68,0.3);
       transition: all 0.6s ease;
       opacity: 0;
     }
 
-    /* Chaos state — scattered, some rotated, jittering */
-    .phase-chaos .app-icon { opacity: 1; }
-    .phase-chaos .app-icon::after { opacity: 1; }
-    .phase-chaos .app-icon:nth-child(1)  { top: 8%;  left: 5%;  transform: rotate(-8deg); }
-    .phase-chaos .app-icon:nth-child(2)  { top: 3%;  left: 30%; transform: rotate(5deg); }
-    .phase-chaos .app-icon:nth-child(3)  { top: 12%; left: 58%; transform: rotate(-3deg); }
-    .phase-chaos .app-icon:nth-child(4)  { top: 5%;  left: 82%; transform: rotate(7deg); }
-    .phase-chaos .app-icon:nth-child(5)  { top: 38%; left: 2%;  transform: rotate(4deg); }
-    .phase-chaos .app-icon:nth-child(6)  { top: 42%; left: 28%; transform: rotate(-6deg); }
-    .phase-chaos .app-icon:nth-child(7)  { top: 35%; left: 55%; transform: rotate(8deg); }
-    .phase-chaos .app-icon:nth-child(8)  { top: 40%; left: 80%; transform: rotate(-4deg); }
-    .phase-chaos .app-icon:nth-child(9)  { top: 68%; left: 12%; transform: rotate(6deg); }
-    .phase-chaos .app-icon:nth-child(10) { top: 72%; left: 42%; transform: rotate(-5deg); }
-    .phase-chaos .app-icon:nth-child(11) { top: 65%; left: 70%; transform: rotate(3deg); }
+    /* ═══ CHAOS STATE — icons pulled TIGHT around center, dimmed ═══ */
+    .phase-chaos .app-icon { opacity: 0.4; }
+    .phase-chaos .app-icon::after { opacity: 0.7; }
 
-    /* Chaos floating jitter animation */
-    .phase-chaos .app-icon { animation: jitter 2.5s ease-in-out infinite alternate; }
-    .phase-chaos .app-icon:nth-child(2n) { animation-delay: -0.5s; animation-duration: 3s; }
-    .phase-chaos .app-icon:nth-child(3n) { animation-delay: -1.2s; animation-duration: 2.8s; }
+    /* Tight orbit — icons cluster close to center, leaving clear space for label */
+    /* Top row — 4 icons across the top */
+    .phase-chaos .app-icon:nth-child(1)  { top: 6%;  left: 14%; transform: rotate(-6deg); }
+    .phase-chaos .app-icon:nth-child(2)  { top: 2%;  left: 34%; transform: rotate(4deg); }
+    .phase-chaos .app-icon:nth-child(3)  { top: 4%;  left: 54%; transform: rotate(-3deg); }
+    .phase-chaos .app-icon:nth-child(4)  { top: 6%;  left: 74%; transform: rotate(5deg); }
+    /* Middle row — 3 icons on left and right edges, clear center */
+    .phase-chaos .app-icon:nth-child(5)  { top: 34%; left: 6%;  transform: rotate(3deg); }
+    .phase-chaos .app-icon:nth-child(6)  { top: 38%; left: 80%; transform: rotate(-5deg); }
+    .phase-chaos .app-icon:nth-child(7)  { top: 52%; left: 4%;  transform: rotate(6deg); }
+    /* Bottom row — 4 icons across the bottom */
+    .phase-chaos .app-icon:nth-child(8)  { top: 68%; left: 78%; transform: rotate(-3deg); }
+    .phase-chaos .app-icon:nth-child(9)  { top: 72%; left: 14%; transform: rotate(5deg); }
+    .phase-chaos .app-icon:nth-child(10) { top: 70%; left: 38%; transform: rotate(-4deg); }
+    .phase-chaos .app-icon:nth-child(11) { top: 72%; left: 58%; transform: rotate(3deg); }
+
+    /* Chaos floating jitter — gentler */
+    .phase-chaos .app-icon { animation: jitter 3s ease-in-out infinite alternate; }
+    .phase-chaos .app-icon:nth-child(2n) { animation-delay: -0.5s; animation-duration: 3.5s; }
+    .phase-chaos .app-icon:nth-child(3n) { animation-delay: -1.2s; animation-duration: 3.2s; }
     .phase-chaos .app-icon:nth-child(5n) { animation-delay: -0.8s; }
     @keyframes jitter {
       0%   { translate: 0 0; }
-      25%  { translate: 4px -3px; }
-      50%  { translate: -3px 5px; }
-      75%  { translate: 5px 2px; }
-      100% { translate: -2px -4px; }
+      25%  { translate: 3px -2px; }
+      50%  { translate: -2px 3px; }
+      75%  { translate: 3px 1px; }
+      100% { translate: -1px -3px; }
     }
 
-    /* Chaos label pulses */
+    /* ═══ CHAOS LABEL — THE STAR OF THE SHOW ═══ */
     .chaos-label {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
-      color: rgba(239,68,68,0.6); font-weight: 600;
-      z-index: 1; pointer-events: none;
+      z-index: 10; pointer-events: none;
+      text-align: center;
       opacity: 0; transition: opacity 0.6s;
+    }
+    .chaos-label .cl-main {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 2.8vw, 1.5rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 40px rgba(6,10,16,0.95), 0 0 80px rgba(6,10,16,0.9);
+    }
+    .chaos-label .cl-sub {
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(239,68,68,0.7);
+      font-weight: 600;
+    }
+    /* Dark vignette behind label to ensure readability */
+    .chaos-label::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 320px; height: 160px;
+      background: radial-gradient(ellipse, rgba(6,10,16,0.85) 0%, rgba(6,10,16,0.5) 50%, transparent 75%);
+      z-index: -1;
+      border-radius: 50%;
     }
     .phase-chaos .chaos-label { opacity: 1; }
 
-    /* Confusion lines — subtle connecting lines between scattered apps */
+    /* Confusion lines */
     .confusion-lines {
-      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
       opacity: 0; transition: opacity 0.5s;
     }
     .phase-chaos .confusion-lines { opacity: 1; }
 
-    /* ═══ CONVERGE PHASE — icons fly to center ═══ */
+    /* ═══ CONVERGE PHASE ═══ */
     .phase-converge .app-icon {
-      opacity: 1;
       top: 50% !important; left: 50% !important;
-      transform: translate(-50%, -50%) scale(0.4) !important;
+      transform: translate(-50%, -50%) scale(0.3) !important;
       opacity: 0 !important;
       transition: all 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
       animation: none !important;
@@ -226,7 +256,7 @@
     .phase-converge .chaos-label { opacity: 0; }
     .phase-converge .confusion-lines { opacity: 0; }
 
-    /* ═══ CALM PHASE — phone with unified dashboard ═══ */
+    /* ═══ CALM PHASE ═══ */
     .phone-frame {
       position: absolute;
       top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.5);
@@ -244,16 +274,12 @@
       opacity: 1; transform: translate(-50%, -50%) scale(1);
     }
 
-    /* Phone notch */
     .phone-notch {
       width: 80px; height: 5px; background: #060a10;
       border-radius: 0 0 8px 8px; margin: 0 auto;
     }
 
-    /* Phone screen content */
-    .phone-screen {
-      padding: 14px 12px 10px;
-    }
+    .phone-screen { padding: 14px 12px 10px; }
     .ps-header {
       display: flex; align-items: center; justify-content: space-between;
       margin-bottom: 10px;
@@ -278,19 +304,14 @@
       font-size: 0.42rem; color: var(--muted); margin-bottom: 10px;
     }
 
-    /* Mini device cards on phone */
-    .ps-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
-    }
+    .ps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
     .ps-card {
       background: rgba(15,23,36,0.8);
       border: 1px solid rgba(255,255,255,0.05);
       border-radius: 10px; padding: 8px 7px;
       opacity: 0; transform: translateY(6px);
     }
-    .phase-calm .ps-card {
-      animation: cardIn 0.4s ease forwards;
-    }
+    .phase-calm .ps-card { animation: cardIn 0.4s ease forwards; }
     .phase-calm .ps-card:nth-child(1) { animation-delay: 0.6s; }
     .phase-calm .ps-card:nth-child(2) { animation-delay: 0.75s; }
     .phase-calm .ps-card:nth-child(3) { animation-delay: 0.9s; }
@@ -304,7 +325,6 @@
     .ps-card-status { font-size: 0.38rem; color: var(--green); font-weight: 500; }
     .ps-card-status.off { color: var(--muted); }
 
-    /* Calm tagline below phone */
     .calm-tagline {
       position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
       text-align: center; white-space: nowrap;
@@ -320,7 +340,6 @@
       font-size: 0.65rem; color: var(--muted); margin-top: 2px;
     }
 
-    /* Glow ring behind phone in calm phase */
     .phone-glow {
       position: absolute; top: 50%; left: 50%;
       transform: translate(-50%, -50%);
@@ -331,7 +350,6 @@
     }
     .phase-calm .phone-glow { opacity: 1; }
 
-    /* Phase indicator dots */
     .phase-dots {
       display: flex; gap: 8px; justify-content: center;
       margin-bottom: 2rem; z-index: 5; position: relative;
@@ -342,7 +360,6 @@
     }
     .phase-dot.active { background: var(--cyan); box-shadow: 0 0 8px var(--cyan); width: 20px; border-radius: 3px; }
 
-    /* Preview banner */
     .preview-banner {
       position: fixed; bottom: 0; left: 0; right: 0;
       background: rgba(47,128,237,0.1); border-top: 1px solid rgba(47,128,237,0.2);
@@ -352,7 +369,6 @@
     }
     .preview-banner strong { color: var(--blue-bright); font-weight: 600; }
 
-    /* FOOTER */
     footer { border-top: 1px solid var(--border); background: var(--black); padding: 2.5rem 4rem; font-size: 0.78rem; color: var(--muted); }
     .footer-logo { font-family: var(--font-display); font-weight: 800; font-size: 0.95rem; color: var(--white); }
     .footer-logo span { color: var(--cyan); }
@@ -362,7 +378,6 @@
     .footer-nav a:hover { color: var(--text); }
     .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 1.2rem; border-top: 1px solid var(--border); }
 
-    /* RESPONSIVE */
     @media (max-width: 768px) {
       .nav-bar { padding: 0.9rem 1.5rem; }
       .nav-toggle { display: block; }
@@ -382,8 +397,10 @@
       .mobile-menu .nav-cta { display: inline-block; margin-top: 0.4rem; padding: 0.6rem 1.8rem; font-size: 1rem; }
 
       .animation-stage { height: 290px; max-width: 360px; }
-      .app-icon { width: 46px; height: 46px; font-size: 1.2rem; border-radius: 12px; }
-      .app-icon .app-label { font-size: 0.44rem; bottom: -15px; }
+      .app-icon { width: 40px; height: 40px; font-size: 1.05rem; border-radius: 10px; }
+      .app-icon .app-label { font-size: 0.42rem; bottom: -14px; }
+      .chaos-label .cl-main { font-size: clamp(1rem, 3.5vw, 1.3rem); }
+      .chaos-label::before { width: 260px; height: 130px; }
       .phone-frame { width: 170px; height: 260px; }
       .ps-greeting { font-size: 0.6rem; }
       .ps-grid { gap: 4px; }
@@ -400,9 +417,12 @@
       .footer-bottom { flex-direction: column; gap: 0.4rem; text-align: center; }
     }
     @media (max-width: 480px) {
-      .app-icon { width: 40px; height: 40px; font-size: 1.05rem; border-radius: 10px; }
+      .app-icon { width: 36px; height: 36px; font-size: 0.95rem; border-radius: 9px; }
       .app-icon .app-label { display: none; }
       .animation-stage { height: 260px; max-width: 320px; }
+      .chaos-label .cl-main { font-size: 1rem; }
+      .chaos-label .cl-sub { font-size: 0.58rem; }
+      .chaos-label::before { width: 220px; height: 110px; }
       .phone-frame { width: 150px; height: 230px; border-radius: 22px; }
       .phone-notch { width: 60px; height: 4px; }
       .phone-screen { padding: 10px 8px 8px; }
@@ -411,7 +431,6 @@
 </head>
 <body>
 
-  <!-- NAV — v5 pattern -->
   <nav>
     <div class="nav-bar">
       <a href="index.html" class="nav-logo">Craison<span>Digital</span></a>
@@ -459,23 +478,26 @@
       <div class="hero-eyebrow">Smart Property Consulting · Estates & Compounds · Miami</div>
       <h1>Your smart home should <em>actually be smart.</em></h1>
 
-      <!-- ANIMATION STAGE -->
       <div class="animation-stage phase-chaos" id="animStage">
 
-        <!-- Confusion lines SVG -->
         <svg class="confusion-lines" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg">
-          <line x1="50" y1="45" x2="180" y2="35" stroke="rgba(239,68,68,0.12)" stroke-width="1" stroke-dasharray="4 4"/>
-          <line x1="320" y1="55" x2="440" y2="40" stroke="rgba(239,68,68,0.1)" stroke-width="1" stroke-dasharray="4 4"/>
-          <line x1="30" y1="140" x2="170" y2="160" stroke="rgba(239,68,68,0.1)" stroke-width="1" stroke-dasharray="4 4"/>
-          <line x1="310" y1="135" x2="440" y2="150" stroke="rgba(239,68,68,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
-          <line x1="100" y1="230" x2="250" y2="245" stroke="rgba(239,68,68,0.1)" stroke-width="1" stroke-dasharray="4 4"/>
-          <line x1="280" y1="135" x2="180" y2="35" stroke="rgba(239,68,68,0.06)" stroke-width="1" stroke-dasharray="4 4"/>
-          <line x1="380" y1="220" x2="440" y2="150" stroke="rgba(239,68,68,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="80" y1="55" x2="200" y2="45" stroke="rgba(239,68,68,0.1)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="300" y1="50" x2="410" y2="55" stroke="rgba(239,68,68,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="40" y1="130" x2="100" y2="165" stroke="rgba(239,68,68,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="420" y1="125" x2="440" y2="160" stroke="rgba(239,68,68,0.07)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="90" y1="245" x2="210" y2="240" stroke="rgba(239,68,68,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="300" y1="240" x2="420" y2="250" stroke="rgba(239,68,68,0.07)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="200" y1="45" x2="40" y2="130" stroke="rgba(239,68,68,0.05)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="410" y1="55" x2="440" y2="160" stroke="rgba(239,68,68,0.05)" stroke-width="1" stroke-dasharray="4 4"/>
         </svg>
 
-        <div class="chaos-label">12 apps · 6 remotes · nothing talks</div>
+        <!-- CHAOS LABEL — front and center, the focal point -->
+        <div class="chaos-label">
+          <div class="cl-main">Twelve apps. Six remotes.<br/>Half of it barely works.</div>
+          <div class="cl-sub">Sound familiar?</div>
+        </div>
 
-        <!-- 11 app icons — real brand stand-ins -->
+        <!-- 11 app icons — background clutter -->
         <div class="app-icon">🚪<span class="app-label">LiftMaster</span></div>
         <div class="app-icon">🌊<span class="app-label">Pentair</span></div>
         <div class="app-icon">💡<span class="app-label">Lutron</span></div>
@@ -488,7 +510,6 @@
         <div class="app-icon">☀️<span class="app-label">Hunter</span></div>
         <div class="app-icon">🏠<span class="app-label">SmartThings</span></div>
 
-        <!-- Phone (hidden until calm phase) -->
         <div class="phone-glow"></div>
         <div class="phone-frame">
           <div class="phone-notch"></div>
@@ -510,14 +531,12 @@
           </div>
         </div>
 
-        <!-- Tagline below phone -->
         <div class="calm-tagline">
           <div class="tag-main">One app. One relationship. One system.</div>
           <div class="tag-sub">Everything you already own — finally working together.</div>
         </div>
       </div>
 
-      <!-- Phase dots -->
       <div class="phase-dots" id="phaseDots">
         <div class="phase-dot active" data-phase="0"></div>
         <div class="phase-dot" data-phase="1"></div>
@@ -554,7 +573,6 @@
     var phases = ['phase-chaos', 'phase-converge', 'phase-calm'];
     var currentPhase = 0;
 
-    // Timing: chaos 4s → converge 1.2s → calm 5s → reset
     var CHAOS_DURATION = 4000;
     var CONVERGE_DURATION = 1200;
     var CALM_DURATION = 5500;
@@ -570,19 +588,12 @@
     }
 
     function runCycle() {
-      // Phase 0: Chaos
       setPhase(0);
-
       setTimeout(function(){
-        // Phase 1: Converge
         setPhase(1);
-
         setTimeout(function(){
-          // Phase 2: Calm
           setPhase(2);
-
           setTimeout(function(){
-            // Brief pause then restart
             setTimeout(runCycle, RESET_PAUSE);
           }, CALM_DURATION);
         }, CONVERGE_DURATION);
@@ -591,7 +602,6 @@
 
     runCycle();
 
-    // Nav toggle — v5 pattern
     var navToggle = document.getElementById('navToggle');
     var mobileMenu = document.getElementById('mobileMenu');
     if(navToggle && mobileMenu){

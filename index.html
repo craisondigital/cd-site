@@ -126,6 +126,8 @@
       .automate-grid { grid-template-columns: 1fr 1fr; }
       .diff-grid { grid-template-columns: 1fr; }
       .plan-layout { grid-template-columns: 1fr; gap: 3rem; }
+      /* Slight contrast boost for tablets */
+      .estate-illustration svg { filter: brightness(1.3) contrast(1.1); }
     }
     @media (max-width: 768px) {
       nav { padding: 0.9rem 1.5rem; }
@@ -139,6 +141,8 @@
       .form-row { grid-template-columns: 1fr; }
       footer { flex-direction: column; gap: 0.8rem; text-align: center; padding: 2rem 1.5rem; }
       .form-submit-row { flex-direction: column; align-items: stretch; }
+      /* Boost SVG contrast on mobile so dark elements are visible */
+      .estate-illustration svg { filter: brightness(1.6) contrast(1.15); }
     }
     @media (max-width: 480px) {
       .graveyard-apps { gap: 0.4rem; }
@@ -169,13 +173,13 @@
       <svg id="estateSVG" viewBox="0 0 1100 440" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
         <defs>
           <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#05080f"/><stop offset="100%" stop-color="#0b1628"/></linearGradient>
-          <linearGradient id="groundGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0e1a28"/><stop offset="100%" stop-color="#0a1420"/></linearGradient>
-          <linearGradient id="houseWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#161f2e"/><stop offset="100%" stop-color="#111928"/></linearGradient>
-          <linearGradient id="roofGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a2640"/><stop offset="100%" stop-color="#141e30"/></linearGradient>
+          <linearGradient id="groundGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#121e2e"/><stop offset="100%" stop-color="#0c1824"/></linearGradient>
+          <linearGradient id="houseWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1e2a3e"/><stop offset="100%" stop-color="#152235"/></linearGradient>
+          <linearGradient id="roofGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#223050"/><stop offset="100%" stop-color="#1a2640"/></linearGradient>
           <linearGradient id="poolWater" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#040e1a" stop-opacity="0.95"/><stop offset="100%" stop-color="#030a12" stop-opacity="0.98"/></linearGradient>
           <linearGradient id="poolGlowG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4ade80" stop-opacity="0.15"/><stop offset="100%" stop-color="#22c55e" stop-opacity="0.03"/></linearGradient>
-          <linearGradient id="gatePost" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1e2d44"/><stop offset="100%" stop-color="#141e30"/></linearGradient>
-          <linearGradient id="driveGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0f1a28"/><stop offset="100%" stop-color="#111e2c"/></linearGradient>
+          <linearGradient id="gatePost" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#253a55"/><stop offset="100%" stop-color="#1a2a40"/></linearGradient>
+          <linearGradient id="driveGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#152535"/><stop offset="100%" stop-color="#182838"/></linearGradient>
           <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
           <filter id="glowStrong" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
           <filter id="softGlow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="8"/></filter>
@@ -200,7 +204,7 @@
           <circle cx="60" cy="20" r="1" fill="white" opacity="0.5"/><circle cx="180" cy="12" r="1.2" fill="white" opacity="0.55"/><circle cx="310" cy="28" r="0.8" fill="white" opacity="0.6"/><circle cx="470" cy="15" r="1" fill="white" opacity="0.4"/><circle cx="620" cy="8" r="1.2" fill="white" opacity="0.55"/><circle cx="760" cy="22" r="0.8" fill="white" opacity="0.5"/><circle cx="880" cy="10" r="1" fill="white" opacity="0.6"/><circle cx="1010" cy="30" r="1.2" fill="white" opacity="0.4"/><circle cx="140" cy="45" r="0.7" fill="white" opacity="0.35"/><circle cx="550" cy="38" r="0.9" fill="white" opacity="0.45"/>
           <rect x="0" y="150" width="1100" height="290" fill="url(#groundGrad)"/>
           <rect x="0" y="150" width="1100" height="290" fill="url(#groundPaver)" opacity="0.5"/>
-          <path id="driveway" d="M0,305 Q80,305 120,298 Q200,286 320,270 Q400,260 480,255 L480,295 Q400,300 320,310 Q200,325 120,335 Q80,340 0,340 Z" fill="url(#driveGrad)" stroke="#1a2a3e" stroke-width="0.5" opacity="0.7"/>
+          <path id="driveway" d="M0,305 Q80,305 120,298 Q200,286 320,270 Q400,260 480,255 L480,295 Q400,300 320,310 Q200,325 120,335 Q80,340 0,340 Z" fill="url(#driveGrad)" stroke="#2a3e55" stroke-width="0.8" opacity="0.85"/>
 
           <!-- GATE SYSTEM: Two pillars on opposite sides of driveway at x≈110 -->
           <!-- Driveway at x=110: top edge ≈ y=299, bottom edge ≈ y=334, center ≈ y=316 -->
@@ -208,29 +212,29 @@
           <!-- LAYER 1: Bottom pillar (near/viewer side) + bottom gate half — drawn FIRST (behind car) -->
           <g id="gateNearSide">
             <!-- Bottom pillar sits just below driveway bottom edge -->
-            <rect x="98" y="336" width="24" height="55" rx="3" fill="url(#gatePost)" stroke="#1e3050" stroke-width="1"/>
-            <rect x="102" y="350" width="16" height="16" rx="3" fill="#0a1520" stroke="#1a3050" stroke-width="1"/>
+            <rect x="98" y="336" width="24" height="55" rx="3" fill="url(#gatePost)" stroke="#2a4060" stroke-width="1"/>
+            <rect x="102" y="350" width="16" height="16" rx="3" fill="#0a1520" stroke="#2a4060" stroke-width="1"/>
             <circle id="gateLed" cx="110" cy="355" r="2.5" fill="#dc3c3c" opacity="0.7" filter="url(#glow)"/>
             <circle id="pillarLight1" cx="110" cy="336" r="4" fill="#f0c060" opacity="0" filter="url(#glowStrong)"/>
             <!-- Bottom gate panel — bars spanning from bottom pillar toward driveway center -->
             <g id="gateLeft">
-              <rect x="95" y="298" width="50" height="38" rx="2" fill="none" stroke="#1a3050" stroke-width="1.2"/>
-              <line x1="95" y1="306" x2="145" y2="306" stroke="#1a3050" stroke-width="1"/>
-              <line x1="95" y1="314" x2="145" y2="314" stroke="#1a3050" stroke-width="1"/>
-              <line x1="95" y1="322" x2="145" y2="322" stroke="#1a3050" stroke-width="1"/>
-              <line x1="95" y1="330" x2="145" y2="330" stroke="#1a3050" stroke-width="1"/>
-              <line x1="103" y1="298" x2="103" y2="336" stroke="#1a3050" stroke-width="1"/>
-              <line x1="111" y1="298" x2="111" y2="336" stroke="#1a3050" stroke-width="1"/>
-              <line x1="119" y1="298" x2="119" y2="336" stroke="#1a3050" stroke-width="1"/>
-              <line x1="127" y1="298" x2="127" y2="336" stroke="#1a3050" stroke-width="1"/>
-              <line x1="135" y1="298" x2="135" y2="336" stroke="#1a3050" stroke-width="1"/>
+              <rect x="95" y="298" width="50" height="38" rx="2" fill="none" stroke="#2a4060" stroke-width="1.2"/>
+              <line x1="95" y1="306" x2="145" y2="306" stroke="#2a4060" stroke-width="1"/>
+              <line x1="95" y1="314" x2="145" y2="314" stroke="#2a4060" stroke-width="1"/>
+              <line x1="95" y1="322" x2="145" y2="322" stroke="#2a4060" stroke-width="1"/>
+              <line x1="95" y1="330" x2="145" y2="330" stroke="#2a4060" stroke-width="1"/>
+              <line x1="103" y1="298" x2="103" y2="336" stroke="#2a4060" stroke-width="1"/>
+              <line x1="111" y1="298" x2="111" y2="336" stroke="#2a4060" stroke-width="1"/>
+              <line x1="119" y1="298" x2="119" y2="336" stroke="#2a4060" stroke-width="1"/>
+              <line x1="127" y1="298" x2="127" y2="336" stroke="#2a4060" stroke-width="1"/>
+              <line x1="135" y1="298" x2="135" y2="336" stroke="#2a4060" stroke-width="1"/>
             </g>
           </g>
 
           <!-- LAYER 2: CAR -->
           <g id="carGroup" opacity="0">
-            <rect x="-26" y="-9" width="52" height="18" rx="4" fill="#1a2535" stroke="#2a3a55" stroke-width="1"/>
-            <rect x="-21" y="-15" width="26" height="10" rx="3" fill="#151e2e" stroke="#2a3a55" stroke-width="0.8"/>
+            <rect x="-26" y="-9" width="52" height="18" rx="4" fill="#1e2d42" stroke="#3a5068" stroke-width="1.2"/>
+            <rect x="-21" y="-15" width="26" height="10" rx="3" fill="#1a2538" stroke="#3a5068" stroke-width="1"/>
             <rect x="-18" y="-13" width="10" height="6" rx="1" fill="#0a2a4a" opacity="0.7"/>
             <rect x="-5" y="-13" width="10" height="6" rx="1" fill="#0a2a4a" opacity="0.7"/>
             <circle cx="-14" cy="11" r="4" fill="#0a0f18" stroke="#1a2a40" stroke-width="1.5"/>
@@ -246,19 +250,19 @@
           <g id="gateFarSide">
             <!-- Top gate panel — bars spanning from top pillar toward driveway center -->
             <g id="gateRight">
-              <rect x="95" y="260" width="50" height="38" rx="2" fill="none" stroke="#1a3050" stroke-width="1.2"/>
-              <line x1="95" y1="268" x2="145" y2="268" stroke="#1a3050" stroke-width="1"/>
-              <line x1="95" y1="276" x2="145" y2="276" stroke="#1a3050" stroke-width="1"/>
-              <line x1="95" y1="284" x2="145" y2="284" stroke="#1a3050" stroke-width="1"/>
-              <line x1="95" y1="292" x2="145" y2="292" stroke="#1a3050" stroke-width="1"/>
-              <line x1="103" y1="260" x2="103" y2="298" stroke="#1a3050" stroke-width="1"/>
-              <line x1="111" y1="260" x2="111" y2="298" stroke="#1a3050" stroke-width="1"/>
-              <line x1="119" y1="260" x2="119" y2="298" stroke="#1a3050" stroke-width="1"/>
-              <line x1="127" y1="260" x2="127" y2="298" stroke="#1a3050" stroke-width="1"/>
-              <line x1="135" y1="260" x2="135" y2="298" stroke="#1a3050" stroke-width="1"/>
+              <rect x="95" y="260" width="50" height="38" rx="2" fill="none" stroke="#2a4060" stroke-width="1.2"/>
+              <line x1="95" y1="268" x2="145" y2="268" stroke="#2a4060" stroke-width="1"/>
+              <line x1="95" y1="276" x2="145" y2="276" stroke="#2a4060" stroke-width="1"/>
+              <line x1="95" y1="284" x2="145" y2="284" stroke="#2a4060" stroke-width="1"/>
+              <line x1="95" y1="292" x2="145" y2="292" stroke="#2a4060" stroke-width="1"/>
+              <line x1="103" y1="260" x2="103" y2="298" stroke="#2a4060" stroke-width="1"/>
+              <line x1="111" y1="260" x2="111" y2="298" stroke="#2a4060" stroke-width="1"/>
+              <line x1="119" y1="260" x2="119" y2="298" stroke="#2a4060" stroke-width="1"/>
+              <line x1="127" y1="260" x2="127" y2="298" stroke="#2a4060" stroke-width="1"/>
+              <line x1="135" y1="260" x2="135" y2="298" stroke="#2a4060" stroke-width="1"/>
             </g>
             <!-- Top pillar sits just above driveway top edge -->
-            <rect x="98" y="238" width="24" height="55" rx="3" fill="url(#gatePost)" stroke="#1e3050" stroke-width="1"/>
+            <rect x="98" y="238" width="24" height="55" rx="3" fill="url(#gatePost)" stroke="#2a4060" stroke-width="1"/>
             <circle id="pillarLight2" cx="110" cy="238" r="4" fill="#f0c060" opacity="0" filter="url(#glowStrong)"/>
           </g>
           <!-- POOL — behind/right of house, on the ground plane (drawn first so house/garage is in front) -->
@@ -276,27 +280,27 @@
             </g>
           </g>
           <!-- GARAGE WING — to the right of house, slightly behind -->
-          <rect x="640" y="180" width="100" height="100" rx="3" fill="url(#houseWall)" stroke="#1e3050" stroke-width="0.8"/>
+          <rect x="640" y="180" width="100" height="100" rx="3" fill="url(#houseWall)" stroke="#2a4060" stroke-width="0.8"/>
           <rect x="640" y="180" width="100" height="6" fill="url(#roofGrad)"/>
-          <rect id="win5" x="660" y="200" width="25" height="28" rx="2" fill="#0a1a2e" stroke="#1a3050" stroke-width="0.8"/><rect id="winGlow5" x="660" y="200" width="25" height="28" rx="2" fill="#f0c060" opacity="0"/>
-          <rect id="win6" x="700" y="200" width="25" height="28" rx="2" fill="#0a1a2e" stroke="#1a3050" stroke-width="0.8"/><rect id="winGlow6" x="700" y="200" width="25" height="28" rx="2" fill="#f0c060" opacity="0"/>
+          <rect id="win5" x="660" y="200" width="25" height="28" rx="2" fill="#0a1a2e" stroke="#2a4060" stroke-width="0.8"/><rect id="winGlow5" x="660" y="200" width="25" height="28" rx="2" fill="#f0c060" opacity="0"/>
+          <rect id="win6" x="700" y="200" width="25" height="28" rx="2" fill="#0a1a2e" stroke="#2a4060" stroke-width="0.8"/><rect id="winGlow6" x="700" y="200" width="25" height="28" rx="2" fill="#f0c060" opacity="0"/>
           <!-- MAIN HOUSE — in front of pool -->
           <g id="houseGroup">
-            <rect x="360" y="140" width="280" height="140" rx="4" fill="url(#houseWall)" stroke="#1e3050" stroke-width="1"/>
-            <path d="M345,140 L500,75 L655,140 Z" fill="url(#roofGrad)" stroke="#1e3050" stroke-width="1"/>
-            <rect x="580" y="85" width="22" height="55" fill="#161f2e" stroke="#1e3050" stroke-width="0.8"/>
-            <rect id="win1" x="385" y="160" width="35" height="40" rx="3" fill="#0a1a2e" stroke="#1a3050" stroke-width="1"/><rect id="winGlow1" x="385" y="160" width="35" height="40" rx="3" fill="#f0c060" opacity="0"/>
-            <rect id="win2" x="440" y="160" width="35" height="40" rx="3" fill="#0a1a2e" stroke="#1a3050" stroke-width="1"/><rect id="winGlow2" x="440" y="160" width="35" height="40" rx="3" fill="#f0c060" opacity="0"/>
-            <rect id="win3" x="525" y="160" width="35" height="40" rx="3" fill="#0a1a2e" stroke="#1a3050" stroke-width="1"/><rect id="winGlow3" x="525" y="160" width="35" height="40" rx="3" fill="#f0c060" opacity="0"/>
-            <rect id="win4" x="580" y="160" width="35" height="40" rx="3" fill="#0a1a2e" stroke="#1a3050" stroke-width="1"/><rect id="winGlow4" x="580" y="160" width="35" height="40" rx="3" fill="#f0c060" opacity="0"/>
-            <rect x="482" y="220" width="36" height="60" rx="3" fill="#0d1822" stroke="#1e3050" stroke-width="1.2"/>
+            <rect x="360" y="140" width="280" height="140" rx="4" fill="url(#houseWall)" stroke="#2a4060" stroke-width="1.2"/>
+            <path d="M345,140 L500,75 L655,140 Z" fill="url(#roofGrad)" stroke="#2a4060" stroke-width="1.2"/>
+            <rect x="580" y="85" width="22" height="55" fill="#161f2e" stroke="#2a4060" stroke-width="0.8"/>
+            <rect id="win1" x="385" y="160" width="35" height="40" rx="3" fill="#0a1a2e" stroke="#2a4060" stroke-width="1"/><rect id="winGlow1" x="385" y="160" width="35" height="40" rx="3" fill="#f0c060" opacity="0"/>
+            <rect id="win2" x="440" y="160" width="35" height="40" rx="3" fill="#0a1a2e" stroke="#2a4060" stroke-width="1"/><rect id="winGlow2" x="440" y="160" width="35" height="40" rx="3" fill="#f0c060" opacity="0"/>
+            <rect id="win3" x="525" y="160" width="35" height="40" rx="3" fill="#0a1a2e" stroke="#2a4060" stroke-width="1"/><rect id="winGlow3" x="525" y="160" width="35" height="40" rx="3" fill="#f0c060" opacity="0"/>
+            <rect id="win4" x="580" y="160" width="35" height="40" rx="3" fill="#0a1a2e" stroke="#2a4060" stroke-width="1"/><rect id="winGlow4" x="580" y="160" width="35" height="40" rx="3" fill="#f0c060" opacity="0"/>
+            <rect x="482" y="220" width="36" height="60" rx="3" fill="#0d1822" stroke="#2a4060" stroke-width="1.2"/>
             <circle id="porchLight" cx="475" cy="228" r="3" fill="#f0c060" opacity="0" filter="url(#glowStrong)"/>
             <circle id="porchLight2" cx="525" cy="228" r="3" fill="#f0c060" opacity="0" filter="url(#glowStrong)"/>
             <rect id="windowAmbient" x="370" y="150" width="260" height="60" rx="8" fill="#f0c060" opacity="0" filter="url(#softGlow)"/>
           </g>
           <g id="fountainGroup">
             <!-- Lake body -->
-            <ellipse cx="960" cy="330" rx="145" ry="73" fill="none" stroke="#1a3050" stroke-width="3" opacity="0.3"/>
+            <ellipse cx="960" cy="330" rx="145" ry="73" fill="none" stroke="#2a4060" stroke-width="3" opacity="0.3"/>
             <ellipse cx="960" cy="330" rx="140" ry="70" fill="#041428"/>
             <g clip-path="url(#lakeClip)">
               <ellipse cx="960" cy="330" rx="140" ry="70" fill="url(#lakeWater)"/>
@@ -382,10 +386,10 @@
             </g>
           </g>
           <g id="landscapeLights">
-            <line x1="200" y1="295" x2="200" y2="280" stroke="#1e3050" stroke-width="1.5"/><circle id="lLight1" cx="200" cy="278" r="3" fill="#f0c060" opacity="0" filter="url(#glow)"/>
-            <line x1="280" y1="288" x2="280" y2="273" stroke="#1e3050" stroke-width="1.5"/><circle id="lLight2" cx="280" cy="271" r="3" fill="#f0c060" opacity="0" filter="url(#glow)"/>
-            <line x1="360" y1="282" x2="360" y2="267" stroke="#1e3050" stroke-width="1.5"/><circle id="lLight3" cx="360" cy="265" r="3" fill="#f0c060" opacity="0" filter="url(#glow)"/>
-            <line x1="630" y1="260" x2="630" y2="245" stroke="#1e3050" stroke-width="1.5"/><circle id="lLight4" cx="630" cy="243" r="3" fill="#f0c060" opacity="0" filter="url(#glow)"/>
+            <line x1="200" y1="295" x2="200" y2="280" stroke="#2a4060" stroke-width="1.5"/><circle id="lLight1" cx="200" cy="278" r="3" fill="#f0c060" opacity="0" filter="url(#glow)"/>
+            <line x1="280" y1="288" x2="280" y2="273" stroke="#2a4060" stroke-width="1.5"/><circle id="lLight2" cx="280" cy="271" r="3" fill="#f0c060" opacity="0" filter="url(#glow)"/>
+            <line x1="360" y1="282" x2="360" y2="267" stroke="#2a4060" stroke-width="1.5"/><circle id="lLight3" cx="360" cy="265" r="3" fill="#f0c060" opacity="0" filter="url(#glow)"/>
+            <line x1="630" y1="260" x2="630" y2="245" stroke="#2a4060" stroke-width="1.5"/><circle id="lLight4" cx="630" cy="243" r="3" fill="#f0c060" opacity="0" filter="url(#glow)"/>
             <ellipse cx="250" cy="250" rx="22" ry="28" fill="#0a1a20" opacity="0.5"/><rect x="248" y="270" width="4" height="18" fill="#0d1a22" opacity="0.4"/>
           </g>
           <g id="estateToast" opacity="0" transform="translate(420,380)">

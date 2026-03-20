@@ -1,9 +1,9 @@
 ---
 deployment:
   tasks:
-    - /bin/cp -f index.html /home/craisond/public_html/
-    - /bin/cp -f gate.html /home/craisond/public_html/
-    - /bin/cp -f pool.html /home/craisond/public_html/
-    - /bin/cp -f fountains.html /home/craisond/public_html/
-    - /bin/cp -f 404.html /home/craisond/public_html/
-    - /bin/cp -f .htaccess /home/craisond/public_html/
+    - /bin/cp -f index.html /home4/craisond/public_html/
+    - /bin/cp -f gate.html /home4/craisond/public_html/
+    - /bin/cp -f pool.html /home4/craisond/public_html/
+    - /bin/cp -f fountains.html /home4/craisond/public_html/
+    - /bin/cp -f 404.html /home4/craisond/public_html/
+    - /bin/cp -f .htaccess /home4/craisond/public_html/

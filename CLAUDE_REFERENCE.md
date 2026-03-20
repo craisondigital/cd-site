@@ -18,14 +18,14 @@
 
 | File | Purpose | Size | Deployed |
 |---|---|---|---|
-| `index.html` | **Homepage** — Animated estate SVG hero with full property automation showcase | ~99KB | ✓ |
-| `gate.html` | **Gate product page** — Smart Gate Access for Large Properties | ~74KB | ✓ |
-| `fountains.html` | **Fountain product page** — Smart Lake Fountain Control | ~72KB | ✓ |
-| `pool.html` | **Pool product page** — Smart Pool Automation (any brand, or no automation at all) | ~79KB | ✓ |
+| `index.html` | **Homepage** — Animated estate SVG hero with full property automation showcase | ~103KB | ✓ |
+| `gate.html` | **Gate product page** — Smart Gate Access for Large Properties | ~78KB | ✓ |
+| `fountains.html` | **Fountain product page** — Smart Lake Fountain Control | ~77KB | ✓ |
+| `pool.html` | **Pool product page** — Smart Pool Automation (any brand, or no automation at all) | ~83KB | ✓ |
 | `404.html` | **Custom 404 page** — Branded error page matching site design | ~5KB | ✓ |
 | `.htaccess` | **Apache config** — Custom 404, GZIP, caching, security headers | ~1KB | ✓ |
-| `nav.html` | **Nav prototype** — Working standalone nav test page (can be removed once nav is integrated) | ~10KB | ✓ |
-| `.cpanel.yml` | **Deployment config** — Tells cPanel which files to copy to public_html | <1KB | No (used by cPanel only) |
+| `nav.html` | **Nav prototype** — Working standalone nav test page (reference for nav pattern) | ~10KB | ✓ |
+| `.cpanel.yml` | **Deployment config** — Auto-deploys all *.html + .htaccess to public_html | <1KB | No |
 | `CLAUDE_REFERENCE.md` | **This file** — Codebase reference for Claude sessions | ~16KB | No |
 
 ---
@@ -34,16 +34,23 @@
 
 ### How it works:
 1. Repo is cloned to `/home4/craisond/repositories/cd-site` on Bluehost
-2. `.cpanel.yml` defines deployment tasks — copies HTML files + .htaccess to `/home4/craisond/public_html/`
+2. `.cpanel.yml` uses wildcard `*.html` — auto-deploys ALL HTML files + .htaccess to `/home4/craisond/public_html/`
 3. Push changes to GitHub → go to cPanel → Git Version Control → click **Update from Remote** → click **Deploy HEAD Commit**
 
-### .cpanel.yml deploys these files:
-- index.html, gate.html, pool.html, fountains.html, 404.html, .htaccess, nav.html
+### .cpanel.yml auto-deploys:
+- **All `*.html` files** in the repo root (no need to list them individually)
+- `.htaccess`
 
 ### NOT deployed (stays in repo only):
 - CLAUDE_REFERENCE.md, .cpanel.yml itself
 
-### IMPORTANT: If adding a new HTML page, you MUST add it to .cpanel.yml or it won't be deployed.
+### Adding new pages:
+New `.html` files are automatically deployed — no changes to `.cpanel.yml` needed. If you add non-HTML files (CSS, JS, images), you MUST add a `/bin/cp` line for them in `.cpanel.yml`.
+
+### Bluehost details:
+- Home directory: `/home4/craisond/` (NOT `/home/`)
+- Deploy path: `/home4/craisond/public_html/`
+- Repo path: `/home4/craisond/repositories/cd-site`
 
 ---
 
@@ -126,12 +133,14 @@ The mobile menu is a `<div class="mobile-menu">` that:
 
 ### JS for mobile toggle:
 ```javascript
-var toggle = document.getElementById('navToggle');
-var menu = document.getElementById('mobileMenu');
-toggle.addEventListener('click', function(){ menu.classList.toggle('open'); });
-menu.querySelectorAll('a').forEach(function(a){
-  a.addEventListener('click', function(){ menu.classList.remove('open'); });
-});
+var navToggle = document.getElementById('navToggle');
+var mobileMenu = document.getElementById('mobileMenu');
+if(navToggle && mobileMenu){
+  navToggle.addEventListener('click', function(){ mobileMenu.classList.toggle('open'); });
+  mobileMenu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ mobileMenu.classList.remove('open'); });
+  });
+}
 ```
 
 ### Customizing per page:
@@ -143,13 +152,13 @@ Home (nav-active) | Services ▾ (Gate, Pool, Fountains) | Why Us | Plans | [Get
 
 **Product page** desktop nav links (example: gate.html):
 ```
-Home | Services ▾ (Gate=active, Pool, Fountains) | divider | The Experience | What's Included | Pricing | [Get a Quote]
+Home | Services ▾ (Gate=active, Pool, Fountains) | divider | The Experience | What's Included | How It Works | Pricing | [Get a Quote]
 ```
 
 For each product page, set `class="dropdown-active"` on the current page's link in both the desktop dropdown-inner and the mobile mm-sub.
 
 ### Reference file: `nav.html`
-The working nav prototype is `nav.html` in the repo root. Use it as the definitive reference when integrating the nav into site pages. It contains the exact CSS, HTML structure, and JS that work on both desktop and mobile.
+The working nav prototype is `nav.html` in the repo root. Use it as the definitive reference when integrating the nav into site pages.
 
 ---
 
@@ -173,20 +182,6 @@ The working nav prototype is `nav.html` in the repo root. Use it as the definiti
     <div>Smart Property Consulting · Estates &amp; Compounds · Miami</div>
   </div>
 </footer>
-```
-
-### Footer CSS:
-```css
-footer { border-top: 1px solid var(--border); background: var(--black); padding: 2.5rem 4rem; font-size: 0.78rem; color: var(--muted); }
-.footer-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; }
-.footer-nav { display: flex; gap: 1.8rem; }
-.footer-nav a { color: var(--muted); text-decoration: none; font-size: 0.8rem; transition: color 0.2s; }
-.footer-nav a:hover { color: var(--text); }
-.footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 1.2rem; border-top: 1px solid var(--border); }
-/* Mobile */
-.footer-top { flex-direction: column; gap: 0.8rem; }
-.footer-nav { justify-content: center; flex-wrap: wrap; gap: 1rem; }
-.footer-bottom { flex-direction: column; gap: 0.4rem; text-align: center; }
 ```
 
 ---
@@ -238,74 +233,58 @@ footer { border-top: 1px solid var(--border); background: var(--black); padding:
 
 ## HOMEPAGE (index.html)
 
-### Core Messaging (updated 2026-03-20)
-1. **"We make smart homes work — and fix the ones that don't."** — Lead message. Not selling new systems.
-2. **"We automate what others won't."** — Killer differentiator. Mixed brands, legacy, the "impossible."
-3. **One app, one relationship, one system** — No more app graveyard. Ongoing partner, not a contractor.
-4. **Built for how you live, not how a manufacturer thinks you should** — Bespoke, not templated.
-5. **Large acre properties, estates, compounds** — The niche. Not condos, not starter homes.
-6. **We work with what you have** — No rip-and-replace. No $200K Crestron overhauls.
+### Core Messaging
+1. **"We make smart homes work — and fix the ones that don't."** — Lead message.
+2. **"We automate what others won't."** — Killer differentiator.
+3. **One app, one relationship, one system** — No more app graveyard.
+4. **Built for how you live, not how a manufacturer thinks you should** — Bespoke.
+5. **Large acre properties, estates, compounds** — The niche.
+6. **We work with what you have** — No rip-and-replace.
 
 ### Section Structure
-1. **Hero** — Animated estate SVG + headline "Your smart home should actually be smart."
-2. **The Problem** — App graveyard (12 disconnected apps visual) — "Half of it barely works"
-3. **What We Do** — "We fix what's broken. We connect what's not." 4-step narrative
-4. **What We Automate** — Card grid (Gate/Pool/Fountains = Live, Lighting/Cameras/HVAC = Coming Soon)
-5. **Why We're Different** — "Built for properties other integrators won't touch." 3 bold statements
-6. **Day in the Life** — Timeline 6AM-11PM showing automated estate scenarios
-7. **Monthly Plans** — Ongoing partnership section
-8. **Contact** — Form with dropdown including "Fix my existing smart home" option
+1. Hero → 2. App Graveyard → 3. What We Do → 4. What We Automate → 5. Why Different → 6. Day in the Life → 7. Monthly Plans → 8. Contact
 
-### Animated Estate SVG (viewBox 0 0 1100 440)
-- **20-second cycle** looping via requestAnimationFrame
-- Car approaches → pillar lights detect → gate opens → all lights on → car drives through → toasts → fade to dark → reset
-- Key element IDs: `carGroup`, `gateLeft`, `gateRight`, `gateLed`, `pillarLight1/2`, `porchLight/2`, `windowAmbient`, `winGlow1-6`, `lLight1-4`, `oakSpotBeams`, `oakCanopyLit`, `palmSpot1-3`, `poolCaustics`, `poolRipples`, `poolGlowOverlay`, `poolLightsGroup`, `fountainSpray`, `ftnLedGroup`, `ftnRipple1-4`, `splashCenter`, `ftnDroplets`, `waterGlowEl`, `waterGlowInner`, `lakeCaustics`, `lakeRipples`, `estateToast`, `toastTitle`, `toastSub`
+### Animated Estate SVG — 20-second cycle
+Key IDs: `carGroup`, `gateLeft`, `gateRight`, `gateLed`, `pillarLight1/2`, `porchLight/2`, `windowAmbient`, `winGlow1-6`, `lLight1-4`, `oakSpotBeams`, `oakCanopyLit`, `palmSpot1-3`, `poolCaustics`, `poolRipples`, `poolGlowOverlay`, `poolLightsGroup`, `fountainSpray`, `ftnLedGroup`, `ftnRipple1-4`, `splashCenter`, `ftnDroplets`, `waterGlowEl`, `waterGlowInner`, `lakeCaustics`, `lakeRipples`, `estateToast`, `toastTitle`, `toastSub`
 
 ---
 
 ## PRODUCT PAGE STRUCTURE
 
-### Gate & Fountain Pages (shared pattern)
-Nav → Hero (SVG animation) → Stats Bar → Problem/Solution → Experience (3-col) → What's Included → How It Works → Features/Dashboard → Beyond Section → Pricing → Contact Form → Footer
+### Gate & Fountain Pages
+Nav → Hero (SVG) → Stats Bar → Problem/Solution → Experience → What's Included → How It Works → Features/Dashboard → Beyond → Pricing → Contact → Footer
 
-### Pool Page (pool.html) — different section order
-Nav → Hero (SVG) → Stats Bar → Problem/Solution → Experience (4-col 2×2) → Compatibility (3 cards) → Whole-House Integration → What's Included → How It Works → Features/Dashboard → Beyond → Pricing → Contact → Footer
+### Pool Page (different order)
+Nav → Hero (SVG) → Stats Bar → Problem/Solution → Experience (2×2) → Compatibility → Whole-House → What's Included → How It Works → Features/Dashboard → Beyond → Pricing → Contact → Footer
 
 ### SVG Animations
-- **Gate (gate.html)** — 10s cycle. IDs: `truckGroup`, `gateLeft`, `gateRight`, `readerLed`, `rfidRings`, `hudMode`, `hudTag`, `notifToast`
-- **Fountain (fountains.html)** — 14s cycle. IDs: `sprayGroup`, `waterGlowEl`, `phoneGroup`, `anemometer`, `notifToast2`, `hudStatus`, `hudWind`
-- **Pool (pool.html)** — 14s cycle. IDs: `poolSVG`, `phoneGroup`, `phoneTemp`, `phoneStatus`, `spaJets`, `spaRipples`, `spaCaustics`, `spaWaterOverlay`, `spaLight1-3`
+- **Gate** — 10s. IDs: `truckGroup`, `gateLeft`, `gateRight`, `readerLed`, `rfidRings`, `hudMode`, `hudTag`, `notifToast`
+- **Fountain** — 14s. IDs: `sprayGroup`, `waterGlowEl`, `phoneGroup`, `anemometer`, `notifToast2`, `hudStatus`, `hudWind`
+- **Pool** — 14s. IDs: `poolSVG`, `phoneGroup`, `phoneTemp`, `phoneStatus`, `spaJets`, `spaRipples`, `spaCaustics`, `spaWaterOverlay`, `spaLight1-3`
 
 ---
 
 ## RESPONSIVE BREAKPOINTS
-- **960px:** grids collapse to 2-col, estate SVG gets brightness boost
-- **768px:** nav switches to hamburger + mobile-menu panel, grids to 1-col, footer stacks
-- **480px:** beyond/compat grids to 1-col, estate SVG tight crop
+- **960px:** grids to 2-col, SVG brightness boost
+- **768px:** hamburger + mobile-menu panel, grids to 1-col, footer stacks
+- **480px:** beyond/compat to 1-col, SVG tight crop
 
 ---
 
 ## IMPORTANT NOTES FOR EDITING
-1. **Each file is self-contained** — CSS and JS are inline, not shared across files
-2. **When creating a new page**, copy `gate.html` as the template (most polished structure)
-3. **SVG animations are handcrafted** — raw `requestAnimationFrame` loops with normalized time fractions (0.0-1.0)
-4. **Nav uses the v5 pattern** — see ⚠️ NAVIGATION section above. Reference file is `nav.html`.
-5. **DO NOT use position:fixed overlays for mobile nav** — they break on phones. Use the mobile-menu-inside-nav pattern.
-6. **Forms are non-functional** — `onsubmit="return false;"` — needs Formspree, PHP mail(), or similar
-7. **Copyright year:** all pages show © 2026
-8. **Favicon:** SVG inline data URI — dark rounded rect with cyan "C"
-9. **The logo** is text-based: "Craison" in white + "Digital" in cyan
-10. **Homepage SVG draw order matters** — pool → garage → house → gate (bottom) → car → gate (top) → oak → palms → fountain → lights
-11. **Deployment:** Push to GitHub → cPanel Git Version Control → Update from Remote → Deploy HEAD Commit
-12. **Bluehost home dir is /home4/craisond/** (not /home/)
+1. **Each file is self-contained** — CSS and JS inline, not shared
+2. **New pages:** copy `gate.html` as template. New `.html` files auto-deploy via `*.html` wildcard in `.cpanel.yml`
+3. **Nav uses v5 pattern** — see ⚠️ NAVIGATION section. Reference: `nav.html`
+4. **DO NOT use position:fixed overlays for mobile nav** — use mobile-menu-inside-nav pattern
+5. **Forms are non-functional** — `onsubmit="return false;"`
+6. **Deployment:** Push to GitHub → cPanel → Update from Remote → Deploy HEAD Commit
+7. **Bluehost home dir:** `/home4/craisond/` (not `/home/`)
 
 ---
 
 ## TODO / KNOWN ISSUES
-- [ ] Integrate nav v5 into all 4 site pages (index.html, gate.html, pool.html, fountains.html)
-- [ ] Wire up contact forms (Bluehost supports PHP — Formspree or `mail()` script)
-- [ ] Add Open Graph meta tags for social sharing (og:title, og:description, og:image)
+- [ ] Wire up contact forms (Formspree or PHP `mail()`)
+- [ ] Add Open Graph meta tags for social sharing
 - [ ] Add robots.txt and sitemap.xml for SEO
-- [ ] Consider HTTPS redirect in .htaccess once SSL confirmed active
-- [ ] "Beyond" sections on product pages could link directly to other product pages
-- [ ] Remove nav.html from repo and .cpanel.yml once nav is integrated into all pages
+- [ ] HTTPS redirect in .htaccess once SSL confirmed
+- [ ] "Beyond" sections could link to other product pages

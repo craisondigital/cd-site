@@ -65,7 +65,12 @@
     .btn-secondary { background: transparent; color: var(--text); padding: 0.85rem 2.2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 400; text-decoration: none; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; }
     .btn-secondary:hover { border-color: rgba(255,255,255,0.15); color: var(--white); }
 
-    .animation-stage { position: relative; width: 100%; max-width: 520px; height: 320px; margin: 0 auto 3rem; z-index: 5; }
+    /* ═══ ANIMATION STAGE — uses flexbox centering for all phases ═══ */
+    .animation-stage {
+      position: relative; width: 100%; max-width: 520px; height: 320px;
+      margin: 0 auto 3rem; z-index: 5;
+      display: flex; align-items: center; justify-content: center;
+    }
 
     .app-icon { position: absolute; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; border: 1px solid rgba(255,255,255,0.04); background: rgba(15,23,36,0.7); box-shadow: 0 4px 16px rgba(0,0,0,0.25); transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1); opacity: 0; z-index: 1; }
     .app-icon .app-label { position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); font-size: 0.48rem; color: rgba(107,122,141,0.6); white-space: nowrap; font-weight: 500; letter-spacing: 0.04em; transition: opacity 0.4s; }
@@ -78,24 +83,30 @@
     .phase-chaos .app-icon:nth-child(2)  { top: 2%;  left: 34%; transform: rotate(4deg); }
     .phase-chaos .app-icon:nth-child(3)  { top: 4%;  left: 54%; transform: rotate(-3deg); }
     .phase-chaos .app-icon:nth-child(4)  { top: 6%;  left: 74%; transform: rotate(5deg); }
-    .phase-chaos .app-icon:nth-child(5)  { top: 34%; left: 6%;  transform: rotate(3deg); }
-    .phase-chaos .app-icon:nth-child(6)  { top: 38%; left: 80%; transform: rotate(-5deg); }
-    .phase-chaos .app-icon:nth-child(7)  { top: 52%; left: 4%;  transform: rotate(6deg); }
-    .phase-chaos .app-icon:nth-child(8)  { top: 68%; left: 78%; transform: rotate(-3deg); }
+    .phase-chaos .app-icon:nth-child(5)  { top: 30%; left: 6%;  transform: rotate(3deg); }
+    .phase-chaos .app-icon:nth-child(6)  { top: 32%; left: 80%; transform: rotate(-5deg); }
+    .phase-chaos .app-icon:nth-child(7)  { top: 50%; left: 4%;  transform: rotate(6deg); }
+    .phase-chaos .app-icon:nth-child(8)  { top: 52%; left: 82%; transform: rotate(-3deg); }
     .phase-chaos .app-icon:nth-child(9)  { top: 72%; left: 14%; transform: rotate(5deg); }
-    .phase-chaos .app-icon:nth-child(10) { top: 70%; left: 38%; transform: rotate(-4deg); }
-    .phase-chaos .app-icon:nth-child(11) { top: 72%; left: 58%; transform: rotate(3deg); }
+    .phase-chaos .app-icon:nth-child(10) { top: 70%; left: 42%; transform: rotate(-4deg); }
+    .phase-chaos .app-icon:nth-child(11) { top: 72%; left: 68%; transform: rotate(3deg); }
     .phase-chaos .app-icon { animation: jitter 3s ease-in-out infinite alternate; }
     .phase-chaos .app-icon:nth-child(2n) { animation-delay: -0.5s; animation-duration: 3.5s; }
     .phase-chaos .app-icon:nth-child(3n) { animation-delay: -1.2s; animation-duration: 3.2s; }
     .phase-chaos .app-icon:nth-child(5n) { animation-delay: -0.8s; }
     @keyframes jitter { 0%{translate:0 0} 25%{translate:3px -2px} 50%{translate:-2px 3px} 75%{translate:3px 1px} 100%{translate:-1px -3px} }
 
-    .chaos-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; pointer-events: none; text-align: center; opacity: 0; transition: opacity 0.6s; }
+    /* ★ FIX 1: Chaos label — true center of stage using flexbox fallback + explicit centering */
+    .chaos-label {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10; pointer-events: none; text-align: center;
+      width: 90%; max-width: 400px;
+      opacity: 0; transition: opacity 0.6s;
+    }
     .chaos-label .cl-main { font-family: var(--font-display); font-size: clamp(1.1rem, 2.8vw, 1.5rem); font-weight: 800; color: var(--white); line-height: 1.3; margin-bottom: 0.6rem; text-shadow: 0 0 40px rgba(6,10,16,0.95), 0 0 80px rgba(6,10,16,0.9); }
-    /* ★ BIGGER "Sound familiar?" */
     .chaos-label .cl-sub { font-family: var(--font-display); font-size: clamp(0.95rem, 2.2vw, 1.15rem); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(239,68,68,0.85); text-shadow: 0 0 30px rgba(6,10,16,0.9); }
-    .chaos-label::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 340px; height: 180px; background: radial-gradient(ellipse, rgba(6,10,16,0.88) 0%, rgba(6,10,16,0.55) 50%, transparent 75%); z-index: -1; border-radius: 50%; }
+    .chaos-label::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 360px; height: 200px; background: radial-gradient(ellipse, rgba(6,10,16,0.92) 0%, rgba(6,10,16,0.6) 45%, transparent 75%); z-index: -1; border-radius: 50%; }
     .phase-chaos .chaos-label { opacity: 1; }
 
     .confusion-lines { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0; transition: opacity 0.5s; }
@@ -109,13 +120,20 @@
     .phase-converge .confusion-lines { opacity: 0; }
 
     /* ═══ PHASE 3: "WE CAN HELP" ═══ */
-    .help-message { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 15; text-align: center; opacity: 0; transition: opacity 0.8s ease; pointer-events: none; width: 90%; max-width: 440px; }
-    .help-logo { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--white); margin-bottom: 0.6rem; transform: translateY(10px); transition: transform 0.8s ease, opacity 0.8s ease; opacity: 0; }
+    /* ★ FIX 2: Help message — proper absolute centering, no overflow issues */
+    .help-message {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 15; text-align: center;
+      width: 92%; max-width: 480px;
+      opacity: 0; transition: opacity 0.8s ease;
+      pointer-events: none;
+    }
+    .help-logo { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.6rem, 3.5vw, 2.4rem); color: var(--white); margin-bottom: 0.6rem; transform: translateY(10px); transition: transform 0.8s ease, opacity 0.8s ease; opacity: 0; line-height: 1.2; }
     .help-logo span { color: var(--cyan); }
     .help-text { font-family: var(--font-display); font-size: clamp(1rem, 2.5vw, 1.4rem); font-weight: 700; color: var(--blue-bright); margin-bottom: 0.8rem; transform: translateY(10px); transition: transform 0.8s ease 0.25s, opacity 0.8s ease 0.25s; opacity: 0; }
-    /* ★ NEW tagline under "We can help" */
-    .help-tagline { font-family: var(--font-body); font-size: clamp(0.65rem, 1.5vw, 0.78rem); font-weight: 400; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; transform: translateY(10px); transition: transform 0.8s ease 0.5s, opacity 0.8s ease 0.5s; opacity: 0; }
-    .help-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; height: 200px; background: radial-gradient(ellipse, rgba(0,212,255,0.08) 0%, rgba(47,128,237,0.04) 40%, transparent 70%); border-radius: 50%; opacity: 0; transition: opacity 1s ease; z-index: 0; }
+    .help-tagline { font-family: var(--font-body); font-size: clamp(0.62rem, 1.4vw, 0.76rem); font-weight: 400; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; transform: translateY(10px); transition: transform 0.8s ease 0.5s, opacity 0.8s ease 0.5s; opacity: 0; }
+    .help-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 320px; height: 220px; background: radial-gradient(ellipse, rgba(0,212,255,0.08) 0%, rgba(47,128,237,0.04) 40%, transparent 70%); border-radius: 50%; opacity: 0; transition: opacity 1s ease; z-index: 0; }
 
     .phase-help .help-message { opacity: 1; }
     .phase-help .help-logo { opacity: 1; transform: translateY(0); }
@@ -129,10 +147,20 @@
     .phase-help .confusion-lines { opacity: 0; }
 
     /* ═══ PHASE 4: CALM ═══ */
-    .phone-frame { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.5); width: 200px; height: 300px; background: #0a1220; border: 2px solid rgba(47,128,237,0.3); border-radius: 28px; box-shadow: 0 0 60px rgba(47,128,237,0.15), 0 0 120px rgba(0,212,255,0.05), 0 20px 60px rgba(0,0,0,0.5); opacity: 0; transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 10; overflow: hidden; }
-    .phase-calm .phone-frame { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    /* ★ FIX 3: Phone + tagline centered as a group using a wrapper */
+    .calm-wrap {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex; flex-direction: column; align-items: center;
+      z-index: 10; width: 100%;
+      opacity: 0; transition: opacity 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .phase-calm .calm-wrap { opacity: 1; }
     .phase-calm .help-message { opacity: 0; }
     .phase-calm .help-glow { opacity: 0; }
+
+    .phone-frame { width: 200px; height: 300px; background: #0a1220; border: 2px solid rgba(47,128,237,0.3); border-radius: 28px; box-shadow: 0 0 60px rgba(47,128,237,0.15), 0 0 120px rgba(0,212,255,0.05), 0 20px 60px rgba(0,0,0,0.5); overflow: hidden; transform: scale(0.5); opacity: 0; transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease; }
+    .phase-calm .phone-frame { opacity: 1; transform: scale(1); }
 
     .phone-notch { width: 80px; height: 5px; background: #060a10; border-radius: 0 0 8px 8px; margin: 0 auto; }
     .phone-screen { padding: 14px 12px 10px; }
@@ -158,12 +186,13 @@
     .ps-card-status { font-size: 0.38rem; color: var(--green); font-weight: 500; }
     .ps-card-status.off { color: var(--muted); }
 
-    .calm-tagline { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); text-align: center; white-space: nowrap; opacity: 0; transition: opacity 0.8s ease 0.6s; z-index: 10; }
+    /* ★ FIX 3: Tagline is now inside calm-wrap, right below phone, bigger text */
+    .calm-tagline { text-align: center; margin-top: 1rem; opacity: 0; transition: opacity 0.8s ease 0.5s; }
     .phase-calm .calm-tagline { opacity: 1; }
-    .calm-tagline .tag-main { font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; color: var(--white); letter-spacing: -0.01em; }
-    .calm-tagline .tag-sub { font-size: 0.65rem; color: var(--muted); margin-top: 2px; }
+    .calm-tagline .tag-main { font-family: var(--font-display); font-size: clamp(0.9rem, 2vw, 1.1rem); font-weight: 700; color: var(--white); letter-spacing: -0.01em; }
+    .calm-tagline .tag-sub { font-size: clamp(0.65rem, 1.4vw, 0.78rem); color: var(--muted); margin-top: 0.3rem; }
 
-    .phone-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 280px; height: 280px; border-radius: 50%; background: radial-gradient(circle, rgba(47,128,237,0.12) 0%, rgba(0,212,255,0.04) 40%, transparent 70%); opacity: 0; transition: opacity 1.2s ease; z-index: 0; }
+    .phone-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(47,128,237,0.12) 0%, rgba(0,212,255,0.04) 40%, transparent 70%); opacity: 0; transition: opacity 1.2s ease; z-index: 0; }
     .phase-calm .phone-glow { opacity: 1; }
 
     .phase-dots { display: flex; gap: 8px; justify-content: center; margin-bottom: 2rem; z-index: 5; position: relative; }
@@ -199,7 +228,7 @@
       .app-icon { width: 40px; height: 40px; font-size: 1.05rem; border-radius: 10px; }
       .app-icon .app-label { font-size: 0.42rem; bottom: -14px; }
       .chaos-label .cl-main { font-size: clamp(1rem, 3.5vw, 1.3rem); }
-      .chaos-label::before { width: 280px; height: 160px; }
+      .chaos-label::before { width: 300px; height: 170px; }
       .phone-frame { width: 170px; height: 260px; }
       .ps-greeting { font-size: 0.6rem; }
       .ps-grid { gap: 4px; }
@@ -207,8 +236,6 @@
       .ps-card-icon { font-size: 0.75rem; }
       .ps-card-name { font-size: 0.42rem; }
       .ps-card-status { font-size: 0.34rem; }
-      .calm-tagline .tag-main { font-size: 0.75rem; }
-      .calm-tagline .tag-sub { font-size: 0.55rem; }
       footer { flex-direction: column; gap: 0.8rem; text-align: center; padding: 2rem 1.5rem; }
       .footer-top { flex-direction: column; gap: 0.8rem; }
       .footer-nav { justify-content: center; flex-wrap: wrap; gap: 1rem; }
@@ -220,10 +247,10 @@
       .animation-stage { height: 260px; max-width: 320px; }
       .chaos-label .cl-main { font-size: 1rem; }
       .chaos-label .cl-sub { font-size: 0.8rem; }
-      .chaos-label::before { width: 240px; height: 140px; }
-      .help-logo { font-size: 1.6rem; }
-      .help-text { font-size: 0.95rem; }
-      .help-tagline { font-size: 0.58rem; }
+      .chaos-label::before { width: 260px; height: 150px; }
+      .help-logo { font-size: 1.4rem; }
+      .help-text { font-size: 0.9rem; }
+      .help-tagline { font-size: 0.56rem; }
       .phone-frame { width: 150px; height: 230px; border-radius: 22px; }
       .phone-notch { width: 60px; height: 4px; }
       .phone-screen { padding: 10px 8px 8px; }
@@ -310,29 +337,32 @@
         </div>
 
         <div class="phone-glow"></div>
-        <div class="phone-frame">
-          <div class="phone-notch"></div>
-          <div class="phone-screen">
-            <div class="ps-header">
-              <div class="ps-logo">Craison<span>Digital</span></div>
-              <div class="ps-status">All Systems Online</div>
-            </div>
-            <div class="ps-greeting">Good evening, Craig</div>
-            <div class="ps-subtitle">5 acres · 11 devices · everything connected</div>
-            <div class="ps-grid">
-              <div class="ps-card"><div class="ps-card-icon">🚪</div><div class="ps-card-name">Front Gate</div><div class="ps-card-status">Secured</div></div>
-              <div class="ps-card"><div class="ps-card-icon">🌊</div><div class="ps-card-name">Pool & Spa</div><div class="ps-card-status">84°F · Ready</div></div>
-              <div class="ps-card"><div class="ps-card-icon">💡</div><div class="ps-card-name">Lighting</div><div class="ps-card-status">Evening Mode</div></div>
-              <div class="ps-card"><div class="ps-card-icon">⛲</div><div class="ps-card-name">Fountain</div><div class="ps-card-status">Running · 60%</div></div>
-              <div class="ps-card"><div class="ps-card-icon">📹</div><div class="ps-card-name">Cameras</div><div class="ps-card-status">4 Active</div></div>
-              <div class="ps-card"><div class="ps-card-icon">🌡️</div><div class="ps-card-name">Climate</div><div class="ps-card-status off">72°F · Auto</div></div>
+
+        <!-- ★ FIX 3: Phone + tagline wrapped together so they center as a unit -->
+        <div class="calm-wrap">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="ps-header">
+                <div class="ps-logo">Craison<span>Digital</span></div>
+                <div class="ps-status">All Systems Online</div>
+              </div>
+              <div class="ps-greeting">Good evening, Craig</div>
+              <div class="ps-subtitle">5 acres · 11 devices · everything connected</div>
+              <div class="ps-grid">
+                <div class="ps-card"><div class="ps-card-icon">🚪</div><div class="ps-card-name">Front Gate</div><div class="ps-card-status">Secured</div></div>
+                <div class="ps-card"><div class="ps-card-icon">🌊</div><div class="ps-card-name">Pool & Spa</div><div class="ps-card-status">84°F · Ready</div></div>
+                <div class="ps-card"><div class="ps-card-icon">💡</div><div class="ps-card-name">Lighting</div><div class="ps-card-status">Evening Mode</div></div>
+                <div class="ps-card"><div class="ps-card-icon">⛲</div><div class="ps-card-name">Fountain</div><div class="ps-card-status">Running · 60%</div></div>
+                <div class="ps-card"><div class="ps-card-icon">📹</div><div class="ps-card-name">Cameras</div><div class="ps-card-status">4 Active</div></div>
+                <div class="ps-card"><div class="ps-card-icon">🌡️</div><div class="ps-card-name">Climate</div><div class="ps-card-status off">72°F · Auto</div></div>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div class="calm-tagline">
-          <div class="tag-main">One app. One relationship. One system.</div>
-          <div class="tag-sub">Everything you already own — finally working together.</div>
+          <div class="calm-tagline">
+            <div class="tag-main">One app. One relationship. One system.</div>
+            <div class="tag-sub">Everything you already own — finally working together.</div>
+          </div>
         </div>
       </div>
 

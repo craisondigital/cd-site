@@ -71,6 +71,7 @@
     .app-icon .app-label { position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); font-size: 0.48rem; color: rgba(107,122,141,0.6); white-space: nowrap; font-weight: 500; letter-spacing: 0.04em; transition: opacity 0.4s; }
     .app-icon::after { content: '✕'; position: absolute; top: -5px; right: -5px; width: 14px; height: 14px; border-radius: 50%; background: rgba(239,68,68,0.7); color: white; font-size: 0.45rem; font-weight: 700; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 6px rgba(239,68,68,0.3); transition: all 0.6s ease; opacity: 0; }
 
+    /* PHASE 1: CHAOS */
     .phase-chaos .app-icon { opacity: 0.4; }
     .phase-chaos .app-icon::after { opacity: 0.7; }
     .phase-chaos .app-icon:nth-child(1)  { top: 6%;  left: 14%; transform: rotate(-6deg); }
@@ -99,19 +100,20 @@
     .confusion-lines { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0; transition: opacity 0.5s; }
     .phase-chaos .confusion-lines { opacity: 1; }
 
+    /* PHASE 2: CONVERGE */
     .phase-converge .app-icon { top: 50% !important; left: 50% !important; transform: translate(-50%, -50%) scale(0.3) !important; opacity: 0 !important; transition: all 0.9s cubic-bezier(0.34, 1.56, 0.64, 1); animation: none !important; }
     .phase-converge .app-icon::after { opacity: 0; }
     .phase-converge .app-icon .app-label { opacity: 0; }
     .phase-converge .chaos-label { opacity: 0; }
     .phase-converge .confusion-lines { opacity: 0; }
 
+    /* PHASE 3: WE CAN HELP */
     .help-message { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 15; text-align: center; width: 92%; max-width: 480px; opacity: 0; transition: opacity 0.8s ease; pointer-events: none; }
     .help-logo { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.6rem, 3.5vw, 2.4rem); color: var(--white); margin-bottom: 0.6rem; transform: translateY(10px); transition: transform 0.8s ease, opacity 0.8s ease; opacity: 0; line-height: 1.2; }
     .help-logo span { color: var(--cyan); }
     .help-text { font-family: var(--font-display); font-size: clamp(1rem, 2.5vw, 1.4rem); font-weight: 700; color: var(--blue-bright); margin-bottom: 0.8rem; transform: translateY(10px); transition: transform 0.8s ease 0.25s, opacity 0.8s ease 0.25s; opacity: 0; }
     .help-tagline { font-family: var(--font-body); font-size: clamp(0.62rem, 1.4vw, 0.76rem); font-weight: 400; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; transform: translateY(10px); transition: transform 0.8s ease 0.5s, opacity 0.8s ease 0.5s; opacity: 0; }
     .help-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 320px; height: 220px; background: radial-gradient(ellipse, rgba(0,212,255,0.08) 0%, rgba(47,128,237,0.04) 40%, transparent 70%); border-radius: 50%; opacity: 0; transition: opacity 1s ease; z-index: 0; }
-
     .phase-help .help-message { opacity: 1; }
     .phase-help .help-logo { opacity: 1; transform: translateY(0); }
     .phase-help .help-text { opacity: 1; transform: translateY(0); }
@@ -123,44 +125,54 @@
     .phase-help .chaos-label { opacity: 0; }
     .phase-help .confusion-lines { opacity: 0; }
 
-    .calm-wrap { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; z-index: 10; width: 100%; opacity: 0; transition: opacity 1s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    /* PHASE 4: CALM — text on top, simplified phone below */
+    .calm-wrap {
+      position: absolute; top: 0; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center;
+      z-index: 10; width: 100%; height: 100%;
+      padding-top: 0.5rem;
+      opacity: 0; transition: opacity 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
     .phase-calm .calm-wrap { opacity: 1; }
     .phase-calm .help-message { opacity: 0; }
     .phase-calm .help-glow { opacity: 0; }
 
-    .phone-frame { width: 200px; height: 300px; background: #0a1220; border: 2px solid rgba(47,128,237,0.3); border-radius: 28px; box-shadow: 0 0 60px rgba(47,128,237,0.15), 0 0 120px rgba(0,212,255,0.05), 0 20px 60px rgba(0,0,0,0.5); overflow: hidden; transform: scale(0.5); opacity: 0; transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease; }
-    .phase-calm .phone-frame { opacity: 1; transform: scale(1); }
-
-    .phone-notch { width: 80px; height: 5px; background: #060a10; border-radius: 0 0 8px 8px; margin: 0 auto; }
-    .phone-screen { padding: 14px 12px 10px; }
-    .ps-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-    .ps-logo { font-family: var(--font-display); font-weight: 800; font-size: 0.6rem; color: var(--white); }
-    .ps-logo span { color: var(--cyan); }
-    .ps-status { font-size: 0.42rem; color: var(--green); font-weight: 600; display: flex; align-items: center; gap: 3px; }
-    .ps-status::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); }
-    .ps-greeting { font-family: var(--font-display); font-size: 0.7rem; font-weight: 700; color: var(--white); margin-bottom: 2px; }
-    .ps-subtitle { font-size: 0.42rem; color: var(--muted); margin-bottom: 10px; }
-    .ps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-    .ps-card { background: rgba(15,23,36,0.8); border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; padding: 8px 7px; opacity: 0; transform: translateY(6px); }
-    .phase-calm .ps-card { animation: cardIn 0.4s ease forwards; }
-    .phase-calm .ps-card:nth-child(1) { animation-delay: 0.6s; }
-    .phase-calm .ps-card:nth-child(2) { animation-delay: 0.75s; }
-    .phase-calm .ps-card:nth-child(3) { animation-delay: 0.9s; }
-    .phase-calm .ps-card:nth-child(4) { animation-delay: 1.05s; }
-    .phase-calm .ps-card:nth-child(5) { animation-delay: 1.2s; }
-    .phase-calm .ps-card:nth-child(6) { animation-delay: 1.35s; }
-    @keyframes cardIn { to { opacity: 1; transform: translateY(0); } }
-    .ps-card-icon { font-size: 0.85rem; margin-bottom: 3px; }
-    .ps-card-name { font-family: var(--font-display); font-size: 0.48rem; font-weight: 700; color: var(--text); margin-bottom: 1px; }
-    .ps-card-status { font-size: 0.38rem; color: var(--green); font-weight: 500; }
-    .ps-card-status.off { color: var(--muted); }
-
-    .calm-tagline { text-align: center; margin-top: 1rem; opacity: 0; transition: opacity 0.8s ease 0.5s; }
+    /* Calm headline at TOP */
+    .calm-tagline { text-align: center; margin-bottom: 1rem; opacity: 0; transition: opacity 0.6s ease; }
     .phase-calm .calm-tagline { opacity: 1; }
-    .calm-tagline .tag-main { font-family: var(--font-display); font-size: clamp(0.9rem, 2vw, 1.1rem); font-weight: 700; color: var(--white); letter-spacing: -0.01em; }
-    .calm-tagline .tag-sub { font-size: clamp(0.65rem, 1.4vw, 0.78rem); color: var(--muted); margin-top: 0.3rem; }
+    .calm-tagline .tag-main { font-family: var(--font-display); font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 800; color: var(--white); letter-spacing: -0.02em; }
+    .calm-tagline .tag-sub { font-size: clamp(0.7rem, 1.6vw, 0.85rem); color: var(--muted); margin-top: 0.35rem; }
 
-    .phone-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(47,128,237,0.12) 0%, rgba(0,212,255,0.04) 40%, transparent 70%); opacity: 0; transition: opacity 1.2s ease; z-index: 0; }
+    /* Simplified phone — clean minimal screen */
+    .phone-frame { width: 180px; height: 230px; background: #0a1220; border: 2px solid rgba(47,128,237,0.3); border-radius: 26px; box-shadow: 0 0 50px rgba(47,128,237,0.12), 0 0 100px rgba(0,212,255,0.04), 0 16px 48px rgba(0,0,0,0.5); overflow: hidden; transform: scale(0.6); opacity: 0; transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease; }
+    .phase-calm .phone-frame { opacity: 1; transform: scale(1); }
+    .phone-notch { width: 70px; height: 4px; background: #060a10; border-radius: 0 0 6px 6px; margin: 0 auto; }
+    .phone-screen { padding: 16px 14px 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; height: calc(100% - 4px); }
+
+    /* Simplified screen content */
+    .ps-mini-logo { font-family: var(--font-display); font-weight: 800; font-size: 0.75rem; color: var(--white); margin-bottom: 0.6rem; }
+    .ps-mini-logo span { color: var(--cyan); }
+    .ps-mini-status { display: inline-flex; align-items: center; gap: 4px; background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.2); border-radius: 100px; padding: 0.2rem 0.6rem; margin-bottom: 1.2rem; }
+    .ps-mini-status .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); animation: pulse 2s infinite; }
+    .ps-mini-status .label { font-size: 0.42rem; color: var(--green); font-weight: 600; letter-spacing: 0.04em; }
+
+    /* Icon row — 6 icons in a clean line */
+    .ps-icon-row { display: flex; align-items: center; gap: 10px; margin-bottom: 0.8rem; }
+    .ps-icon-dot { width: 32px; height: 32px; border-radius: 10px; background: rgba(15,23,36,0.8); border: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; opacity: 0; transform: scale(0.7); }
+    .phase-calm .ps-icon-dot { animation: iconPop 0.35s ease forwards; }
+    .phase-calm .ps-icon-dot:nth-child(1) { animation-delay: 0.5s; }
+    .phase-calm .ps-icon-dot:nth-child(2) { animation-delay: 0.6s; }
+    .phase-calm .ps-icon-dot:nth-child(3) { animation-delay: 0.7s; }
+    .phase-calm .ps-icon-dot:nth-child(4) { animation-delay: 0.8s; }
+    .phase-calm .ps-icon-dot:nth-child(5) { animation-delay: 0.9s; }
+    .phase-calm .ps-icon-dot:nth-child(6) { animation-delay: 1.0s; }
+    @keyframes iconPop { to { opacity: 1; transform: scale(1); } }
+
+    .ps-connected { font-size: 0.4rem; color: var(--muted); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0; transition: opacity 0.5s ease 1.2s; }
+    .phase-calm .ps-connected { opacity: 1; }
+
+    .phone-glow { position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%); width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, rgba(47,128,237,0.1) 0%, rgba(0,212,255,0.03) 40%, transparent 70%); opacity: 0; transition: opacity 1.2s ease; z-index: 0; }
     .phase-calm .phone-glow { opacity: 1; }
 
     .phase-dots { display: flex; gap: 8px; justify-content: center; margin-bottom: 2rem; z-index: 5; position: relative; }
@@ -197,13 +209,9 @@
       .app-icon .app-label { font-size: 0.42rem; bottom: -14px; }
       .chaos-label .cl-main { font-size: clamp(1rem, 3.5vw, 1.3rem); }
       .chaos-label::before { width: 300px; height: 170px; }
-      .phone-frame { width: 170px; height: 260px; }
-      .ps-greeting { font-size: 0.6rem; }
-      .ps-grid { gap: 4px; }
-      .ps-card { padding: 6px 5px; border-radius: 8px; }
-      .ps-card-icon { font-size: 0.75rem; }
-      .ps-card-name { font-size: 0.42rem; }
-      .ps-card-status { font-size: 0.34rem; }
+      .phone-frame { width: 160px; height: 210px; }
+      .ps-icon-row { gap: 7px; }
+      .ps-icon-dot { width: 28px; height: 28px; font-size: 0.75rem; border-radius: 8px; }
       footer { flex-direction: column; gap: 0.8rem; text-align: center; padding: 2rem 1.5rem; }
       .footer-top { flex-direction: column; gap: 0.8rem; }
       .footer-nav { justify-content: center; flex-wrap: wrap; gap: 1rem; }
@@ -219,9 +227,9 @@
       .help-logo { font-size: 1.4rem; }
       .help-text { font-size: 0.9rem; }
       .help-tagline { font-size: 0.56rem; }
-      .phone-frame { width: 150px; height: 230px; border-radius: 22px; }
-      .phone-notch { width: 60px; height: 4px; }
-      .phone-screen { padding: 10px 8px 8px; }
+      .phone-frame { width: 145px; height: 190px; border-radius: 22px; }
+      .ps-icon-row { gap: 5px; }
+      .ps-icon-dot { width: 24px; height: 24px; font-size: 0.65rem; border-radius: 7px; }
     }
   </style>
 </head>
@@ -306,29 +314,30 @@
 
         <div class="phone-glow"></div>
 
+        <!-- SLIDE 3: Text on top, simplified phone below -->
         <div class="calm-wrap">
-          <div class="phone-frame">
-            <div class="phone-notch"></div>
-            <div class="phone-screen">
-              <div class="ps-header">
-                <div class="ps-logo">Craison<span>Digital</span></div>
-                <div class="ps-status">All Systems Online</div>
-              </div>
-              <div class="ps-greeting">Good evening, Craig</div>
-              <div class="ps-subtitle">5 acres · 11 devices · everything connected</div>
-              <div class="ps-grid">
-                <div class="ps-card"><div class="ps-card-icon">🚪</div><div class="ps-card-name">Front Gate</div><div class="ps-card-status">Secured</div></div>
-                <div class="ps-card"><div class="ps-card-icon">🌊</div><div class="ps-card-name">Pool & Spa</div><div class="ps-card-status">84°F · Ready</div></div>
-                <div class="ps-card"><div class="ps-card-icon">💡</div><div class="ps-card-name">Lighting</div><div class="ps-card-status">Evening Mode</div></div>
-                <div class="ps-card"><div class="ps-card-icon">⛲</div><div class="ps-card-name">Fountain</div><div class="ps-card-status">Running · 60%</div></div>
-                <div class="ps-card"><div class="ps-card-icon">📹</div><div class="ps-card-name">Cameras</div><div class="ps-card-status">4 Active</div></div>
-                <div class="ps-card"><div class="ps-card-icon">🌡️</div><div class="ps-card-name">Climate</div><div class="ps-card-status off">72°F · Auto</div></div>
-              </div>
-            </div>
-          </div>
           <div class="calm-tagline">
             <div class="tag-main">One App for All.</div>
             <div class="tag-sub">Everything you already own finally working together.</div>
+          </div>
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="ps-mini-logo">Craison<span>Digital</span></div>
+              <div class="ps-mini-status">
+                <div class="dot"></div>
+                <div class="label">All Systems Online</div>
+              </div>
+              <div class="ps-icon-row">
+                <div class="ps-icon-dot">🚪</div>
+                <div class="ps-icon-dot">🌊</div>
+                <div class="ps-icon-dot">💡</div>
+                <div class="ps-icon-dot">⛲</div>
+                <div class="ps-icon-dot">📹</div>
+                <div class="ps-icon-dot">🌡️</div>
+              </div>
+              <div class="ps-connected">6 systems · 1 app · connected</div>
+            </div>
           </div>
         </div>
       </div>

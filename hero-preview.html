@@ -65,36 +65,33 @@
 
     .animation-stage { position: relative; width: 100%; max-width: 520px; height: 360px; margin: 0 auto 3rem; z-index: 5; display: flex; align-items: center; justify-content: center; }
 
-    /* ★ BIGGER app icons — 56px */
+    /* ★ BIGGER app icons — 56px, using individual classes for positioning */
     .app-icon { position: absolute; width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; border: 1px solid rgba(255,255,255,0.05); background: rgba(15,23,36,0.75); box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: all 1s ease; opacity: 0; z-index: 1; }
     .app-icon .app-label { position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); font-size: 0.48rem; color: rgba(107,122,141,0.6); white-space: nowrap; font-weight: 500; letter-spacing: 0.04em; transition: opacity 0.4s; }
     .app-icon::after { content: '✕'; position: absolute; top: -6px; right: -6px; width: 16px; height: 16px; border-radius: 50%; background: rgba(239,68,68,0.75); color: white; font-size: 0.5rem; font-weight: 700; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 8px rgba(239,68,68,0.35); transition: all 0.6s ease; opacity: 0; }
 
-    /* === SLIDE 1: CHAOS — icons spread across FULL stage, including upper-left === */
+    /* === SLIDE 1: CHAOS — using individual classes to avoid nth-child bug === */
     .phase-chaos .app-icon { opacity: 0.45; }
     .phase-chaos .app-icon::after { opacity: 0.75; }
-    /* Row 1: top — 3 icons spread across full width */
-    .phase-chaos .app-icon:nth-child(1)  { top: 1%;  left: 2%;  transform: rotate(-7deg); }
-    .phase-chaos .app-icon:nth-child(2)  { top: 3%;  left: 38%; transform: rotate(4deg); }
-    .phase-chaos .app-icon:nth-child(3)  { top: 1%;  left: 78%; transform: rotate(-4deg); }
-    /* Row 2: upper-mid — fills the gap */
-    .phase-chaos .app-icon:nth-child(4)  { top: 20%; left: 18%; transform: rotate(5deg); }
-    .phase-chaos .app-icon:nth-child(5)  { top: 22%; left: 62%; transform: rotate(-3deg); }
-    .phase-chaos .app-icon:nth-child(6)  { top: 18%; left: 85%; transform: rotate(6deg); }
-    /* Row 3: middle sides — clear center for text */
-    .phase-chaos .app-icon:nth-child(7)  { top: 40%; left: 0%;  transform: rotate(-5deg); }
-    .phase-chaos .app-icon:nth-child(8)  { top: 42%; left: 82%; transform: rotate(4deg); }
-    /* Row 4: lower-mid */
-    .phase-chaos .app-icon:nth-child(9)  { top: 58%; left: 4%;  transform: rotate(3deg); }
-    .phase-chaos .app-icon:nth-child(10) { top: 60%; left: 80%; transform: rotate(-6deg); }
-    /* Row 5: bottom — 2 icons */
-    .phase-chaos .app-icon:nth-child(11) { top: 76%; left: 15%; transform: rotate(5deg); }
-    .phase-chaos .app-icon:nth-child(12) { top: 78%; left: 65%; transform: rotate(-4deg); }
+    /* ★ Positions using individual classes — fills ALL corners including upper-left */
+    .phase-chaos .ai1  { top: 0%;  left: 0%;  transform: rotate(-7deg); }
+    .phase-chaos .ai2  { top: 2%;  left: 22%; transform: rotate(4deg); }
+    .phase-chaos .ai3  { top: 0%;  left: 46%; transform: rotate(-3deg); }
+    .phase-chaos .ai4  { top: 2%;  left: 72%; transform: rotate(5deg); }
+    .phase-chaos .ai5  { top: 20%; left: 8%;  transform: rotate(3deg); }
+    .phase-chaos .ai6  { top: 18%; left: 58%; transform: rotate(-5deg); }
+    .phase-chaos .ai7  { top: 20%; left: 84%; transform: rotate(6deg); }
+    .phase-chaos .ai8  { top: 40%; left: 0%;  transform: rotate(-4deg); }
+    .phase-chaos .ai9  { top: 42%; left: 82%; transform: rotate(3deg); }
+    .phase-chaos .ai10 { top: 60%; left: 2%;  transform: rotate(5deg); }
+    .phase-chaos .ai11 { top: 74%; left: 18%; transform: rotate(-6deg); }
+    .phase-chaos .ai12 { top: 72%; left: 66%; transform: rotate(4deg); }
+    /* Jitter using individual classes too */
     .phase-chaos .app-icon { animation: jitter 3s ease-in-out infinite alternate; }
-    .phase-chaos .app-icon:nth-child(2n) { animation-delay: -0.5s; animation-duration: 3.5s; }
-    .phase-chaos .app-icon:nth-child(3n) { animation-delay: -1.2s; animation-duration: 3.2s; }
-    .phase-chaos .app-icon:nth-child(5n) { animation-delay: -0.8s; }
-    .phase-chaos .app-icon:nth-child(7n) { animation-delay: -1.5s; animation-duration: 2.8s; }
+    .phase-chaos .ai2, .phase-chaos .ai4, .phase-chaos .ai6, .phase-chaos .ai8, .phase-chaos .ai10, .phase-chaos .ai12 { animation-delay: -0.6s; animation-duration: 3.4s; }
+    .phase-chaos .ai3, .phase-chaos .ai6, .phase-chaos .ai9 { animation-delay: -1.3s; animation-duration: 3.1s; }
+    .phase-chaos .ai5, .phase-chaos .ai10 { animation-delay: -0.9s; animation-duration: 2.9s; }
+    .phase-chaos .ai7, .phase-chaos .ai11 { animation-delay: -1.6s; animation-duration: 2.7s; }
     @keyframes jitter { 0%{translate:0 0} 25%{translate:4px -3px} 50%{translate:-3px 4px} 75%{translate:4px 2px} 100%{translate:-2px -4px} }
 
     .chaos-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; pointer-events: none; text-align: center; width: 90%; max-width: 400px; opacity: 0; transition: opacity 0.6s; }
@@ -108,13 +105,7 @@
     .phase-chaos .confusion-lines { opacity: 1; }
 
     /* === SLIDE 2: ONE APP FOR ALL === */
-    .calm-wrap {
-      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center;
-      z-index: 10; width: 100%; height: 100%;
-      justify-content: flex-start; padding-top: 0;
-      opacity: 0; transition: opacity 0.8s ease;
-    }
+    .calm-wrap { position: absolute; top: 0; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; z-index: 10; width: 100%; height: 100%; justify-content: flex-start; padding-top: 0; opacity: 0; transition: opacity 0.8s ease; }
     .phase-calm .calm-wrap { opacity: 1; }
     .phase-calm .app-icon { top: 50% !important; left: 50% !important; transform: translate(-50%, -50%) scale(0) !important; opacity: 0 !important; animation: none !important; }
     .phase-calm .chaos-label { opacity: 0; }
@@ -125,42 +116,19 @@
     .calm-above .above-main { font-family: var(--font-display); font-size: clamp(1rem, 2.2vw, 1.2rem); font-weight: 700; color: var(--blue-bright); }
     .calm-above .above-sub { font-family: var(--font-body); font-size: clamp(0.78rem, 1.8vw, 0.92rem); color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; margin-top: 0.25rem; font-weight: 400; }
 
-    .phone-frame {
-      width: 340px; height: 220px;
-      background: #0a1220; border: 2px solid rgba(47,128,237,0.3);
-      border-radius: 22px;
-      box-shadow: 0 0 50px rgba(47,128,237,0.12), 0 0 100px rgba(0,212,255,0.04), 0 16px 48px rgba(0,0,0,0.5);
-      overflow: hidden;
-      transform: scale(0.7); opacity: 0;
-      transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.6s ease;
-      flex-shrink: 0;
-    }
+    .phone-frame { width: 340px; height: 220px; background: #0a1220; border: 2px solid rgba(47,128,237,0.3); border-radius: 22px; box-shadow: 0 0 50px rgba(47,128,237,0.12), 0 0 100px rgba(0,212,255,0.04), 0 16px 48px rgba(0,0,0,0.5); overflow: hidden; transform: scale(0.7); opacity: 0; transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.6s ease; flex-shrink: 0; }
     .phase-calm .phone-frame { opacity: 1; transform: scale(1); }
     .phone-notch { width: 70px; height: 4px; background: #060a10; border-radius: 0 0 6px 6px; margin: 0 auto; }
-    .phone-screen {
-      padding: 16px 24px 14px;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      height: calc(100% - 4px);
-    }
+    .phone-screen { padding: 16px 24px 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; height: calc(100% - 4px); }
 
     .ps-mini-logo { font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; color: var(--white); margin-bottom: 0.7rem; }
     .ps-mini-logo span { color: var(--cyan); }
-    .ps-mini-status {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.2);
-      border-radius: 100px; padding: 0.3rem 0.85rem; margin-bottom: 1rem;
-    }
+    .ps-mini-status { display: inline-flex; align-items: center; gap: 6px; background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.2); border-radius: 100px; padding: 0.3rem 0.85rem; margin-bottom: 1rem; }
     .ps-mini-status .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulse 2s infinite; }
     .ps-mini-status .label { font-size: 0.68rem; color: var(--green); font-weight: 600; letter-spacing: 0.04em; }
 
     .ps-icon-row { display: flex; align-items: center; gap: 14px; margin-bottom: 0.7rem; }
-    .ps-icon-dot {
-      width: 42px; height: 42px; border-radius: 11px;
-      background: rgba(15,23,36,0.8); border: 1px solid rgba(255,255,255,0.06);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem;
-      opacity: 0; transform: scale(0.7);
-    }
+    .ps-icon-dot { width: 42px; height: 42px; border-radius: 11px; background: rgba(15,23,36,0.8); border: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; opacity: 0; transform: scale(0.7); }
     .phase-calm .ps-icon-dot { animation: iconPop 0.35s ease forwards; }
     .phase-calm .ps-icon-dot:nth-child(1) { animation-delay: 0.4s; }
     .phase-calm .ps-icon-dot:nth-child(2) { animation-delay: 0.5s; }
@@ -210,7 +178,6 @@
       .mobile-menu .nav-cta { display: inline-block; margin-top: 0.4rem; padding: 0.6rem 1.8rem; font-size: 1rem; }
       .animation-stage { height: 340px; max-width: 400px; }
       .app-icon { width: 46px; height: 46px; font-size: 1.25rem; border-radius: 12px; }
-      .app-icon .app-label { font-size: 0.42rem; bottom: -14px; }
       .chaos-label .cl-main { font-size: clamp(1rem, 3.5vw, 1.3rem); }
       .chaos-label::before { width: 300px; height: 170px; }
       .phone-frame { width: 300px; height: 200px; }
@@ -289,8 +256,6 @@
           <line x1="400" y1="110" x2="480" y2="170" stroke="rgba(239,68,68,0.07)" stroke-width="1" stroke-dasharray="4 4"/>
           <line x1="50" y1="260" x2="200" y2="280" stroke="rgba(239,68,68,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
           <line x1="330" y1="270" x2="460" y2="250" stroke="rgba(239,68,68,0.07)" stroke-width="1" stroke-dasharray="4 4"/>
-          <line x1="120" y1="80" x2="30" y2="160" stroke="rgba(239,68,68,0.06)" stroke-width="1" stroke-dasharray="4 4"/>
-          <line x1="420" y1="80" x2="480" y2="170" stroke="rgba(239,68,68,0.06)" stroke-width="1" stroke-dasharray="4 4"/>
         </svg>
 
         <div class="chaos-label">
@@ -298,19 +263,19 @@
           <div class="cl-sub">Sound familiar?</div>
         </div>
 
-        <!-- ★ 12 app icons — spread across full stage -->
-        <div class="app-icon">🚪<span class="app-label">LiftMaster</span></div>
-        <div class="app-icon">🌊<span class="app-label">Pentair</span></div>
-        <div class="app-icon">💡<span class="app-label">Lutron</span></div>
-        <div class="app-icon">📹<span class="app-label">Ring</span></div>
-        <div class="app-icon">🔊<span class="app-label">Sonos</span></div>
-        <div class="app-icon">🌡️<span class="app-label">Nest</span></div>
-        <div class="app-icon">⛲<span class="app-label">Fountain Co</span></div>
-        <div class="app-icon">🔒<span class="app-label">Yale</span></div>
-        <div class="app-icon">🌿<span class="app-label">Rachio</span></div>
-        <div class="app-icon">☀️<span class="app-label">Hunter</span></div>
-        <div class="app-icon">🏠<span class="app-label">SmartThings</span></div>
-        <div class="app-icon">🔔<span class="app-label">Doorbell</span></div>
+        <!-- ★ 12 app icons with individual classes for reliable positioning -->
+        <div class="app-icon ai1">🚪<span class="app-label">LiftMaster</span></div>
+        <div class="app-icon ai2">🌊<span class="app-label">Pentair</span></div>
+        <div class="app-icon ai3">💡<span class="app-label">Lutron</span></div>
+        <div class="app-icon ai4">📹<span class="app-label">Ring</span></div>
+        <div class="app-icon ai5">🔊<span class="app-label">Sonos</span></div>
+        <div class="app-icon ai6">🌡️<span class="app-label">Nest</span></div>
+        <div class="app-icon ai7">⛲<span class="app-label">Fountain Co</span></div>
+        <div class="app-icon ai8">🔒<span class="app-label">Yale</span></div>
+        <div class="app-icon ai9">🌿<span class="app-label">Rachio</span></div>
+        <div class="app-icon ai10">☀️<span class="app-label">Hunter</span></div>
+        <div class="app-icon ai11">🏠<span class="app-label">SmartThings</span></div>
+        <div class="app-icon ai12">🔔<span class="app-label">Doorbell</span></div>
 
         <div class="phone-glow"></div>
         <div class="calm-wrap">

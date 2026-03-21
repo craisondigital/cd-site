@@ -63,7 +63,6 @@
     .btn-secondary { background: transparent; color: var(--text); padding: 0.85rem 2.2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 400; text-decoration: none; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; }
     .btn-secondary:hover { border-color: rgba(255,255,255,0.15); color: var(--white); }
 
-    /* ======= ANIMATION STAGE ======= */
     .animation-stage { position: relative; width: 100%; max-width: 520px; height: 360px; margin: 0 auto 3rem; z-index: 5; display: flex; align-items: center; justify-content: center; }
 
     .app-icon { position: absolute; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; border: 1px solid rgba(255,255,255,0.04); background: rgba(15,23,36,0.7); box-shadow: 0 4px 16px rgba(0,0,0,0.25); transition: all 1s ease; opacity: 0; z-index: 1; }
@@ -117,7 +116,8 @@
     .calm-above { text-align: center; margin-bottom: 0.7rem; opacity: 0; transform: translateY(8px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .phase-calm .calm-above { opacity: 1; transform: translateY(0); }
     .calm-above .above-main { font-family: var(--font-display); font-size: clamp(1rem, 2.2vw, 1.2rem); font-weight: 700; color: var(--blue-bright); }
-    .calm-above .above-sub { font-family: var(--font-body); font-size: clamp(0.6rem, 1.3vw, 0.72rem); color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 0.2rem; }
+    /* ★ BIGGER consulting tagline */
+    .calm-above .above-sub { font-family: var(--font-body); font-size: clamp(0.78rem, 1.8vw, 0.92rem); color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; margin-top: 0.25rem; font-weight: 400; }
 
     /* BIG WIDE phone */
     .phone-frame {
@@ -138,7 +138,6 @@
       height: calc(100% - 4px);
     }
 
-    /* Phone content — BIG and readable */
     .ps-mini-logo { font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; color: var(--white); margin-bottom: 0.7rem; }
     .ps-mini-logo span { color: var(--cyan); }
     .ps-mini-status {
@@ -149,7 +148,6 @@
     .ps-mini-status .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulse 2s infinite; }
     .ps-mini-status .label { font-size: 0.68rem; color: var(--green); font-weight: 600; letter-spacing: 0.04em; }
 
-    /* Icon row — BIG icons */
     .ps-icon-row { display: flex; align-items: center; gap: 14px; margin-bottom: 0.7rem; }
     .ps-icon-dot {
       width: 42px; height: 42px; border-radius: 11px;
@@ -174,12 +172,12 @@
     .calm-below { text-align: center; margin-top: 0.8rem; opacity: 0; transform: translateY(8px); transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s; }
     .phase-calm .calm-below { opacity: 1; transform: translateY(0); }
     .calm-below .below-main { font-family: var(--font-display); font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 800; color: var(--white); letter-spacing: -0.02em; }
-    .calm-below .below-sub { font-size: clamp(0.68rem, 1.5vw, 0.85rem); color: var(--muted); margin-top: 0.25rem; }
+    /* ★ BIGGER "Everything you already own" */
+    .calm-below .below-sub { font-size: clamp(0.82rem, 1.8vw, 1rem); color: var(--text); margin-top: 0.3rem; }
 
     .phone-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 380px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(47,128,237,0.1) 0%, rgba(0,212,255,0.03) 40%, transparent 70%); opacity: 0; transition: opacity 1.2s ease; z-index: 0; }
     .phase-calm .phone-glow { opacity: 1; }
 
-    /* 2 phase dots */
     .phase-dots { display: flex; gap: 8px; justify-content: center; margin-bottom: 2rem; z-index: 5; position: relative; }
     .phase-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.15); transition: all 0.4s; }
     .phase-dot.active { background: var(--cyan); box-shadow: 0 0 8px var(--cyan); width: 20px; border-radius: 3px; }
@@ -307,7 +305,6 @@
         <div class="app-icon">☀️<span class="app-label">Hunter</span></div>
         <div class="app-icon">🏠<span class="app-label">SmartThings</span></div>
 
-        <!-- SLIDE 2: Phone with text above and below -->
         <div class="phone-glow"></div>
         <div class="calm-wrap">
           <div class="calm-above">
@@ -340,7 +337,6 @@
         </div>
       </div>
 
-      <!-- 2 phase dots -->
       <div class="phase-dots" id="phaseDots">
         <div class="phase-dot active" data-phase="0"></div>
         <div class="phase-dot" data-phase="1"></div>

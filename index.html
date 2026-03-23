@@ -129,12 +129,27 @@
     .section-sub { color: var(--muted); font-size: 1rem; max-width: 560px; margin-bottom: 3rem; line-height: 1.7; }
     .app-graveyard { position: relative; z-index: 1; }
     .app-graveyard-inner { max-width: 1100px; margin: 0 auto; padding: 7rem 4rem 6rem; text-align: center; }
-    .graveyard-apps { display: flex; justify-content: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
-    .ghost-app { width: 52px; height: 52px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.015); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; opacity: 0.35; position: relative; }
-    .ghost-app::after { content: ''; position: absolute; inset: -1px; border-radius: 12px; background: linear-gradient(135deg, rgba(220,60,60,0.12), transparent 60%); pointer-events: none; }
-    .graveyard-label { font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(220,60,60,0.55); font-weight: 600; margin-bottom: 1.8rem; }
-    .graveyard-title { font-family: var(--font-display); font-size: clamp(1.5rem,3vw,2.4rem); font-weight: 800; color: var(--white); line-height: 1.15; margin-bottom: 1.2rem; }
     .graveyard-sub { font-size: 1rem; color: var(--muted); max-width: 620px; margin: 0 auto; line-height: 1.75; }
+    /* ── CHAOS SLIDE ANIMATION (App Graveyard) ── */
+    .animation-stage{position:relative;width:100%;max-width:620px;height:360px;margin:0 auto 2.5rem;display:flex;align-items:center;justify-content:center}
+    .app-icon{position:absolute;width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;border:1px solid rgba(255,255,255,0.05);background:rgba(15,23,36,0.75);box-shadow:0 4px 20px rgba(0,0,0,0.3);transition:all 1s ease;opacity:0;z-index:1}
+    .app-icon .app-label{position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);font-size:0.48rem;color:rgba(107,122,141,0.6);white-space:nowrap;font-weight:500;letter-spacing:0.04em;transition:opacity 0.4s}
+    .app-icon::after{content:'\2715';position:absolute;top:-6px;right:-6px;width:16px;height:16px;border-radius:50%;background:rgba(239,68,68,0.75);color:white;font-size:0.5rem;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 0 8px rgba(239,68,68,0.35);transition:all 0.6s ease;opacity:0}
+    .phase-chaos .app-icon{opacity:0.45}.phase-chaos .app-icon::after{opacity:0.75}
+    .phase-chaos .ai1{top:0%;left:0%;transform:rotate(-7deg)}.phase-chaos .ai2{top:2%;left:22%;transform:rotate(4deg)}.phase-chaos .ai3{top:0%;left:46%;transform:rotate(-3deg)}.phase-chaos .ai4{top:2%;left:72%;transform:rotate(5deg)}.phase-chaos .ai5{top:20%;left:8%;transform:rotate(3deg)}.phase-chaos .ai6{top:18%;left:58%;transform:rotate(-5deg)}.phase-chaos .ai7{top:20%;left:84%;transform:rotate(6deg)}.phase-chaos .ai8{top:40%;left:0%;transform:rotate(-4deg)}.phase-chaos .ai9{top:42%;left:82%;transform:rotate(3deg)}.phase-chaos .ai10{top:60%;left:2%;transform:rotate(5deg)}.phase-chaos .ai11{top:74%;left:18%;transform:rotate(-6deg)}.phase-chaos .ai12{top:72%;left:66%;transform:rotate(4deg)}
+    .phase-chaos .app-icon{animation:jitter 3s ease-in-out infinite alternate}
+    .phase-chaos .ai2,.phase-chaos .ai4,.phase-chaos .ai6,.phase-chaos .ai8,.phase-chaos .ai10,.phase-chaos .ai12{animation-delay:-0.6s;animation-duration:3.4s}
+    .phase-chaos .ai3,.phase-chaos .ai9{animation-delay:-1.3s;animation-duration:3.1s}
+    .phase-chaos .ai5,.phase-chaos .ai10{animation-delay:-0.9s;animation-duration:2.9s}
+    .phase-chaos .ai7,.phase-chaos .ai11{animation-delay:-1.6s;animation-duration:2.7s}
+    @keyframes jitter{0%{translate:0 0}25%{translate:4px -3px}50%{translate:-3px 4px}75%{translate:4px 2px}100%{translate:-2px -4px}}
+    .chaos-label{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:10;pointer-events:none;text-align:center;width:90%;max-width:440px;opacity:0;transition:opacity 0.6s}
+    .chaos-label .cl-main{font-family:var(--font-display);font-size:clamp(1.1rem,2.8vw,1.5rem);font-weight:800;color:var(--white);line-height:1.3;margin-bottom:0.6rem;text-shadow:0 0 40px rgba(6,10,16,0.95),0 0 80px rgba(6,10,16,0.9)}
+    .chaos-label .cl-sub{font-family:var(--font-display);font-size:clamp(1.05rem,2.5vw,1.3rem);font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:rgba(239,68,68,0.85);text-shadow:0 0 30px rgba(6,10,16,0.9)}
+    .chaos-label::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:400px;height:210px;background:radial-gradient(ellipse,rgba(6,10,16,0.92) 0%,rgba(6,10,16,0.6) 45%,transparent 75%);z-index:-1;border-radius:50%}
+    .phase-chaos .chaos-label{opacity:1}
+    .confusion-lines{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity 0.5s}
+    .phase-chaos .confusion-lines{opacity:1}
     #whatwedo { background: var(--dark); }
     .narrative-flow { display: flex; flex-direction: column; gap: 2.5rem; }
     .narrative-step { display: grid; grid-template-columns: 56px 1fr; gap: 1.8rem; align-items: start; }
@@ -202,7 +217,6 @@
       .automate-grid { grid-template-columns: 1fr 1fr; }
       .diff-grid { grid-template-columns: 1fr; }
       .plan-layout { grid-template-columns: 1fr; gap: 3rem; }
-      /* Slight contrast boost for tablets */
       .estate-illustration svg { filter: brightness(1.3) contrast(1.1); }
     }
     @media (max-width: 768px) {
@@ -257,7 +271,6 @@
       .footer-nav { justify-content: center; flex-wrap: wrap; gap: 1rem; }
       .footer-bottom { flex-direction: column; gap: 0.4rem; text-align: center; }
       .form-submit-row { flex-direction: column; align-items: stretch; }
-      /* Boost SVG contrast on mobile so dark elements are visible */
       .estate-illustration svg { filter: brightness(1.6) contrast(1.15); }
       .notif-toast { padding: 0.6rem 0.7rem; gap: 0.4rem; max-width: 320px; border-radius: 10px; }
       .notif-snapshot { width: 56px; height: 40px; border-radius: 4px; }
@@ -266,10 +279,13 @@
       .notif-sub { font-size: 0.6rem; }
       .notif-badge { font-size: 0.55rem; padding: 0.12rem 0.4rem; }
       .notif-dot { width: 5px; height: 5px; }
+      .animation-stage{height:340px;max-width:480px}
+      .app-icon{width:46px;height:46px;font-size:1.25rem;border-radius:12px}
     }
     @media (max-width: 480px) {
-      .graveyard-apps { gap: 0.4rem; }
-      .ghost-app { width: 42px; height: 42px; font-size: 1.1rem; }
+      .app-icon{width:42px;height:42px;font-size:1.15rem;border-radius:11px}
+      .app-icon .app-label{display:none}
+      .animation-stage{height:320px;max-width:380px}
     }
   </style>
 </head>
@@ -325,24 +341,17 @@
           <div class="notif-snapshot">
             <svg viewBox="0 0 80 56" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
               <rect width="80" height="56" rx="4" fill="#0a1420"/>
-              <!-- Simplified gate camera view -->
               <rect x="0" y="34" width="80" height="22" fill="#0e1822"/>
               <rect x="0" y="34" width="80" height="1" fill="#1a2a3a" opacity="0.5"/>
-              <!-- Road -->
               <rect x="20" y="34" width="40" height="22" fill="#121e2c"/>
-              <!-- Gate pillars -->
               <rect x="18" y="16" width="6" height="24" rx="1" fill="#1e3050"/>
               <rect x="56" y="16" width="6" height="24" rx="1" fill="#1e3050"/>
-              <!-- Gate open -->
               <rect x="24" y="18" width="14" height="2" fill="#2a4060" opacity="0.4"/>
               <rect x="42" y="18" width="14" height="2" fill="#2a4060" opacity="0.4"/>
-              <!-- Car (from above) -->
               <rect x="30" y="28" width="20" height="12" rx="3" fill="#2a3e58"/>
               <rect x="32" y="26" width="10" height="6" rx="2" fill="#1a2e44"/>
-              <!-- Headlights -->
               <circle cx="35" cy="28" r="1.5" fill="#f0e070" opacity="0.8"/>
               <circle cx="45" cy="28" r="1.5" fill="#f0e070" opacity="0.8"/>
-              <!-- Camera overlay -->
               <circle cx="72" cy="8" r="3" fill="none" stroke="#dc3c3c" stroke-width="1" opacity="0.8"/>
               <circle cx="72" cy="8" r="1.2" fill="#dc3c3c" opacity="0.9"/>
               <text x="4" y="10" font-size="5" fill="#6b7a8d" font-family="monospace" opacity="0.7">GATE CAM</text>
@@ -374,7 +383,6 @@
             <rect width="40" height="20" fill="#0e1a28"/><rect x="1" y="1" width="18" height="8" rx="1" fill="#121e2c" opacity="0.5"/><rect x="21" y="1" width="18" height="8" rx="1" fill="#101c28" opacity="0.5"/><rect x="11" y="11" width="18" height="8" rx="1" fill="#121e2c" opacity="0.4"/>
             <line x1="0" y1="10" x2="40" y2="10" stroke="#091218" stroke-width="1"/><line x1="20" y1="0" x2="20" y2="10" stroke="#091218" stroke-width="1"/><line x1="10" y1="10" x2="10" y2="20" stroke="#091218" stroke-width="1"/><line x1="30" y1="10" x2="30" y2="20" stroke="#091218" stroke-width="1"/>
           </pattern>
-          <!-- Grass texture pattern -->
           <pattern id="grassTexture" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
             <rect width="20" height="20" fill="transparent"/>
             <line x1="3" y1="18" x2="4" y2="14" stroke="#0e2218" stroke-width="0.6" opacity="0.3"/>
@@ -400,88 +408,43 @@
           <rect width="1100" height="440" fill="url(#skyGrad)"/>
           <circle cx="60" cy="20" r="1" fill="white" opacity="0.5"/><circle cx="180" cy="12" r="1.2" fill="white" opacity="0.55"/><circle cx="310" cy="28" r="0.8" fill="white" opacity="0.6"/><circle cx="470" cy="15" r="1" fill="white" opacity="0.4"/><circle cx="620" cy="8" r="1.2" fill="white" opacity="0.55"/><circle cx="760" cy="22" r="0.8" fill="white" opacity="0.5"/><circle cx="880" cy="10" r="1" fill="white" opacity="0.6"/><circle cx="1010" cy="30" r="1.2" fill="white" opacity="0.4"/><circle cx="140" cy="45" r="0.7" fill="white" opacity="0.35"/><circle cx="550" cy="38" r="0.9" fill="white" opacity="0.45"/>
           <rect x="0" y="150" width="1100" height="290" fill="url(#groundGrad)"/>
-          <!-- Grass texture across entire ground -->
           <rect x="0" y="150" width="1100" height="290" fill="url(#grassTexture)" opacity="0.6"/>
           <path id="driveway" d="M0,305 Q80,305 120,298 Q200,286 320,270 Q400,260 480,255 L480,295 Q400,300 320,310 Q200,325 120,335 Q80,340 0,340 Z" fill="url(#driveGrad)" stroke="#2a3e55" stroke-width="0.8" opacity="0.85"/>
-
-          <!-- GATE SYSTEM: Two pillars on opposite sides of driveway at x≈110 -->
-          <!-- Driveway at x=110: top edge ≈ y=299, bottom edge ≈ y=334, center ≈ y=316 -->
-
-          <!-- LAYER 1: Bottom pillar (near/viewer side) + bottom gate half — drawn FIRST (behind car) -->
           <g id="gateNearSide">
-            <!-- Bottom pillar sits just below driveway bottom edge -->
             <rect x="98" y="336" width="24" height="55" rx="3" fill="url(#gatePost)" stroke="#2a4060" stroke-width="1"/>
             <rect x="102" y="350" width="16" height="16" rx="3" fill="#0a1520" stroke="#2a4060" stroke-width="1"/>
             <circle id="gateLed" cx="110" cy="355" r="2.5" fill="#dc3c3c" opacity="0.7" filter="url(#glow)"/>
             <circle id="pillarLight1" cx="110" cy="336" r="4" fill="#f0c060" opacity="0" filter="url(#glowStrong)"/>
-            <!-- Bottom gate panel — bars spanning from bottom pillar toward driveway center -->
             <g id="gateLeft">
               <rect x="95" y="298" width="50" height="38" rx="2" fill="none" stroke="#2a4060" stroke-width="1.2"/>
-              <line x1="95" y1="306" x2="145" y2="306" stroke="#2a4060" stroke-width="1"/>
-              <line x1="95" y1="314" x2="145" y2="314" stroke="#2a4060" stroke-width="1"/>
-              <line x1="95" y1="322" x2="145" y2="322" stroke="#2a4060" stroke-width="1"/>
-              <line x1="95" y1="330" x2="145" y2="330" stroke="#2a4060" stroke-width="1"/>
-              <line x1="103" y1="298" x2="103" y2="336" stroke="#2a4060" stroke-width="1"/>
-              <line x1="111" y1="298" x2="111" y2="336" stroke="#2a4060" stroke-width="1"/>
-              <line x1="119" y1="298" x2="119" y2="336" stroke="#2a4060" stroke-width="1"/>
-              <line x1="127" y1="298" x2="127" y2="336" stroke="#2a4060" stroke-width="1"/>
-              <line x1="135" y1="298" x2="135" y2="336" stroke="#2a4060" stroke-width="1"/>
+              <line x1="95" y1="306" x2="145" y2="306" stroke="#2a4060" stroke-width="1"/><line x1="95" y1="314" x2="145" y2="314" stroke="#2a4060" stroke-width="1"/><line x1="95" y1="322" x2="145" y2="322" stroke="#2a4060" stroke-width="1"/><line x1="95" y1="330" x2="145" y2="330" stroke="#2a4060" stroke-width="1"/>
+              <line x1="103" y1="298" x2="103" y2="336" stroke="#2a4060" stroke-width="1"/><line x1="111" y1="298" x2="111" y2="336" stroke="#2a4060" stroke-width="1"/><line x1="119" y1="298" x2="119" y2="336" stroke="#2a4060" stroke-width="1"/><line x1="127" y1="298" x2="127" y2="336" stroke="#2a4060" stroke-width="1"/><line x1="135" y1="298" x2="135" y2="336" stroke="#2a4060" stroke-width="1"/>
             </g>
           </g>
-
-          <!-- LAYER 2: CAR — large and visible -->
           <g id="carGroup" opacity="0">
-            <!-- Car body -->
             <rect x="-42" y="-14" width="84" height="28" rx="6" fill="#1e2d42" stroke="#3a5068" stroke-width="1.5"/>
-            <!-- Cabin -->
             <rect x="-34" y="-24" width="42" height="16" rx="4" fill="#1a2538" stroke="#3a5068" stroke-width="1.2"/>
-            <!-- Windows -->
-            <rect x="-30" y="-21" width="16" height="10" rx="2" fill="#0a2a4a" opacity="0.7"/>
-            <rect x="-10" y="-21" width="16" height="10" rx="2" fill="#0a2a4a" opacity="0.7"/>
-            <!-- Rear wheel -->
-            <circle cx="-24" cy="17" r="6.5" fill="#0a0f18" stroke="#2a3a50" stroke-width="2"/>
-            <circle cx="-24" cy="17" r="2.5" fill="#1a2a40"/>
-            <!-- Front wheel -->
-            <circle cx="22" cy="17" r="6.5" fill="#0a0f18" stroke="#2a3a50" stroke-width="2"/>
-            <circle cx="22" cy="17" r="2.5" fill="#1a2a40"/>
-            <!-- Headlights -->
-            <circle id="headlightL" cx="42" cy="-4" r="4" fill="#f0e070" opacity="0.85" filter="url(#glow)"/>
-            <circle id="headlightR" cx="42" cy="6" r="4" fill="#f0e070" opacity="0.85" filter="url(#glow)"/>
-            <!-- Headlight beam glow -->
+            <rect x="-30" y="-21" width="16" height="10" rx="2" fill="#0a2a4a" opacity="0.7"/><rect x="-10" y="-21" width="16" height="10" rx="2" fill="#0a2a4a" opacity="0.7"/>
+            <circle cx="-24" cy="17" r="6.5" fill="#0a0f18" stroke="#2a3a50" stroke-width="2"/><circle cx="-24" cy="17" r="2.5" fill="#1a2a40"/>
+            <circle cx="22" cy="17" r="6.5" fill="#0a0f18" stroke="#2a3a50" stroke-width="2"/><circle cx="22" cy="17" r="2.5" fill="#1a2a40"/>
+            <circle id="headlightL" cx="42" cy="-4" r="4" fill="#f0e070" opacity="0.85" filter="url(#glow)"/><circle id="headlightR" cx="42" cy="6" r="4" fill="#f0e070" opacity="0.85" filter="url(#glow)"/>
             <ellipse cx="58" cy="1" rx="14" ry="9" fill="#f0e070" opacity="0.06" filter="url(#glowStrong)"/>
-            <!-- Taillights -->
             <rect x="-45" y="-4" width="4" height="8" rx="2" fill="#dc3c3c" opacity="0.6"/>
-            <!-- Roof highlight -->
             <rect x="-30" y="-24" width="38" height="2" rx="1" fill="#2a3e55" opacity="0.3"/>
           </g>
-
-          <!-- LAYER 3: Top pillar (far side) + top gate half — drawn LAST (in front of car) -->
           <g id="gateFarSide">
-            <!-- Top gate panel — bars spanning from top pillar toward driveway center -->
             <g id="gateRight">
               <rect x="95" y="260" width="50" height="38" rx="2" fill="none" stroke="#2a4060" stroke-width="1.2"/>
-              <line x1="95" y1="268" x2="145" y2="268" stroke="#2a4060" stroke-width="1"/>
-              <line x1="95" y1="276" x2="145" y2="276" stroke="#2a4060" stroke-width="1"/>
-              <line x1="95" y1="284" x2="145" y2="284" stroke="#2a4060" stroke-width="1"/>
-              <line x1="95" y1="292" x2="145" y2="292" stroke="#2a4060" stroke-width="1"/>
-              <line x1="103" y1="260" x2="103" y2="298" stroke="#2a4060" stroke-width="1"/>
-              <line x1="111" y1="260" x2="111" y2="298" stroke="#2a4060" stroke-width="1"/>
-              <line x1="119" y1="260" x2="119" y2="298" stroke="#2a4060" stroke-width="1"/>
-              <line x1="127" y1="260" x2="127" y2="298" stroke="#2a4060" stroke-width="1"/>
-              <line x1="135" y1="260" x2="135" y2="298" stroke="#2a4060" stroke-width="1"/>
+              <line x1="95" y1="268" x2="145" y2="268" stroke="#2a4060" stroke-width="1"/><line x1="95" y1="276" x2="145" y2="276" stroke="#2a4060" stroke-width="1"/><line x1="95" y1="284" x2="145" y2="284" stroke="#2a4060" stroke-width="1"/><line x1="95" y1="292" x2="145" y2="292" stroke="#2a4060" stroke-width="1"/>
+              <line x1="103" y1="260" x2="103" y2="298" stroke="#2a4060" stroke-width="1"/><line x1="111" y1="260" x2="111" y2="298" stroke="#2a4060" stroke-width="1"/><line x1="119" y1="260" x2="119" y2="298" stroke="#2a4060" stroke-width="1"/><line x1="127" y1="260" x2="127" y2="298" stroke="#2a4060" stroke-width="1"/><line x1="135" y1="260" x2="135" y2="298" stroke="#2a4060" stroke-width="1"/>
             </g>
-            <!-- Top pillar sits just above driveway top edge -->
             <rect x="98" y="238" width="24" height="55" rx="3" fill="url(#gatePost)" stroke="#2a4060" stroke-width="1"/>
             <circle id="pillarLight2" cx="110" cy="238" r="4" fill="#f0c060" opacity="0" filter="url(#glowStrong)"/>
           </g>
-          <!-- POOL — to the left of house, perspective trapezoid -->
           <g id="poolGroup">
-            <!-- Pool patio — large paver deck covering the area beside/left of house above the driveway -->
             <path d="M0,150 L365,150 L365,270 L340,270 Q280,282 200,292 Q120,298 0,305 Z" fill="url(#groundPaver)" opacity="0.55"/>
             <path d="M0,150 L365,150 L365,270 L340,270 Q280,282 200,292 Q120,298 0,305 Z" fill="none" stroke="#1a2a38" stroke-width="0.8" opacity="0.2"/>
-            <!-- Pool deck/coping -->
             <path d="M110,152 L315,152 L330,235 L95,235 Z" fill="#0e1a28" stroke="#2a3e55" stroke-width="2.5" opacity="0.4" stroke-linejoin="round"/>
-            <!-- Pool water base -->
             <path d="M115,155 L310,155 L325,230 L100,230 Z" fill="#020810"/>
             <g clip-path="url(#poolClip)">
               <path d="M115,155 L310,155 L325,230 L100,230 Z" fill="url(#poolWater)"/>
@@ -491,12 +454,10 @@
               <g id="poolLightsGroup" opacity="0"><circle cx="155" cy="220" r="4.5" fill="#4ade80" opacity="0.7" filter="url(#glowStrong)"/><circle cx="212" cy="220" r="4.5" fill="#4ade80" opacity="0.7" filter="url(#glowStrong)"/><circle cx="270" cy="220" r="4.5" fill="#4ade80" opacity="0.7" filter="url(#glowStrong)"/><ellipse cx="155" cy="212" rx="20" ry="12" fill="#4ade80" opacity="0.04"/><ellipse cx="212" cy="212" rx="20" ry="12" fill="#4ade80" opacity="0.04"/><ellipse cx="270" cy="212" rx="20" ry="12" fill="#4ade80" opacity="0.04"/></g>
             </g>
           </g>
-          <!-- GARAGE WING — to the right of house, slightly behind -->
           <rect x="640" y="180" width="100" height="100" rx="3" fill="url(#houseWall)" stroke="#2a4060" stroke-width="0.8"/>
           <rect x="640" y="180" width="100" height="6" fill="url(#roofGrad)"/>
           <rect id="win5" x="660" y="200" width="25" height="28" rx="2" fill="#0a1a2e" stroke="#2a4060" stroke-width="0.8"/><rect id="winGlow5" x="660" y="200" width="25" height="28" rx="2" fill="#f0c060" opacity="0"/>
           <rect id="win6" x="700" y="200" width="25" height="28" rx="2" fill="#0a1a2e" stroke="#2a4060" stroke-width="0.8"/><rect id="winGlow6" x="700" y="200" width="25" height="28" rx="2" fill="#f0c060" opacity="0"/>
-          <!-- MAIN HOUSE — in front of pool -->
           <g id="houseGroup">
             <rect x="360" y="140" width="280" height="140" rx="4" fill="url(#houseWall)" stroke="#2a4060" stroke-width="1.2"/>
             <path d="M345,140 L500,75 L655,140 Z" fill="url(#roofGrad)" stroke="#2a4060" stroke-width="1.2"/>
@@ -510,304 +471,89 @@
             <circle id="porchLight2" cx="525" cy="228" r="3" fill="#f0c060" opacity="0" filter="url(#glowStrong)"/>
             <rect id="windowAmbient" x="370" y="150" width="260" height="60" rx="8" fill="#f0c060" opacity="0" filter="url(#softGlow)"/>
           </g>
-          <!-- PALM TREES — backyard behind fountain and garage -->
           <g id="palmTreeGroup">
-            <!-- Palm 1: behind garage, left side -->
             <g>
-              <!-- Trunk — thick brown with ring segments -->
-              <path d="M755,178 Q752,145 748,115 Q745,90 750,70" stroke="#5a3c20" stroke-width="8" fill="none" stroke-linecap="round"/>
-              <path d="M755,178 Q752,145 748,115 Q745,90 750,70" stroke="#6e4c2a" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.5"/>
-              <!-- Trunk ring segments -->
-              <line x1="748" y1="90" x2="754" y2="89" stroke="#4a3018" stroke-width="1" opacity="0.6"/>
-              <line x1="747" y1="100" x2="754" y2="99" stroke="#4a3018" stroke-width="1" opacity="0.55"/>
-              <line x1="748" y1="110" x2="754" y2="109" stroke="#4a3018" stroke-width="1" opacity="0.5"/>
-              <line x1="749" y1="120" x2="755" y2="119" stroke="#4a3018" stroke-width="1" opacity="0.5"/>
-              <line x1="750" y1="130" x2="756" y2="129" stroke="#4a3018" stroke-width="1" opacity="0.45"/>
-              <line x1="751" y1="140" x2="756" y2="139" stroke="#4a3018" stroke-width="1" opacity="0.45"/>
-              <line x1="752" y1="150" x2="757" y2="149" stroke="#4a3018" stroke-width="1" opacity="0.4"/>
-              <line x1="753" y1="160" x2="757" y2="159" stroke="#4a3018" stroke-width="1" opacity="0.4"/>
-              <line x1="754" y1="170" x2="757" y2="169" stroke="#4a3018" stroke-width="1" opacity="0.35"/>
-              <!-- Fronds -->
-              <path d="M750,70 Q720,55 695,68" stroke="#1a3a1e" stroke-width="3" fill="none" stroke-linecap="round"/>
-              <path d="M750,70 Q725,48 705,55" stroke="#1e3e22" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-              <path d="M750,70 Q770,50 795,60" stroke="#1a3a1e" stroke-width="3" fill="none" stroke-linecap="round"/>
-              <path d="M750,70 Q775,45 800,48" stroke="#1e3e22" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-              <path d="M750,70 Q745,45 740,35" stroke="#1a3a1e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-              <path d="M750,70 Q758,42 762,30" stroke="#1e3e22" stroke-width="2" fill="none" stroke-linecap="round"/>
-              <!-- Frond leaf shapes -->
-              <ellipse cx="700" cy="62" rx="18" ry="8" fill="#142a18" opacity="0.75" transform="rotate(-15,700,62)"/>
-              <ellipse cx="795" cy="55" rx="18" ry="8" fill="#142a18" opacity="0.75" transform="rotate(12,795,55)"/>
-              <ellipse cx="742" cy="38" rx="14" ry="6" fill="#1a3218" opacity="0.65"/>
-              <ellipse cx="760" cy="34" rx="14" ry="6" fill="#1a3218" opacity="0.65"/>
-              <!-- Spotlight fixture -->
+              <path d="M755,178 Q752,145 748,115 Q745,90 750,70" stroke="#5a3c20" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M755,178 Q752,145 748,115 Q745,90 750,70" stroke="#6e4c2a" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.5"/>
+              <line x1="748" y1="90" x2="754" y2="89" stroke="#4a3018" stroke-width="1" opacity="0.6"/><line x1="747" y1="100" x2="754" y2="99" stroke="#4a3018" stroke-width="1" opacity="0.55"/><line x1="748" y1="110" x2="754" y2="109" stroke="#4a3018" stroke-width="1" opacity="0.5"/><line x1="749" y1="120" x2="755" y2="119" stroke="#4a3018" stroke-width="1" opacity="0.5"/><line x1="750" y1="130" x2="756" y2="129" stroke="#4a3018" stroke-width="1" opacity="0.45"/><line x1="751" y1="140" x2="756" y2="139" stroke="#4a3018" stroke-width="1" opacity="0.45"/><line x1="752" y1="150" x2="757" y2="149" stroke="#4a3018" stroke-width="1" opacity="0.4"/><line x1="753" y1="160" x2="757" y2="159" stroke="#4a3018" stroke-width="1" opacity="0.4"/><line x1="754" y1="170" x2="757" y2="169" stroke="#4a3018" stroke-width="1" opacity="0.35"/>
+              <path d="M750,70 Q720,55 695,68" stroke="#1a3a1e" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M750,70 Q725,48 705,55" stroke="#1e3e22" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M750,70 Q770,50 795,60" stroke="#1a3a1e" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M750,70 Q775,45 800,48" stroke="#1e3e22" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M750,70 Q745,45 740,35" stroke="#1a3a1e" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M750,70 Q758,42 762,30" stroke="#1e3e22" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <ellipse cx="700" cy="62" rx="18" ry="8" fill="#142a18" opacity="0.75" transform="rotate(-15,700,62)"/><ellipse cx="795" cy="55" rx="18" ry="8" fill="#142a18" opacity="0.75" transform="rotate(12,795,55)"/><ellipse cx="742" cy="38" rx="14" ry="6" fill="#1a3218" opacity="0.65"/><ellipse cx="760" cy="34" rx="14" ry="6" fill="#1a3218" opacity="0.65"/>
               <circle cx="760" cy="182" r="2.5" fill="#0a1520" stroke="#1a2a3a" stroke-width="0.6"/>
-              <!-- Spotlight beam (angled toward trunk/canopy) -->
-              <g id="palmSpot1" opacity="0">
-                <polygon points="760,180 748,100 756,95" fill="#f0e070" opacity="0.04"/>
-                <polygon points="760,180 750,110 758,105" fill="#ffe890" opacity="0.025"/>
-                <circle cx="760" cy="180" r="4" fill="#f0e070" opacity="0.45" filter="url(#glow)"/>
-                <!-- Lit fronds -->
-                <ellipse cx="750" cy="68" rx="15" ry="12" fill="#2a5a28" opacity="0.15" filter="url(#glow)"/>
-                <ellipse cx="755" cy="80" rx="8" ry="10" fill="#f0c060" opacity="0.03" filter="url(#glowStrong)"/>
-              </g>
+              <g id="palmSpot1" opacity="0"><polygon points="760,180 748,100 756,95" fill="#f0e070" opacity="0.04"/><polygon points="760,180 750,110 758,105" fill="#ffe890" opacity="0.025"/><circle cx="760" cy="180" r="4" fill="#f0e070" opacity="0.45" filter="url(#glow)"/><ellipse cx="750" cy="68" rx="15" ry="12" fill="#2a5a28" opacity="0.15" filter="url(#glow)"/><ellipse cx="755" cy="80" rx="8" ry="10" fill="#f0c060" opacity="0.03" filter="url(#glowStrong)"/></g>
             </g>
-            <!-- Palm 2: behind fountain, center-right, taller -->
             <g>
-              <path d="M890,190 Q888,148 885,110 Q882,75 888,50" stroke="#5a3c20" stroke-width="8" fill="none" stroke-linecap="round"/>
-              <path d="M890,190 Q888,148 885,110 Q882,75 888,50" stroke="#6e4c2a" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.5"/>
-              <!-- Trunk rings -->
-              <line x1="883" y1="70" x2="890" y2="69" stroke="#4a3018" stroke-width="1" opacity="0.6"/>
-              <line x1="883" y1="80" x2="890" y2="79" stroke="#4a3018" stroke-width="1" opacity="0.55"/>
-              <line x1="884" y1="90" x2="890" y2="89" stroke="#4a3018" stroke-width="1" opacity="0.55"/>
-              <line x1="884" y1="100" x2="891" y2="99" stroke="#4a3018" stroke-width="1" opacity="0.5"/>
-              <line x1="885" y1="110" x2="891" y2="109" stroke="#4a3018" stroke-width="1" opacity="0.5"/>
-              <line x1="886" y1="120" x2="892" y2="119" stroke="#4a3018" stroke-width="1" opacity="0.45"/>
-              <line x1="886" y1="130" x2="892" y2="129" stroke="#4a3018" stroke-width="1" opacity="0.45"/>
-              <line x1="887" y1="140" x2="892" y2="139" stroke="#4a3018" stroke-width="1" opacity="0.4"/>
-              <line x1="888" y1="150" x2="893" y2="149" stroke="#4a3018" stroke-width="1" opacity="0.4"/>
-              <line x1="888" y1="160" x2="893" y2="159" stroke="#4a3018" stroke-width="1" opacity="0.35"/>
-              <line x1="889" y1="170" x2="893" y2="169" stroke="#4a3018" stroke-width="1" opacity="0.35"/>
-              <line x1="889" y1="180" x2="893" y2="179" stroke="#4a3018" stroke-width="1" opacity="0.3"/>
-              <!-- Fronds -->
-              <path d="M888,50 Q855,35 832,48" stroke="#1a3a1e" stroke-width="3" fill="none" stroke-linecap="round"/>
-              <path d="M888,50 Q860,28 840,32" stroke="#1e3e22" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-              <path d="M888,50 Q915,32 940,42" stroke="#1a3a1e" stroke-width="3" fill="none" stroke-linecap="round"/>
-              <path d="M888,50 Q918,25 945,28" stroke="#1e3e22" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-              <path d="M888,50 Q883,25 878,12" stroke="#1a3a1e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-              <path d="M888,50 Q895,22 900,8" stroke="#1e3e22" stroke-width="2" fill="none" stroke-linecap="round"/>
-              <path d="M888,50 Q870,30 858,22" stroke="#152e18" stroke-width="2" fill="none" stroke-linecap="round"/>
-              <!-- Frond leaf shapes -->
-              <ellipse cx="838" cy="42" rx="20" ry="9" fill="#142a18" opacity="0.75" transform="rotate(-12,838,42)"/>
-              <ellipse cx="938" cy="36" rx="20" ry="9" fill="#142a18" opacity="0.75" transform="rotate(10,938,36)"/>
-              <ellipse cx="880" cy="16" rx="15" ry="7" fill="#1a3218" opacity="0.65"/>
-              <ellipse cx="898" cy="12" rx="15" ry="7" fill="#1a3218" opacity="0.65"/>
-              <ellipse cx="860" cy="24" rx="12" ry="6" fill="#142a18" opacity="0.6"/>
-              <!-- Spotlight fixture -->
+              <path d="M890,190 Q888,148 885,110 Q882,75 888,50" stroke="#5a3c20" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M890,190 Q888,148 885,110 Q882,75 888,50" stroke="#6e4c2a" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.5"/>
+              <line x1="883" y1="70" x2="890" y2="69" stroke="#4a3018" stroke-width="1" opacity="0.6"/><line x1="883" y1="80" x2="890" y2="79" stroke="#4a3018" stroke-width="1" opacity="0.55"/><line x1="884" y1="90" x2="890" y2="89" stroke="#4a3018" stroke-width="1" opacity="0.55"/><line x1="884" y1="100" x2="891" y2="99" stroke="#4a3018" stroke-width="1" opacity="0.5"/><line x1="885" y1="110" x2="891" y2="109" stroke="#4a3018" stroke-width="1" opacity="0.5"/><line x1="886" y1="120" x2="892" y2="119" stroke="#4a3018" stroke-width="1" opacity="0.45"/><line x1="886" y1="130" x2="892" y2="129" stroke="#4a3018" stroke-width="1" opacity="0.45"/><line x1="887" y1="140" x2="892" y2="139" stroke="#4a3018" stroke-width="1" opacity="0.4"/><line x1="888" y1="150" x2="893" y2="149" stroke="#4a3018" stroke-width="1" opacity="0.4"/><line x1="888" y1="160" x2="893" y2="159" stroke="#4a3018" stroke-width="1" opacity="0.35"/><line x1="889" y1="170" x2="893" y2="169" stroke="#4a3018" stroke-width="1" opacity="0.35"/><line x1="889" y1="180" x2="893" y2="179" stroke="#4a3018" stroke-width="1" opacity="0.3"/>
+              <path d="M888,50 Q855,35 832,48" stroke="#1a3a1e" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M888,50 Q860,28 840,32" stroke="#1e3e22" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M888,50 Q915,32 940,42" stroke="#1a3a1e" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M888,50 Q918,25 945,28" stroke="#1e3e22" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M888,50 Q883,25 878,12" stroke="#1a3a1e" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M888,50 Q895,22 900,8" stroke="#1e3e22" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M888,50 Q870,30 858,22" stroke="#152e18" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <ellipse cx="838" cy="42" rx="20" ry="9" fill="#142a18" opacity="0.75" transform="rotate(-12,838,42)"/><ellipse cx="938" cy="36" rx="20" ry="9" fill="#142a18" opacity="0.75" transform="rotate(10,938,36)"/><ellipse cx="880" cy="16" rx="15" ry="7" fill="#1a3218" opacity="0.65"/><ellipse cx="898" cy="12" rx="15" ry="7" fill="#1a3218" opacity="0.65"/><ellipse cx="860" cy="24" rx="12" ry="6" fill="#142a18" opacity="0.6"/>
               <circle cx="895" cy="194" r="2.5" fill="#0a1520" stroke="#1a2a3a" stroke-width="0.6"/>
-              <!-- Spotlight beam -->
-              <g id="palmSpot2" opacity="0">
-                <polygon points="895,192 884,80 894,74" fill="#f0e070" opacity="0.04"/>
-                <polygon points="895,192 886,95 894,88" fill="#ffe890" opacity="0.025"/>
-                <circle cx="895" cy="192" r="4" fill="#f0e070" opacity="0.45" filter="url(#glow)"/>
-                <ellipse cx="888" cy="48" rx="16" ry="14" fill="#2a5a28" opacity="0.15" filter="url(#glow)"/>
-                <ellipse cx="890" cy="62" rx="8" ry="12" fill="#f0c060" opacity="0.03" filter="url(#glowStrong)"/>
-              </g>
+              <g id="palmSpot2" opacity="0"><polygon points="895,192 884,80 894,74" fill="#f0e070" opacity="0.04"/><polygon points="895,192 886,95 894,88" fill="#ffe890" opacity="0.025"/><circle cx="895" cy="192" r="4" fill="#f0e070" opacity="0.45" filter="url(#glow)"/><ellipse cx="888" cy="48" rx="16" ry="14" fill="#2a5a28" opacity="0.15" filter="url(#glow)"/><ellipse cx="890" cy="62" rx="8" ry="12" fill="#f0c060" opacity="0.03" filter="url(#glowStrong)"/></g>
             </g>
-            <!-- Palm 3: far right, behind fountain -->
             <g>
-              <path d="M1010,195 Q1008,155 1005,120 Q1002,88 1008,62" stroke="#5a3c20" stroke-width="7" fill="none" stroke-linecap="round"/>
-              <path d="M1010,195 Q1008,155 1005,120 Q1002,88 1008,62" stroke="#6e4c2a" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.5"/>
-              <!-- Trunk rings -->
-              <line x1="1003" y1="80" x2="1010" y2="79" stroke="#4a3018" stroke-width="1" opacity="0.6"/>
-              <line x1="1003" y1="90" x2="1010" y2="89" stroke="#4a3018" stroke-width="1" opacity="0.55"/>
-              <line x1="1004" y1="100" x2="1010" y2="99" stroke="#4a3018" stroke-width="1" opacity="0.5"/>
-              <line x1="1004" y1="110" x2="1011" y2="109" stroke="#4a3018" stroke-width="1" opacity="0.5"/>
-              <line x1="1005" y1="120" x2="1011" y2="119" stroke="#4a3018" stroke-width="1" opacity="0.45"/>
-              <line x1="1006" y1="130" x2="1011" y2="129" stroke="#4a3018" stroke-width="1" opacity="0.45"/>
-              <line x1="1006" y1="140" x2="1012" y2="139" stroke="#4a3018" stroke-width="1" opacity="0.4"/>
-              <line x1="1007" y1="150" x2="1012" y2="149" stroke="#4a3018" stroke-width="1" opacity="0.4"/>
-              <line x1="1008" y1="160" x2="1012" y2="159" stroke="#4a3018" stroke-width="1" opacity="0.35"/>
-              <line x1="1009" y1="170" x2="1012" y2="169" stroke="#4a3018" stroke-width="1" opacity="0.35"/>
-              <line x1="1009" y1="180" x2="1012" y2="179" stroke="#4a3018" stroke-width="1" opacity="0.3"/>
-              <line x1="1010" y1="190" x2="1012" y2="189" stroke="#4a3018" stroke-width="1" opacity="0.3"/>
-              <!-- Fronds -->
-              <path d="M1008,62 Q980,48 960,58" stroke="#1a3a1e" stroke-width="2.8" fill="none" stroke-linecap="round"/>
-              <path d="M1008,62 Q985,40 968,45" stroke="#1e3e22" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-              <path d="M1008,62 Q1032,45 1052,54" stroke="#1a3a1e" stroke-width="2.8" fill="none" stroke-linecap="round"/>
-              <path d="M1008,62 Q1035,38 1055,40" stroke="#1e3e22" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-              <path d="M1008,62 Q1004,38 1000,25" stroke="#1a3a1e" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-              <path d="M1008,62 Q1014,35 1018,22" stroke="#1e3e22" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-              <!-- Frond leaf shapes -->
-              <ellipse cx="964" cy="52" rx="16" ry="8" fill="#142a18" opacity="0.7" transform="rotate(-10,964,52)"/>
-              <ellipse cx="1048" cy="48" rx="16" ry="8" fill="#142a18" opacity="0.7" transform="rotate(8,1048,48)"/>
-              <ellipse cx="1002" cy="28" rx="12" ry="6" fill="#1a3218" opacity="0.6"/>
-              <ellipse cx="1016" cy="25" rx="12" ry="6" fill="#1a3218" opacity="0.6"/>
-              <!-- Spotlight fixture -->
+              <path d="M1010,195 Q1008,155 1005,120 Q1002,88 1008,62" stroke="#5a3c20" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M1010,195 Q1008,155 1005,120 Q1002,88 1008,62" stroke="#6e4c2a" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+              <line x1="1003" y1="80" x2="1010" y2="79" stroke="#4a3018" stroke-width="1" opacity="0.6"/><line x1="1003" y1="90" x2="1010" y2="89" stroke="#4a3018" stroke-width="1" opacity="0.55"/><line x1="1004" y1="100" x2="1010" y2="99" stroke="#4a3018" stroke-width="1" opacity="0.5"/><line x1="1004" y1="110" x2="1011" y2="109" stroke="#4a3018" stroke-width="1" opacity="0.5"/><line x1="1005" y1="120" x2="1011" y2="119" stroke="#4a3018" stroke-width="1" opacity="0.45"/><line x1="1006" y1="130" x2="1011" y2="129" stroke="#4a3018" stroke-width="1" opacity="0.45"/><line x1="1006" y1="140" x2="1012" y2="139" stroke="#4a3018" stroke-width="1" opacity="0.4"/><line x1="1007" y1="150" x2="1012" y2="149" stroke="#4a3018" stroke-width="1" opacity="0.4"/><line x1="1008" y1="160" x2="1012" y2="159" stroke="#4a3018" stroke-width="1" opacity="0.35"/><line x1="1009" y1="170" x2="1012" y2="169" stroke="#4a3018" stroke-width="1" opacity="0.35"/><line x1="1009" y1="180" x2="1012" y2="179" stroke="#4a3018" stroke-width="1" opacity="0.3"/><line x1="1010" y1="190" x2="1012" y2="189" stroke="#4a3018" stroke-width="1" opacity="0.3"/>
+              <path d="M1008,62 Q980,48 960,58" stroke="#1a3a1e" stroke-width="2.8" fill="none" stroke-linecap="round"/><path d="M1008,62 Q985,40 968,45" stroke="#1e3e22" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M1008,62 Q1032,45 1052,54" stroke="#1a3a1e" stroke-width="2.8" fill="none" stroke-linecap="round"/><path d="M1008,62 Q1035,38 1055,40" stroke="#1e3e22" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M1008,62 Q1004,38 1000,25" stroke="#1a3a1e" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M1008,62 Q1014,35 1018,22" stroke="#1e3e22" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+              <ellipse cx="964" cy="52" rx="16" ry="8" fill="#142a18" opacity="0.7" transform="rotate(-10,964,52)"/><ellipse cx="1048" cy="48" rx="16" ry="8" fill="#142a18" opacity="0.7" transform="rotate(8,1048,48)"/><ellipse cx="1002" cy="28" rx="12" ry="6" fill="#1a3218" opacity="0.6"/><ellipse cx="1016" cy="25" rx="12" ry="6" fill="#1a3218" opacity="0.6"/>
               <circle cx="1015" cy="198" r="2.5" fill="#0a1520" stroke="#1a2a3a" stroke-width="0.6"/>
-              <!-- Spotlight beam -->
-              <g id="palmSpot3" opacity="0">
-                <polygon points="1015,196 1004,92 1014,86" fill="#f0e070" opacity="0.035"/>
-                <polygon points="1015,196 1006,105 1014,98" fill="#ffe890" opacity="0.02"/>
-                <circle cx="1015" cy="196" r="4" fill="#f0e070" opacity="0.4" filter="url(#glow)"/>
-                <ellipse cx="1008" cy="60" rx="14" ry="12" fill="#2a5a28" opacity="0.12" filter="url(#glow)"/>
-                <ellipse cx="1010" cy="72" rx="7" ry="10" fill="#f0c060" opacity="0.025" filter="url(#glowStrong)"/>
-              </g>
+              <g id="palmSpot3" opacity="0"><polygon points="1015,196 1004,92 1014,86" fill="#f0e070" opacity="0.035"/><polygon points="1015,196 1006,105 1014,98" fill="#ffe890" opacity="0.02"/><circle cx="1015" cy="196" r="4" fill="#f0e070" opacity="0.4" filter="url(#glow)"/><ellipse cx="1008" cy="60" rx="14" ry="12" fill="#2a5a28" opacity="0.12" filter="url(#glow)"/><ellipse cx="1010" cy="72" rx="7" ry="10" fill="#f0c060" opacity="0.025" filter="url(#glowStrong)"/></g>
             </g>
           </g>
-          <!-- LARGE OAK TREE — centered between front door and fountain -->
           <g id="oakTreeGroup">
-            <!-- Tree shadow on ground -->
             <ellipse cx="640" cy="355" rx="65" ry="20" fill="#050c14" opacity="0.45"/>
-            <!-- Trunk -->
             <rect x="632" y="290" width="16" height="58" rx="4" fill="#0e1820" stroke="#1a2a3a" stroke-width="1.2"/>
-            <!-- Trunk detail — bark texture -->
-            <line x1="636" y1="298" x2="636" y2="344" stroke="#162430" stroke-width="1" opacity="0.5"/>
-            <line x1="642" y1="295" x2="642" y2="346" stroke="#162430" stroke-width="0.8" opacity="0.4"/>
-            <line x1="646" y1="300" x2="646" y2="342" stroke="#162430" stroke-width="0.8" opacity="0.4"/>
-            <!-- Root flare -->
-            <path d="M632,340 Q628,345 624,348" stroke="#0e1820" stroke-width="3" fill="none" stroke-linecap="round"/>
-            <path d="M648,340 Q652,345 656,348" stroke="#0e1820" stroke-width="3" fill="none" stroke-linecap="round"/>
-            <!-- Main branches — thick, spreading wide like an oak -->
-            <path d="M640,300 Q625,285 595,278" stroke="#0e1820" stroke-width="5" fill="none" stroke-linecap="round"/>
-            <path d="M640,300 Q658,284 685,276" stroke="#0e1820" stroke-width="5" fill="none" stroke-linecap="round"/>
-            <path d="M640,295 Q628,270 610,258" stroke="#0e1820" stroke-width="4" fill="none" stroke-linecap="round"/>
-            <path d="M640,295 Q656,268 672,256" stroke="#0e1820" stroke-width="4" fill="none" stroke-linecap="round"/>
-            <path d="M640,292 Q638,268 635,252" stroke="#0e1820" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-            <!-- Secondary branches reaching out -->
-            <path d="M595,278 Q578,272 568,268" stroke="#0e1820" stroke-width="3" fill="none" stroke-linecap="round"/>
-            <path d="M685,276 Q700,270 712,266" stroke="#0e1820" stroke-width="3" fill="none" stroke-linecap="round"/>
-            <path d="M610,258 Q595,248 585,248" stroke="#0e1820" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-            <path d="M672,256 Q688,246 698,245" stroke="#0e1820" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-            <!-- Oak canopy — wide, flat-topped, irregular blobs using paths -->
-            <!-- Main canopy mass — wide and flat, not round -->
+            <line x1="636" y1="298" x2="636" y2="344" stroke="#162430" stroke-width="1" opacity="0.5"/><line x1="642" y1="295" x2="642" y2="346" stroke="#162430" stroke-width="0.8" opacity="0.4"/><line x1="646" y1="300" x2="646" y2="342" stroke="#162430" stroke-width="0.8" opacity="0.4"/>
+            <path d="M632,340 Q628,345 624,348" stroke="#0e1820" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M648,340 Q652,345 656,348" stroke="#0e1820" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M640,300 Q625,285 595,278" stroke="#0e1820" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M640,300 Q658,284 685,276" stroke="#0e1820" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M640,295 Q628,270 610,258" stroke="#0e1820" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M640,295 Q656,268 672,256" stroke="#0e1820" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M640,292 Q638,268 635,252" stroke="#0e1820" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <path d="M595,278 Q578,272 568,268" stroke="#0e1820" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M685,276 Q700,270 712,266" stroke="#0e1820" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M610,258 Q595,248 585,248" stroke="#0e1820" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M672,256 Q688,246 698,245" stroke="#0e1820" stroke-width="2.5" fill="none" stroke-linecap="round"/>
             <path d="M570,275 Q572,260 585,250 Q600,238 620,235 Q635,232 640,230 Q645,232 660,235 Q680,238 695,250 Q708,260 710,275 Q712,285 700,292 Q685,298 670,296 Q655,298 640,300 Q625,298 610,296 Q595,298 580,292 Q568,285 570,275 Z" fill="#081410" opacity="0.9"/>
-            <!-- Left canopy lobe — extends further left -->
             <path d="M558,280 Q555,268 565,258 Q575,248 590,248 Q598,252 595,262 Q592,272 585,280 Q575,288 565,286 Q558,284 558,280 Z" fill="#0a1812" opacity="0.85"/>
-            <!-- Right canopy lobe — extends further right -->
             <path d="M722,278 Q725,266 715,256 Q705,248 692,248 Q684,252 687,262 Q690,272 697,278 Q707,286 717,284 Q724,282 722,278 Z" fill="#0a1812" opacity="0.85"/>
-            <!-- Upper middle cluster — slightly higher, gives irregular top -->
             <path d="M605,252 Q610,238 625,232 Q635,228 640,226 Q645,228 655,232 Q670,238 675,252 Q678,262 665,268 Q650,272 640,270 Q630,272 615,268 Q602,262 605,252 Z" fill="#0c1a14" opacity="0.8"/>
-            <!-- Upper left bump -->
             <path d="M578,260 Q580,248 592,242 Q605,238 612,245 Q616,252 608,260 Q598,268 588,265 Q578,264 578,260 Z" fill="#081410" opacity="0.75"/>
-            <!-- Upper right bump -->
             <path d="M702,258 Q700,246 688,240 Q675,236 668,243 Q664,250 672,258 Q682,266 692,263 Q702,262 702,258 Z" fill="#081410" opacity="0.75"/>
-            <!-- Top tuft — small irregular bump at the very top -->
             <path d="M628,240 Q632,230 640,226 Q648,230 652,240 Q650,246 640,248 Q630,246 628,240 Z" fill="#0e1c16" opacity="0.7"/>
-            <!-- Far-reaching side extensions (gives the wide oak silhouette) -->
             <path d="M548,282 Q550,272 560,266 Q570,262 575,268 Q578,275 572,282 Q565,288 555,286 Q548,285 548,282 Z" fill="#081410" opacity="0.55"/>
             <path d="M732,280 Q730,270 720,264 Q710,260 705,266 Q702,273 708,280 Q715,286 725,284 Q732,283 732,280 Z" fill="#081410" opacity="0.55"/>
-            <!-- Canopy outline — irregular oak silhouette -->
             <path d="M548,282 Q550,272 560,266 Q570,256 585,248 Q600,238 620,235 Q635,230 640,226 Q645,230 660,235 Q680,238 695,248 Q710,256 720,264 Q730,270 732,280 Q734,290 720,296 Q700,302 680,298 Q660,302 640,304 Q620,302 600,298 Q580,302 560,296 Q546,290 548,282 Z" fill="none" stroke="#1a2e22" stroke-width="0.8" opacity="0.2"/>
-            <!-- ★ SPOTLIGHTS — 3 angled ground-mounted uplights ★ -->
-            <!-- Spot fixtures on ground -->
-            <circle cx="608" cy="342" r="3" fill="#0a1520" stroke="#1a2a3a" stroke-width="0.8"/>
-            <circle cx="640" cy="350" r="3" fill="#0a1520" stroke="#1a2a3a" stroke-width="0.8"/>
-            <circle cx="672" cy="342" r="3" fill="#0a1520" stroke="#1a2a3a" stroke-width="0.8"/>
-            <!-- Spot beams — angled inward toward the wide canopy -->
+            <circle cx="608" cy="342" r="3" fill="#0a1520" stroke="#1a2a3a" stroke-width="0.8"/><circle cx="640" cy="350" r="3" fill="#0a1520" stroke="#1a2a3a" stroke-width="0.8"/><circle cx="672" cy="342" r="3" fill="#0a1520" stroke="#1a2a3a" stroke-width="0.8"/>
             <g id="oakSpotBeams" opacity="0">
-              <!-- Left spot — aims up and right into the left canopy lobe -->
-              <polygon points="608,340 622,272 636,280" fill="#f0e070" opacity="0.05"/>
-              <polygon points="608,340 618,278 632,284" fill="#ffe890" opacity="0.03"/>
-              <circle cx="608" cy="340" r="5" fill="#f0e070" opacity="0.5" filter="url(#glow)"/>
-              <!-- Center spot — aims straight up into the canopy mass -->
-              <polygon points="640,348 630,262 650,262" fill="#f0e070" opacity="0.06"/>
-              <polygon points="640,348 633,270 647,270" fill="#ffe890" opacity="0.04"/>
-              <circle cx="640" cy="348" r="5" fill="#f0e070" opacity="0.55" filter="url(#glow)"/>
-              <!-- Right spot — aims up and left into the right canopy lobe -->
-              <polygon points="672,340 658,280 644,272" fill="#f0e070" opacity="0.05"/>
-              <polygon points="672,340 654,278 648,274" fill="#ffe890" opacity="0.03"/>
-              <circle cx="672" cy="340" r="5" fill="#f0e070" opacity="0.5" filter="url(#glow)"/>
+              <polygon points="608,340 622,272 636,280" fill="#f0e070" opacity="0.05"/><polygon points="608,340 618,278 632,284" fill="#ffe890" opacity="0.03"/><circle cx="608" cy="340" r="5" fill="#f0e070" opacity="0.5" filter="url(#glow)"/>
+              <polygon points="640,348 630,262 650,262" fill="#f0e070" opacity="0.06"/><polygon points="640,348 633,270 647,270" fill="#ffe890" opacity="0.04"/><circle cx="640" cy="348" r="5" fill="#f0e070" opacity="0.55" filter="url(#glow)"/>
+              <polygon points="672,340 658,280 644,272" fill="#f0e070" opacity="0.05"/><polygon points="672,340 654,278 648,274" fill="#ffe890" opacity="0.03"/><circle cx="672" cy="340" r="5" fill="#f0e070" opacity="0.5" filter="url(#glow)"/>
             </g>
-            <!-- Canopy lit from below — spread across the wide oak canopy -->
             <g id="oakCanopyLit" opacity="0">
-              <!-- Light pools spread across the wide canopy -->
-              <ellipse cx="610" cy="275" rx="22" ry="12" fill="#4a6a30" opacity="0.18" filter="url(#glow)"/>
-              <ellipse cx="640" cy="265" rx="24" ry="14" fill="#4a6a30" opacity="0.22" filter="url(#glow)"/>
-              <ellipse cx="670" cy="273" rx="22" ry="12" fill="#4a6a30" opacity="0.18" filter="url(#glow)"/>
-              <!-- Amber trunk splash -->
+              <ellipse cx="610" cy="275" rx="22" ry="12" fill="#4a6a30" opacity="0.18" filter="url(#glow)"/><ellipse cx="640" cy="265" rx="24" ry="14" fill="#4a6a30" opacity="0.22" filter="url(#glow)"/><ellipse cx="670" cy="273" rx="22" ry="12" fill="#4a6a30" opacity="0.18" filter="url(#glow)"/>
               <ellipse cx="640" cy="298" rx="12" ry="16" fill="#f0c060" opacity="0.04" filter="url(#glowStrong)"/>
-              <!-- Wide canopy wash -->
               <ellipse cx="640" cy="270" rx="70" ry="28" fill="#3a5a28" opacity="0.08" filter="url(#softGlow)"/>
             </g>
           </g>
           <g id="fountainGroup" transform="translate(-60,-30)">
-            <!-- Lake body -->
-            <ellipse cx="960" cy="330" rx="145" ry="73" fill="none" stroke="#2a4060" stroke-width="3" opacity="0.3"/>
-            <ellipse cx="960" cy="330" rx="140" ry="70" fill="#041428"/>
+            <ellipse cx="960" cy="330" rx="145" ry="73" fill="none" stroke="#2a4060" stroke-width="3" opacity="0.3"/><ellipse cx="960" cy="330" rx="140" ry="70" fill="#041428"/>
             <g clip-path="url(#lakeClip)">
-              <ellipse cx="960" cy="330" rx="140" ry="70" fill="url(#lakeWater)"/>
-              <ellipse cx="960" cy="330" rx="140" ry="70" fill="url(#lakeGlow)"/>
-              <!-- Lake caustics -->
-              <g id="lakeCaustics" opacity="0">
-                <ellipse cx="920" cy="315" rx="35" ry="14" fill="#5ba4f5" opacity="0.08" filter="url(#waterRipple)"/>
-                <ellipse cx="1000" cy="345" rx="40" ry="16" fill="#2f80ed" opacity="0.06" filter="url(#waterRipple)"/>
-                <ellipse cx="940" cy="355" rx="30" ry="12" fill="#5ba4f5" opacity="0.07" filter="url(#waterRipple)"/>
-                <ellipse cx="1020" cy="310" rx="25" ry="10" fill="#2f80ed" opacity="0.05" filter="url(#waterRipple)"/>
-              </g>
-              <!-- Lake ripples -->
-              <g id="lakeRipples" opacity="0">
-                <ellipse cx="960" cy="305" rx="100" ry="12" fill="none" stroke="#5ba4f5" stroke-width="0.6" opacity="0.3"/>
-                <ellipse cx="960" cy="325" rx="110" ry="14" fill="none" stroke="#5ba4f5" stroke-width="0.5" opacity="0.25"/>
-                <ellipse cx="960" cy="345" rx="105" ry="13" fill="none" stroke="#5ba4f5" stroke-width="0.5" opacity="0.2"/>
-                <ellipse cx="960" cy="360" rx="90" ry="10" fill="none" stroke="#5ba4f5" stroke-width="0.4" opacity="0.15"/>
-              </g>
+              <ellipse cx="960" cy="330" rx="140" ry="70" fill="url(#lakeWater)"/><ellipse cx="960" cy="330" rx="140" ry="70" fill="url(#lakeGlow)"/>
+              <g id="lakeCaustics" opacity="0"><ellipse cx="920" cy="315" rx="35" ry="14" fill="#5ba4f5" opacity="0.08" filter="url(#waterRipple)"/><ellipse cx="1000" cy="345" rx="40" ry="16" fill="#2f80ed" opacity="0.06" filter="url(#waterRipple)"/><ellipse cx="940" cy="355" rx="30" ry="12" fill="#5ba4f5" opacity="0.07" filter="url(#waterRipple)"/><ellipse cx="1020" cy="310" rx="25" ry="10" fill="#2f80ed" opacity="0.05" filter="url(#waterRipple)"/></g>
+              <g id="lakeRipples" opacity="0"><ellipse cx="960" cy="305" rx="100" ry="12" fill="none" stroke="#5ba4f5" stroke-width="0.6" opacity="0.3"/><ellipse cx="960" cy="325" rx="110" ry="14" fill="none" stroke="#5ba4f5" stroke-width="0.5" opacity="0.25"/><ellipse cx="960" cy="345" rx="105" ry="13" fill="none" stroke="#5ba4f5" stroke-width="0.5" opacity="0.2"/><ellipse cx="960" cy="360" rx="90" ry="10" fill="none" stroke="#5ba4f5" stroke-width="0.4" opacity="0.15"/></g>
             </g>
-            <!-- Lake shore edge highlight -->
             <ellipse cx="960" cy="330" rx="140" ry="70" fill="none" stroke="#1a3a55" stroke-width="1.5" opacity="0.3"/>
-            <!-- Natural grass/reeds around lake (positions relative to pre-translate coords, translate shifts them -180,-60) -->
-            <ellipse cx="850" cy="290" rx="10" ry="14" fill="#0a1a1e" opacity="0.35"/>
-            <ellipse cx="1080" cy="310" rx="10" ry="15" fill="#0a1a1e" opacity="0.3"/>
-            <ellipse cx="870" cy="370" rx="8" ry="12" fill="#0a1a1e" opacity="0.25"/>
-            <!-- Fountain pedestal in lake center -->
-            <ellipse cx="960" cy="318" rx="22" ry="8" fill="#1a2e48" stroke="#2f80ed" stroke-width="1" opacity="0.6"/>
-            <rect x="948" y="306" width="24" height="14" rx="4" fill="#121e30" stroke="#2f80ed" stroke-width="0.6" opacity="0.5"/>
-            <rect x="954" y="300" width="12" height="8" rx="2" fill="#1a2e48" stroke="#5ba4f5" stroke-width="0.5" opacity="0.4"/>
-            <!-- Water glow on lake surface -->
-            <ellipse id="waterGlowEl" cx="960" cy="316" rx="100" ry="30" fill="#2f80ed" opacity="0" filter="url(#waterGlowF)"/>
-            <ellipse id="waterGlowInner" cx="960" cy="312" rx="50" ry="16" fill="#00d4ff" opacity="0" filter="url(#waterGlowF)"/>
-            <!-- LED group around fountain base -->
-            <g id="ftnLedGroup" opacity="0">
-              <ellipse cx="960" cy="304" rx="28" ry="8" fill="#2f80ed" opacity="0.2" filter="url(#waterGlowF)"/>
-              <circle cx="930" cy="315" r="3" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/>
-              <circle cx="942" cy="310" r="3" fill="#2f80ed" opacity="0.85" filter="url(#glow)"/>
-              <circle cx="954" cy="307" r="3" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/>
-              <circle cx="966" cy="307" r="3" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/>
-              <circle cx="978" cy="310" r="3" fill="#2f80ed" opacity="0.85" filter="url(#glow)"/>
-              <circle cx="990" cy="315" r="3" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/>
-              <ellipse cx="960" cy="320" rx="50" ry="14" fill="#2f80ed" opacity="0.1" filter="url(#waterGlowF)"/>
-            </g>
-            <!-- ★ ENHANCED FOUNTAIN SPRAY (from fountains.html) ★ -->
+            <ellipse cx="850" cy="290" rx="10" ry="14" fill="#0a1a1e" opacity="0.35"/><ellipse cx="1080" cy="310" rx="10" ry="15" fill="#0a1a1e" opacity="0.3"/><ellipse cx="870" cy="370" rx="8" ry="12" fill="#0a1a1e" opacity="0.25"/>
+            <ellipse cx="960" cy="318" rx="22" ry="8" fill="#1a2e48" stroke="#2f80ed" stroke-width="1" opacity="0.6"/><rect x="948" y="306" width="24" height="14" rx="4" fill="#121e30" stroke="#2f80ed" stroke-width="0.6" opacity="0.5"/><rect x="954" y="300" width="12" height="8" rx="2" fill="#1a2e48" stroke="#5ba4f5" stroke-width="0.5" opacity="0.4"/>
+            <ellipse id="waterGlowEl" cx="960" cy="316" rx="100" ry="30" fill="#2f80ed" opacity="0" filter="url(#waterGlowF)"/><ellipse id="waterGlowInner" cx="960" cy="312" rx="50" ry="16" fill="#00d4ff" opacity="0" filter="url(#waterGlowF)"/>
+            <g id="ftnLedGroup" opacity="0"><ellipse cx="960" cy="304" rx="28" ry="8" fill="#2f80ed" opacity="0.2" filter="url(#waterGlowF)"/><circle cx="930" cy="315" r="3" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/><circle cx="942" cy="310" r="3" fill="#2f80ed" opacity="0.85" filter="url(#glow)"/><circle cx="954" cy="307" r="3" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/><circle cx="966" cy="307" r="3" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/><circle cx="978" cy="310" r="3" fill="#2f80ed" opacity="0.85" filter="url(#glow)"/><circle cx="990" cy="315" r="3" fill="#00d4ff" opacity="0.9" filter="url(#glow)"/><ellipse cx="960" cy="320" rx="50" ry="14" fill="#2f80ed" opacity="0.1" filter="url(#waterGlowF)"/></g>
             <g id="fountainSpray" opacity="0">
-              <!-- Mist haze -->
               <ellipse cx="960" cy="230" rx="80" ry="60" fill="url(#mistGrad)" opacity="0.7"/>
-              <!-- Center jet — tall and bold -->
-              <line id="centerJet" x1="960" y1="305" x2="960" y2="190" stroke="url(#sprayGrad)" stroke-width="6" stroke-linecap="round" opacity="0.9"/>
-              <line x1="960" y1="305" x2="960" y2="195" stroke="#b8e4ff" stroke-width="2.5" stroke-linecap="round" opacity="0.3"/>
-              <line x1="960" y1="305" x2="960" y2="200" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" opacity="0.2"/>
+              <line id="centerJet" x1="960" y1="305" x2="960" y2="190" stroke="url(#sprayGrad)" stroke-width="6" stroke-linecap="round" opacity="0.9"/><line x1="960" y1="305" x2="960" y2="195" stroke="#b8e4ff" stroke-width="2.5" stroke-linecap="round" opacity="0.3"/><line x1="960" y1="305" x2="960" y2="200" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" opacity="0.2"/>
               <ellipse cx="960" cy="192" rx="12" ry="6" fill="#00d4ff" opacity="0.1" filter="url(#sprayBlur)"/>
-              <!-- Splash particles at top -->
-              <g id="splashCenter" opacity="0.7">
-                <circle cx="952" cy="198" r="2" fill="#00d4ff" opacity="0.65"/><circle cx="968" cy="202" r="1.8" fill="#5ba4f5" opacity="0.55"/>
-                <circle cx="948" cy="208" r="1.6" fill="#00d4ff" opacity="0.5"/><circle cx="972" cy="205" r="1.8" fill="#5ba4f5" opacity="0.45"/>
-                <circle cx="955" cy="192" r="1.5" fill="white" opacity="0.35"/><circle cx="965" cy="190" r="1.2" fill="white" opacity="0.3"/>
-                <circle cx="944" cy="218" r="1.2" fill="#00d4ff" opacity="0.35"/><circle cx="976" cy="215" r="1.2" fill="#00d4ff" opacity="0.35"/>
-                <circle cx="938" cy="230" r="1" fill="#5ba4f5" opacity="0.25"/><circle cx="982" cy="226" r="1" fill="#5ba4f5" opacity="0.25"/>
-              </g>
-              <!-- Left fan spray -->
-              <path d="M960,305 Q930,240 900,272" stroke="url(#sprayGradSide)" stroke-width="4.5" fill="none" stroke-linecap="round" opacity="0.65"/>
-              <path d="M960,305 Q920,225 880,260" stroke="url(#sprayGradSide)" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.5"/>
-              <path d="M960,305 Q910,210 860,250" stroke="url(#sprayGradSide)" stroke-width="2.8" fill="none" stroke-linecap="round" opacity="0.35"/>
-              <path d="M960,305 Q900,200 845,242" stroke="url(#sprayGradSide)" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.2"/>
-              <!-- Right fan spray -->
-              <path d="M960,305 Q990,240 1020,272" stroke="url(#sprayGradSide)" stroke-width="4.5" fill="none" stroke-linecap="round" opacity="0.65"/>
-              <path d="M960,305 Q1000,225 1040,260" stroke="url(#sprayGradSide)" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.5"/>
-              <path d="M960,305 Q1010,210 1060,250" stroke="url(#sprayGradSide)" stroke-width="2.8" fill="none" stroke-linecap="round" opacity="0.35"/>
-              <path d="M960,305 Q1020,200 1075,242" stroke="url(#sprayGradSide)" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.2"/>
-              <!-- Droplets -->
-              <g id="ftnDroplets">
-                <circle cx="905" cy="275" r="1.6" fill="#00d4ff" opacity="0.45"/><circle cx="1015" cy="275" r="1.6" fill="#00d4ff" opacity="0.45"/>
-                <circle cx="885" cy="264" r="1.4" fill="#2f80ed" opacity="0.35"/><circle cx="1035" cy="264" r="1.4" fill="#2f80ed" opacity="0.35"/>
-                <circle cx="865" cy="255" r="1.2" fill="#2f80ed" opacity="0.25"/><circle cx="1055" cy="255" r="1.2" fill="#2f80ed" opacity="0.25"/>
-                <circle cx="920" cy="290" r="1.2" fill="#5ba4f5" opacity="0.25"/><circle cx="1000" cy="290" r="1.2" fill="#5ba4f5" opacity="0.25"/>
-              </g>
-              <!-- Ripple rings -->
-              <ellipse id="ftnRipple1" cx="960" cy="316" rx="35" ry="9" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.35"/>
-              <ellipse id="ftnRipple2" cx="960" cy="319" rx="60" ry="15" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/>
-              <ellipse id="ftnRipple3" cx="960" cy="322" rx="90" ry="22" fill="none" stroke="#1a4a7a" stroke-width="0.6" opacity="0.15"/>
-              <ellipse id="ftnRipple4" cx="960" cy="325" rx="120" ry="30" fill="none" stroke="#1a4a7a" stroke-width="0.4" opacity="0.08"/>
+              <g id="splashCenter" opacity="0.7"><circle cx="952" cy="198" r="2" fill="#00d4ff" opacity="0.65"/><circle cx="968" cy="202" r="1.8" fill="#5ba4f5" opacity="0.55"/><circle cx="948" cy="208" r="1.6" fill="#00d4ff" opacity="0.5"/><circle cx="972" cy="205" r="1.8" fill="#5ba4f5" opacity="0.45"/><circle cx="955" cy="192" r="1.5" fill="white" opacity="0.35"/><circle cx="965" cy="190" r="1.2" fill="white" opacity="0.3"/><circle cx="944" cy="218" r="1.2" fill="#00d4ff" opacity="0.35"/><circle cx="976" cy="215" r="1.2" fill="#00d4ff" opacity="0.35"/><circle cx="938" cy="230" r="1" fill="#5ba4f5" opacity="0.25"/><circle cx="982" cy="226" r="1" fill="#5ba4f5" opacity="0.25"/></g>
+              <path d="M960,305 Q930,240 900,272" stroke="url(#sprayGradSide)" stroke-width="4.5" fill="none" stroke-linecap="round" opacity="0.65"/><path d="M960,305 Q920,225 880,260" stroke="url(#sprayGradSide)" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.5"/><path d="M960,305 Q910,210 860,250" stroke="url(#sprayGradSide)" stroke-width="2.8" fill="none" stroke-linecap="round" opacity="0.35"/><path d="M960,305 Q900,200 845,242" stroke="url(#sprayGradSide)" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.2"/>
+              <path d="M960,305 Q990,240 1020,272" stroke="url(#sprayGradSide)" stroke-width="4.5" fill="none" stroke-linecap="round" opacity="0.65"/><path d="M960,305 Q1000,225 1040,260" stroke="url(#sprayGradSide)" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.5"/><path d="M960,305 Q1010,210 1060,250" stroke="url(#sprayGradSide)" stroke-width="2.8" fill="none" stroke-linecap="round" opacity="0.35"/><path d="M960,305 Q1020,200 1075,242" stroke="url(#sprayGradSide)" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.2"/>
+              <g id="ftnDroplets"><circle cx="905" cy="275" r="1.6" fill="#00d4ff" opacity="0.45"/><circle cx="1015" cy="275" r="1.6" fill="#00d4ff" opacity="0.45"/><circle cx="885" cy="264" r="1.4" fill="#2f80ed" opacity="0.35"/><circle cx="1035" cy="264" r="1.4" fill="#2f80ed" opacity="0.35"/><circle cx="865" cy="255" r="1.2" fill="#2f80ed" opacity="0.25"/><circle cx="1055" cy="255" r="1.2" fill="#2f80ed" opacity="0.25"/><circle cx="920" cy="290" r="1.2" fill="#5ba4f5" opacity="0.25"/><circle cx="1000" cy="290" r="1.2" fill="#5ba4f5" opacity="0.25"/></g>
+              <ellipse id="ftnRipple1" cx="960" cy="316" rx="35" ry="9" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.35"/><ellipse id="ftnRipple2" cx="960" cy="319" rx="60" ry="15" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.25"/><ellipse id="ftnRipple3" cx="960" cy="322" rx="90" ry="22" fill="none" stroke="#1a4a7a" stroke-width="0.6" opacity="0.15"/><ellipse id="ftnRipple4" cx="960" cy="325" rx="120" ry="30" fill="none" stroke="#1a4a7a" stroke-width="0.4" opacity="0.08"/>
             </g>
           </g>
           <g id="landscapeLights">
-            <!-- Row of lights along the near (bottom) edge of the driveway, gate to house -->
-            <!-- Light 1: x=150, just past the gate -->
             <line x1="150" y1="345" x2="150" y2="332" stroke="#2a4060" stroke-width="1.5"/><circle id="lLight1" cx="150" cy="330" r="3" fill="#f0c060" opacity="0" filter="url(#glow)"/>
-            <!-- Light 2: x=210 -->
             <line x1="210" y1="338" x2="210" y2="325" stroke="#2a4060" stroke-width="1.5"/><circle id="lLight2" cx="210" cy="323" r="3" fill="#f0c060" opacity="0" filter="url(#glow)"/>
-            <!-- Light 3: x=270 -->
             <line x1="270" y1="328" x2="270" y2="315" stroke="#2a4060" stroke-width="1.5"/><circle id="lLight3" cx="270" cy="313" r="3" fill="#f0c060" opacity="0" filter="url(#glow)"/>
-            <!-- Light 4: x=330, near where car parks -->
             <line x1="330" y1="318" x2="330" y2="305" stroke="#2a4060" stroke-width="1.5"/><circle id="lLight4" cx="330" cy="303" r="3" fill="#f0c060" opacity="0" filter="url(#glow)"/>
-            <!-- Tree: off to the side, below driveway near the gate area -->
             <ellipse cx="165" cy="360" rx="18" ry="24" fill="#0a1a20" opacity="0.45"/><rect x="163" y="378" width="4" height="14" fill="#0d1a22" opacity="0.35"/>
           </g>
           <path d="M0,0 L0,18 M0,0 L18,0" stroke="#2f80ed" stroke-width="2" opacity="0.18" fill="none"/><path d="M1100,0 L1100,18 M1100,0 L1082,0" stroke="#2f80ed" stroke-width="2" opacity="0.18" fill="none"/><path d="M0,440 L0,422 M0,440 L18,440" stroke="#2f80ed" stroke-width="2" opacity="0.18" fill="none"/><path d="M1100,440 L1100,422 M1100,440 L1082,440" stroke="#2f80ed" stroke-width="2" opacity="0.18" fill="none"/>
@@ -822,9 +568,29 @@
   </section>
 
   <section class="app-graveyard"><div class="app-graveyard-inner">
-    <div class="graveyard-apps reveal"><div class="ghost-app">🚪</div><div class="ghost-app">💡</div><div class="ghost-app">📹</div><div class="ghost-app">🌡️</div><div class="ghost-app">🔒</div><div class="ghost-app">🌊</div><div class="ghost-app">⛲</div><div class="ghost-app">🔊</div><div class="ghost-app">🌿</div><div class="ghost-app">☀️</div><div class="ghost-app">🏠</div><div class="ghost-app">📱</div></div>
-    <div class="graveyard-label reveal">Sound familiar?</div>
-    <h2 class="graveyard-title reveal">Twelve apps. Six remotes.<br/>Half of it barely works.</h2>
+    <div class="animation-stage phase-chaos">
+      <svg class="confusion-lines" viewBox="0 0 620 360" xmlns="http://www.w3.org/2000/svg">
+        <line x1="30" y1="30" x2="250" y2="50" stroke="rgba(239,68,68,0.1)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="370" y1="25" x2="560" y2="45" stroke="rgba(239,68,68,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="20" y1="120" x2="140" y2="160" stroke="rgba(239,68,68,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="480" y1="110" x2="580" y2="170" stroke="rgba(239,68,68,0.07)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="50" y1="260" x2="240" y2="280" stroke="rgba(239,68,68,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="400" y1="270" x2="560" y2="250" stroke="rgba(239,68,68,0.07)" stroke-width="1" stroke-dasharray="4 4"/>
+      </svg>
+      <div class="chaos-label"><div class="cl-main">12 apps. 6 remotes.<br/>Nothing works.</div><div class="cl-sub">Sound familiar?</div></div>
+      <div class="app-icon ai1">🚪<span class="app-label">LiftMaster</span></div>
+      <div class="app-icon ai2">🌊<span class="app-label">Pentair</span></div>
+      <div class="app-icon ai3">💡<span class="app-label">Lutron</span></div>
+      <div class="app-icon ai4">📹<span class="app-label">Ring</span></div>
+      <div class="app-icon ai5">🔊<span class="app-label">Sonos</span></div>
+      <div class="app-icon ai6">🌡️<span class="app-label">Nest</span></div>
+      <div class="app-icon ai7">⛲<span class="app-label">Fountain Co</span></div>
+      <div class="app-icon ai8">🔒<span class="app-label">Yale</span></div>
+      <div class="app-icon ai9">🌿<span class="app-label">Rachio</span></div>
+      <div class="app-icon ai10">☀️<span class="app-label">Hunter</span></div>
+      <div class="app-icon ai11">🏠<span class="app-label">SmartThings</span></div>
+      <div class="app-icon ai12">🔔<span class="app-label">Doorbell</span></div>
+    </div>
     <p class="graveyard-sub reveal">Your gate has one app. Your pool has another. Your lights use a third. Somebody installed "smart" equipment years ago and now nobody remembers how it works — or why it stopped. You've got systems from three different companies that were never meant to talk to each other. You don't need new stuff. You need someone who can make what you have actually work together.</p>
   </div></section>
 
@@ -920,69 +686,37 @@
     function clamp(v,lo,hi){return v<lo?lo:v>hi?hi:v}
     function ease(t){return t*t*(3-2*t)}
     function frac(t,a,b){return clamp((t-a)/(b-a),0,1)}
-
-    // Animation phases (20s cycle):
-    // 0.00-0.10: dark estate, lights start coming on
-    // 0.10-0.22: windows light up, porch/landscape lights on
-    // 0.15-0.24: car approaches from left (headlights visible)
-    // 0.24-0.27: car stops at gate, LED amber→green
-    // 0.27-0.33: gate opens
-    // 0.33-0.40: car drives through gate, up driveway toward house
-    // 0.40-0.46: gate closes, car parks
-    // 0.42-0.48: toast "Gate: Vehicle Arrived"
-    // 0.48-0.55: fountain turns on
-    // 0.55-0.72: everything lit — pool, fountain, lights, full estate alive
-    // 0.72-0.80: toast "Pool Night Activated"
-    // 0.80-0.90: everything running beautifully
-    // 0.90-0.97: wind down — lights fade, fountain off, car fades
-    // 0.97-1.00: reset
-
     function tick(ts){
       if(startTs===null)startTs=ts;
       var f=((ts-startTs)%CYCLE)/CYCLE;
-
-      // Pool caustics (move always, but opacity controlled)
       var pcx=Math.sin(ts*0.0007)*10,pcy=Math.cos(ts*0.0005)*6;
       poolCaustics.setAttribute('transform','translate('+pcx+','+pcy+')');
       poolRipples.setAttribute('transform','translate(0,'+Math.sin(ts*0.0009)*2.5+')');
-
-      // Pool lights — OFF until gate opens at 0.27, then fade on
       var poolLightOn=0;
       if(f>=0.27&&f<0.35)poolLightOn=ease(frac(f,0.27,0.35));
       else if(f>=0.35&&f<0.90)poolLightOn=1;
       else if(f>=0.90&&f<0.96)poolLightOn=1-ease(frac(f,0.90,0.96));
       var poolShimmer=poolLightOn*(0.5+0.2*Math.sin(ts*0.003));
       document.getElementById('poolLightsGroup').setAttribute('opacity',String(poolShimmer));
-      // Pool caustics visibility tied to pool lights
       poolCaustics.setAttribute('opacity',String(0.25*poolLightOn));
       poolRipples.setAttribute('opacity',String(0.25*poolLightOn));
-      // Green glow overlay on water — makes pool look illuminated when on
       poolGlowOverlay.setAttribute('opacity',String(poolLightOn));
-
-      // Lake caustics (move always, but opacity controlled)
       var lcx=Math.sin(ts*0.0005)*12,lcy=Math.cos(ts*0.0004)*7;
       lakeCaustics.setAttribute('transform','translate('+lcx+','+lcy+')');
       var lry=Math.sin(ts*0.0006)*3;
       lakeRipples.setAttribute('transform','translate(0,'+lry+')');
-      // Lake caustics dim until fountain comes on at 0.27
       var lakeVis=0;
       if(f>=0.27&&f<0.35)lakeVis=ease(frac(f,0.27,0.35))*0.2;
       else if(f>=0.35&&f<0.90)lakeVis=0.2+0.05*(fOn>0.5?1:0);
       else if(f>=0.90)lakeVis=0.25*(1-ease(frac(f,0.90,0.96)));
       lakeCaustics.setAttribute('opacity',String(lakeVis));
       lakeRipples.setAttribute('opacity',String(lakeVis));
-
-      // ── PILLAR LIGHTS — come on as car approaches (0.18), before gate opens ──
       var plOn=0;
       if(f>=0.18&&f<0.92)plOn=ease(frac(f,0.18,0.23));
       if(f>=0.92)plOn=1-ease(frac(f,0.92,0.97));
       var plF=0.6+0.15*Math.sin(ts*0.0035);
       pillarLight1.setAttribute('opacity',String(plOn*plF));
       pillarLight2.setAttribute('opacity',String(plOn*plF));
-
-      // ── ALL OTHER LIGHTS come on as gate opens (0.27+) ──
-
-      // House windows — staggered starting at 0.27
       var winTargets=[0.27,0.29,0.31,0.33,0.35,0.37];
       for(var w=0;w<6;w++){
         var wOn=0;
@@ -995,16 +729,12 @@
       if(f>=0.30&&f<0.90)ambOn=ease(frac(f,0.30,0.38))*0.06;
       if(f>=0.90)ambOn=0.06*(1-ease(frac(f,0.90,0.96)));
       windowAmbient.setAttribute('opacity',String(ambOn));
-
-      // Porch lights — come on at 0.28
       var pOn=0;
       if(f>=0.28&&f<0.90)pOn=ease(frac(f,0.28,0.33));
       if(f>=0.90)pOn=1-ease(frac(f,0.90,0.95));
       var pF=0.7+0.15*Math.sin(ts*0.004);
       porchLight.setAttribute('opacity',String(pOn*pF));
       porchLight2.setAttribute('opacity',String(pOn*pF));
-
-      // Landscape lights — staggered starting at 0.29
       var llT=[0.29,0.32,0.35,0.38];
       for(var l=0;l<4;l++){
         var lOn=0;
@@ -1012,8 +742,6 @@
         if(f>=0.92)lOn=1-ease(frac(f,0.92,0.97));
         lLights[l].setAttribute('opacity',String(lOn*(0.65+0.15*Math.sin(ts*0.003+l*2))));
       }
-
-      // Oak tree spotlights — 3 ground spots shining up at the canopy
       var oakSpots=document.getElementById('oakSpotBeams');
       var oakCanopyLit=document.getElementById('oakCanopyLit');
       if(oakSpots&&oakCanopyLit){
@@ -1024,8 +752,6 @@
         oakSpots.setAttribute('opacity',String(oakOn));
         oakCanopyLit.setAttribute('opacity',String(oakOn*(0.8+0.2*Math.sin(ts*0.002))));
       }
-
-      // Palm tree spotlights — come on with other lights at 0.27
       var ps1=document.getElementById('palmSpot1'),ps2=document.getElementById('palmSpot2'),ps3=document.getElementById('palmSpot3');
       if(ps1&&ps2&&ps3){
         var palmOn=0;
@@ -1036,20 +762,7 @@
         ps2.setAttribute('opacity',String(palmOn*(0.85+0.15*Math.sin(ts*0.0032+1))));
         ps3.setAttribute('opacity',String(palmOn*(0.85+0.15*Math.sin(ts*0.003+2))));
       }
-
-      // ── CAR ANIMATION ──
-      // Car drawn centered at (0,0). Translate places car center on driveway.
-      //
-      // Exact driveway path from SVG (widened):
-      // Top edge:    M0,305  Q80,305  120,298  Q200,286  320,270  Q400,260  480,255
-      // Bottom edge: L480,295 Q400,300 320,310  Q200,325  120,335  Q80,340   0,340
-      //
-      // Centerline (avg of top & bottom):
-      //   x=0   → (305+340)/2 = 322.5
-      //   x=120 → (298+335)/2 = 316.5
-      //   x=320 → (270+310)/2 = 290
-      //   x=480 → (255+295)/2 = 275
-
+      var carOp=0;
       function driveCenterY(x){
         if(x<=0) return 322;
         if(x<=120) return lerp(322,316,x/120);
@@ -1057,33 +770,25 @@
         if(x<=480) return lerp(290,275,(x-320)/160);
         return 275;
       }
-
-      var carOp=0;
       if(f>=0.15&&f<0.24){
-        // Approaching gate — realistic deceleration (fast approach, gradual braking)
         var ct=frac(f,0.15,0.24);
-        // Deceleration curve: starts fast, slows down as it approaches the gate
-        // Using 1-(1-t)^3 which gives rapid initial movement, gentle stop
         var decel=1-Math.pow(1-ct,3);
-        var cx=lerp(-60,52,decel); // car front (at +42) reaches x=94, just before gate bars at x=95
+        var cx=lerp(-60,52,decel);
         var cy=driveCenterY(Math.max(cx,0));
         carGroup.setAttribute('transform','translate('+cx+','+cy+')');
         carOp=f<0.17?ease(frac(f,0.15,0.17)):1;
       }else if(f>=0.24&&f<0.33){
-        // Waiting at gate while it opens
         var cy=driveCenterY(52);
         carGroup.setAttribute('transform','translate(52,'+cy+')');
         carOp=1;
       }else if(f>=0.33&&f<0.50){
-        // Driving through open gate and along driveway, stopping in front of house
         var ct2=ease(frac(f,0.33,0.50));
-        var cx=lerp(52,320,ct2); // stop at x=320, in front of house (house starts at x=360)
+        var cx=lerp(52,320,ct2);
         var cy=driveCenterY(cx);
         var sc=lerp(1,0.8,ct2);
         carGroup.setAttribute('transform','translate('+cx+','+cy+') scale('+sc+')');
         carOp=1;
       }else if(f>=0.50&&f<0.90){
-        // Parked in front of house
         var cy=driveCenterY(320);
         var fadeOp=f<0.87?1:(1-ease(frac(f,0.87,0.90)));
         carGroup.setAttribute('transform','translate(320,'+cy+') scale(0.8)');
@@ -1092,39 +797,26 @@
         carOp=0;
       }
       carGroup.setAttribute('opacity',String(carOp));
-
-      // ── GATE ANIMATION (triggered by car arrival) ──
-      // Gate spans vertically across driveway. Bottom panel (gateLeft) retracts DOWN toward bottom pillar.
-      // Top panel (gateRight) retracts UP toward top pillar.
-      // Bottom panel: y=298 to y=336, hinges at y=336 (pillar edge)
-      // Top panel: y=260 to y=298, hinges at y=260 (pillar edge)
       var HINGE_BOT=336, HINGE_TOP=260;
       function setGate(sx){
-        // sx: 1=closed, 0=open
-        // Bottom half scales from bottom (hinge at y=336)
         gateLeft.setAttribute('transform','translate(0,'+HINGE_BOT+') scale(1,'+sx+') translate(0,'+(-HINGE_BOT)+')');
-        // Top half scales from top (hinge at y=260)
         gateRight.setAttribute('transform','translate(0,'+HINGE_TOP+') scale(1,'+sx+') translate(0,'+(-HINGE_TOP)+')');
       }
       var gateSx=1;
       if(f>=0.24&&f<0.27){
-        // LED amber→green
         var gf=frac(f,0.24,0.27);
         gateLed.setAttribute('fill',gf<0.5?'#dcaa14':'#4ade80');
         gateLed.setAttribute('opacity','0.9');
         gateSx=1;
       }else if(f>=0.27&&f<0.33){
-        // Gate opens
         gateLed.setAttribute('fill','#4ade80');
         gateLed.setAttribute('opacity','0.9');
         gateSx=1-ease(frac(f,0.27,0.32));
       }else if(f>=0.33&&f<0.52){
-        // Gate stays open while car drives through
         gateSx=0;
         gateLed.setAttribute('fill','#4ade80');
         gateLed.setAttribute('opacity','0.9');
       }else if(f>=0.52&&f<0.58){
-        // Gate closes after car is through
         gateSx=ease(frac(f,0.52,0.58));
         var closeF=frac(f,0.52,0.58);
         gateLed.setAttribute('fill',closeF>0.5?'#dc3c3c':'#4ade80');
@@ -1134,28 +826,20 @@
         gateLed.setAttribute('fill','#dc3c3c');gateLed.setAttribute('opacity','0.7');
       }
       setGate(gateSx);
-
-      // ── FOUNTAIN (enhanced, from fountains.html style) — comes on with gate at 0.27 ──
       var fOn=0;
       if(f>=0.27&&f<0.35)fOn=ease(frac(f,0.27,0.35));
       else if(f>=0.35&&f<0.88)fOn=1;
       else if(f>=0.88&&f<0.94)fOn=1-ease(frac(f,0.88,0.94));
       fountainSpray.setAttribute('opacity',String(fOn));
-
-      // Water glow on lake
       var wgEl=document.getElementById('waterGlowEl');
       var wgIn=document.getElementById('waterGlowInner');
       if(wgEl)wgEl.setAttribute('opacity',String(0.18*fOn));
       if(wgIn)wgIn.setAttribute('opacity',String(0.12*fOn));
-
-      // LED group shimmer
       var ftnLed=document.getElementById('ftnLedGroup');
       if(ftnLed){
         var ledShim=0.9+Math.sin(ts/350)*0.1;
         ftnLed.setAttribute('opacity',String(fOn*ledShim));
       }
-
-      // Ripple animation
       var rTime=(ts/2000)%1;
       var r1=document.getElementById('ftnRipple1'),r2=document.getElementById('ftnRipple2'),r3=document.getElementById('ftnRipple3'),r4=document.getElementById('ftnRipple4');
       if(fOn>0.1){
@@ -1168,21 +852,15 @@
         if(r1)r1.setAttribute('opacity','0');if(r2)r2.setAttribute('opacity','0');
         if(r3)r3.setAttribute('opacity','0');if(r4)r4.setAttribute('opacity','0');
       }
-
-      // Splash shimmer
       var splC=document.getElementById('splashCenter');
       var ftnDr=document.getElementById('ftnDroplets');
       var shimmer=0.55+Math.sin(ts/180)*0.3;
       if(splC)splC.setAttribute('opacity',String(shimmer*fOn));
       if(ftnDr)ftnDr.setAttribute('opacity',String((0.5+Math.sin(ts/250)*0.2)*fOn));
-
-      // Subtle sway
       if(fOn>0){
         var sway=Math.sin(ts/1800)*1.5;
         fountainSpray.setAttribute('transform','translate('+sway+',0)');
       }
-
-      // ── NOTIFICATION TOAST (HTML overlay, gate.html style) ──
       if(f>=0.51&&f<0.65){
         notifTitle.textContent='Craig — Kia entered via RFID';
         notifSub.textContent='Gate Access · Hands-free entry · 3:12 PM';
@@ -1194,11 +872,9 @@
       }else{
         estateNotif.classList.remove('visible');
       }
-
       requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
-
     var els=document.querySelectorAll('.reveal');
     var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.15,rootMargin:'0px 0px -40px 0px'});
     els.forEach(function(el){obs.observe(el)});
@@ -1210,22 +886,16 @@
         a.addEventListener('click', function(){ mobileMenu.classList.remove('open'); });
       });
     }
-
-    // Responsive viewBox — zoom into the estate on mobile
     var estateSVG=document.getElementById('estateSVG');
     function updateViewBox(){
       var w=window.innerWidth;
       if(w<=480){
-        // Phone: tight crop on gate+house+pool+lake, cut most of driveway
         estateSVG.setAttribute('viewBox','30 90 1080 360');
       }else if(w<=768){
-        // Small tablet: moderate crop
         estateSVG.setAttribute('viewBox','10 100 1090 360');
       }else if(w<=960){
-        // Tablet: slight crop
         estateSVG.setAttribute('viewBox','0 80 1100 380');
       }else{
-        // Desktop: full view
         estateSVG.setAttribute('viewBox','0 0 1100 440');
       }
     }

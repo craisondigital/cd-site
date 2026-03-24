@@ -1,6 +1,6 @@
 # CLAUDE_REFERENCE.md
 > **Purpose:** Read this file FIRST every session to understand the codebase before making changes.
-> Last updated: 2026-03-20
+> Last updated: 2026-03-24
 
 ---
 
@@ -8,7 +8,7 @@
 - **Owner:** craisondigital
 - **Repo:** cd-site
 - **Branch:** main
-- **Business:** Craison Digital — Smart Home / Smart Property consulting (Miami area)
+- **Business:** Craison Digital — Smart Home / Smart Property consulting (Sarasota area)
 - **Hosting:** Bluehost (static HTML, deployed via cPanel Git Version Control)
 - **Domain:** craisondigital.com
 
@@ -22,10 +22,12 @@
 | `gate.html` | **Gate product page** — Smart Gate Access for Large Properties | ~78KB | ✓ |
 | `fountains.html` | **Fountain product page** — Smart Lake Fountain Control | ~77KB | ✓ |
 | `pool.html` | **Pool product page** — Smart Pool Automation (any brand, or no automation at all) | ~83KB | ✓ |
+| `pricing.html` | **Gate pricing page** — Smart Gate Access packages, add-ons, how it works, FAQ | ~40KB | ✓ |
 | `404.html` | **Custom 404 page** — Branded error page matching site design | ~5KB | ✓ |
 | `.htaccess` | **Apache config** — Custom 404, GZIP, caching, security headers | ~1KB | ✓ |
 | `nav.html` | **Nav prototype** — Working standalone nav test page (reference for nav pattern) | ~10KB | ✓ |
-| `.cpanel.yml` | **Deployment config** — Auto-deploys all *.html + .htaccess to public_html | <1KB | No |
+| `img/` | **Images directory** — Product photos and assets | varies | ✓ |
+| `.cpanel.yml` | **Deployment config** — Auto-deploys all *.html + .htaccess + img/ to public_html | <1KB | No |
 | `CLAUDE_REFERENCE.md` | **This file** — Codebase reference for Claude sessions | ~16KB | No |
 
 ---
@@ -34,18 +36,19 @@
 
 ### How it works:
 1. Repo is cloned to `/home4/craisond/repositories/cd-site` on Bluehost
-2. `.cpanel.yml` uses wildcard `*.html` — auto-deploys ALL HTML files + .htaccess to `/home4/craisond/public_html/`
+2. `.cpanel.yml` uses wildcard `*.html` — auto-deploys ALL HTML files + .htaccess + img/ to `/home4/craisond/public_html/`
 3. Push changes to GitHub → go to cPanel → Git Version Control → click **Update from Remote** → click **Deploy HEAD Commit**
 
 ### .cpanel.yml auto-deploys:
 - **All `*.html` files** in the repo root (no need to list them individually)
 - `.htaccess`
+- `img/` directory (recursive copy)
 
 ### NOT deployed (stays in repo only):
 - CLAUDE_REFERENCE.md, .cpanel.yml itself
 
 ### Adding new pages:
-New `.html` files are automatically deployed — no changes to `.cpanel.yml` needed. If you add non-HTML files (CSS, JS, images), you MUST add a `/bin/cp` line for them in `.cpanel.yml`.
+New `.html` files are automatically deployed — no changes to `.cpanel.yml` needed. Images go in `img/` and are auto-deployed. If you add other non-HTML files (CSS, JS), you MUST add a `/bin/cp` line for them in `.cpanel.yml`.
 
 ### Bluehost details:
 - Home directory: `/home4/craisond/` (NOT `/home/`)
@@ -179,7 +182,7 @@ The working nav prototype is `nav.html` in the repo root. Use it as the definiti
   </div>
   <div class="footer-bottom">
     <div>© 2026 Craison Digital. All rights reserved.</div>
-    <div>Smart Property Consulting · Estates &amp; Compounds · Miami</div>
+    <div>Smart Property Consulting · Estates &amp; Compounds · Sarasota</div>
   </div>
 </footer>
 ```
@@ -257,6 +260,9 @@ Nav → Hero (SVG) → Stats Bar → Problem/Solution → Experience → What's 
 ### Pool Page (different order)
 Nav → Hero (SVG) → Stats Bar → Problem/Solution → Experience (2×2) → Compatibility → Whole-House → What's Included → How It Works → Features/Dashboard → Beyond → Pricing → Contact → Footer
 
+### Gate Pricing Page (pricing.html)
+Nav → Packages (4 cards) → Photo Banner → Add-Ons (8 items) → Photo Banner → How It Works (6 cards with images) → FAQ (7 accordion items) → Contact → Footer
+
 ### SVG Animations
 - **Gate** — 10s. IDs: `truckGroup`, `gateLeft`, `gateRight`, `readerLed`, `rfidRings`, `hudMode`, `hudTag`, `notifToast`
 - **Fountain** — 14s. IDs: `sprayGroup`, `waterGlowEl`, `phoneGroup`, `anemometer`, `notifToast2`, `hudStatus`, `hudWind`
@@ -279,6 +285,7 @@ Nav → Hero (SVG) → Stats Bar → Problem/Solution → Experience (2×2) → 
 5. **Forms are non-functional** — `onsubmit="return false;"`
 6. **Deployment:** Push to GitHub → cPanel → Update from Remote → Deploy HEAD Commit
 7. **Bluehost home dir:** `/home4/craisond/` (not `/home/`)
+8. **Images:** go in `img/` directory, auto-deployed via `.cpanel.yml`
 
 ---
 

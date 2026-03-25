@@ -406,16 +406,16 @@
     <div class="section-tag" style="color:var(--white);">Our Packages</div>
     <h2 class="section-title"><em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">How smart</em> do you want your gate?</h2>
 
-    <!-- Notification toast from gate.html -->
+    <!-- Notification toast - cycles through different access types -->
     <div style="margin-bottom:2rem;text-align:center;">
-      <div class="notif-toast" style="opacity:1;transform:none;position:relative;display:inline-flex;">
+      <div class="notif-toast" id="pricingToast" style="opacity:1;transform:none;position:relative;display:inline-flex;transition:opacity 0.4s ease;">
         <div class="notif-dot"></div>
-        <div class="notif-icon">🏊</div>
+        <div class="notif-icon" id="toastIcon">🏊</div>
         <div class="notif-body">
-          <div class="notif-title">Pool Service Arrived</div>
-          <div class="notif-sub">Blue Wave Pool Co. · Gate opened via RFID · 10:24 AM</div>
+          <div class="notif-title" id="toastTitle">Pool Service Arrived</div>
+          <div class="notif-sub" id="toastSub">Blue Wave Pool Co. · RFID · 10:24 AM</div>
         </div>
-        <div class="notif-badge">✓ Authorized</div>
+        <div class="notif-badge" id="toastBadge">✓ Authorized</div>
       </div>
     </div>
 
@@ -698,6 +698,50 @@
       btn.classList.add('active');
     }
   }
+
+  // Cycling notification toast
+  (function() {
+    var toast = document.getElementById('pricingToast');
+    var icon = document.getElementById('toastIcon');
+    var title = document.getElementById('toastTitle');
+    var sub = document.getElementById('toastSub');
+    var badge = document.getElementById('toastBadge');
+    if (!toast) return;
+
+    var notifications = [
+      { icon: '🏊', title: 'Pool Service Arrived', sub: 'Blue Wave Pool Co. · RFID · 10:24 AM', badge: '✓ Authorized', badgeClass: '' },
+      { icon: '🚗', title: 'Craig — Kia Arrived', sub: 'Craig · RFID · 3:12 PM', badge: '✓ Authorized', badgeClass: '' },
+      { icon: '🏊', title: 'Pool Service Exited', sub: 'Blue Wave Pool Co. · RFID · 1:45 PM', badge: 'Exited', badgeClass: 'exit' },
+      { icon: '📦', title: 'FedEx Delivery', sub: 'FedEx · PIN · 11:30 AM', badge: '✓ PIN Entry', badgeClass: '' }
+    ];
+
+    var current = 0;
+    var INTERVAL = 3500;
+
+    function cycle() {
+      toast.style.opacity = '0';
+      setTimeout(function() {
+        current = (current + 1) % notifications.length;
+        var n = notifications[current];
+        icon.textContent = n.icon;
+        title.textContent = n.title;
+        sub.textContent = n.sub;
+        badge.textContent = n.badge;
+        if (n.badgeClass === 'exit') {
+          badge.style.background = 'rgba(251,113,133,0.08)';
+          badge.style.borderColor = 'rgba(251,113,133,0.25)';
+          badge.style.color = '#f87171';
+        } else {
+          badge.style.background = 'rgba(74,222,128,0.1)';
+          badge.style.borderColor = 'rgba(74,222,128,0.25)';
+          badge.style.color = 'var(--green)';
+        }
+        toast.style.opacity = '1';
+      }, 400);
+    }
+
+    setInterval(cycle, INTERVAL);
+  })();
   </script>
 
 </body>

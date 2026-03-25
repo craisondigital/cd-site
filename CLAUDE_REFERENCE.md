@@ -1,6 +1,6 @@
 # CLAUDE_REFERENCE.md
 > **Purpose:** Read this file FIRST every session to understand the codebase before making changes.
-> Last updated: 2026-03-24
+> Last updated: 2026-03-25
 
 ---
 
@@ -19,16 +19,26 @@
 | File | Purpose | Size | Deployed |
 |---|---|---|---|
 | `index.html` | **Homepage** — Animated estate SVG hero with full property automation showcase | ~103KB | ✓ |
-| `gate.html` | **Gate product page** — Smart Gate Access for Large Properties | ~78KB | ✓ |
+| `gate.html` | **Gate product page** — Smart Gate Access for Large Properties (SVG animation hero) | ~78KB | ✓ |
 | `fountains.html` | **Fountain product page** — Smart Lake Fountain Control | ~77KB | ✓ |
 | `pool.html` | **Pool product page** — Smart Pool Automation (any brand, or no automation at all) | ~83KB | ✓ |
-| `pricing.html` | **Gate pricing page** — Smart Gate Access packages, add-ons, how it works, FAQ | ~40KB | ✓ |
+| `pricing.html` | **Gate pricing/packages page** — 3-tier installed pricing, add-on cards, FAQ, contact | ~42KB | ✓ |
 | `404.html` | **Custom 404 page** — Branded error page matching site design | ~5KB | ✓ |
 | `.htaccess` | **Apache config** — Custom 404, GZIP, caching, security headers | ~1KB | ✓ |
 | `nav.html` | **Nav prototype** — Working standalone nav test page (reference for nav pattern) | ~10KB | ✓ |
 | `img/` | **Images directory** — Product photos and assets | varies | ✓ |
 | `.cpanel.yml` | **Deployment config** — Auto-deploys all *.html + .htaccess + img/ to public_html | <1KB | No |
-| `CLAUDE_REFERENCE.md` | **This file** — Codebase reference for Claude sessions | ~16KB | No |
+| `CLAUDE_REFERENCE.md` | **This file** — Codebase reference for Claude sessions | ~20KB | No |
+
+### Images in `img/`
+| File | Used On | Description |
+|---|---|---|
+| `Gate_rfid_animation.png` | pricing.html, gate.html | RFID reader/gate product shot |
+| `PhoneControl.png` | pricing.html | Phone controlling gate |
+| `keypad.png` | pricing.html | Weatherproof keypad |
+| `wifi_bridge.png` | pricing.html | Point-to-point wireless bridge antennas |
+| `gate_alarm.png` | pricing.html | Gate alarm/siren — also used as photo banner background |
+| `door_cam.png` | pricing.html | Doorbell camera |
 
 ---
 
@@ -40,15 +50,12 @@
 3. Push changes to GitHub → go to cPanel → Git Version Control → click **Update from Remote** → click **Deploy HEAD Commit**
 
 ### .cpanel.yml auto-deploys:
-- **All `*.html` files** in the repo root (no need to list them individually)
+- **All `*.html` files** in the repo root
 - `.htaccess`
 - `img/` directory (recursive copy)
 
-### NOT deployed (stays in repo only):
+### NOT deployed:
 - CLAUDE_REFERENCE.md, .cpanel.yml itself
-
-### Adding new pages:
-New `.html` files are automatically deployed — no changes to `.cpanel.yml` needed. Images go in `img/` and are auto-deployed. If you add other non-HTML files (CSS, JS), you MUST add a `/bin/cp` line for them in `.cpanel.yml`.
 
 ### Bluehost details:
 - Home directory: `/home4/craisond/` (NOT `/home/`)
@@ -67,116 +74,68 @@ New `.html` files are automatically deployed — no changes to `.cpanel.yml` nee
 
 ---
 
-## ⚠️ NAVIGATION — CRITICAL: READ THIS BEFORE TOUCHING THE NAV ⚠️
+## ⚠️ NAVIGATION — TWO PATTERNS
 
-The nav went through 5 iterations to get right. The working pattern (v5) is documented below. **DO NOT** attempt to use position:fixed overlays for the mobile menu — they consistently broke across devices. The working approach uses a **separate mobile-menu div inside the nav element** that drops down below the nav bar.
+The nav uses v5 pattern with **separate mobile-menu div inside the nav element**. DO NOT use position:fixed overlays for the mobile menu.
 
-### Architecture (two separate elements inside `<nav>`)
-
-The nav uses **two separate HTML structures**: one for desktop, one for mobile. They live side by side inside the `<nav>` element. CSS media queries show/hide the appropriate one.
-
-```html
-<nav>
-  <div class="nav-bar">
-    <a href="index.html" class="nav-logo">Craison<span>Digital</span></a>
-    <button class="nav-toggle" id="navToggle" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-    <!-- DESKTOP NAV — hidden on mobile via display:none !important -->
-    <ul class="nav-links">
-      <!-- ... desktop links with hover dropdown ... -->
-    </ul>
-  </div>
-  <!-- MOBILE MENU — hidden on desktop, separate div inside nav -->
-  <div class="mobile-menu" id="mobileMenu">
-    <!-- ... mobile links, flat list, no dropdown hover ... -->
-  </div>
-</nav>
-```
-
-### Why this works:
-- The `<nav>` is `position: fixed` at top of page
-- The `.mobile-menu` lives INSIDE the fixed `<nav>`, so it inherits the fixed positioning
-- When toggled open, it simply expands the nav's height downward — no overlay, no z-index fights
-- Background is solid `var(--black)` — no transparency issues
-- No padding-top guesswork needed since the menu drops below the nav bar naturally
-
-### Desktop nav: hover dropdown with bridge
-
-The Services dropdown uses a `<div class="dropdown-panel">` wrapper with `padding-top: 0.75rem` that creates an invisible hover bridge between the trigger text and the dropdown menu. This prevents the dropdown from closing as the mouse travels from the trigger down to the menu items.
-
-```css
-.dropdown-panel {
-  visibility: hidden; opacity: 0;
-  position: absolute; top: 100%; left: 50%;
-  transform: translateX(-50%);
-  padding-top: 0.75rem; /* hover bridge */
-  z-index: 110;
-  transition: visibility 0.15s, opacity 0.15s;
-}
-.nav-dropdown:hover .dropdown-panel { visibility: visible; opacity: 1; }
-```
-
-### Mobile nav: dropdown panel inside fixed nav
-
-The mobile menu is a `<div class="mobile-menu">` that:
-- Is `display: none` by default
-- Gets `display: flex` when `.open` class is toggled
-- Lives inside the `<nav>` so it inherits fixed positioning
-- Has `border-top: 1px solid var(--border)` to separate from the nav bar
-- Has `background: var(--black)` — fully opaque
-- Uses compact padding (`0.55rem` per link, `0.45rem` for sub-links)
-- "Services" is rendered as a small uppercase label (`.mm-label`), not a link
-
-### Mobile menu link sizes (all uniform at 1rem):
-- Regular links: `font-size: 1rem; padding: 0.55rem 0; color: var(--text);`
-- Sub-links (services): `font-size: 1rem; padding: 0.45rem 0; color: var(--muted);`
-- CTA button: `font-size: 1rem; padding: 0.6rem 1.8rem;`
-- Services label: `font-size: 0.62rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-bright);`
-
-### JS for mobile toggle:
-```javascript
-var navToggle = document.getElementById('navToggle');
-var mobileMenu = document.getElementById('mobileMenu');
-if(navToggle && mobileMenu){
-  navToggle.addEventListener('click', function(){ mobileMenu.classList.toggle('open'); });
-  mobileMenu.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){ mobileMenu.classList.remove('open'); });
-  });
-}
-```
-
-### Customizing per page:
-
-**Homepage** desktop nav links:
-```
-Home (nav-active) | Services ▾ (Gate, Pool, Fountains) | Why Us | Plans | [Get Started]
-```
-
-**Product page** desktop nav links (example: gate.html):
+### Pattern 1: Product Pages (gate.html, pool.html, fountains.html)
+Full nav with page-specific section links:
 ```
 Home | Services ▾ (Gate=active, Pool, Fountains) | divider | The Experience | What's Included | How It Works | Pricing | [Get a Quote]
 ```
 
-For each product page, set `class="dropdown-active"` on the current page's link in both the desktop dropdown-inner and the mobile mm-sub.
+### Pattern 2: Sub-Pages (pricing.html and ALL new pages)
+**Simplified nav — site-wide links ONLY, NO page-specific section links:**
+```
+Home | Services ▾ (parent product=active) | [Get a Quote]
+```
 
-### Reference file: `nav.html`
-The working nav prototype is `nav.html` in the repo root. Use it as the definitive reference when integrating the nav into site pages.
+Desktop:
+```html
+<ul class="nav-links">
+  <li><a href="index.html">Home</a></li>
+  <li class="nav-dropdown">
+    <a class="nav-active">Services <svg>...chevron...</svg></a>
+    <div class="dropdown-panel">
+      <ul class="dropdown-inner">
+        <li><a href="gate.html" class="dropdown-active"><span class="dd-icon">🚪</span> Smart Gate Access</a></li>
+        <li><a href="pool.html"><span class="dd-icon">🌊</span> Pool &amp; Spa Automation</a></li>
+        <li><a href="fountains.html"><span class="dd-icon">⛲</span> Lake &amp; Fountain Control</a></li>
+      </ul>
+    </div>
+  </li>
+  <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+</ul>
+```
+
+Mobile:
+```html
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <div class="mm-label">Services</div>
+  <div class="mm-sub">
+    <a href="gate.html" class="dropdown-active">Smart Gate Access</a>
+    <a href="pool.html">Pool &amp; Spa Automation</a>
+    <a href="fountains.html">Lake &amp; Fountain Control</a>
+  </div>
+  <div class="mm-divider"></div>
+  <a href="#contact" class="nav-cta">Get a Quote</a>
+</div>
+```
+
+Set `class="dropdown-active"` on the parent product's link.
 
 ---
 
 ## FOOTER (consistent across all pages)
 
-### Structure:
 ```html
 <footer>
   <div class="footer-top">
     <div class="footer-logo"><a href="index.html">Craison<span>Digital</span></a></div>
     <div class="footer-nav">
-      <a href="index.html">Home</a>
-      <a href="gate.html">Gate</a>
-      <a href="pool.html">Pool</a>
-      <a href="fountains.html">Fountains</a>
+      <a href="index.html">Home</a><a href="gate.html">Gate</a>
+      <a href="pool.html">Pool</a><a href="fountains.html">Fountains</a>
       <a href="#contact">Contact</a>
     </div>
   </div>
@@ -189,109 +148,114 @@ The working nav prototype is `nav.html` in the repo root. Use it as the definiti
 
 ---
 
-## DESIGN SYSTEM (consistent across all pages)
+## DESIGN SYSTEM
 
-### CSS Variables (`:root`)
+### CSS Variables
 ```css
---black: #060a10;        /* page background */
---dark: #0b1018;         /* alternating section bg */
---card: #0f1724;         /* card backgrounds */
---card-hover: #141d2e;   /* card hover state */
---border: rgba(255,255,255,0.06);
---blue: #2f80ed;         /* primary accent / CTAs */
---blue-bright: #5ba4f5;  /* hover states, highlights */
---blue-glow: rgba(47,128,237,0.15);
---cyan: #00d4ff;         /* secondary accent (logo, badges) */
---green: #4ade80;        /* success states */
---text: #e4e9f2;         /* primary text */
---muted: #6b7a8d;        /* secondary text */
---white: #f4f7fb;        /* brightest text */
---font-display: 'Syne', sans-serif;
---font-body: 'DM Sans', sans-serif;
+--black: #060a10; --dark: #0b1018; --card: #0f1724;
+--card-hover: #141d2e; --border: rgba(255,255,255,0.06);
+--blue: #2f80ed; --blue-bright: #5ba4f5;
+--blue-glow: rgba(47,128,237,0.15); --cyan: #00d4ff;
+--green: #4ade80; --text: #e4e9f2; --muted: #6b7a8d; --white: #f4f7fb;
+--font-display: 'Syne', sans-serif; --font-body: 'DM Sans', sans-serif;
 ```
 
 ### Visual Patterns
-- **Dark theme only** — deep navy/black backgrounds
-- **Noise texture overlay** — `body::before` with SVG fractalNoise filter, fixed position
-- **Subtle grid background** on hero sections (thin blue lines, radial mask)
-- **Glow effects** — `box-shadow` with blue rgba for CTAs, `filter: url(#glow)` for SVG elements
-- **Section alternation** — sections alternate between `--black` and `--dark` backgrounds
-- **Border style** — 1px solid with very low opacity white (`rgba(255,255,255,0.06)`)
-- **Border-radius:** cards = 14-16px, buttons = 8px, badges = 100px (pill shape)
-- **Animation:** `fadeUp` keyframe (opacity 0→1, translateY 18px→0) with staggered delays
+- Dark theme only, noise texture overlay, section alternation (--black / --dark)
+- Border: 1px solid rgba(255,255,255,0.06), border-radius: cards 14-16px, buttons 8px, badges 100px
+- Glow effects on CTAs and SVG elements
+- fadeUp animation with staggered delays
 
-### Typography Hierarchy
-- **h1 (hero):** Syne, weight 800, `clamp(2.2rem, 5.2vw, 4.2rem)`, tracking -0.025em
-- **Section titles:** Syne, weight 800, `clamp(1.7rem, 3.2vw, 2.6rem)`
-- **Card titles:** Syne, weight 700, ~1rem
-- **Body text:** DM Sans, weight 300, 0.85-0.9rem
-- **Tags/labels:** 0.7rem, weight 600, letter-spacing 0.16em, uppercase, blue-bright color
-- **Muted text:** color `--muted` (#6b7a8d)
+### Typography
+- **h1:** Syne 800, clamp(2.2rem, 5.2vw, 4.2rem)
+- **Section titles:** Syne 800, clamp(1.7rem, 3.2vw, 2.6rem)
+- **Card titles:** Syne 700, ~1rem
+- **Body:** DM Sans 300, 0.85-0.9rem
+- **Tags/labels:** 0.7rem, weight 600, letter-spacing 0.16em, uppercase
 
-### Button Styles
-- **Primary:** `background: var(--blue)`, white text, 8px radius, `box-shadow: 0 0 20px rgba(47,128,237,0.25)`, hover lifts 1px + brighter shadow
-- **Secondary:** transparent bg, 1px border `var(--border)`, hover brightens border
+### Responsive Breakpoints
+- **960px:** grids to 2-col, featured card spans full width centered
+- **768px:** hamburger menu, grids to 1-col, footer stacks, toast compact styles, photo banner auto height
+- **480px:** add-on grids to 1-col
 
 ---
 
-## HOMEPAGE (index.html)
+## ⭐ PRICING PAGE TEMPLATE (pricing.html) — REPLICATE FOR NEW PRODUCTS
 
-### Core Messaging
-1. **"We make smart homes work — and fix the ones that don't."** — Lead message.
-2. **"We automate what others won't."** — Killer differentiator.
-3. **One app, one relationship, one system** — No more app graveyard.
-4. **Built for how you live, not how a manufacturer thinks you should** — Bespoke.
-5. **Large acre properties, estates, compounds** — The niche.
-6. **We work with what you have** — No rip-and-replace.
+### Page Flow
+```
+Nav (simplified, site-wide only)
+ → Packages Section (#packages) — section tag + gradient h2 + cycling notification toast + 3-col pricing cards + footnote
+ → Photo Banner — emotional hook (full-width image, dark overlay, bold text)
+ → Add-Ons Section (#addons) — section tag + h2 + 2-col image cards (how-card pattern) + footnote
+ → FAQ Section (#faq) — accordion
+ → Contact Form (#contact)
+ → Footer
+```
 
-### Section Structure
-1. Hero → 2. App Graveyard → 3. What We Do → 4. What We Automate → 5. Why Different → 6. Day in the Life → 7. Monthly Plans → 8. Contact
+### Packages Section
+- **Section tag** in WHITE (not blue): `style="color:var(--white);"`
+- **H2** with blue-to-cyan gradient on key phrase
+- **Cycling notification toast** — centered, static-positioned, JS cycles through 3-4 product scenarios every 3.5s with fade transition. Green badge for entries, red for exits.
+- **3-column pricing cards** — each has: emoji icon → name → tagline → LARGE price (2.4rem white) → "Installed · One-time · No monthly fees" → divider → feature list with cyan checkmarks → muted features (gray dashes showing what's NOT included) → full-width CTA button → footnote
+- **Featured card**: `class="pkg-card featured"` — cyan border glow, badge, always-visible gradient line
+- **Footnote**: centered, mentions existing equipment assumption, free property assessment
 
-### Animated Estate SVG — 20-second cycle
-Key IDs: `carGroup`, `gateLeft`, `gateRight`, `gateLed`, `pillarLight1/2`, `porchLight/2`, `windowAmbient`, `winGlow1-6`, `lLight1-4`, `oakSpotBeams`, `oakCanopyLit`, `palmSpot1-3`, `poolCaustics`, `poolRipples`, `poolGlowOverlay`, `poolLightsGroup`, `fountainSpray`, `ftnLedGroup`, `ftnRipple1-4`, `splashCenter`, `ftnDroplets`, `waterGlowEl`, `waterGlowInner`, `lakeCaustics`, `lakeRipples`, `estateToast`, `toastTitle`, `toastSub`
+### Pricing Philosophy
+- Show INSTALLED prices (hardware + labor bundled) — never show component costs to customer
+- "Contact" for variable-complexity items
+- Bundle vs standalone pricing for simple add-ons
+- No "starting at" on cards — footnote handles the disclaimer
+
+### Photo Banner
+- Full-width image with `brightness(0.35) saturate(0.7)` filter
+- Dark gradient overlay, centered text
+- Height: 280px desktop, auto/min-height 220px mobile
+- Can include large emoji on its own line between heading and subtitle
+
+### Add-On Cards (how-card pattern)
+- 2-column grid, product photo at top (180px), card body with h3 + description
+- **NO emoji icons** — photos only in this section
+- Optional pricing line at bottom
+- Cards can have IDs for deep linking: `id="wireless-bridge"`
+- Dashboard mockup card uses inline HTML scaled to 180px instead of photo
+
+### FAQ Accordion
+- Click-to-expand, max-height animation, chevron rotation
+- Answers can contain inline links as soft CTAs
+- Cover: requirements, pricing inclusions, specs, modularity, power outages, upgradability
+
+### Gate Pricing Reference
+| Package | Installed Price | Hardware | Labor |
+|---|---|---|---|
+| Phone Control | $295 | ~$19 | $276 |
+| Hands-Free RFID | $650 | ~$238 | $412 |
+| Full Access Control | $995 | ~$400+ | $595 |
+
+| Add-On | With Package | Standalone |
+|---|---|---|
+| PIN Code Keypad | $95 | $195 |
+| Wireless Bridge | $195 | $295 |
+| Gate Camera | Contact | Contact |
+| Gate Alarm | Contact | Contact |
 
 ---
 
-## PRODUCT PAGE STRUCTURE
-
-### Gate & Fountain Pages
-Nav → Hero (SVG) → Stats Bar → Problem/Solution → Experience → What's Included → How It Works → Features/Dashboard → Beyond → Pricing → Contact → Footer
-
-### Pool Page (different order)
-Nav → Hero (SVG) → Stats Bar → Problem/Solution → Experience (2×2) → Compatibility → Whole-House → What's Included → How It Works → Features/Dashboard → Beyond → Pricing → Contact → Footer
-
-### Gate Pricing Page (pricing.html)
-Nav → Packages (4 cards) → Photo Banner → Add-Ons (8 items) → Photo Banner → How It Works (6 cards with images) → FAQ (7 accordion items) → Contact → Footer
-
-### SVG Animations
-- **Gate** — 10s. IDs: `truckGroup`, `gateLeft`, `gateRight`, `readerLed`, `rfidRings`, `hudMode`, `hudTag`, `notifToast`
-- **Fountain** — 14s. IDs: `sprayGroup`, `waterGlowEl`, `phoneGroup`, `anemometer`, `notifToast2`, `hudStatus`, `hudWind`
-- **Pool** — 14s. IDs: `poolSVG`, `phoneGroup`, `phoneTemp`, `phoneStatus`, `spaJets`, `spaRipples`, `spaCaustics`, `spaWaterOverlay`, `spaLight1-3`
+## IMPORTANT NOTES
+1. Each file is self-contained — CSS and JS inline
+2. **New pricing pages:** copy `pricing.html` as template. Use simplified nav.
+3. **New product pages:** copy `gate.html` as template for SVG hero pages
+4. DO NOT add page-specific section links to nav on sub-pages
+5. DO NOT use position:fixed overlays for mobile nav
+6. Forms are non-functional — `onsubmit="return false;"`
+7. Footer must say **Sarasota** (not Miami)
+8. Images go in `img/` directory
 
 ---
 
-## RESPONSIVE BREAKPOINTS
-- **960px:** grids to 2-col, SVG brightness boost
-- **768px:** hamburger + mobile-menu panel, grids to 1-col, footer stacks
-- **480px:** beyond/compat to 1-col, SVG tight crop
-
----
-
-## IMPORTANT NOTES FOR EDITING
-1. **Each file is self-contained** — CSS and JS inline, not shared
-2. **New pages:** copy `gate.html` as template. New `.html` files auto-deploy via `*.html` wildcard in `.cpanel.yml`
-3. **Nav uses v5 pattern** — see ⚠️ NAVIGATION section. Reference: `nav.html`
-4. **DO NOT use position:fixed overlays for mobile nav** — use mobile-menu-inside-nav pattern
-5. **Forms are non-functional** — `onsubmit="return false;"`
-6. **Deployment:** Push to GitHub → cPanel → Update from Remote → Deploy HEAD Commit
-7. **Bluehost home dir:** `/home4/craisond/` (not `/home/`)
-8. **Images:** go in `img/` directory, auto-deployed via `.cpanel.yml`
-
----
-
-## TODO / KNOWN ISSUES
-- [ ] Wire up contact forms (Formspree or PHP `mail()`)
-- [ ] Add Open Graph meta tags for social sharing
-- [ ] Add robots.txt and sitemap.xml for SEO
-- [ ] HTTPS redirect in .htaccess once SSL confirmed
-- [ ] "Beyond" sections could link to other product pages
+## TODO
+- [ ] Wire up contact forms (Formspree or PHP mail())
+- [ ] Open Graph meta tags for social sharing
+- [ ] robots.txt and sitemap.xml for SEO
+- [ ] HTTPS redirect in .htaccess
+- [ ] Footer Miami → Sarasota still needed in: index.html, pool.html, fountains.html, 404.html

@@ -334,7 +334,15 @@
       .packages-grid { grid-template-columns: 1fr; }
       .how-grid { grid-template-columns: 1fr; }
       .how-card-img { height: 160px; }
-      .photo-banner { height: 220px; }
+      .photo-banner { height: auto; min-height: 220px; }
+      .photo-banner-text { padding: 1.5rem; }
+      .photo-banner-text h2 { font-size: clamp(1.2rem, 5vw, 1.6rem); }
+      .notif-toast { padding: 0.6rem 0.7rem; gap: 0.4rem; max-width: 320px; border-radius: 10px; }
+      .notif-icon { width: 30px; height: 30px; font-size: 0.9rem; }
+      .notif-title { font-size: 0.74rem; }
+      .notif-sub { font-size: 0.6rem; }
+      .notif-badge { font-size: 0.55rem; padding: 0.12rem 0.4rem; }
+      .notif-dot { width: 5px; height: 5px; }
       .form-row { grid-template-columns: 1fr; }
       footer { flex-direction: column; gap: 0.8rem; text-align: center; padding: 2rem 1.5rem; }
       .footer-top { flex-direction: column; gap: 0.8rem; }
@@ -514,7 +522,6 @@
       <div class="how-card">
         <img class="how-card-img" src="img/Gate_rfid_animation.png" alt="Smart gate RFID access system" loading="lazy"/>
         <div class="how-card-body">
-        <div class="how-icon">📡</div>
         <h3>Long Range RFID</h3>
         <p>A discreet UHF reader is mounted at your gate entrance. Each authorized vehicle has a small windshield tag. As you approach, the reader detects the tag from up to 20 feet away and opens the gate automatically — no stopping, no buttons, no phone needed. Drive in seamlessly, every time.</p>
         </div>
@@ -522,7 +529,6 @@
       <div class="how-card">
         <img class="how-card-img" src="img/keypad.png" alt="Weatherproof PIN code keypad" loading="lazy"/>
         <div class="how-card-body">
-        <div class="how-icon">⌨️</div>
         <h3>PIN Code Keypad</h3>
         <p>A rugged, weatherproof keypad is mounted at the gate for visitors, contractors, delivery drivers, or anyone who needs temporary access. Each person gets their own unique PIN code. You can add or remove codes in seconds. The keypad works independently — no internet, no phone, no app required.</p>
         <div style="margin-top:0.8rem;font-size:0.7rem;color:var(--muted);">$195 standalone · $95 when added to any package</div>
@@ -531,7 +537,6 @@
       <div class="how-card">
         <img class="how-card-img" src="img/PhoneControl.png" alt="Phone control gate access" loading="lazy"/>
         <div class="how-card-body">
-        <div class="how-icon">📱</div>
         <h3>Phone Control</h3>
         <p>A compact smart relay at the gate connects to your WiFi. Using the free Shelly app on your iPhone or Android, you can open the gate from anywhere — whether you're in the house, at work, or on vacation. Share access with family members through the app. Works with Alexa and Google Home for voice control.</p>
         </div>
@@ -549,7 +554,6 @@
           </div>
         </div>
         <div class="how-card-body">
-        <div class="how-icon">🏠</div>
         <h3>Full Access Control</h3>
         <p>For complete control, we install a Home Assistant smart home hub at your property. This gives you a beautiful dashboard on your phone where you can add and remove RFID tags, manage keypad PINs, view a full log of who entered and when, receive real-time notifications, and set up automations like an after-hours gate alarm.</p>
         </div>
@@ -557,7 +561,6 @@
       <div class="how-card">
         <img class="how-card-img" src="img/door_cam.png" alt="Gate doorbell camera" loading="lazy"/>
         <div class="how-card-body">
-        <div class="how-icon">📹</div>
         <h3>Gate Camera &amp; Doorbell</h3>
         <p>See who's at the gate before you open it. Live video, two-way audio, and motion-triggered recording — all from your phone. Integrates with your Full Access Control dashboard for instant alerts, playback, and automated responses like turning on flood lights.</p>
         </div>
@@ -565,7 +568,6 @@
       <div class="how-card">
         <img class="how-card-img" src="img/gate_alarm.png" alt="Gate alarm and siren" loading="lazy"/>
         <div class="how-card-body">
-        <div class="how-icon">🚨</div>
         <h3>Gate Alarm</h3>
         <p>An outdoor-rated sensor detects when the gate opens without authorization. Triggers a loud siren and strobe, sends an instant alert to your phone with a camera snapshot. Arm manually or on a schedule.</p>
         </div>
@@ -573,7 +575,6 @@
       <div class="how-card">
         <img class="how-card-img" src="img/wifi_bridge.png" alt="Point-to-point wireless bridge" loading="lazy"/>
         <div class="how-card-body">
-        <div class="how-icon">📶</div>
         <h3>Point-to-Point Wireless Bridge</h3>
         <p>Don't have internet at the gate? Our wireless bridge creates an invisible network link between your house and gate, up to 3,280 feet away. Two weatherproof antennas are mounted with line of sight to each other — one at the house, one at the gate. Your home WiFi and internet are now available at the gate.</p>
         <div style="margin-top:0.8rem;font-size:0.7rem;color:var(--muted);">$295 standalone · $195 when added to any package</div>

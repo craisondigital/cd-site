@@ -655,48 +655,81 @@
     }
   }
 
-  // Cycling notification toast
+  // Cycling notification toast — 2 notifications
   (function() {
     var toast = document.getElementById('pricingToast');
     var icon = document.getElementById('toastIcon');
     var title = document.getElementById('toastTitle');
     var sub = document.getElementById('toastSub');
     var badge = document.getElementById('toastBadge');
+    var dot = toast ? toast.querySelector('.notif-dot') : null;
+    var iconEl = toast ? toast.querySelector('.notif-icon') : null;
     if (!toast) return;
 
-    var notifications = [
-      { icon: '⛲', title: 'Fountain Schedule Active', sub: 'Sunset mode · Fountain & LEDs turned on · 7:32 PM', badge: '✓ Scheduled', badgeClass: '' },
-      { icon: '🌬️', title: 'Wind Protection Activated', sub: 'Wind gust 24 mph · Fountain auto-shutoff · 2:15 PM', badge: '⚠ Wind', badgeClass: 'warn' },
-      { icon: '📱', title: 'Craig — Fountain On', sub: 'Turned on via app · Manual override · 4:45 PM', badge: '✓ Manual', badgeClass: '' },
-      { icon: '🌅', title: 'Fountain LEDs On', sub: 'Auto-on at sunset · Fountain is running · 7:48 PM', badge: '✓ Auto', badgeClass: '' }
-    ];
+    toast.style.transition = 'opacity 0.4s ease, border-color 0.6s ease, box-shadow 0.6s ease';
+    dot.style.transition = 'background 0.6s ease, box-shadow 0.6s ease';
+    iconEl.style.transition = 'background 0.6s ease, border-color 0.6s ease';
+    badge.style.transition = 'background 0.6s ease, border-color 0.6s ease, color 0.6s ease';
 
-    var current = 0;
-    var INTERVAL = 3500;
-
-    function cycle() {
-      toast.style.opacity = '0';
-      setTimeout(function() {
-        current = (current + 1) % notifications.length;
-        var n = notifications[current];
-        icon.textContent = n.icon;
-        title.textContent = n.title;
-        sub.textContent = n.sub;
-        badge.textContent = n.badge;
-        if (n.badgeClass === 'warn') {
-          badge.style.background = 'rgba(250,204,21,0.08)';
-          badge.style.borderColor = 'rgba(250,204,21,0.25)';
-          badge.style.color = '#facc15';
-        } else {
-          badge.style.background = 'rgba(74,222,128,0.1)';
-          badge.style.borderColor = 'rgba(74,222,128,0.25)';
-          badge.style.color = 'var(--green)';
-        }
-        toast.style.opacity = '1';
-      }, 400);
+    function setGreen() {
+      toast.style.borderColor = 'rgba(74,222,128,0.35)';
+      toast.style.boxShadow = '0 0 40px rgba(74,222,128,0.15), 0 8px 40px rgba(0,0,0,0.5)';
+      dot.style.background = '#4ade80';
+      dot.style.boxShadow = '0 0 8px #4ade80';
+      iconEl.style.background = 'linear-gradient(135deg,#1a4a2a,#0d2a1a)';
+      iconEl.style.borderColor = 'rgba(74,222,128,0.35)';
+      badge.style.background = 'rgba(74,222,128,0.1)';
+      badge.style.borderColor = 'rgba(74,222,128,0.25)';
+      badge.style.color = '#4ade80';
     }
 
-    setInterval(cycle, INTERVAL);
+    function setRed() {
+      toast.style.borderColor = 'rgba(251,113,133,0.4)';
+      toast.style.boxShadow = '0 0 40px rgba(251,113,133,0.15), 0 8px 40px rgba(0,0,0,0.5)';
+      dot.style.background = '#f87171';
+      dot.style.boxShadow = '0 0 8px #f87171';
+      iconEl.style.background = 'linear-gradient(135deg,#4a1a1a,#2a0d0d)';
+      iconEl.style.borderColor = 'rgba(251,113,133,0.4)';
+      badge.style.background = 'rgba(251,113,133,0.08)';
+      badge.style.borderColor = 'rgba(251,113,133,0.25)';
+      badge.style.color = '#f87171';
+    }
+
+    setGreen();
+    var DISPLAY = 5000;
+
+    function loop() {
+      // Show schedule (green) for DISPLAY ms
+      setTimeout(function() {
+        toast.style.opacity = '0';
+        setTimeout(function() {
+          // Swap to wind — already red
+          setRed();
+          icon.textContent = '🌬️';
+          title.textContent = 'Wind Protection Activated';
+          sub.textContent = 'Wind gust 24 mph · Fountain auto-shutoff · 2:15 PM';
+          badge.textContent = '⛔ Shutoff';
+          toast.style.opacity = '1';
+
+          // Show wind (red) for DISPLAY ms
+          setTimeout(function() {
+            toast.style.opacity = '0';
+            setTimeout(function() {
+              // Swap back to schedule (green)
+              setGreen();
+              icon.textContent = '⛲';
+              title.textContent = 'Fountain Schedule Active';
+              sub.textContent = 'Sunset mode · Fountain & LEDs turned on · 7:32 PM';
+              badge.textContent = '✓ Scheduled';
+              toast.style.opacity = '1';
+              loop();
+            }, 400);
+          }, DISPLAY);
+        }, 400);
+      }, DISPLAY);
+    }
+
+    loop();
   })();
   </script>
 

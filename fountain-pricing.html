@@ -115,8 +115,8 @@
     #packages { background: var(--dark); padding-top: 70px; }
     #packages .section-inner { padding-top: 3rem; }
     .packages-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
-      align-items: start;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+      align-items: start; max-width: 800px; margin: 0 auto;
     }
     .pkg-card {
       background: var(--card); border: 1px solid var(--border); border-radius: 16px;
@@ -267,8 +267,6 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 960px) {
-      .packages-grid { grid-template-columns: 1fr 1fr; }
-      .packages-grid .pkg-card:last-child { grid-column: 1 / -1; max-width: 480px; justify-self: center; }
       .how-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 768px) {
@@ -409,14 +407,14 @@
           <li>Share access with family members</li>
           <li class="muted-feature">No wind protection</li>
           <li class="muted-feature">No weather monitoring</li>
-          <li class="muted-feature">No smart home dashboard</li>
         </ul>
         <div class="pkg-cta"><a href="#contact" class="btn-primary">Get a Quote →</a></div>
-        <div class="pkg-note">Requires WiFi at the fountain — add our <a href="#wireless-bridge" style="color:var(--blue-bright);text-decoration:none;">wireless bridge</a> if needed.</div>
+        <div class="pkg-note">Works without internet via Bluetooth. Add our <a href="#wireless-bridge" style="color:var(--blue-bright);text-decoration:none;">wireless bridge</a> for remote control from anywhere.</div>
       </div>
 
       <!-- WEATHER PROTECTED -->
-      <div class="pkg-card">
+      <div class="pkg-card featured">
+        <div class="pkg-badge">Recommended</div>
         <div class="pkg-icon-large">🌬️</div>
         <div class="pkg-name">Weather Protected</div>
         <div class="pkg-tagline">Everything in Phone Control, plus a local weather station that automatically shuts off the fountain in high winds.</div>
@@ -432,36 +430,9 @@
           <li>Protects fountain from wind damage</li>
           <li>Wind speed &amp; gust monitoring</li>
           <li>App notifications when wind shuts off fountain</li>
-          <li class="muted-feature">No smart home dashboard</li>
-          <li class="muted-feature">No custom automations</li>
         </ul>
         <div class="pkg-cta"><a href="#contact" class="btn-primary">Get a Quote →</a></div>
         <div class="pkg-note">Weather station is solar powered with battery backup. No moving parts.</div>
-      </div>
-
-      <!-- FULL FOUNTAIN CONTROL -->
-      <div class="pkg-card featured">
-        <div class="pkg-badge">Complete System</div>
-        <div class="pkg-icon-large">🏠</div>
-        <div class="pkg-name">Full Fountain Control</div>
-        <div class="pkg-tagline">The complete smart fountain — weather protection, dashboard, automations, and expandable to your entire property.</div>
-        <div class="pkg-price-block">
-          <div class="pkg-price">$995</div>
-          <div class="pkg-price-sub">Installed · One-time · No monthly fees</div>
-        </div>
-        <div class="pkg-divider"></div>
-        <ul class="pkg-features">
-          <li>Everything in Weather Protected, plus:</li>
-          <li>Home Assistant smart home hub included</li>
-          <li>Custom dashboard on your phone</li>
-          <li>Advanced automations &amp; scheduling</li>
-          <li>LEDs auto-on at sunset when fountain is running</li>
-          <li>Full event logging &amp; history</li>
-          <li>Expandable — connects to your entire smart home</li>
-          <li>Integrates with gate, pool, lights, cameras &amp; more</li>
-        </ul>
-        <div class="pkg-cta"><a href="#contact" class="btn-primary">Get a Quote →</a></div>
-        <div class="pkg-note">Includes HA server hardware. Requires internet at the fountain — add our <a href="#wireless-bridge" style="color:var(--blue-bright);text-decoration:none;">wireless bridge</a> if needed.</div>
       </div>
     </div>
 
@@ -523,8 +494,9 @@
           </div>
         </div>
         <div class="how-card-body">
-        <h3>Full Fountain Dashboard</h3>
-        <p>For complete control, we install a Home Assistant smart home hub at your property. This gives you a live dashboard on your phone showing fountain status, LED state, wind speed, scheduling, and a full event log. Set custom automations and expand to control your gate, pool, lights, cameras, and more — all from one app.</p>
+        <h3>Home Assistant Integration</h3>
+        <p>Want to control your fountain alongside your gate, pool, lights, and cameras — all from one app? We add a Home Assistant smart home hub to your property. You get a live dashboard, advanced automations like LEDs auto-on at sunset, full event logging, and a single platform that grows with your property.</p>
+        <div style="margin-top:0.8rem;font-size:0.7rem;color:var(--muted);">Contact for pricing · Includes HA server hardware</div>
         </div>
       </div>
       <div class="how-card" id="wireless-bridge">
@@ -532,7 +504,7 @@
         <img class="how-card-img" src="img/wifi_bridge.png" alt="Point-to-point wireless bridge" loading="lazy"/>
         <div class="how-card-body">
         <h3>Point-to-Point Wireless Bridge</h3>
-        <p>Don't have internet at the fountain? Our wireless bridge creates an invisible network link between your house and fountain, up to 3,280 feet away. Two weatherproof antennas are mounted with line of sight to each other — one at the house, one at the fountain. Your home WiFi and internet are now available at the fountain.</p>
+        <p>Want to control your fountain from the house or while you're away? Our wireless bridge extends your home internet to the fountain, up to 3,280 feet away. Two weatherproof antennas are mounted with line of sight to each other — one at the house, one at the fountain. Enables remote control, push notifications, and voice assistant integration.</p>
         <div style="margin-top:0.8rem;font-size:0.7rem;color:var(--muted);">$295 standalone · $195 when added to any package</div>
         </div>
       </div>
@@ -552,7 +524,7 @@
     <div class="faq-list">
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">Do I need internet at the fountain? <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></button>
-        <div class="faq-a"><p>Yes — all packages require WiFi at the fountain for phone control and scheduling. If you don't have WiFi there, our <a href="#wireless-bridge" style="color:var(--blue-bright);text-decoration:none;">wireless bridge</a> add-on extends your home internet up to 3,280 feet and solves this for most properties.</p></div>
+        <div class="faq-a"><p>No. You can configure and control everything via Bluetooth or the device's built-in WiFi access point when you're near the fountain. Internet is only needed if you want remote control from the house or while you're away — and push notifications. If you don't have WiFi reaching the fountain, our <a href="#wireless-bridge" style="color:var(--blue-bright);text-decoration:none;">wireless bridge</a> add-on extends your home internet up to 3,280 feet.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">How does the wind protection work? <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></button>
@@ -575,8 +547,8 @@
         <div class="faq-a"><p>Yes. Every package is designed to build on the one before it. Start with Phone Control, add the weather station later for wind protection, or add Home Assistant down the road for the full dashboard and automations. Nothing gets replaced — we just add to what's already there.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Why would I choose Full Fountain Control over Weather Protected? <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></button>
-        <div class="faq-a"><p>The Full Fountain Control package is for properties that want a central smart home platform. If you're also looking at smart gate access, pool automation, lighting control, or security cameras, Home Assistant ties everything together in one app. It also adds advanced automations, event logging, and a live dashboard — features that go beyond what the Shelly app offers on its own.</p></div>
+        <button class="faq-q" onclick="toggleFaq(this)">What if I want to control more than just the fountain? <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+        <div class="faq-a"><p>Add our <a href="#addons" style="color:var(--blue-bright);text-decoration:none;">Home Assistant integration</a> to any package. It ties your fountain into a single dashboard alongside your gate, pool, lights, cameras, and anything else on your property. One app for everything. <a href="#contact" style="color:var(--blue-bright);text-decoration:none;">Let's talk about what's possible.</a></p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">Do you work with existing fountain setups? <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></button>

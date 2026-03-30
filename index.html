@@ -19,7 +19,7 @@
       --font-display: 'Syne', sans-serif;
       --font-body: 'DM Sans', sans-serif;
     }
-    html { scroll-behavior: smooth; overflow-x: hidden; }
+    html { scroll-behavior: smooth; }
     body { background: var(--black); color: var(--text); font-family: var(--font-body); font-weight: 300; line-height: 1.75; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
     body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.5; }
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(6,10,16,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
@@ -179,7 +179,7 @@
   <section class="hero">
     <div class="hero-bg"></div><div class="hero-grid"></div><div class="hero-glow"></div>
     <div class="hero-headline-above">
-      <div class="hero-eyebrow">Smart Property Consulting · Estates & Compounds · Sarasota</div>
+      <div class="hero-eyebrow">Smart Property Consulting</div>
       <h1>Your existing systems. <br><em>ALL WORKING TOGETHER!</em></h1>
       <p style="font-family:var(--font-display);font-size:clamp(1.1rem,2.4vw,1.6rem);font-weight:700;color:var(--text);letter-spacing:-0.01em;margin-top:0.8rem;animation:fadeUp 0.6s 0.15s ease both;">Every Acre. One App. Fully Intelligent</p>
       <p style="font-size:0.95rem;color:var(--muted);margin-top:0.5rem;animation:fadeUp 0.6s 0.2s ease both;">LARGE ACRE ESTATE CONTROLS<br>We integrate gates, pools, security, lighting, and existing smart devices into one reliable system for large properties</p>

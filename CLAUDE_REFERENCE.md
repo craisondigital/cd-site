@@ -74,23 +74,20 @@
 
 ---
 
-## ⚠️ NAVIGATION — TWO PATTERNS
+## ⚠️ NAVIGATION — ONE PATTERN FOR ALL PAGES
 
-The nav uses v5 pattern with **separate mobile-menu div inside the nav element**. DO NOT use position:fixed overlays for the mobile menu.
+The nav uses v5 pattern with **separate mobile-menu div inside the nav element**. DO NOT use position:fixed overlays for the mobile menu. **All pages use the same simplified nav — NO page-specific section links.**
 
-### Pattern 1: Product Pages (gate.html, pool.html, fountains.html)
-Full nav with page-specific section links:
 ```
-Home | Services ▾ (Gate=active, Pool, Fountains) | divider | The Experience | What's Included | How It Works | Pricing | [Get a Quote]
+Home | Services ▾ (dropdown with active page highlighted) | [Get a Quote]
 ```
 
-### Pattern 2: Sub-Pages (pricing.html and ALL new pages)
-**Simplified nav — site-wide links ONLY, NO page-specific section links:**
-```
-Home | Services ▾ (parent product=active) | [Get a Quote]
-```
+### Active states:
+- **index.html:** `Home` gets `class="nav-active"`, Services `<a>` has NO `nav-active` or `href`
+- **Product/sub-pages (gate, pool, fountains, pricing, etc.):** Services `<a>` gets `class="nav-active"`, set `class="dropdown-active"` on the current product in the dropdown
+- **404.html:** No active state, CTA links to `index.html#contact` instead of `#contact`
 
-Desktop:
+### Desktop:
 ```html
 <ul class="nav-links">
   <li><a href="index.html">Home</a></li>
@@ -108,7 +105,7 @@ Desktop:
 </ul>
 ```
 
-Mobile:
+### Mobile:
 ```html
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html">Home</a>
@@ -123,7 +120,7 @@ Mobile:
 </div>
 ```
 
-Set `class="dropdown-active"` on the parent product's link.
+Set `class="dropdown-active"` on the current product's link in both desktop and mobile.
 
 ---
 
@@ -184,7 +181,7 @@ Set `class="dropdown-active"` on the parent product's link.
 
 ### Page Flow
 ```
-Nav (simplified, site-wide only)
+Nav (standard site-wide nav — Home | Services | Get a Quote)
  → Packages Section (#packages) — section tag + gradient h2 + cycling notification toast + 3-col pricing cards + footnote
  → Photo Banner — emotional hook (full-width image, dark overlay, bold text)
  → Add-Ons Section (#addons) — section tag + h2 + 2-col image cards (how-card pattern) + footnote
@@ -243,9 +240,9 @@ Nav (simplified, site-wide only)
 
 ## IMPORTANT NOTES
 1. Each file is self-contained — CSS and JS inline
-2. **New pricing pages:** copy `pricing.html` as template. Use simplified nav.
-3. **New product pages:** copy `gate.html` as template for SVG hero pages
-4. DO NOT add page-specific section links to nav on sub-pages
+2. **New pricing pages:** copy `pricing.html` as template. Nav is already correct.
+3. **New product pages:** copy `gate.html` as template for SVG hero pages. Nav is already correct.
+4. DO NOT add page-specific section links to nav on ANY page — all pages use the simplified nav (Home | Services | Get a Quote)
 5. DO NOT use position:fixed overlays for mobile nav
 6. Forms are non-functional — `onsubmit="return false;"`
 7. Footer must say **Sarasota** (not Miami)

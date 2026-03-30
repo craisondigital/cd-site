@@ -79,12 +79,13 @@
 The nav uses v5 pattern with **separate mobile-menu div inside the nav element**. DO NOT use position:fixed overlays for the mobile menu. **All pages use the same simplified nav — NO page-specific section links.**
 
 ```
-Home | Services ▾ (dropdown with active page highlighted) | [Get a Quote]
+Home | Services ▾ | Pricing ▾ | [Get a Quote]
 ```
 
 ### Active states:
-- **index.html:** `Home` gets `class="nav-active"`, Services `<a>` has NO `nav-active` or `href`
-- **Product/sub-pages (gate, pool, fountains, pricing, etc.):** Services `<a>` gets `class="nav-active"`, set `class="dropdown-active"` on the current product in the dropdown
+- **index.html:** `Home` gets `class="nav-active"`, Services and Pricing `<a>` have NO `nav-active` or `href`
+- **Product pages (gate, pool, fountains):** Services `<a>` gets `class="nav-active"`, set `class="dropdown-active"` on the current product in the Services dropdown
+- **Pricing pages (pricing, fountain-pricing):** Pricing `<a>` gets `class="nav-active"`, set `class="dropdown-active"` on the current pricing page in the Pricing dropdown. Services `<a>` also gets `class="nav-active"` with `dropdown-active` on the parent product.
 - **404.html:** No active state, CTA links to `index.html#contact` instead of `#contact`
 
 ### Desktop:
@@ -98,6 +99,15 @@ Home | Services ▾ (dropdown with active page highlighted) | [Get a Quote]
         <li><a href="gate.html" class="dropdown-active"><span class="dd-icon">🚪</span> Smart Gate Access</a></li>
         <li><a href="pool.html"><span class="dd-icon">🌊</span> Pool &amp; Spa Automation</a></li>
         <li><a href="fountains.html"><span class="dd-icon">⛲</span> Lake &amp; Fountain Control</a></li>
+      </ul>
+    </div>
+  </li>
+  <li class="nav-dropdown">
+    <a>Pricing <svg>...chevron...</svg></a>
+    <div class="dropdown-panel">
+      <ul class="dropdown-inner">
+        <li><a href="pricing.html"><span class="dd-icon">🚪</span> Gate Control</a></li>
+        <li><a href="fountain-pricing.html"><span class="dd-icon">⛲</span> Fountain Control</a></li>
       </ul>
     </div>
   </li>
@@ -115,12 +125,17 @@ Home | Services ▾ (dropdown with active page highlighted) | [Get a Quote]
     <a href="pool.html">Pool &amp; Spa Automation</a>
     <a href="fountains.html">Lake &amp; Fountain Control</a>
   </div>
+  <div class="mm-label">Pricing</div>
+  <div class="mm-sub">
+    <a href="pricing.html">Gate Control</a>
+    <a href="fountain-pricing.html">Fountain Control</a>
+  </div>
   <div class="mm-divider"></div>
   <a href="#contact" class="nav-cta">Get a Quote</a>
 </div>
 ```
 
-Set `class="dropdown-active"` on the current product's link in both desktop and mobile.
+Set `class="dropdown-active"` on the current page's link in both desktop and mobile dropdowns.
 
 ---
 

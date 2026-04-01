@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Craison Digital – Smart Gate Access for Large Properties</title>
-  <meta name="description" content="Upgrade your existing gate with hands-free entry, mobile control, and real-time access logging. Professional smart home consulting for large acre properties."/>
+  <meta name="description" content="Upgrade your existing gate with hands-free RFID entry, mobile control, and real-time access logging. Professional smart home consulting for large acre properties."/>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230d1320'/><text x='4' y='24' font-size='22' font-weight='bold' fill='%2300d4ff'>C</text></svg>"/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
   <style>
@@ -336,10 +336,10 @@
           <a class="nav-active">Services <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></a>
           <div class="dropdown-panel">
             <ul class="dropdown-inner">
-              <li><a href="gate.html" class="dropdown-active"><span class="dd-icon">🚪</span> Gate Controls</a></li>
-              <li><a href="fountains.html"><span class="dd-icon">⛲</span> Fountain Controls</a></li>
-              <li><a href="garage.html"><span class="dd-icon">🚗</span> Garage Controls</a></li>
-              <li><a href="pool.html"><span class="dd-icon">🌊</span> Pool Controls</a></li>
+              <li><a href="gate.html" class="dropdown-active"><span class="dd-icon">🚪</span> Smart Gate Access</a></li>
+              <li><a href="pool.html"><span class="dd-icon">🌊</span> Pool &amp; Spa Automation</a></li>
+              <li><a href="fountains.html"><span class="dd-icon">⛲</span> Lake &amp; Fountain Control</a></li>
+              <li><a href="garage.html"><span class="dd-icon">🚗</span> Garage Door Controls</a></li>
             </ul>
           </div>
         </li>
@@ -359,10 +359,10 @@
       <a href="index.html">Home</a>
       <div class="mm-label">Services</div>
       <div class="mm-sub">
-        <a href="gate.html" class="dropdown-active">Gate Controls</a>
-        <a href="fountains.html">Fountain Controls</a>
-        <a href="garage.html">Garage Controls</a>
-        <a href="pool.html">Pool Controls</a>
+        <a href="gate.html" class="dropdown-active">Smart Gate Access</a>
+        <a href="pool.html">Pool &amp; Spa Automation</a>
+        <a href="fountains.html">Lake &amp; Fountain Control</a>
+        <a href="garage.html">Garage Door Controls</a>
       </div>
       <div class="mm-label">Pricing</div>
       <div class="mm-sub">
@@ -390,7 +390,7 @@
           <div class="notif-icon">🏊</div>
           <div class="notif-body">
             <div class="notif-title">Pool Service Arrived</div>
-            <div class="notif-sub">Blue Wave Pool Co. · Gate opened · Hands-free · 10:24 AM</div>
+            <div class="notif-sub">Blue Wave Pool Co. · Gate opened via RFID · 10:24 AM</div>
           </div>
           <div class="notif-badge">✓ Authorized</div>
         </div>
@@ -431,7 +431,7 @@
           <rect x="725" y="130" width="68" height="225" rx="4" fill="url(#pillarGrad)"/><rect x="725" y="130" width="68" height="225" rx="4" fill="none" stroke="#2f80ed" stroke-width="1.2" opacity="0.38"/><rect x="718" y="119" width="82" height="16" rx="5" fill="#1e3050"/><rect x="718" y="119" width="82" height="16" rx="5" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.45"/><circle cx="759" cy="112" r="11" fill="#1b2e4a"/><circle cx="759" cy="112" r="11" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.55"/><circle cx="759" cy="112" r="5" fill="#2f80ed" opacity="0.45"/><rect x="747" y="182" width="36" height="22" rx="3" fill="#111e30"/><rect x="747" y="182" width="36" height="22" rx="3" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.38"/><rect x="725" y="130" width="68" height="3" rx="1" fill="white" opacity="0.05"/>
           <rect x="267" y="220" width="20" height="135" rx="4" fill="#0e1b2c"/><rect x="267" y="220" width="20" height="135" rx="4" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0.35"/><rect x="255" y="188" width="46" height="60" rx="6" fill="#0d1e35"/><rect x="255" y="188" width="46" height="60" rx="6" fill="none" stroke="#2f80ed" stroke-width="1.5" opacity="0.65"/><rect x="260" y="194" width="34" height="26" rx="3" fill="#060e18"/><rect x="260" y="194" width="34" height="26" rx="3" fill="none" stroke="#1a3050" stroke-width="1"/><circle id="readerLed" cx="278" cy="235" r="8" fill="#cc2020" filter="url(#glow)"/><circle id="readerLedGlow" cx="278" cy="235" r="18" fill="#cc2020" opacity="0.15"/><rect x="275" y="181" width="6" height="11" rx="2" fill="#1e3050"/>
           <g id="rfidRings" opacity="0" filter="url(#softglow)"><ellipse id="ring1" cx="278" cy="210" rx="20" ry="13" fill="none" stroke="#00d4ff" stroke-width="1.8" opacity="0"/><ellipse id="ring2" cx="278" cy="210" rx="38" ry="26" fill="none" stroke="#00d4ff" stroke-width="1.4" opacity="0"/><ellipse id="ring3" cx="278" cy="210" rx="58" ry="40" fill="none" stroke="#2f80ed" stroke-width="1.1" opacity="0"/><ellipse id="ring4" cx="278" cy="210" rx="78" ry="54" fill="none" stroke="#2f80ed" stroke-width="0.8" opacity="0"/></g>
-          <g opacity="0.85"><rect x="28" y="28" width="165" height="75" rx="6" fill="#060e1c" opacity="0.92"/><rect x="28" y="28" width="165" height="75" rx="6" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.3"/><text x="42" y="50" font-size="8" fill="#5ba4f5" font-family="monospace" font-weight="bold" letter-spacing="1">GATE SYSTEM</text><rect x="42" y="55" width="65" height="1" fill="#2f80ed" opacity="0.3"/><text x="42" y="70" font-size="7" fill="#7a8599" font-family="monospace">STATUS</text><text x="92" y="70" font-size="7" fill="#4ade80" font-family="monospace">ACTIVE</text><text x="42" y="85" font-size="7" fill="#7a8599" font-family="monospace">RANGE</text><text x="92" y="85" font-size="7" fill="#00d4ff" font-family="monospace">20 FT</text></g>
+          <g opacity="0.85"><rect x="28" y="28" width="165" height="75" rx="6" fill="#060e1c" opacity="0.92"/><rect x="28" y="28" width="165" height="75" rx="6" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.3"/><text x="42" y="50" font-size="8" fill="#5ba4f5" font-family="monospace" font-weight="bold" letter-spacing="1">RFID SYSTEM</text><rect x="42" y="55" width="65" height="1" fill="#2f80ed" opacity="0.3"/><text x="42" y="70" font-size="7" fill="#7a8599" font-family="monospace">STATUS</text><text x="92" y="70" font-size="7" fill="#4ade80" font-family="monospace">ACTIVE</text><text x="42" y="85" font-size="7" fill="#7a8599" font-family="monospace">RANGE</text><text x="92" y="85" font-size="7" fill="#00d4ff" font-family="monospace">20 FT UHF</text></g>
           <g opacity="0.85"><rect x="907" y="28" width="165" height="75" rx="6" fill="#060e1c" opacity="0.92"/><rect x="907" y="28" width="165" height="75" rx="6" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.3"/><text x="921" y="50" font-size="8" fill="#5ba4f5" font-family="monospace" font-weight="bold" letter-spacing="1">GATE STATUS</text><rect x="921" y="55" width="65" height="1" fill="#2f80ed" opacity="0.3"/><text x="921" y="70" font-size="7" fill="#7a8599" font-family="monospace">MODE</text><text id="hudMode" x="965" y="70" font-size="7" fill="#cc4040" font-family="monospace">LOCKED</text><text x="921" y="85" font-size="7" fill="#7a8599" font-family="monospace">TAG</text><text id="hudTag" x="965" y="85" font-size="7" fill="#7a8599" font-family="monospace">SCANNING...</text></g>
           <path d="M0,0 L0,22 M0,0 L22,0" stroke="#2f80ed" stroke-width="2" opacity="0.22" fill="none"/><path d="M1100,0 L1100,22 M1100,0 L1078,0" stroke="#2f80ed" stroke-width="2" opacity="0.22" fill="none"/><path d="M0,500 L0,478 M0,500 L22,500" stroke="#2f80ed" stroke-width="2" opacity="0.22" fill="none"/><path d="M1100,500 L1100,478 M1100,500 L1078,500" stroke="#2f80ed" stroke-width="2" opacity="0.22" fill="none"/>
           <g id="truckGroup" transform="translate(0,0)">
@@ -449,16 +449,16 @@
 
     <div class="hero-content">
       <div class="hero-eyebrow">Smart Property Consulting</div>
-      <p class="hero-sub">No stopping. No window down. No remote. Your gate detects your vehicle and opens automatically — with full logging, mobile control, and instant alerts.</p>
+      <p class="hero-sub">No stopping. No window down. No remote. Our long-range RFID system detects your vehicle and opens the gate automatically — with full logging, mobile control, and instant alerts.</p>
       <div class="hero-actions">
         <a href="#contact" class="btn-primary">Request a Quote →</a>
-        <a href="#" class="btn-secondary" onclick="return false;">▶ Watch the Video</a>
+        <a href="#experience" class="btn-secondary">See How It Works</a>
       </div>
     </div>
   </section>
 
   <div class="stats-bar">
-    <div class="stat"><div class="stat-number">20ft</div><div class="stat-label">Hands-free detection</div></div>
+    <div class="stat"><div class="stat-number">20ft</div><div class="stat-label">Long-range RFID detection</div></div>
     <div class="stat"><div class="stat-number">100%</div><div class="stat-label">Works with existing opener</div></div>
     <div class="stat"><div class="stat-number">24/7</div><div class="stat-label">Access logging &amp; alerts</div></div>
     <div class="stat"><div class="stat-number">MOBILE</div><div class="stat-label">Open from anywhere</div></div>
@@ -466,27 +466,27 @@
 
   <section id="problem"><div class="section-inner">
     <div class="section-tag">Why Upgrade</div>
-    <h2 class="section-title">You already have a gate. We simply make it <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">intelligent.</em></h2>
+    <h2 class="section-title">You already have a gate. We simply make it intelligent.</h2>
     <p class="section-sub">Your existing gate opener works fine — but it could work so much better.</p>
     <div class="problem-grid">
       <div class="problem-card">
-        <div style="font-size:2.2rem;margin-bottom:0.8rem;text-align:center;">😤</div><h3>The way it is now</h3>
+        <h3>😤 The way it is now</h3>
         <ul>
           <li>Fumbling for a remote every time you pull up</li>
-          <li>Rolling your window down in the rain to punch in a code</li>
-          <li>No idea when the pool guy, landscaper, or FedEx showed up</li>
-          <li>Lost a remote — now anyone who finds it can get in</li>
-          <li>Guests stuck at the gate, calling your phone</li>
+          <li>Rolling the window down in the rain to enter a code</li>
+          <li>No idea when the landscaper, pool service, or delivery arrived</li>
+          <li>Lost remotes mean expensive replacements or no security</li>
+          <li>Guests stuck at the gate calling your phone</li>
         </ul>
       </div>
       <div class="problem-card solution-card">
-        <div style="font-size:2.2rem;margin-bottom:0.8rem;text-align:center;">😁</div><h3>The way it should be</h3>
+        <h3>✨ The way it should be</h3>
         <ul>
-          <li>Your gate opens as you approach — no stopping, no remote</li>
-          <li>Open it from your phone, from anywhere in the world</li>
-          <li>Every entry and exit logged — you always know who came and when</li>
-          <li>Add or revoke access in seconds from your phone</li>
-          <li>Instant alerts the moment someone arrives or leaves</li>
+          <li>Gate opens automatically as your car approaches — hands-free</li>
+          <li>Open the gate from your phone from anywhere in the world</li>
+          <li>Every entry and exit logged with name, time, and method</li>
+          <li>Add or revoke tags and PINs in seconds from your dashboard</li>
+          <li>Instant phone alerts when anyone arrives or leaves</li>
         </ul>
       </div>
     </div>
@@ -494,23 +494,23 @@
 
   <section id="experience"><div class="section-inner">
     <div class="section-tag">The Experience</div>
-    <h2 class="section-title">Three ways to enter!<br/><em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Zero hassles.</em></h2>
+    <h2 class="section-title">Three ways to enter! Zero hassles.</h2>
     <p class="section-sub">Your gate recognizes who belongs and logs every entry and exit.</p>
     <div class="experience-grid">
-      <div class="exp-card" style="padding-top:0;">
-        <img src="img/gate_home.png" alt="Hands-Free Entry" style="width:calc(100% + 4rem);height:180px;object-fit:cover;border-radius:14px 14px 0 0;margin:0 -2rem 1.2rem -2rem;"/>
-        <h3>Hands-Free Entry</h3>
-        <p>A small tag on your vehicle is detected from up to 20 feet away. The gate opens as you approach — no stopping, no window down, no remote to fumble with. Every family member and regular visitor gets their own tag.</p>
+      <div class="exp-card">
+        <div class="exp-icon">📡</div>
+        <h3>Hands-Free RFID Entry</h3>
+        <p>A small UHF tag on your vehicle is detected from up to 20 feet away. The gate opens as you approach — no stopping, no window down, no remote to fumble with. Every family member and regular visitor gets their own tag.</p>
         <div class="exp-tag">Core Feature</div>
       </div>
-      <div class="exp-card" style="padding-top:0;">
-        <img src="img/PhoneControl.png" alt="Phone Control" style="width:calc(100% + 4rem);height:180px;object-fit:cover;border-radius:14px 14px 0 0;margin:0 -2rem 1.2rem -2rem;"/>
-        <h3>Phone Control</h3>
+      <div class="exp-card">
+        <div class="exp-icon">📱</div>
+        <h3>Remote Phone Access</h3>
         <p>Open the gate from your phone from anywhere in the world. Let in a delivery driver while you're at work, or open up for guests before they even reach the driveway. Works from any smartphone.</p>
         <div class="exp-tag">Core Feature</div>
       </div>
-      <div class="exp-card" style="padding-top:0;">
-        <img src="img/keypad.png" alt="Keypad PIN Entry" style="width:calc(100% + 4rem);height:180px;object-fit:cover;border-radius:14px 14px 0 0;margin:0 -2rem 1.2rem -2rem;"/>
+      <div class="exp-card">
+        <div class="exp-icon">⌨️</div>
         <h3>Keypad PIN Entry</h3>
         <p>An optional weatherproof keypad at the gate for deliveries, contractors, or anyone without a tag. Create temporary or permanent PINs — and revoke them instantly when the job is done.</p>
         <div class="exp-tag">Optional Add-On</div>
@@ -519,51 +519,57 @@
   </div></section>
 
   <section id="package"><div class="section-inner">
-    <div class="section-tag">Optional Add-Ons</div>
-    <h2 class="section-title">Take your gate even <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">further.</em></h2>
-    <p class="section-sub">Enhance your gate system with these add-ons — installed and configured alongside your core setup.</p>
-    <div class="experience-grid" style="grid-template-columns:repeat(2,1fr);">
-      <div class="exp-card" style="padding-top:0;">
-        <img src="img/door_cam.png" alt="Gate Camera & Doorbell" style="width:calc(100% + 4rem);height:180px;object-fit:cover;border-radius:14px 14px 0 0;margin:0 -2rem 1.2rem -2rem;"/>
-        <h3>Gate Camera &amp; Doorbell</h3>
-        <p>See who's at the gate before you open it. Live video, two-way audio, and motion-triggered recording — all from your phone. Instant alerts, playback, and automated responses like turning on flood lights.</p>
-        <div class="exp-tag">Add-On</div>
-      </div>
-      <div class="exp-card" style="padding-top:0;">
-        <img src="img/gate_alarm.png" alt="Gate Alarm" style="width:calc(100% + 4rem);height:180px;object-fit:cover;border-radius:14px 14px 0 0;margin:0 -2rem 1.2rem -2rem;"/>
-        <h3>Gate Alarm &amp; Siren</h3>
-        <p>Detects when the gate opens without authorization. Triggers a loud siren and strobe, sends an instant alert to your phone with a camera snapshot. Arm manually or on a schedule.</p>
-        <div class="exp-tag">Add-On</div>
-      </div>
+    <div class="section-tag">What's Included</div>
+    <h2 class="section-title">Everything in one package.</h2>
+    <p class="section-sub">Hardware, professional installation, and full system configuration — done for you.</p>
+    <div class="package-grid">
+      <div class="package-item"><div class="pkg-icon">📡</div><div class="pkg-title">Long-Range UHF RFID Reader</div><div class="pkg-desc">Reads authorized vehicle tags from up to 20 feet away. The gate opens as you approach — no stopping required.</div></div>
+      <div class="package-item"><div class="pkg-icon">📱</div><div class="pkg-title">Mobile Phone Control</div><div class="pkg-desc">Open the gate from your cellphone from anywhere in the world. Grant instant access to anyone, anytime.</div></div>
+      <div class="package-item"><div class="pkg-icon">📋</div><div class="pkg-title">Complete Access Logging</div><div class="pkg-desc">Every entry and exit is timestamped and logged with the person's name and access method — RFID, PIN, or phone.</div></div>
+      <div class="package-item"><div class="pkg-icon">🔔</div><div class="pkg-title">Real-Time Notifications</div><div class="pkg-desc">Get instant alerts on your phone when someone arrives, leaves, or attempts an unauthorized entry.</div></div>
+      <div class="package-item"><div class="pkg-icon">🔧</div><div class="pkg-title">Professional Installation</div><div class="pkg-desc">We handle everything — hardware mounting, wiring, and complete system configuration. Works with your existing gate opener.</div></div>
+      <div class="package-item"><div class="pkg-icon">🏠</div><div class="pkg-title">Home Assistant Dashboard</div><div class="pkg-desc">A clean, intuitive dashboard to manage all tags and PINs. Add a new tag in seconds. Revoke access instantly if one is lost.</div></div>
     </div>
     <div style="text-align:center;margin-top:2rem;">
-      <p style="color:var(--muted);font-size:0.9rem;">See all add-ons, packages &amp; detailed pricing — <a href="pricing.html" style="color:var(--blue-bright);text-decoration:none;">view pricing page →</a></p>
+      <div class="pkg-optional" style="font-size:0.72rem;padding:0.25rem 0.8rem;">Optional Add-Ons Available</div>
+      <p style="color:var(--muted);font-size:0.9rem;margin-top:0.6rem;">Keypad entry, gate camera &amp; doorbell, and gate alarm/siren — <a href="#pricing" style="color:var(--blue-bright);text-decoration:none;">see add-on packages</a></p>
     </div>
   </div></section>
 
+  <section id="how"><div class="section-inner">
+    <div class="section-tag">The Process</div>
+    <h2 class="section-title">Simple from day one.</h2>
+    <p class="section-sub">We take care of the technical work. You end up with a system that's easy to manage.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><div><div class="step-title">We assess your existing setup</div><div class="step-desc">We evaluate your current gate opener and confirm compatibility. Most standard openers with a Wiegand input work out of the box.</div></div></div>
+      <div class="step"><div class="step-num">02</div><div><div class="step-title">Hardware installation</div><div class="step-desc">We mount the UHF RFID reader at the right position for your driveway, wire everything cleanly, and connect to your opener. Optional keypad installed if requested.</div></div></div>
+      <div class="step"><div class="step-num">03</div><div><div class="step-title">System configuration</div><div class="step-desc">We set up or connect to your Home Assistant instance, configure all integrations, build your access dashboard, and set up notifications and logging.</div></div></div>
+      <div class="step"><div class="step-num">04</div><div><div class="step-title">You take control</div><div class="step-desc">We walk you through the dashboard — adding tags, setting PINs, viewing logs. It's simple enough that anyone in the household can manage it.</div></div></div>
+    </div>
+  </div></section>
 
   <section id="features"><div class="section-inner">
     <div class="features-layout">
       <div>
         <div class="section-tag">Access Management</div>
-        <h2 class="section-title">Every entry. Every exit. <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">One screen.</em></h2>
+        <h2 class="section-title">Full control at your fingertips.</h2>
         <p class="section-sub" style="margin-bottom:2rem;">Your dashboard gives you a clear, real-time view of everything happening at your gate — from any device.</p>
         <div class="feature-list">
-          <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Add or revoke tags in seconds</strong><span>Assign tags to family, staff, or regular visitors. Remove access instantly if a tag is lost.</span></div></div>
+          <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Add or revoke tags in seconds</strong><span>Assign RFID tags to family, staff, or regular visitors. Remove access instantly if a tag is lost.</span></div></div>
           <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Create PINs for guests and deliveries</strong><span>Set up temporary or permanent PIN codes. Revoke them when the job is done — no tag needed.</span></div></div>
           <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Arrival &amp; departure alerts</strong><span>Push notifications the moment the gate is triggered — know who came and when.</span></div></div>
-          <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Full audit log</strong><span>Every access event is stored with a timestamp, name, and method — tag, PIN, or phone.</span></div></div>
+          <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Full audit log</strong><span>Every access event is stored with a timestamp, name, and method (RFID, PIN, or phone).</span></div></div>
         </div>
       </div>
       <div class="dashboard-mockup">
         <div class="mockup-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><div class="mockup-title">Gate Access Log</div></div>
         <div class="mockup-body">
-          <div class="mockup-row"><div><div class="tag-name">John (Tag #1)</div><div class="tag-time">Today, 8:14 AM · Hands-free</div></div><div class="tag-status status-in">Entered</div></div>
-          <div class="mockup-row"><div><div class="tag-name">Pool Service</div><div class="tag-time">Today, 10:24 AM · Tag</div></div><div class="tag-status status-in">Entered</div></div>
+          <div class="mockup-row"><div><div class="tag-name">John (Tag #1)</div><div class="tag-time">Today, 8:14 AM · RFID — Hands-free</div></div><div class="tag-status status-in">Entered</div></div>
+          <div class="mockup-row"><div><div class="tag-name">Pool Service</div><div class="tag-time">Today, 10:24 AM · RFID</div></div><div class="tag-status status-in">Entered</div></div>
           <div class="mockup-row"><div><div class="tag-name">FedEx Delivery</div><div class="tag-time">Today, 11:30 AM · PIN</div></div><div class="tag-status status-in">Entered</div></div>
           <div class="mockup-row"><div><div class="tag-name">Sarah (remote)</div><div class="tag-time">Today, 2:15 PM · Phone</div></div><div class="tag-status status-in">Opened</div></div>
-          <div class="mockup-row"><div><div class="tag-name">Pool Service</div><div class="tag-time">Today, 1:45 PM · Tag</div></div><div class="tag-status status-out">Exited</div></div>
-          <div class="mockup-notif">🔔 &nbsp;<span><strong>Gate opened</strong> — John arrived (hands-free) at 8:14 AM</span></div>
+          <div class="mockup-row"><div><div class="tag-name">Pool Service</div><div class="tag-time">Today, 1:45 PM · RFID</div></div><div class="tag-status status-out">Exited</div></div>
+          <div class="mockup-notif">🔔 &nbsp;<span><strong>Gate opened</strong> — John arrived (hands-free RFID) at 8:14 AM</span></div>
         </div>
       </div>
     </div>
@@ -571,21 +577,69 @@
 
   <section id="beyond"><div class="section-inner" style="text-align:center;">
     <div class="section-tag">Beyond the Gate</div>
-    <h2 class="section-title"><em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">One app.</em> Your entire property.</h2>
-    <p class="section-sub" style="margin:0 auto 3rem;max-width:750px;">Your gate is just the start. We automate everything on your property.</p>
+    <h2 class="section-title">One app. Your entire property.</h2>
+    <p class="section-sub" style="margin:0 auto 1.5rem;">Your gate is just the starting point. The same dashboard that manages your gate access can grow to control every system across every building on your property — all from a single app on your phone.</p>
+    <p class="section-sub" style="margin:0 auto 3rem; max-width: 520px;">No juggling five different apps from five different vendors. Craison Digital integrates everything into one unified platform that you already know how to use.</p>
     <div class="beyond-grid">
-      <a href="garage.html" class="beyond-card" style="padding:0;overflow:hidden;text-decoration:none;"><img src="img/rollup_home.png" alt="Garage Door Controls" style="width:100%;height:120px;object-fit:cover;"/><div style="padding:1rem 1.6rem 1.6rem;"><h4>Garage Door Controls</h4><p>Control every garage door and rollup door across your property from one app. Know what's open. Close what shouldn't be. Get alerts when a door is left open.</p></div></a>
-      <a href="fountains.html" class="beyond-card" style="padding:0;overflow:hidden;text-decoration:none;"><img src="img/fountain_night.png" alt="Fountain Controls" style="width:100%;height:120px;object-fit:cover;"/><div style="padding:1rem 1.6rem 1.6rem;"><h4>Fountain Controls</h4><p>Your fountains turn on when you want them and shut off automatically when the wind picks up. Schedules, phone control, and synced lighting — all from the same app that runs everything else.</p></div></a>
-      <a href="pool.html" class="beyond-card" style="padding:0;overflow:hidden;text-decoration:none;"><img src="img/pool_home.png" alt="Pool Controls" style="width:100%;height:120px;object-fit:cover;"/><div style="padding:1rem 1.6rem 1.6rem;"><h4>Pool Controls</h4><p>One tap to heat the spa. Voice controls for your entire pool. Custom dashboard with only the buttons you actually use — works with any existing equipment, any brand. All from the same app.</p></div></a>
+      <div class="beyond-card"><div class="beyond-icon">👁️</div><h4>Security Cameras</h4><p>View every camera on your property from the same app — with motion alerts, recording, and automated flood lights triggered by camera activity</p></div>
+      <div class="beyond-card"><div class="beyond-icon">💡</div><h4>Lighting Control</h4><p>Control lights in every building from one place — schedules, scenes, and automation included</p></div>
+      <div class="beyond-card"><div class="beyond-icon">🌡️</div><h4>Climate &amp; HVAC</h4><p>Manage thermostats across your main home, guest house, barn, or shop — all in one view</p></div>
+      <div class="beyond-card"><div class="beyond-icon">🏊</div><h4>Pool Automation</h4><p>Control your pool pump, heater, lights, and chemical levels from the same app — schedule runs, adjust temp, and monitor it all remotely</p></div>
+      <div class="beyond-card"><div class="beyond-icon">⛲</div><h4>Lake &amp; Fountain Control</h4><p>Turn lake fountains and water features on and off from your phone — set schedules, sync with lighting, and manage it alongside everything else</p></div>
+      <div class="beyond-card"><div class="beyond-icon">🌿</div><h4>Irrigation &amp; Sensors</h4><p>Automated watering, soil sensors, water leak detection — monitored and controlled alongside everything else</p></div>
     </div>
-    <p style="color:var(--muted);font-size:0.9rem;margin-top:2rem;">Cameras, lighting, networking, irrigation, and more. <a href="#contact" style="color:var(--blue-bright);text-decoration:none;">Let's talk about what's possible.</a></p>
+    <p style="color:var(--text);font-size:0.95rem;margin-top:2.5rem;font-weight:400;">One app. One dashboard. Every building. Every system.</p>
+    <p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem;">Ready to go beyond the gate? <a href="#contact" style="color:var(--blue-bright);text-decoration:none;">Let's talk about what's possible.</a></p>
+  </div></section>
+
+  <section id="pricing"><div class="section-inner" style="text-align:center;">
+    <div class="section-tag">Pricing</div>
+    <h2 class="section-title">One flat rate. No surprises.</h2>
+    <p class="section-sub" style="margin:0 auto 3rem;">Everything included — hardware, installation, and full system setup. Add optional packages to fit your property.</p>
+    <div class="pricing-card">
+      <div class="price-label">Smart Gate Access Package</div>
+      <div class="price-amount">Contact for Pricing</div>
+      <div class="price-note">Pricing varies by property. Get a custom quote.</div>
+      <div class="price-includes">
+        <div class="price-line">Long-range UHF RFID reader + vehicle tags</div>
+        <div class="price-line">Mobile phone remote access setup</div>
+        <div class="price-line">Full Home Assistant setup &amp; configuration</div>
+        <div class="price-line">Access logging &amp; notification setup</div>
+        <div class="price-line">Custom dashboard for easy tag &amp; PIN management</div>
+        <div class="price-line">Walkthrough &amp; handoff training</div>
+      </div>
+      <a href="#contact" class="btn-primary" style="display:block;text-align:center;justify-content:center;">Request a Quote →</a>
+    </div>
+    <p style="margin-top:1.5rem;"><a href="pricing.html" style="color:var(--blue-bright);text-decoration:none;font-size:0.92rem;font-weight:500;">View all packages &amp; pricing →</a></p>
+    <div style="margin-top:3rem;">
+      <div class="section-tag">Optional Add-Ons</div>
+      <p style="color:var(--muted);font-size:0.95rem;margin:0.5rem auto 2rem;max-width:480px;">Enhance your gate system with any of these packages — installed and configured alongside your core setup.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;max-width:900px;margin:0 auto;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem;text-align:left;">
+        <div style="font-size:1.5rem;margin-bottom:0.8rem;">⌨️</div>
+        <div style="font-family:var(--font-display);font-size:0.95rem;font-weight:700;color:var(--white);margin-bottom:0.4rem;">Keypad Entry</div>
+        <p style="font-size:0.83rem;color:var(--muted);line-height:1.6;margin-bottom:0;">Weatherproof keypad for PIN-based access. Perfect for deliveries, contractors, and guests without a tag. Create or revoke PINs instantly from your dashboard.</p>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem;text-align:left;">
+        <div style="font-size:1.5rem;margin-bottom:0.8rem;">📹</div>
+        <div style="font-family:var(--font-display);font-size:0.95rem;font-weight:700;color:var(--white);margin-bottom:0.4rem;">Gate Camera &amp; Doorbell</div>
+        <p style="font-size:0.83rem;color:var(--muted);line-height:1.6;margin-bottom:0;">See who's at the gate before you open it. Live video feed, two-way audio, and motion-triggered recording — all viewable from the same app that controls your gate.</p>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem;text-align:left;">
+        <div style="font-size:1.5rem;margin-bottom:0.8rem;">🚨</div>
+        <div style="font-family:var(--font-display);font-size:0.95rem;font-weight:700;color:var(--white);margin-bottom:0.4rem;">Gate Alarm / Siren</div>
+        <p style="font-size:0.83rem;color:var(--muted);line-height:1.6;margin-bottom:0;">Triggers an audible siren when the gate opens without an authorized tag or PIN. Deters unauthorized entry and sends an instant alert to your phone with a timestamp.</p>
+      </div>
+    </div>
+    <p style="margin-top:2rem;"><a href="pricing.html" style="color:var(--blue-bright);text-decoration:none;font-size:0.92rem;font-weight:500;">See all add-ons &amp; detailed pricing →</a></p>
   </div></section>
 
   <section id="contact"><div class="section-inner">
-    <div class="cta-box" style="max-width:700px;">
+    <div class="cta-box">
       <div class="section-tag">Get Started</div>
-      <h2 class="section-title" style="white-space:nowrap;">Tell us about your <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">property.</em></h2>
-      <p class="section-sub" style="margin:0 auto;max-width:600px;">Tell us about your property and we'll get back to you with a custom quote.</p>
+      <h2 class="section-title">Ready to upgrade your gate?</h2>
+      <p class="section-sub" style="margin-bottom:0;">Tell us about your property and we'll get back to you with a custom quote.</p>
       <form class="contact-form" onsubmit="return false;">
         <div class="form-row">
           <div class="form-group"><label>First Name</label><input type="text" placeholder="John"/></div>

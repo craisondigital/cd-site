@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Craison Digital – Lake Fountain Control Packages & Pricing</title>
-  <meta name="description" content="Smart lake fountain control packages for residential properties. Phone control, wind protection, LED scheduling, and full automation — choose what you need."/>
+  <title>Craison Digital – Smart Garage Door Control Pricing</title>
+  <meta name="description" content="Smart garage door control pricing for residential properties. Phone control, open/close status, alerts, and auto-close — per door pricing with no monthly fees."/>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230d1320'/><text x='4' y='24' font-size='22' font-weight='bold' fill='%2300d4ff'>C</text></svg>"/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
   <style>
@@ -111,10 +111,10 @@
     .section-title { font-family: var(--font-display); font-size: clamp(1.7rem,3.2vw,2.6rem); font-weight: 800; line-height: 1.12; letter-spacing: -0.02em; margin-bottom: 1rem; color: var(--white); }
     .section-sub { color: var(--muted); font-size: 1rem; max-width: 580px; margin-bottom: 3rem; line-height: 1.7; }
 
-    /* ── PACKAGES GRID ── */
+    /* ── PRICING CARDS ── */
     #packages { background: var(--dark); padding-top: 70px; }
     #packages .section-inner { padding-top: 3rem; }
-    .packages-grid {
+    .pricing-grid {
       display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
       align-items: start; max-width: 800px; margin: 0 auto;
     }
@@ -144,8 +144,6 @@
     .pkg-features { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; flex: 1; }
     .pkg-features li { font-size: 0.83rem; color: var(--text); display: flex; align-items: flex-start; gap: 0.6rem; line-height: 1.55; }
     .pkg-features li::before { content: '✓'; color: var(--cyan); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
-    .pkg-features li.muted-feature { color: var(--muted); }
-    .pkg-features li.muted-feature::before { content: '—'; color: rgba(255,255,255,0.12); }
     .pkg-cta { margin-top: 1.8rem; }
     .pkg-cta .btn-primary { display: block; text-align: center; justify-content: center; width: 100%; }
     .pkg-note { font-size: 0.72rem; color: var(--muted); margin-top: 1rem; line-height: 1.5; text-align: center; }
@@ -193,9 +191,8 @@
     .tag-name { font-weight: 500; color: var(--text); font-size: 0.8rem; }
     .tag-time { color: var(--muted); font-size: 0.68rem; }
     .tag-status { font-size: 0.68rem; padding: 0.15rem 0.6rem; border-radius: 100px; font-weight: 500; white-space: nowrap; }
-    .status-in{background:rgba(40,200,100,0.1);color:#4ade80;border:1px solid rgba(40,200,100,0.18)}
-    .status-out{background:rgba(251,113,133,0.08);color:#f87171;border:1px solid rgba(251,113,133,0.18)}
-    .status-warn{background:rgba(250,204,21,0.08);color:#facc15;border:1px solid rgba(250,204,21,0.18)}
+    .status-closed{background:rgba(40,200,100,0.1);color:#4ade80;border:1px solid rgba(40,200,100,0.18)}
+    .status-open{background:rgba(251,113,133,0.08);color:#f87171;border:1px solid rgba(251,113,133,0.18)}
     .mockup-notif { margin-top: 0.8rem; background: rgba(47,128,237,0.06); border: 1px solid rgba(47,128,237,0.12); border-radius: 8px; padding: 0.65rem 0.9rem; font-size: 0.72rem; color: var(--blue-bright); display: flex; gap: 0.5rem; align-items: center; }
 
     /* ── PHOTO BANNER ── */
@@ -312,7 +309,7 @@
         padding: 0.6rem 1.8rem; font-size: 1rem;
       }
       .section-inner { padding: 4rem 1.5rem; }
-      .packages-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
       .how-grid { grid-template-columns: 1fr; }
       .how-card-img { height: 160px; }
       .photo-banner { height: auto; min-height: 220px; }
@@ -335,7 +332,7 @@
 </head>
 <body>
 
-  <!-- ── NAV v5 — simplified, site-wide only ── -->
+  <!-- ── NAV v5 ── -->
   <nav>
     <div class="nav-bar">
       <a href="index.html" class="nav-logo">Craison<span>Digital</span></a>
@@ -349,8 +346,8 @@
           <div class="dropdown-panel">
             <ul class="dropdown-inner">
               <li><a href="gate.html"><span class="dd-icon">🚪</span> Gate Controls</a></li>
-              <li><a href="fountains.html" class="dropdown-active"><span class="dd-icon">⛲</span> Fountain Controls</a></li>
-              <li><a href="garage.html"><span class="dd-icon">🚗</span> Garage Controls</a></li>
+              <li><a href="fountains.html"><span class="dd-icon">⛲</span> Fountain Controls</a></li>
+              <li><a href="garage.html" class="dropdown-active"><span class="dd-icon">🚗</span> Garage Controls</a></li>
               <li><a href="pool.html"><span class="dd-icon">🌊</span> Pool Controls</a></li>
             </ul>
           </div>
@@ -360,8 +357,8 @@
           <div class="dropdown-panel">
             <ul class="dropdown-inner">
               <li><a href="pricing.html"><span class="dd-icon">🚪</span> Gate Control</a></li>
-              <li><a href="fountain-pricing.html" class="dropdown-active"><span class="dd-icon">⛲</span> Fountain Control</a></li>
-              <li><a href="garage-pricing.html"><span class="dd-icon">🚗</span> Garage Control</a></li>
+              <li><a href="fountain-pricing.html"><span class="dd-icon">⛲</span> Fountain Control</a></li>
+              <li><a href="garage-pricing.html" class="dropdown-active"><span class="dd-icon">🚗</span> Garage Control</a></li>
             </ul>
           </div>
         </li>
@@ -373,15 +370,15 @@
       <div class="mm-label">Services</div>
       <div class="mm-sub">
         <a href="gate.html">Gate Controls</a>
-        <a href="fountains.html" class="dropdown-active">Fountain Controls</a>
-        <a href="garage.html">Garage Controls</a>
+        <a href="fountains.html">Fountain Controls</a>
+        <a href="garage.html" class="dropdown-active">Garage Controls</a>
         <a href="pool.html">Pool Controls</a>
       </div>
       <div class="mm-label">Pricing</div>
       <div class="mm-sub">
         <a href="pricing.html">Gate Control</a>
-        <a href="fountain-pricing.html" class="dropdown-active">Fountain Control</a>
-        <a href="garage-pricing.html">Garage Control</a>
+        <a href="fountain-pricing.html">Fountain Control</a>
+        <a href="garage-pricing.html" class="dropdown-active">Garage Control</a>
       </div>
       <div class="mm-divider"></div>
       <a href="#contact" class="nav-cta">Get a Quote</a>
@@ -390,137 +387,155 @@
 
   <!-- ── PACKAGES ── -->
   <section id="packages"><div class="section-inner">
-    <div class="section-tag" style="color:var(--white);">Our Packages</div>
-    <h2 class="section-title">What happens to your fountain <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">when it's windy?</em></h2>
+    <div class="section-tag" style="color:var(--white);">Per-Door Pricing</div>
+    <h2 class="section-title">Is your garage door <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">still open?</em></h2>
 
-    <!-- Notification toast - cycles through different fountain scenarios -->
+    <!-- Notification toast - cycles through garage scenarios -->
     <div style="margin-bottom:2rem;text-align:center;">
-      <div class="notif-toast" id="pricingToast" style="opacity:1;transform:none;position:relative;display:inline-flex;transition:opacity 0.4s ease;">
+      <div class="notif-toast" id="pricingToast" style="opacity:1;transform:none;position:relative;display:inline-flex;transition:opacity 0.4s ease, border-color 0.6s ease, box-shadow 0.6s ease;">
         <div class="notif-dot"></div>
-        <div class="notif-icon" id="toastIcon">⛲</div>
+        <div class="notif-icon" id="toastIcon">🚗</div>
         <div class="notif-body">
-          <div class="notif-title" id="toastTitle">Fountain Schedule Active</div>
-          <div class="notif-sub" id="toastSub">Sunset mode · Fountain &amp; LEDs turned on · 7:32 PM</div>
+          <div class="notif-title" id="toastTitle">Main Garage Closed</div>
+          <div class="notif-sub" id="toastSub">Auto-close · Left open 10 min · 9:42 PM</div>
         </div>
-        <div class="notif-badge" id="toastBadge">✓ Scheduled</div>
+        <div class="notif-badge" id="toastBadge">✓ Closed</div>
       </div>
     </div>
 
-    <div class="packages-grid">
-      <!-- PHONE CONTROL -->
-      <div class="pkg-card">
-        <div class="pkg-icon-large">📱</div>
-        <div class="pkg-name">Phone Control</div>
-        <div class="pkg-tagline">Turn your fountain and LEDs on and off from your phone — from anywhere. Set schedules so it runs on its own.</div>
+    <div class="pricing-grid">
+      <!-- FIRST DOOR -->
+      <div class="pkg-card featured">
+        <div class="pkg-badge">Get Started</div>
+        <div class="pkg-icon-large">🚗</div>
+        <div class="pkg-name">First Door</div>
+        <div class="pkg-tagline">Full smart garage control — open, close, monitor, and automate your first garage or rollup door from your phone.</div>
         <div class="pkg-price-block">
-          <div class="pkg-price">$345</div>
+          <div class="pkg-price">$295</div>
           <div class="pkg-price-sub">Installed · One-time · No monthly fees</div>
         </div>
         <div class="pkg-divider"></div>
         <ul class="pkg-features">
-          <li>Control fountain pump from your phone</li>
-          <li>Control fountain LEDs from your phone</li>
-          <li>Set custom on/off schedules</li>
+          <li>Open &amp; close from your phone — anywhere</li>
+          <li>Real-time open/closed status</li>
+          <li>Instant alerts when the door opens or closes</li>
+          <li>Auto-close if left open too long</li>
+          <li>Set schedules to close at night automatically</li>
           <li>Works with Siri, Alexa &amp; Google Home</li>
-          <li><a href="#addons" style="color:var(--text);text-decoration:none;">Compatible with Home Assistant</a></li>
           <li>Share access with family members</li>
-          <li class="muted-feature">No wind protection</li>
-          <li class="muted-feature">No weather monitoring</li>
+          <li>No monthly fees — ever</li>
         </ul>
         <div class="pkg-cta"><a href="#contact" class="btn-primary">Get a Quote →</a></div>
-        <div class="pkg-note">Works with your existing fountain.<br/>WiFi or Bluetooth.</div>
+        <div class="pkg-note">Works with your existing garage door opener.<br/>Requires WiFi at the garage.</div>
       </div>
 
-      <!-- WEATHER PROTECTED -->
-      <div class="pkg-card featured">
-        <div class="pkg-badge">Recommended</div>
-        <div class="pkg-icon-large">🌬️</div>
-        <div class="pkg-name">Weather Protected</div>
-        <div class="pkg-tagline">Everything in Phone Control, plus a local weather station that automatically shuts off the fountain in high winds.</div>
+      <!-- ADDITIONAL DOORS -->
+      <div class="pkg-card">
+        <div class="pkg-icon-large">➕</div>
+        <div class="pkg-name">Each Additional Door</div>
+        <div class="pkg-tagline">Add smart control to every garage door, rollup door, or barn door on your property — all managed from a single app.</div>
         <div class="pkg-price-block">
-          <div class="pkg-price">$695</div>
-          <div class="pkg-price-sub">Installed · One-time · No monthly fees</div>
+          <div class="pkg-price">$195</div>
+          <div class="pkg-price-sub">Per door · Installed · No monthly fees</div>
         </div>
         <div class="pkg-divider"></div>
         <ul class="pkg-features">
-          <li>Everything in Phone Control, plus:</li>
-          <li>Local weather station installed on-site</li>
-          <li>Auto-shutoff when wind exceeds threshold</li>
-          <li>Protects vehicles, buildings &amp; landscaping from overspray on windy days</li>
-          <li>Wind speed &amp; gust monitoring</li>
-          <li>App notifications when wind shuts off fountain</li>
+          <li>Same full smart control as the first door</li>
+          <li>Independent open/close &amp; scheduling per door</li>
+          <li>Individual alerts for each door</li>
+          <li>Auto-close per door with custom timers</li>
+          <li>All doors in one app — one tap to see everything</li>
+          <li>Works with garage doors, rollups &amp; barn doors</li>
+          <li>Close all doors at once from the app</li>
         </ul>
         <div class="pkg-cta"><a href="#contact" class="btn-primary">Get a Quote →</a></div>
-        <div class="pkg-note">Works with your existing fountain.<br/>Solar powered weather station with battery backup.</div>
+        <div class="pkg-note">Example: 4 doors = $295 + 3 &times; $195 = $880</div>
       </div>
     </div>
 
     <div class="packages-footnote">
-      <p>Every package works with your existing fountain equipment — we add smart control to the setup you already have. Pricing includes hardware, professional installation, full system configuration, and a walkthrough. We'll confirm your quote after a free property assessment.</p>
+      <p>Every installation includes hardware, professional setup, full system configuration, and a walkthrough so you know exactly how everything works. Pricing assumes a standard garage door with an existing opener — we'll confirm your quote after a free property assessment.</p>
     </div>
   </div></section>
 
   <!-- ── PHOTO BANNER ── -->
   <div class="photo-banner">
-    <img src="img/fountain_day.png" alt="Lake fountain" loading="lazy"/>
+    <img src="img/rollup_home.png" alt="Rollup garage doors on property" loading="lazy"/>
     <div class="photo-banner-overlay">
       <div class="photo-banner-text">
-        <h2>Is your fountain running right now?</h2>
+        <h2>Did someone leave the garage open?</h2>
         <div style="font-size:3rem;margin:0.5rem 0;">🤷</div>
-        <p>No app? No schedule? No wind protection? <span style="color:var(--blue-bright);font-weight:500;">There's a better way.</span></p>
+        <p>No status? No alerts? No auto-close? <span style="color:var(--blue-bright);font-weight:500;">There's a better way.</span></p>
       </div>
     </div>
   </div>
 
   <!-- ── ADD-ONS / COMPONENTS ── -->
   <section id="addons"><div class="section-inner">
-    <div class="section-tag">Add-On Options</div>
-    <h2 class="section-title">Enhance any package.</h2>
-    <p class="section-sub">Add to any package now or later. Priced add-ons include standard installation — we'll confirm everything during your free property assessment.</p>
+    <div class="section-tag">How It Works &amp; Add-Ons</div>
+    <h2 class="section-title">What's included — and what you can add.</h2>
+    <p class="section-sub">Every door gets full smart control out of the box. Add-ons expand what's possible across your entire property.</p>
 
     <div class="how-grid">
       <div class="how-card">
-        <img class="how-card-img" src="img/fountain_phone.png" alt="Fountain phone control" loading="lazy"/>
+        <img class="how-card-img" src="img/garage_phone.png" alt="Garage door phone control" loading="lazy"/>
         <div class="how-card-body">
-        <h3>Fountain Phone Control</h3>
-        <p>A compact smart relay is wired to your fountain pump and connects to your WiFi, giving you full on/off control from your phone — from anywhere. Set custom schedules, share access with family, and use voice control with Siri, Alexa, or Google Home.</p>
+        <h3>Phone Control &amp; Status</h3>
+        <p>A compact smart controller is wired to your existing garage door opener. Open and close from your phone — from the house, at work, or on vacation. The built-in sensor knows if the door is open or closed in real time, so you always know the status of every door on your property.</p>
         </div>
       </div>
       <div class="how-card">
-        <img class="how-card-img" src="img/fountain_night.png" alt="Fountain LED lights at night" loading="lazy"/>
+        <div style="height:180px;overflow:hidden;border-bottom:1px solid var(--border);padding:0.8rem;display:flex;align-items:flex-start;">
+          <div class="dashboard-mockup" style="transform:scale(0.82);transform-origin:top center;width:122%;margin-left:-11%;box-shadow:none;">
+            <div class="mockup-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><div class="mockup-title">Garage Door Status</div></div>
+            <div class="mockup-body">
+              <div class="mockup-row"><div><div class="tag-name">Main Garage</div><div class="tag-time">Closed · 8:14 AM</div></div><div class="tag-status status-closed">Closed</div></div>
+              <div class="mockup-row"><div><div class="tag-name">Workshop</div><div class="tag-time">Open · 10:30 AM</div></div><div class="tag-status status-open">Open</div></div>
+              <div class="mockup-row"><div><div class="tag-name">Barn Rollup</div><div class="tag-time">Closed · Yesterday</div></div><div class="tag-status status-closed">Closed</div></div>
+              <div class="mockup-notif">🔔 &nbsp;<span><strong>Workshop open 10 min</strong> — auto-close in 5 min</span></div>
+            </div>
+          </div>
+        </div>
         <div class="how-card-body">
-        <h3>LED Light Control</h3>
-        <p>A second smart relay controls your fountain's LED lights independently from the pump. Turn lights on for ambiance even when the fountain is off, or set them to automatically activate at sunset whenever the fountain is running. Controlled from the same app.</p>
+        <h3>Alerts &amp; Auto-Close</h3>
+        <p>Get instant notifications when any door opens or closes. Set a timer so doors automatically close if left open too long — 5 minutes, 15 minutes, whatever you want. Schedule all doors to close at a specific time every night so nothing gets missed.</p>
         </div>
       </div>
       <div class="how-card">
-        <img class="how-card-img" src="img/weather_station.png" alt="Local weather station" loading="lazy"/>
+        <img class="how-card-img" src="img/garage_voice.png" alt="Voice control for garage doors" loading="lazy"/>
         <div class="how-card-body">
-        <h3>Local Weather Station</h3>
-        <p>A solar-powered 7-in-1 weather station is installed on your property. It measures wind speed, gusts, temperature, humidity, rain, UV, and barometric pressure — all in real time. When wind exceeds your set threshold, the fountain shuts off automatically to prevent damage. No moving parts, no maintenance.</p>
+        <h3>Voice &amp; Automation</h3>
+        <p>Works with Siri, Alexa, and Google Home out of the box. Say "close all garage doors" and it's done. Set up automations — close everything at sunset, open the workshop at 7 AM on weekdays, or trigger the garage when you arrive home.</p>
+        </div>
+      </div>
+      <div class="how-card">
+        <img class="how-card-img" src="img/garage_camera.png" alt="Garage security camera" loading="lazy"/>
+        <div class="how-card-body">
+        <h3>Garage Camera</h3>
+        <p>See inside the garage before you open it — or check who just opened it. Live video, motion detection, and recording. Pairs with your door alerts so you get a snapshot every time a door opens. Great for detached garages and workshops.</p>
+        <div style="margin-top:0.8rem;font-size:0.7rem;color:var(--muted);">Contact for pricing</div>
         </div>
       </div>
       <div class="how-card">
         <img class="how-card-img" src="img/ha_integration.png" alt="Home Assistant dashboard integration" loading="lazy"/>
         <div class="how-card-body">
         <h3>Home Assistant Integration</h3>
-        <p>Your fountain is just one piece of your property. Home Assistant brings everything — gate access, pool, lights, cameras, irrigation — into a single app on your phone. One dashboard, one system, no juggling five apps from five different vendors.</p>
+        <p>Your garage doors are just one piece of your property. Home Assistant brings everything — gates, pool, fountains, lights, cameras — into a single app on your phone. One dashboard, one system. See all your doors alongside every other smart device on the property.</p>
         <div style="margin-top:0.8rem;font-size:0.7rem;color:var(--muted);">Contact for pricing · Includes HA server hardware</div>
         </div>
       </div>
       <div class="how-card" id="wireless-bridge">
-        <!-- SWAP: Replace with photo of wireless bridge antennas -->
         <img class="how-card-img" src="img/wifi_bridge.png" alt="Point-to-point wireless bridge" loading="lazy"/>
         <div class="how-card-body">
         <h3>Point-to-Point Wireless Bridge</h3>
-        <p>No internet at the fountain? Our wireless bridge extends your home WiFi up to 3,280 feet away. Two weatherproof antennas are mounted with line of sight — one at the house, one at the fountain. Required only if you want remote control, push notifications, or voice assistant integration and don't have WiFi reaching the fountain.</p>
+        <p>Detached garage with no WiFi? Our wireless bridge extends your home network up to 3,280 feet away. Two weatherproof antennas are mounted with line of sight — one at the house, one at the garage. Required for remote control, alerts, and voice assistant integration.</p>
         <div style="margin-top:0.8rem;font-size:0.7rem;color:var(--muted);">Contact for pricing</div>
         </div>
       </div>
     </div>
 
     <div style="text-align:center;margin-top:2rem;">
-      <p style="color:var(--muted);font-size:0.82rem;line-height:1.6;">We'll quote add-ons alongside your package during your free property assessment.</p>
+      <p style="color:var(--muted);font-size:0.82rem;line-height:1.6;">We'll quote add-ons alongside your installation during your free property assessment.</p>
     </div>
   </div></section>
 
@@ -532,36 +547,36 @@
 
     <div class="faq-list">
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Do I need internet at the fountain? <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></button>
-        <div class="faq-a"><p>Not at all — everything works over Bluetooth when you're near the fountain. But with WiFi, you get remote control from anywhere, push notifications, and voice assistant integration. If your WiFi doesn't reach the fountain, our <a href="#wireless-bridge" style="color:var(--blue-bright);text-decoration:none;">wireless bridge</a> add-on extends it up to 3,280 feet.</p></div>
+        <button class="faq-q" onclick="toggleFaq(this)">Will this work with my existing garage door opener? <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+        <div class="faq-a"><p>Yes — our system works with virtually every garage door opener on the market, including LiftMaster, Chamberlain, Genie, Craftsman, Linear, and more. We wire into the existing control board, so there's no need to replace your opener. We also work with commercial rollup doors and barn door openers. We'll confirm full compatibility during your free property assessment.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">How does the wind protection work? <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></button>
-        <div class="faq-a"><p>A local weather station monitors wind speed and gusts in real time. When wind exceeds your set threshold, the fountain shuts off automatically to prevent overspray. When conditions calm down, it can be configured to restart on its own — or you can restart it manually from the app whenever you're ready.</p></div>
+        <button class="faq-q" onclick="toggleFaq(this)">Do I need WiFi at the garage? <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+        <div class="faq-a"><p>Yes — WiFi is required for remote control, notifications, and voice assistant integration. If your garage is detached and doesn't have WiFi, our <a href="#wireless-bridge" style="color:var(--blue-bright);text-decoration:none;">wireless bridge</a> add-on extends your home network up to 3,280 feet.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">What's included in the installed price? <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></button>
         <div class="faq-a"><p>Everything. Hardware, professional installation, system configuration, testing, and a full walkthrough. The price we quote is the price you pay — no surprise labor charges or hidden fees.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Can I control the fountain LEDs separately from the pump? <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></button>
-        <div class="faq-a"><p>Yes — the pump and LEDs are on separate smart relays, so you have independent control of each. Turn on the lights for evening ambiance without running the fountain, or run the fountain during the day without the lights. You can also set the LEDs to auto-on at sunset whenever the fountain is running.</p></div>
+        <button class="faq-q" onclick="toggleFaq(this)">How does auto-close work? <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+        <div class="faq-a"><p>You set a timer for each door — 5 minutes, 15 minutes, whatever you want. If the door is left open past the timer, it closes automatically. You'll get an alert before it closes. You can also schedule all doors to close at a specific time every night as a safety net.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Are there any monthly fees? <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+        <div class="faq-a"><p>No. Every installation is a one-time purchase with no subscriptions, no cloud fees, and no recurring charges. Everything runs locally on your property.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Can I control rollup doors and barn doors too? <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+        <div class="faq-a"><p>Yes. If the door has an electric opener, we can make it smart. Standard garage doors, commercial rollups, barn doors — they all work the same way in the app. Each door gets its own status, alerts, and auto-close settings.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">What happens during a power outage? <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></button>
-        <div class="faq-a"><p>The smart relays remember their last state and reconnect automatically when power is restored. Your schedules and automations resume on their own — no reconfiguration needed. The weather station runs on solar power with a battery backup, so it continues monitoring even during outages.</p></div>
+        <div class="faq-a"><p>The smart controller remembers its settings and reconnects automatically when power is restored. Your schedules and auto-close rules resume on their own — no reconfiguration needed. The garage door opener itself determines manual release behavior during an outage.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Can I start with Phone Control and upgrade later? <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></button>
-        <div class="faq-a"><p>Yes. Every package is designed to build on the one before it. Start with Phone Control, add the weather station later for wind protection, or add Home Assistant when you're ready to integrate your fountain with the rest of your property. Nothing gets replaced — we just add to what's already there.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">What if I want to control more than just the fountain? <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></button>
-        <div class="faq-a"><p>Add our <a href="#addons" style="color:var(--blue-bright);text-decoration:none;">Home Assistant integration</a> to any package. It ties your fountain into a single dashboard alongside your gate, pool, lights, cameras, and anything else on your property. One app for everything. <a href="#contact" style="color:var(--blue-bright);text-decoration:none;">Let's talk about what's possible.</a></p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Do you work with existing fountain setups? <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></button>
-        <div class="faq-a"><p>Yes. We add smart control to the fountain equipment you already have — no rip and replace. We wire smart relays to your existing pump and LED circuits. <a href="#contact" style="color:var(--blue-bright);text-decoration:none;">Let's talk about what's possible.</a></p></div>
+        <button class="faq-q" onclick="toggleFaq(this)">What if I want to control more than just the garage? <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+        <div class="faq-a"><p>Add our <a href="#addons" style="color:var(--blue-bright);text-decoration:none;">Home Assistant integration</a> to tie your garage doors into a single dashboard alongside your gate, pool, fountains, lights, cameras, and anything else on your property. One app for everything. <a href="#contact" style="color:var(--blue-bright);text-decoration:none;">Let's talk about what's possible.</a></p></div>
       </div>
     </div>
   </div></section>
@@ -570,8 +585,9 @@
   <section id="contact"><div class="section-inner">
     <div class="cta-box">
       <div class="section-tag">Get Started</div>
-      <h2 class="section-title">Ready to upgrade your fountain?</h2>
+      <h2 class="section-title">Ready to upgrade your garage?</h2>
       <p class="section-sub" style="margin-bottom:0;">Tell us about your property and we'll get back to you with a custom quote.</p>
+      <p style="font-size:0.78rem;color:var(--muted);margin-top:0.6rem;">Trusted by property owners across Sarasota — 10+ years of smart home experience.</p>
       <form class="contact-form" onsubmit="return false;">
         <div class="form-row">
           <div class="form-group"><label>First Name</label><input type="text" placeholder="John"/></div>
@@ -579,19 +595,31 @@
         </div>
         <div class="form-group"><label>Email</label><input type="email" placeholder="john@example.com"/></div>
         <div class="form-group"><label>Phone</label><input type="tel" placeholder="(555) 000-0000"/></div>
-        <div class="form-group">
-          <label>Property Type</label>
-          <select>
-            <option value="" disabled selected>Select your property type</option>
-            <option>Ranch / Farm</option>
-            <option>Estate / Residential Acreage</option>
-            <option>Lakefront Property</option>
-            <option>HOA / Community</option>
-            <option>Commercial / Multi-Building</option>
-            <option>Other</option>
-          </select>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Property Type</label>
+            <select>
+              <option value="" disabled selected>Select your property type</option>
+              <option>Ranch / Farm</option>
+              <option>Estate / Residential Acreage</option>
+              <option>Equestrian Property</option>
+              <option>Commercial / Multi-Building</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Number of Doors</label>
+            <select>
+              <option value="" disabled selected>How many doors?</option>
+              <option>1 door</option>
+              <option>2 doors</option>
+              <option>3 doors</option>
+              <option>4 doors</option>
+              <option>5+ doors</option>
+            </select>
+          </div>
         </div>
-        <div class="form-group"><label>Tell us about your fountain and property</label><textarea placeholder="What kind of fountain do you have? How far is it from the house? Any other details about your setup..."></textarea></div>
+        <div class="form-group"><label>Tell us about your garage and property</label><textarea placeholder="What kind of doors do you have? How many garages? Are any detached? Any other details about your setup..."></textarea></div>
         <div class="form-submit-row">
           <button type="submit" class="btn-primary">Send My Request →</button>
           <span class="form-note">We typically respond within 24 hours.</span>
@@ -607,8 +635,8 @@
       <div class="footer-nav"><a href="index.html">Home</a><a href="gate.html">Gate</a><a href="pool.html">Pool</a><a href="fountains.html">Fountains</a><a href="garage.html">Garage</a><a href="#contact">Contact</a></div>
     </div>
     <div class="footer-bottom">
-      <div>© 2026 Craison Digital. All rights reserved.</div>
-      <div>Smart Property Consulting · Estates &amp; Compounds · Sarasota</div>
+      <div>&copy; 2026 Craison Digital. All rights reserved.</div>
+      <div>Smart Property Consulting &middot; Estates &amp; Compounds &middot; Sarasota</div>
     </div>
   </footer>
 
@@ -636,7 +664,7 @@
     }
   }
 
-  // Cycling notification toast — 2 notifications
+  // Cycling notification toast
   (function() {
     var toast = document.getElementById('pricingToast');
     var icon = document.getElementById('toastIcon');
@@ -647,7 +675,6 @@
     var iconEl = toast ? toast.querySelector('.notif-icon') : null;
     if (!toast) return;
 
-    toast.style.transition = 'opacity 0.4s ease, border-color 0.6s ease, box-shadow 0.6s ease';
     dot.style.transition = 'background 0.6s ease, box-shadow 0.6s ease';
     iconEl.style.transition = 'background 0.6s ease, border-color 0.6s ease';
     badge.style.transition = 'background 0.6s ease, border-color 0.6s ease, color 0.6s ease';
@@ -676,41 +703,31 @@
       badge.style.color = '#f87171';
     }
 
+    var notifications = [
+      { icon: '🚗', title: 'Main Garage Closed', sub: 'Auto-close · Left open 10 min · 9:42 PM', badge: '✓ Closed', color: 'green' },
+      { icon: '🚪', title: 'Workshop Door Opened', sub: 'Craig · Phone · 7:15 AM', badge: '✓ Opened', color: 'green' },
+      { icon: '⚠️', title: 'Barn Rollup Left Open', sub: 'Open 15 min · Auto-close disabled · 3:30 PM', badge: '⚠ Open', color: 'red' },
+      { icon: '🔒', title: 'All Doors Closed', sub: 'Nightly schedule · 10:00 PM', badge: '✓ Secured', color: 'green' }
+    ];
+
+    var current = 0;
     setGreen();
-    var DISPLAY = 5000;
 
-    function loop() {
-      // Show schedule (green) for DISPLAY ms
+    function cycle() {
+      toast.style.opacity = '0';
       setTimeout(function() {
-        toast.style.opacity = '0';
-        setTimeout(function() {
-          // Swap to wind — already red
-          setRed();
-          icon.textContent = '🌬️';
-          title.textContent = 'Wind Protection Activated';
-          sub.textContent = 'Wind gust 24 mph · Fountain auto-shutoff · 2:15 PM';
-          badge.textContent = '⛔ Shutoff';
-          toast.style.opacity = '1';
-
-          // Show wind (red) for DISPLAY ms
-          setTimeout(function() {
-            toast.style.opacity = '0';
-            setTimeout(function() {
-              // Swap back to schedule (green)
-              setGreen();
-              icon.textContent = '⛲';
-              title.textContent = 'Fountain Schedule Active';
-              sub.textContent = 'Sunset mode · Fountain & LEDs turned on · 7:32 PM';
-              badge.textContent = '✓ Scheduled';
-              toast.style.opacity = '1';
-              loop();
-            }, 400);
-          }, DISPLAY);
-        }, 400);
-      }, DISPLAY);
+        current = (current + 1) % notifications.length;
+        var n = notifications[current];
+        icon.textContent = n.icon;
+        title.textContent = n.title;
+        sub.textContent = n.sub;
+        badge.textContent = n.badge;
+        if (n.color === 'red') { setRed(); } else { setGreen(); }
+        toast.style.opacity = '1';
+      }, 400);
     }
 
-    loop();
+    setInterval(cycle, 5000);
   })();
   </script>
 

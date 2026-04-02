@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Craison Digital – Whole Property Integration</title>
+  <meta name="description" content="Unify every smart device across your entire property into one app. Lights, cameras, locks, climate, audio, irrigation — all working together. No rip and replace."/>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230d1320'/><text x='4' y='24' font-size='22' font-weight='bold' fill='%2300d4ff'>C</text></svg>"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #060a10; --dark: #0b1018; --card: #0f1724;
+      --card-hover: #141d2e; --border: rgba(255,255,255,0.06);
+      --blue: #2f80ed; --blue-bright: #5ba4f5;
+      --blue-glow: rgba(47,128,237,0.15); --cyan: #00d4ff;
+      --green: #4ade80; --green-glow: rgba(74,222,128,0.15);
+      --text: #e4e9f2; --muted: #6b7a8d; --white: #f4f7fb;
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--text); font-family: var(--font-body); font-weight: 300; line-height: 1.75; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.5; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(6,10,16,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    .nav-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 4rem; }
+    .nav-logo { font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--cyan); }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--text); margin: 5px 0; border-radius: 2px; }
+    .nav-links { display: flex; align-items: center; gap: 2.2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 400; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.nav-active { color: var(--text); }
+    .nav-cta { background: var(--blue); color: var(--white) !important; padding: 0.5rem 1.4rem; border-radius: 6px; font-weight: 500 !important; transition: background 0.2s, transform 0.15s; }
+    .nav-cta:hover { background: var(--blue-bright) !important; transform: translateY(-1px); }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { display: inline-flex; align-items: center; gap: 0.3rem; cursor: default; }
+    .nav-dropdown > a svg { transition: transform 0.2s; }
+    .dropdown-panel { visibility: hidden; opacity: 0; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); padding-top: 0.75rem; z-index: 110; transition: visibility 0.15s, opacity 0.15s; }
+    .nav-dropdown:hover .dropdown-panel { visibility: visible; opacity: 1; }
+    .nav-dropdown:hover > a svg { transform: rotate(180deg); }
+    .dropdown-inner { background: rgba(11,16,24,0.97); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 0.5rem 0; min-width: 240px; box-shadow: 0 16px 48px rgba(0,0,0,0.6); list-style: none; }
+    .dropdown-inner li a { display: flex; align-items: center; gap: 0.65rem; padding: 0.65rem 1.2rem; font-size: 0.84rem; color: var(--muted); transition: all 0.15s; white-space: nowrap; }
+    .dropdown-inner li a:hover { color: var(--white); background: rgba(47,128,237,0.08); }
+    .dropdown-inner li a.dropdown-active { color: var(--blue-bright); }
+    .dropdown-inner li a .dd-icon { font-size: 1rem; width: 1.2rem; text-align: center; flex-shrink: 0; }
+    .mobile-menu { display: none; }
+
+    .hero { position: relative; width: 100%; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; padding-top: 70px; }
+    .hero-bg { position: absolute; inset: 0; background: linear-gradient(180deg, #040710 0%, #081525 40%, #0a1a30 100%); }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(47,128,237,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(47,128,237,0.04) 1px, transparent 1px); background-size: 56px 56px; mask-image: radial-gradient(ellipse 85% 75% at 50% 55%, black 15%, transparent 100%); -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 55%, black 15%, transparent 100%); }
+    .hero-glow { position: absolute; top: 15%; left: 50%; transform: translateX(-50%); width: 700px; height: 400px; background: radial-gradient(ellipse, rgba(47,128,237,0.08) 0%, transparent 70%); pointer-events: none; }
+    .hero-headline-above { position: relative; z-index: 3; text-align: center; padding: 2rem 2rem 1.5rem; }
+    .hero-headline-above h1 { font-family: var(--font-display); font-size: clamp(2.2rem,5.2vw,4.2rem); font-weight: 800; line-height: 1.06; letter-spacing: -0.025em; margin-bottom: 0; animation: fadeUp 0.6s 0.1s ease both; color: var(--white); }
+    .hero-headline-above h1 em { font-style: normal; background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .notif-area { position: relative; z-index: 2; width: 100%; max-width: 600px; margin: 0 auto; padding: 1.5rem 1rem; min-height: 80px; display: flex; align-items: center; justify-content: center; }
+    .notif-toast { background: rgba(8,18,32,0.96); border: 1px solid rgba(74,222,128,0.35); border-radius: 14px; padding: 1rem 1.4rem; display: flex; align-items: center; gap: 0.9rem; box-shadow: 0 0 40px rgba(74,222,128,0.15), 0 8px 40px rgba(0,0,0,0.5); opacity: 0; transform: translateY(14px) scale(0.97); transition: opacity 0.5s ease, transform 0.5s ease; max-width: 420px; width: 100%; }
+    .notif-toast.visible { opacity: 1; transform: translateY(0) scale(1); }
+    .notif-icon { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg,#1a4a2a,#0d2a1a); border: 1.5px solid rgba(74,222,128,0.35); display: flex; align-items: center; justify-content: center; font-size: 1.15rem; flex-shrink: 0; }
+    .notif-body { flex: 1; }
+    .notif-title { font-family: var(--font-display); font-size: 0.88rem; font-weight: 700; color: var(--text); margin-bottom: 0.1rem; }
+    .notif-sub { font-size: 0.72rem; color: var(--muted); }
+    .notif-badge { background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.25); color: var(--green); font-size: 0.65rem; font-weight: 600; padding: 0.2rem 0.55rem; border-radius: 100px; white-space: nowrap; }
+    .notif-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); flex-shrink: 0; animation: blink 1s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .hero-content { position: relative; z-index: 3; width: 100%; text-align: center; padding: 2.5rem 2rem 5rem; }
+    .hero-content .hero-sub { font-size: 1.08rem; color: var(--muted); max-width: 850px; margin: 0 auto 2.2rem; animation: fadeUp 0.6s 0.2s ease both; line-height: 1.7; }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+    .btn-primary { background: var(--blue); color: var(--white); padding: 0.8rem 2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 500; text-decoration: none; border: none; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 20px rgba(47,128,237,0.25); display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-primary:hover { background: var(--blue-bright); transform: translateY(-1px); box-shadow: 0 0 32px rgba(47,128,237,0.4); }
+    .btn-secondary { background: transparent; color: var(--text); padding: 0.8rem 2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 400; text-decoration: none; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.15); color: var(--white); }
+
+    section { position: relative; z-index: 1; }
+    .section-inner { max-width: 1100px; margin: 0 auto; padding: 6rem 4rem; }
+    .section-tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue-bright); margin-bottom: 0.7rem; }
+    .section-title { font-family: var(--font-display); font-size: clamp(1.7rem,3.2vw,2.6rem); font-weight: 800; line-height: 1.12; letter-spacing: -0.02em; margin-bottom: 1rem; color: var(--white); }
+    .section-sub { color: var(--muted); font-size: 1rem; max-width: 520px; margin-bottom: 3rem; line-height: 1.7; }
+
+    /* ── PROBLEM CARDS ── */
+    #problem { background: var(--dark); }
+    .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .problem-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; }
+    .problem-card h3 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; margin-bottom: 1.2rem; color: var(--white); display: flex; align-items: center; gap: 0.7rem; }
+    .problem-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+    .problem-card li { font-size: 0.9rem; color: var(--muted); display: flex; align-items: flex-start; gap: 0.7rem; line-height: 1.6; }
+    .problem-card li::before { content: '—'; color: rgba(255,255,255,0.15); flex-shrink: 0; margin-top: 1px; }
+    .solution-card li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+    .solution-card { border-color: rgba(47,128,237,0.15); background: linear-gradient(135deg, var(--card) 0%, rgba(47,128,237,0.04) 100%); }
+
+    /* ── INTEGRATIONS GRID ── */
+    .integrations-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .int-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.6rem; text-align: center; transition: all 0.3s; }
+    .int-card:hover { border-color: rgba(47,128,237,0.15); background: var(--card-hover); }
+    .int-icon { font-size: 1.8rem; margin-bottom: 0.6rem; display: block; }
+    .int-card h4 { font-family: var(--font-display); font-size: 0.88rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
+    .int-card p { font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── SCENES ── */
+    #scenes { background: var(--dark); }
+    .scenes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .scene-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; transition: all 0.3s; }
+    .scene-card:hover { background: var(--card-hover); border-color: rgba(47,128,237,0.15); }
+    .scene-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+    .scene-icon { width: 42px; height: 42px; background: var(--blue-glow); border: 1px solid rgba(47,128,237,0.18); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    .scene-name { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--white); }
+    .scene-trigger { font-size: 0.68rem; color: var(--blue-bright); font-weight: 500; }
+    .scene-steps { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .scene-steps li { font-size: 0.82rem; color: var(--muted); display: flex; align-items: center; gap: 0.6rem; line-height: 1.5; }
+    .scene-steps li::before { content: '→'; color: var(--cyan); font-weight: 700; flex-shrink: 0; }
+
+    /* ── DASHBOARD MOCKUP ── */
+    #dashboard { background: var(--black); }
+    .dashboard-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .feature-list { display: flex; flex-direction: column; gap: 1.4rem; }
+    .feature-item { display: flex; gap: 0.9rem; align-items: flex-start; }
+    .feature-check { width: 20px; height: 20px; border-radius: 50%; background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.25); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 3px; font-size: 0.6rem; color: var(--cyan); }
+    .feature-text strong { display: block; font-weight: 500; font-size: 0.92rem; margin-bottom: 0.15rem; color: var(--white); }
+    .feature-text span { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
+    .dashboard-mockup { background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: 0 20px 70px rgba(0,0,0,0.5), 0 0 0 1px rgba(47,128,237,0.08); }
+    .mockup-bar { background: #0a0f18; border-bottom: 1px solid var(--border); padding: 0.7rem 1rem; display: flex; align-items: center; gap: 0.45rem; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; }
+    .dot-r{background:#ff5f57} .dot-y{background:#febc2e} .dot-g{background:#28c840}
+    .mockup-title { margin-left: auto; margin-right: auto; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.03em; }
+    .mockup-body { padding: 1.2rem; }
+    .mockup-row { display: flex; justify-content: space-between; align-items: center; padding: 0.65rem 0.9rem; background: rgba(255,255,255,0.02); border-radius: 8px; margin-bottom: 0.5rem; font-size: 0.78rem; }
+    .mockup-row:last-child { margin-bottom: 0; }
+    .tag-name { font-weight: 500; color: var(--text); font-size: 0.8rem; }
+    .tag-time { color: var(--muted); font-size: 0.68rem; }
+    .tag-status { font-size: 0.68rem; padding: 0.15rem 0.6rem; border-radius: 100px; font-weight: 500; }
+    .status-on{background:rgba(40,200,100,0.1);color:#4ade80;border:1px solid rgba(40,200,100,0.18)}
+    .status-off{background:rgba(255,255,255,0.04);color:var(--muted);border:1px solid var(--border)}
+    .status-locked{background:rgba(47,128,237,0.08);color:var(--blue-bright);border:1px solid rgba(47,128,237,0.18)}
+    .mockup-notif { margin-top: 0.8rem; background: rgba(47,128,237,0.06); border: 1px solid rgba(47,128,237,0.12); border-radius: 8px; padding: 0.65rem 0.9rem; font-size: 0.72rem; color: var(--blue-bright); display: flex; gap: 0.5rem; align-items: center; }
+
+    /* ── HOW IT WORKS ── */
+    .steps { display: flex; flex-direction: column; position: relative; }
+    .steps::before { content: ''; position: absolute; left: 22px; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--blue), transparent); }
+    .step { display: grid; grid-template-columns: 48px 1fr; gap: 1.6rem; padding: 1.8rem 0; border-bottom: 1px solid var(--border); }
+    .step:last-child { border-bottom: none; }
+    .step-num { width: 44px; height: 44px; border-radius: 50%; background: var(--blue-glow); border: 1px solid var(--blue); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 0.82rem; font-weight: 700; color: var(--blue-bright); flex-shrink: 0; position: relative; z-index: 1; }
+    .step-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem; color: var(--white); }
+    .step-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── BEYOND ── */
+    .beyond-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .beyond-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.6rem; text-align: center; transition: all 0.3s; }
+    .beyond-card:hover { border-color: rgba(47,128,237,0.15); background: var(--card-hover); }
+    .beyond-card h4 { font-family: var(--font-display); font-size: 0.88rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
+    .beyond-card p { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── CONTACT ── */
+    #contact { text-align: center; }
+    .cta-box { max-width: 600px; margin: 0 auto; }
+    .contact-form { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 2rem; text-align: left; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+    label { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.04em; font-weight: 400; }
+    input, textarea, select { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 0.7rem 0.9rem; color: var(--text); font-family: var(--font-body); font-size: 0.88rem; outline: none; transition: border-color 0.2s; width: 100%; }
+    input:focus, textarea:focus, select:focus { border-color: rgba(47,128,237,0.4); }
+    textarea { resize: vertical; min-height: 100px; }
+    select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7a8d' fill='none' stroke-width='1.5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.9rem center; padding-right: 2.2rem; }
+    select option { background: var(--card); color: var(--text); }
+    .form-submit-row { display: flex; align-items: center; gap: 1rem; margin-top: 0.5rem; }
+    .form-submit-row .btn-primary { flex-shrink: 0; }
+    .form-note { font-size: 0.72rem; color: var(--muted); }
+
+    footer { border-top: 1px solid var(--border); background: var(--black); padding: 2.5rem 4rem; font-size: 0.78rem; color: var(--muted); }
+    .footer-logo { font-family: var(--font-display); font-weight: 800; font-size: 0.95rem; color: var(--white); }
+    .footer-logo span { color: var(--cyan); }
+    .footer-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; }
+    .footer-nav { display: flex; gap: 1.8rem; }
+    .footer-nav a { color: var(--muted); text-decoration: none; font-size: 0.8rem; transition: color 0.2s; }
+    .footer-nav a:hover { color: var(--text); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 1.2rem; border-top: 1px solid var(--border); }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 960px) {
+      .integrations-grid { grid-template-columns: repeat(3, 1fr); }
+      .beyond-grid { grid-template-columns: 1fr 1fr; }
+      .dashboard-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .problem-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-bar { padding: 0.9rem 1.5rem; }
+      .nav-toggle { display: block; }
+      .nav-links { display: none !important; }
+      .mobile-menu { display: none; flex-direction: column; align-items: center; padding: 1.2rem 2rem 1.8rem; border-top: 1px solid var(--border); background: var(--black); }
+      .mobile-menu.open { display: flex; }
+      .mobile-menu a { display: block; width: 100%; text-align: center; padding: 0.55rem 0; font-size: 1rem; color: var(--text); text-decoration: none; transition: color 0.15s; }
+      .mobile-menu a:active { color: var(--blue-bright); }
+      .mobile-menu .mm-label { display: block; width: 100%; text-align: center; padding: 0.6rem 0 0.15rem; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-bright); }
+      .mobile-menu .mm-sub a { color: var(--muted); font-size: 1rem; padding: 0.45rem 0; }
+      .mobile-menu .mm-sub a:active { color: var(--text); }
+      .mobile-menu .mm-sub a.dropdown-active { color: var(--blue-bright); }
+      .mobile-menu .mm-divider { width: 32px; height: 1px; background: var(--border); margin: 0.4rem auto; }
+      .mobile-menu .nav-cta { display: inline-block; margin-top: 0.4rem; padding: 0.6rem 1.8rem; font-size: 1rem; }
+      .section-inner { padding: 4rem 1.5rem; }
+      .integrations-grid { grid-template-columns: 1fr 1fr; }
+      .scenes-grid { grid-template-columns: 1fr; }
+      .beyond-grid { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 0.8rem; text-align: center; padding: 2rem 1.5rem; }
+      .footer-top { flex-direction: column; gap: 0.8rem; }
+      .footer-nav { justify-content: center; flex-wrap: wrap; gap: 1rem; }
+      .footer-bottom { flex-direction: column; gap: 0.4rem; text-align: center; }
+      .form-submit-row { flex-direction: column; align-items: stretch; }
+      .notif-toast { padding: 0.6rem 0.7rem; gap: 0.4rem; max-width: 270px; border-radius: 10px; }
+      .notif-icon { width: 28px; height: 28px; font-size: 0.85rem; }
+      .notif-title { font-size: 0.72rem; }
+      .notif-sub { font-size: 0.6rem; }
+      .notif-badge { font-size: 0.52rem; padding: 0.12rem 0.4rem; }
+      .notif-dot { width: 5px; height: 5px; }
+    }
+    @media (max-width: 480px) {
+      .integrations-grid { grid-template-columns: 1fr 1fr; }
+      .beyond-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-bar">
+      <a href="index.html" class="nav-logo">Craison<span>Digital</span></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li class="nav-dropdown">
+          <a class="nav-active">Services <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+          <div class="dropdown-panel">
+            <ul class="dropdown-inner">
+              <li><a href="gate.html"><span class="dd-icon">🚪</span> Gate Controls</a></li>
+              <li><a href="fountains.html"><span class="dd-icon">⛲</span> Fountain Controls</a></li>
+              <li><a href="garage.html"><span class="dd-icon">🚗</span> Garage Controls</a></li>
+              <li><a href="pool.html"><span class="dd-icon">🌊</span> Pool Controls</a></li>
+              <li><a href="integration.html" class="dropdown-active"><span class="dd-icon">🏠</span> Whole Property</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-dropdown">
+          <a>Pricing <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+          <div class="dropdown-panel">
+            <ul class="dropdown-inner">
+              <li><a href="pricing.html"><span class="dd-icon">🚪</span> Gate Control</a></li>
+              <li><a href="fountain-pricing.html"><span class="dd-icon">⛲</span> Fountain Control</a></li>
+              <li><a href="garage-pricing.html"><span class="dd-icon">🚗</span> Garage Control</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+      </ul>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <div class="mm-label">Services</div>
+      <div class="mm-sub">
+        <a href="gate.html">Gate Controls</a>
+        <a href="fountains.html">Fountain Controls</a>
+        <a href="garage.html">Garage Controls</a>
+        <a href="pool.html">Pool Controls</a>
+        <a href="integration.html" class="dropdown-active">Whole Property</a>
+      </div>
+      <div class="mm-label">Pricing</div>
+      <div class="mm-sub">
+        <a href="pricing.html">Gate Control</a>
+        <a href="fountain-pricing.html">Fountain Control</a>
+        <a href="garage-pricing.html">Garage Control</a>
+      </div>
+      <div class="mm-divider"></div>
+      <a href="#contact" class="nav-cta">Get a Quote</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+
+    <div class="hero-headline-above">
+      <h1>Every device. Every building.<br/><em>One app.</em></h1>
+    </div>
+
+    <div class="notif-area">
+      <div class="notif-toast" id="notifToast">
+        <div class="notif-dot"></div>
+        <div class="notif-icon" id="notifIconEl">🚗</div>
+        <div class="notif-body">
+          <div class="notif-title" id="notifTitleEl">Craig arriving home</div>
+          <div class="notif-sub" id="notifSubEl">Gate opened · Garage opening · Lights on</div>
+        </div>
+        <div class="notif-badge" id="notifBadgeEl">✓ Scene</div>
+      </div>
+    </div>
+
+    <div class="hero-content">
+      <p class="hero-sub">You've invested in smart devices across your property. We connect them all — every brand, every building, every room — into one intelligent system that actually works together.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></a>
+        <a href="#how" class="btn-secondary">How It Works</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROBLEM / SOLUTION ── -->
+  <section id="problem"><div class="section-inner">
+    <div class="section-tag">The Problem</div>
+    <h2 class="section-title">You bought smart devices.<br/>They don't <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">talk to each other.</em></h2>
+    <p class="section-sub">Different brands, different apps, different installers over the years. Nothing works as one system.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div style="text-align:center;margin-bottom:0.8rem;"><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><polygon points="11.5,2 24.5,2 34,11.5 34,24.5 24.5,34 11.5,34 2,24.5 2,11.5" stroke="#f87171" stroke-width="2" fill="rgba(248,113,113,0.08)"/><line x1="10" y1="18" x2="26" y2="18" stroke="#f87171" stroke-width="3" stroke-linecap="round"/></svg></div><h3>The way it is now</h3>
+        <ul>
+          <li>A different app for lights, cameras, locks, thermostat, pool, and gate</li>
+          <li>Nothing talks to each other — your Ring doesn't know your Lutron exists</li>
+          <li>Three different installers over the years, none of them understand the whole picture</li>
+          <li>Your spouse gave up trying to figure it out</li>
+          <li>Smart home that feels anything but smart</li>
+        </ul>
+      </div>
+      <div class="problem-card solution-card">
+        <div style="text-align:center;margin-bottom:0.8rem;"><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="16" stroke="#4ade80" stroke-width="2" fill="rgba(74,222,128,0.08)"/><polygon points="13,10 27,18 13,26" fill="#4ade80"/></svg></div><h3>The way it should be</h3>
+        <ul>
+          <li>One app controls everything — every device, every room, every building</li>
+          <li>Motion at the gate turns on your driveway lights automatically</li>
+          <li>Say "goodnight" and every door locks, every light turns off, cameras arm</li>
+          <li>Anyone in the house can use it — simple, intuitive, no training needed</li>
+          <li>Your existing devices finally work together as one system</li>
+        </ul>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- ── WHAT WE INTEGRATE ── -->
+  <section id="integrations"><div class="section-inner" style="text-align:center;">
+    <div class="section-tag">What We Connect</div>
+    <h2 class="section-title">Your devices. <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Any brand.</em></h2>
+    <p class="section-sub" style="margin:0 auto 3rem;">We don't rip and replace. We integrate what you already own — whatever the brand, whatever the age.</p>
+    <div class="integrations-grid">
+      <div class="int-card reveal"><div class="int-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 4v4M14 20v4M4 14h4M20 14h4" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="14" r="5" stroke="var(--cyan)" stroke-width="2"/></svg></div><h4>Lighting</h4><p>Lutron, Hue, smart switches — any brand</p></div>
+      <div class="int-card reveal"><div class="int-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="6" y="6" width="16" height="16" rx="3" stroke="var(--cyan)" stroke-width="2"/><circle cx="14" cy="14" r="3" stroke="var(--cyan)" stroke-width="1.5"/><path d="M14 6v3M14 19v3M6 14h3M19 14h3" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round"/></svg></div><h4>Climate</h4><p>Nest, ecobee, Honeywell, mini-splits</p></div>
+      <div class="int-card reveal"><div class="int-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="11" r="5" stroke="var(--cyan)" stroke-width="2"/><path d="M7 24c0-4 3-7 7-7s7 3 7 7" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round"/></svg></div><h4>Cameras</h4><p>Ring, UniFi, Reolink, Hikvision</p></div>
+      <div class="int-card reveal"><div class="int-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="9" y="4" width="10" height="20" rx="3" stroke="var(--cyan)" stroke-width="2"/><circle cx="14" cy="13" r="2.5" stroke="var(--cyan)" stroke-width="1.5"/><line x1="14" y1="15.5" x2="14" y2="19" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round"/></svg></div><h4>Locks</h4><p>Yale, August, Schlage</p></div>
+      <div class="int-card reveal"><div class="int-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="8" stroke="var(--cyan)" stroke-width="2"/><path d="M10 12c1-2 3-3 4-3s3 1 4 3" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round"/><path d="M10 16c1 2 3 3 4 3s3-1 4-3" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round"/></svg></div><h4>Audio</h4><p>Sonos, Apple TV, media systems</p></div>
+      <div class="int-card reveal"><div class="int-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 4v8" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round"/><path d="M10 8c0 0 2 6 4 6s4-6 4-6" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round"/><path d="M8 14c0 0 3 8 6 8s6-8 6-8" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round"/><line x1="14" y1="22" x2="14" y2="26" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round"/></svg></div><h4>Irrigation</h4><p>Rachio, Hunter, Rain Bird</p></div>
+      <div class="int-card reveal"><div class="int-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="10" width="20" height="12" rx="2" stroke="var(--cyan)" stroke-width="2"/><path d="M10 10V7a4 4 0 0 1 8 0v3" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round"/></svg></div><h4>Security</h4><p>Alarms, sensors, leak detectors</p></div>
+      <div class="int-card reveal"><div class="int-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 14L14 6l10 8" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 12v10h14V12" stroke="var(--cyan)" stroke-width="2" stroke-linejoin="round"/><rect x="11" y="16" width="6" height="6" stroke="var(--cyan)" stroke-width="1.5"/></svg></div><h4>Everything Else</h4><p>Shades, vacuums, generators, and more</p></div>
+    </div>
+    <div style="margin-top:2.5rem;padding:1.5rem 2rem;background:var(--card);border:1px solid var(--border);border-radius:12px;display:inline-flex;align-items:center;gap:0.8rem;width:100%;justify-content:center;">
+      <span style="font-family:var(--font-display);font-size:0.95rem;font-weight:700;color:var(--text);">Works with Siri, Alexa &amp; Google Home — <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">voice control for everything.</em></span>
+    </div>
+  </div></section>
+
+  <!-- ── SCENES ── -->
+  <section id="scenes"><div class="section-inner">
+    <div class="section-tag">The Magic</div>
+    <h2 class="section-title">Devices that <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">think together.</em></h2>
+    <p class="section-sub">When everything is connected, your property starts to anticipate. One event triggers a chain reaction across every system.</p>
+    <div class="scenes-grid">
+      <div class="scene-card reveal">
+        <div class="scene-header">
+          <div class="scene-icon">🚗</div>
+          <div><div class="scene-name">Arriving Home</div><div class="scene-trigger">Triggered by: vehicle approaching gate</div></div>
+        </div>
+        <ul class="scene-steps">
+          <li>Gate opens automatically</li>
+          <li>Driveway lights illuminate a path to the house</li>
+          <li>Garage door opens</li>
+          <li>Interior lights set to welcome scene</li>
+          <li>Thermostat adjusts from away to comfort</li>
+          <li>Security system disarms</li>
+        </ul>
+      </div>
+      <div class="scene-card reveal">
+        <div class="scene-header">
+          <div class="scene-icon">🌙</div>
+          <div><div class="scene-name">Goodnight</div><div class="scene-trigger">Triggered by: voice command or one tap</div></div>
+        </div>
+        <ul class="scene-steps">
+          <li>All doors lock and confirm locked</li>
+          <li>All lights dim and turn off in sequence</li>
+          <li>Garage doors verified closed</li>
+          <li>Cameras switch to armed mode</li>
+          <li>Fountain pumps shut off</li>
+          <li>Thermostat shifts to sleep schedule</li>
+        </ul>
+      </div>
+      <div class="scene-card reveal">
+        <div class="scene-header">
+          <div class="scene-icon">👋</div>
+          <div><div class="scene-name">Guest Arriving</div><div class="scene-trigger">Triggered by: guest code at gate</div></div>
+        </div>
+        <ul class="scene-steps">
+          <li>Gate opens for authorized guest</li>
+          <li>Pathway lights from driveway to guest house</li>
+          <li>Guest house HVAC activates</li>
+          <li>Guest house lights set to welcoming scene</li>
+          <li>Owner notified with camera snapshot</li>
+        </ul>
+      </div>
+      <div class="scene-card reveal">
+        <div class="scene-header">
+          <div class="scene-icon">⛈️</div>
+          <div><div class="scene-name">Storm Approaching</div><div class="scene-trigger">Triggered by: weather station data</div></div>
+        </div>
+        <ul class="scene-steps">
+          <li>Fountain pumps shut down</li>
+          <li>Outdoor audio turns off</li>
+          <li>Open windows flagged with alert</li>
+          <li>Exterior cameras increase sensitivity</li>
+          <li>Generator pre-check runs</li>
+        </ul>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- ── DASHBOARD ── -->
+  <section id="dashboard"><div class="section-inner">
+    <div class="dashboard-layout">
+      <div>
+        <div class="section-tag">Your Dashboard</div>
+        <h2 class="section-title">Your entire property.<br/><em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">One screen.</em></h2>
+        <p class="section-sub" style="margin-bottom:2rem;">This is what it looks like when every system on your property is finally connected.</p>
+        <div class="feature-list">
+          <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Built for how you live</strong><span>Your dashboard shows only what matters to you — no clutter, no menus six levels deep.</span></div></div>
+          <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Everyone can use it</strong><span>Simple enough for your spouse, your housekeeper, your guests. No training manual required.</span></div></div>
+          <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Works from anywhere</strong><span>Check on your Sarasota property from your summer home up north. Full control, full visibility.</span></div></div>
+          <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>No cloud dependency</strong><span>Everything runs locally on your property. Fast, private, and works even if your internet goes down.</span></div></div>
+        </div>
+      </div>
+      <div class="dashboard-mockup">
+        <div class="mockup-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><div class="mockup-title">Property Overview</div></div>
+        <div class="mockup-body">
+          <div class="mockup-row"><div><div class="tag-name">Front Gate</div><div class="tag-time">Closed · Last entry 3:12 PM</div></div><div class="tag-status status-locked">Secured</div></div>
+          <div class="mockup-row"><div><div class="tag-name">Main House — Lights</div><div class="tag-time">Kitchen, Living Room</div></div><div class="tag-status status-on">On</div></div>
+          <div class="mockup-row"><div><div class="tag-name">Guest House — HVAC</div><div class="tag-time">Set to 72° · Cooling</div></div><div class="tag-status status-on">Active</div></div>
+          <div class="mockup-row"><div><div class="tag-name">Pool — Heater</div><div class="tag-time">Spa 102° · Reached target</div></div><div class="tag-status status-on">Ready</div></div>
+          <div class="mockup-row"><div><div class="tag-name">Garage — All Doors</div><div class="tag-time">3 doors · All closed</div></div><div class="tag-status status-locked">Closed</div></div>
+          <div class="mockup-row"><div><div class="tag-name">Lake Fountain</div><div class="tag-time">Wind 8 mph · Running</div></div><div class="tag-status status-on">On</div></div>
+          <div class="mockup-row"><div><div class="tag-name">Irrigation — Zone 3</div><div class="tag-time">Next run: Tomorrow 6 AM</div></div><div class="tag-status status-off">Idle</div></div>
+          <div class="mockup-notif">🌙 &nbsp;<span><strong>"Goodnight"</strong> — 8 devices updated · All doors locked · Cameras armed</span></div>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- ── HOW IT WORKS ── -->
+  <section id="how"><div class="section-inner">
+    <div class="section-tag">How It Works</div>
+    <h2 class="section-title">Three steps to a <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">unified property.</em></h2>
+    <p class="section-sub">No construction. No ripping anything out. We work with what you have.</p>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div>
+          <div class="step-title">We walk every acre and learn what you have</div>
+          <div class="step-desc">Different buildings, different brands, different installers who came and went over the years. We audit every device on your property — what works, what doesn't, and what's been sitting unused because nobody could figure it out.</div>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <div>
+          <div class="step-title">We connect everything into one system</div>
+          <div class="step-desc">We install a central hub on your property and integrate every device — regardless of brand or age — into a single platform. Your Lutron lights, Ring cameras, Sonos speakers, Rachio irrigation, pool equipment, gate, garage doors — all unified.</div>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <div>
+          <div class="step-title">We build your dashboard around how you live</div>
+          <div class="step-desc">No generic templates. We build a custom dashboard with only the controls you actually use, set up automations that match your routines, and make sure everyone in the household can use it without a manual. Then we stay — tuning and improving as your needs change.</div>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- ── BEYOND ── -->
+  <section id="beyond"><div class="section-inner" style="text-align:center;">
+    <div class="section-tag">Explore Our Services</div>
+    <h2 class="section-title"><em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Dedicated solutions</em> for every system.</h2>
+    <p class="section-sub" style="margin:0 auto 3rem;">Each of these can be installed standalone or as part of your whole-property integration.</p>
+    <div class="beyond-grid">
+      <a href="gate.html" class="beyond-card" style="padding:0;overflow:hidden;text-decoration:none;"><img src="img/gate_home.png" alt="Gate Control" style="width:100%;height:120px;object-fit:cover;"/><div style="padding:1rem 1.6rem 1.6rem;"><h4>Gate Control</h4><p>Hands-free entry, phone access, visitor logging, and automatic opening.</p></div></a>
+      <a href="pool.html" class="beyond-card" style="padding:0;overflow:hidden;text-decoration:none;"><img src="img/pool_home.png" alt="Pool Controls" style="width:100%;height:120px;object-fit:cover;"/><div style="padding:1rem 1.6rem 1.6rem;"><h4>Pool &amp; Spa</h4><p>One tap to heat the spa. Voice controls. Custom dashboard for any equipment.</p></div></a>
+      <a href="fountains.html" class="beyond-card" style="padding:0;overflow:hidden;text-decoration:none;"><img src="img/fountain_night.png" alt="Fountain Controls" style="width:100%;height:120px;object-fit:cover;"/><div style="padding:1rem 1.6rem 1.6rem;"><h4>Fountains</h4><p>Schedules, phone control, automatic wind shutoff, and synced lighting.</p></div></a>
+      <a href="garage.html" class="beyond-card" style="padding:0;overflow:hidden;text-decoration:none;"><img src="img/rollup_home.png" alt="Garage Controls" style="width:100%;height:120px;object-fit:cover;"/><div style="padding:1rem 1.6rem 1.6rem;"><h4>Garage Doors</h4><p>Open, close, and monitor every door across every building from one app.</p></div></a>
+    </div>
+  </div></section>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact"><div class="section-inner">
+    <div class="cta-box" style="max-width:700px;">
+      <div class="section-tag">Get Started</div>
+      <h2 class="section-title">Tell us about your <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">property.</em></h2>
+      <p class="section-sub" style="margin:0 auto;max-width:600px;">Tell us what you have, what's frustrating you, and what you wish worked better. We'll take it from there.</p>
+      <form class="contact-form" onsubmit="return false;">
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" placeholder="John"/></div>
+          <div class="form-group"><label>Last Name</label><input type="text" placeholder="Smith"/></div>
+        </div>
+        <div class="form-group"><label>Email</label><input type="email" placeholder="john@example.com"/></div>
+        <div class="form-group"><label>Phone</label><input type="tel" placeholder="(555) 000-0000"/></div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Property Type</label>
+            <select>
+              <option value="" disabled selected>Select your property type</option>
+              <option>Ranch / Farm</option>
+              <option>Estate / Residential Acreage</option>
+              <option>Equestrian Property</option>
+              <option>Commercial / Multi-Building</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Number of Buildings</label>
+            <select>
+              <option value="" disabled selected>How many buildings?</option>
+              <option>1 building</option>
+              <option>2 buildings</option>
+              <option>3–4 buildings</option>
+              <option>5+ buildings</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label>Tell us about your property and what you'd like to improve</label><textarea placeholder="What smart devices do you already have? What's frustrating you? What do you wish worked better?"></textarea></div>
+        <div class="form-submit-row">
+          <button type="submit" class="btn-primary">Send My Request →</button>
+          <span class="form-note">We typically respond within 24 hours.</span>
+        </div>
+      </form>
+    </div>
+  </div></section>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-logo"><a href="index.html" style="color:inherit;text-decoration:none;">Craison<span>Digital</span></a></div>
+      <div class="footer-nav"><a href="index.html">Home</a><a href="gate.html">Gate</a><a href="pool.html">Pool</a><a href="fountains.html">Fountains</a><a href="garage.html">Garage</a><a href="integration.html">Integration</a><a href="#contact">Contact</a></div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 Craison Digital. All rights reserved.</div>
+      <div>Smart Property Consulting &middot; Estates &amp; Compounds &middot; Sarasota</div>
+    </div>
+  </footer>
+
+  <script>
+  (function() {
+    // --- Cycling Notification Toasts ---
+    var toast = document.getElementById('notifToast');
+    var notifIcon = document.getElementById('notifIconEl');
+    var notifTitle = document.getElementById('notifTitleEl');
+    var notifSub = document.getElementById('notifSubEl');
+    var notifBadge = document.getElementById('notifBadgeEl');
+
+    var notifications = [
+      { icon: '🚗', title: 'Craig arriving home', sub: 'Gate opened · Garage opening · Lights on', badge: '✓ Scene' },
+      { icon: '🌙', title: '"Goodnight" activated', sub: 'Doors locked · Lights off · Cameras armed', badge: '✓ Scene' },
+      { icon: '👋', title: 'Guest arrived at gate', sub: 'Guest house prepped · Pathway lights on', badge: '✓ Guest' },
+      { icon: '⛈️', title: 'Storm approaching', sub: 'Fountain off · Awnings closed · Generator ready', badge: '⚡ Weather' },
+      { icon: '🏊', title: 'Spa ready', sub: 'Reached 102° · Pool lights on', badge: '✓ Ready' }
+    ];
+    var currentNotif = 0;
+
+    function showNotification() {
+      toast.classList.remove('visible');
+      setTimeout(function() {
+        var n = notifications[currentNotif];
+        notifIcon.textContent = n.icon;
+        notifTitle.textContent = n.title;
+        notifSub.textContent = n.sub;
+        notifBadge.textContent = n.badge;
+        toast.classList.add('visible');
+        currentNotif = (currentNotif + 1) % notifications.length;
+      }, 500);
+    }
+
+    showNotification();
+    setInterval(showNotification, 4000);
+
+    // --- Nav toggle ---
+    var navToggle = document.getElementById('navToggle');
+    var mobileMenu = document.getElementById('mobileMenu');
+    if (navToggle && mobileMenu) {
+      navToggle.addEventListener('click', function() { mobileMenu.classList.toggle('open'); });
+      mobileMenu.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() { mobileMenu.classList.remove('open'); });
+      });
+    }
+
+    // --- Reveal on scroll ---
+    var els = document.querySelectorAll('.reveal');
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(function(el) { obs.observe(el); });
+  })();
+  </script>
+
+</body>
+</html>

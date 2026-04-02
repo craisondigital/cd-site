@@ -111,8 +111,12 @@
     .section-title { font-family: var(--font-display); font-size: clamp(1.7rem,3.2vw,2.6rem); font-weight: 800; line-height: 1.12; letter-spacing: -0.02em; margin-bottom: 1rem; color: var(--white); }
     .section-sub { color: var(--muted); font-size: 1rem; max-width: 580px; margin-bottom: 3rem; line-height: 1.7; }
 
+    /* ── HERO GRID & GLOW ── */
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(47,128,237,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(47,128,237,0.04) 1px, transparent 1px); background-size: 56px 56px; mask-image: radial-gradient(ellipse 85% 75% at 50% 55%, black 15%, transparent 100%); -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 55%, black 15%, transparent 100%); pointer-events: none; }
+    .hero-glow { position: absolute; top: 15%; left: 50%; transform: translateX(-50%); width: 700px; height: 400px; background: radial-gradient(ellipse, rgba(47,128,237,0.08) 0%, transparent 70%); pointer-events: none; }
+
     /* ── PRICING CARDS ── */
-    #packages { background: var(--dark); padding-top: 70px; }
+    #packages { background: var(--dark); padding-top: 70px; position: relative; overflow: hidden; }
     #packages .section-inner { padding-top: 3rem; }
     .pricing-grid {
       display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
@@ -134,7 +138,8 @@
       text-transform: uppercase; padding: 0.15rem 0.55rem; border-radius: 4px; margin-bottom: 0.8rem;
       align-self: flex-start;
     }
-    .pkg-icon-large { font-size: 2rem; margin-bottom: 1rem; display: block; }
+    .pkg-icon-large { margin-bottom: 1rem; display: block; }
+    .pkg-icon-large svg { width: 40px; height: 40px; }
     .pkg-name { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
     .pkg-tagline { font-size: 0.85rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.6rem; }
     .pkg-price-block { margin-bottom: 1.6rem; }
@@ -153,6 +158,7 @@
     /* ── HOW IT WORKS / ADD-ONS ── */
     #addons { background: var(--black); }
     .how-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .how-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
     .how-card {
       background: var(--card); border: 1px solid var(--border); border-radius: 14px;
       overflow: hidden; transition: all 0.3s;
@@ -265,6 +271,7 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 960px) {
       .how-grid { grid-template-columns: 1fr 1fr; }
+      .how-grid-3 { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 768px) {
       .nav-bar { padding: 0.9rem 1.5rem; }
@@ -309,8 +316,10 @@
         padding: 0.6rem 1.8rem; font-size: 1rem;
       }
       .section-inner { padding: 4rem 1.5rem; }
+      .pkg-card.featured { grid-template-columns: 1fr !important; }
       .pricing-grid { grid-template-columns: 1fr; }
       .how-grid { grid-template-columns: 1fr; }
+      .how-grid-3 { grid-template-columns: 1fr; }
       .how-card-img { height: 160px; }
       .photo-banner { height: auto; min-height: 220px; }
       .photo-banner-text { padding: 1.5rem; }
@@ -386,9 +395,12 @@
   </nav>
 
   <!-- ── PACKAGES ── -->
-  <section id="packages"><div class="section-inner">
-    <div class="section-tag" style="color:var(--white);">Per-Door Pricing</div>
-    <h2 class="section-title">Is your garage door <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">still open?</em></h2>
+  <section id="packages">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="section-inner">
+    <div class="section-tag" style="color:var(--white);">Garage Control Pricing</div>
+    <h2 class="section-title">Did you leave the garage <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">open?</em></h2>
 
     <!-- Notification toast - cycles through garage scenarios -->
     <div style="margin-bottom:2rem;text-align:center;">
@@ -403,54 +415,32 @@
       </div>
     </div>
 
-    <div class="pricing-grid">
-      <!-- FIRST DOOR -->
-      <div class="pkg-card featured">
-        <div class="pkg-badge">Get Started</div>
-        <div class="pkg-icon-large">🚗</div>
-        <div class="pkg-name">First Door</div>
-        <div class="pkg-tagline">Full smart garage control — open, close, monitor, and automate your first garage or rollup door from your phone.</div>
-        <div class="pkg-price-block">
-          <div class="pkg-price">$295</div>
-          <div class="pkg-price-sub">Installed · One-time · No monthly fees</div>
-        </div>
-        <div class="pkg-divider"></div>
+    <div class="pkg-card featured" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:900px;margin:0 auto;">
+      <div style="display:flex;flex-direction:column;justify-content:center;">
         <ul class="pkg-features">
           <li>Open &amp; close from your phone — anywhere</li>
           <li>Real-time open/closed status</li>
+          <li>Control the garage light from your phone</li>
           <li>Instant alerts when the door opens or closes</li>
+          <li>Obstruction sensor alerts</li>
           <li>Auto-close if left open too long</li>
           <li>Set schedules to close at night automatically</li>
           <li>Works with Siri, Alexa &amp; Google Home</li>
-          <li>Share access with family members</li>
-          <li>No monthly fees — ever</li>
+          <li>Share access with family members &amp; guests</li>
+          <li>No monthly fees</li>
         </ul>
-        <div class="pkg-cta"><a href="#contact" class="btn-primary">Get a Quote →</a></div>
-        <div class="pkg-note">Works with your existing garage door opener.<br/>Requires WiFi at the garage.</div>
       </div>
-
-      <!-- ADDITIONAL DOORS -->
-      <div class="pkg-card">
-        <div class="pkg-icon-large">➕</div>
-        <div class="pkg-name">Each Additional Door</div>
-        <div class="pkg-tagline">Add smart control to every garage door, rollup door, or barn door on your property — all managed from a single app.</div>
+      <div>
+        <div class="pkg-icon-large"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 16L20 6l16 10" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="8" y="16" width="24" height="20" stroke="var(--cyan)" stroke-width="2"/><line x1="8" y1="21" x2="32" y2="21" stroke="var(--cyan)" stroke-width="1.5"/><line x1="8" y1="26" x2="32" y2="26" stroke="var(--cyan)" stroke-width="1.5"/><line x1="8" y1="31" x2="32" y2="31" stroke="var(--cyan)" stroke-width="1.5"/><rect x="13" y="16.5" width="3.5" height="4" rx="0.5" stroke="var(--cyan)" stroke-width="1"/><rect x="18.25" y="16.5" width="3.5" height="4" rx="0.5" stroke="var(--cyan)" stroke-width="1"/><rect x="23.5" y="16.5" width="3.5" height="4" rx="0.5" stroke="var(--cyan)" stroke-width="1"/></svg></div>
+        <div class="pkg-name">Smart Garage Control</div>
+        <div class="pkg-tagline">Full smart garage control — open, close, monitor, and automate any garage or rollup door from your phone.</div>
         <div class="pkg-price-block">
-          <div class="pkg-price">$195</div>
+          <div class="pkg-price">$395</div>
           <div class="pkg-price-sub">Per door · Installed · No monthly fees</div>
         </div>
-        <div class="pkg-divider"></div>
-        <ul class="pkg-features">
-          <li>Same full smart control as the first door</li>
-          <li>Independent open/close &amp; scheduling per door</li>
-          <li>Individual alerts for each door</li>
-          <li>Auto-close per door with custom timers</li>
-          <li>All doors in one app — one tap to see everything</li>
-          <li>Works with garage doors, rollups &amp; barn doors</li>
-          <li>Close all doors at once from the app</li>
-        </ul>
-        <div class="pkg-cta"><a href="#contact" class="btn-primary">Get a Quote →</a></div>
-        <div class="pkg-note">Example: 4 doors = $295 + 3 &times; $195 = $880</div>
+        <div class="pkg-cta"><a href="#contact" class="btn-primary">Get Started →</a></div>
       </div>
+      <div class="pkg-note" style="grid-column:1/-1;text-align:center;">Works with your existing garage door opener. Requires WiFi at the garage.</div>
     </div>
 
     <div class="packages-footnote">
@@ -463,25 +453,32 @@
     <img src="img/rollup_home.png" alt="Rollup garage doors on property" loading="lazy"/>
     <div class="photo-banner-overlay">
       <div class="photo-banner-text">
-        <h2>Did someone leave the garage open?</h2>
-        <div style="font-size:3rem;margin:0.5rem 0;">🤷</div>
-        <p>No status? No alerts? No auto-close? <span style="color:var(--blue-bright);font-weight:500;">There's a better way.</span></p>
+        <h2>Your garage just closed itself.</h2>
+        <p>Auto-close. Schedules. Alerts. <span style="color:var(--blue-bright);font-weight:500;">Never wonder again.</span></p>
+        <p style="margin-top:0.8rem;font-family:var(--font-display);font-weight:800;font-size:1rem;color:var(--white);">Craison<span style="color:var(--cyan);">Digital</span></p>
       </div>
     </div>
   </div>
 
-  <!-- ── ADD-ONS / COMPONENTS ── -->
-  <section id="addons"><div class="section-inner">
-    <div class="section-tag">How It Works &amp; Add-Ons</div>
-    <h2 class="section-title">What's included — and what you can add.</h2>
-    <p class="section-sub">Every door gets full smart control out of the box. Add-ons expand what's possible across your entire property.</p>
+  <!-- ── WHAT'S INCLUDED ── -->
+  <section id="included"><div class="section-inner">
+    <div class="section-tag">How It Works</div>
+    <h2 class="section-title"><em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">What's included</em> with every door.</h2>
+    <p class="section-sub">Every door gets full smart control out of the box.</p>
 
-    <div class="how-grid">
+    <div class="how-grid-3">
       <div class="how-card">
         <img class="how-card-img" src="img/garage_phone.png" alt="Garage door phone control" loading="lazy"/>
         <div class="how-card-body">
         <h3>Phone Control &amp; Status</h3>
-        <p>A compact smart controller is wired to your existing garage door opener. Open and close from your phone — from the house, at work, or on vacation. The built-in sensor knows if the door is open or closed in real time, so you always know the status of every door on your property.</p>
+        <p>A compact smart controller integrates directly with your existing garage door opener. Open and close from your phone — from the house, at work, or on vacation. See real-time door position, toggle the garage light, and get obstruction sensor alerts — all from the app.</p>
+        </div>
+      </div>
+      <div class="how-card">
+        <img class="how-card-img" src="img/garage_voice.png" alt="Voice control for garage doors" loading="lazy"/>
+        <div class="how-card-body">
+        <h3>Voice &amp; Automation</h3>
+        <p>Works with Siri, Alexa, and Google Home out of the box. Say "close all garage doors" and it's done. Set up automations — close everything at sunset, open the workshop at 7 AM on weekdays, or trigger the garage when you arrive home.</p>
         </div>
       </div>
       <div class="how-card">
@@ -501,18 +498,29 @@
         <p>Get instant notifications when any door opens or closes. Set a timer so doors automatically close if left open too long — 5 minutes, 15 minutes, whatever you want. Schedule all doors to close at a specific time every night so nothing gets missed.</p>
         </div>
       </div>
+    </div>
+  </div></section>
+
+  <!-- ── ADD-ONS ── -->
+  <section id="addons"><div class="section-inner">
+    <div class="section-tag">Add-Ons</div>
+    <h2 class="section-title"><em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Enhance</em> your setup.</h2>
+    <p class="section-sub">Add to any installation now or later.</p>
+
+    <div class="how-grid-3">
       <div class="how-card">
-        <img class="how-card-img" src="img/garage_voice.png" alt="Voice control for garage doors" loading="lazy"/>
-        <div class="how-card-body">
-        <h3>Voice &amp; Automation</h3>
-        <p>Works with Siri, Alexa, and Google Home out of the box. Say "close all garage doors" and it's done. Set up automations — close everything at sunset, open the workshop at 7 AM on weekdays, or trigger the garage when you arrive home.</p>
-        </div>
-      </div>
-      <div class="how-card">
-        <img class="how-card-img" src="img/garage_camera.png" alt="Garage security camera" loading="lazy"/>
+        <img class="how-card-img" src="img/garage_camera.png" alt="Garage security camera" loading="lazy" style="object-position:top;"/>
         <div class="how-card-body">
         <h3>Garage Camera</h3>
         <p>See inside the garage before you open it — or check who just opened it. Live video, motion detection, and recording. Pairs with your door alerts so you get a snapshot every time a door opens. Great for detached garages and workshops.</p>
+        <div style="margin-top:0.8rem;font-size:0.7rem;color:var(--muted);">Contact for pricing</div>
+        </div>
+      </div>
+      <div class="how-card" id="wireless-bridge">
+        <img class="how-card-img" src="img/wifi_bridge.png" alt="Point-to-point wireless bridge" loading="lazy"/>
+        <div class="how-card-body">
+        <h3>Point-to-Point Wireless Bridge</h3>
+        <p>Detached garage with no WiFi? Our wireless bridge extends your home network up to 3,280 feet away. Two weatherproof antennas are mounted with line of sight — one at the house, one at the garage. Required for remote control, alerts, and voice assistant integration.</p>
         <div style="margin-top:0.8rem;font-size:0.7rem;color:var(--muted);">Contact for pricing</div>
         </div>
       </div>
@@ -522,14 +530,6 @@
         <h3>Home Assistant Integration</h3>
         <p>Your garage doors are just one piece of your property. Home Assistant brings everything — gates, pool, fountains, lights, cameras — into a single app on your phone. One dashboard, one system. See all your doors alongside every other smart device on the property.</p>
         <div style="margin-top:0.8rem;font-size:0.7rem;color:var(--muted);">Contact for pricing · Includes HA server hardware</div>
-        </div>
-      </div>
-      <div class="how-card" id="wireless-bridge">
-        <img class="how-card-img" src="img/wifi_bridge.png" alt="Point-to-point wireless bridge" loading="lazy"/>
-        <div class="how-card-body">
-        <h3>Point-to-Point Wireless Bridge</h3>
-        <p>Detached garage with no WiFi? Our wireless bridge extends your home network up to 3,280 feet away. Two weatherproof antennas are mounted with line of sight — one at the house, one at the garage. Required for remote control, alerts, and voice assistant integration.</p>
-        <div style="margin-top:0.8rem;font-size:0.7rem;color:var(--muted);">Contact for pricing</div>
         </div>
       </div>
     </div>
@@ -548,7 +548,7 @@
     <div class="faq-list">
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">Will this work with my existing garage door opener? <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></button>
-        <div class="faq-a"><p>Yes — our system works with virtually every garage door opener on the market, including LiftMaster, Chamberlain, Genie, Craftsman, Linear, and more. We wire into the existing control board, so there's no need to replace your opener. We also work with commercial rollup doors and barn door openers. We'll confirm full compatibility during your free property assessment.</p></div>
+        <div class="faq-a"><p>Yes — our system works with virtually every garage door opener on the market, including LiftMaster, Chamberlain, Genie, Craftsman, Linear, and more. LiftMaster and Chamberlain Security+ 2.0 openers get the deepest integration — real-time position tracking, light control, and obstruction sensor monitoring. No need to replace your opener. We also work with commercial rollup doors and barn door openers. We'll confirm full compatibility during your free property assessment.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">Do I need WiFi at the garage? <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></button>
@@ -560,7 +560,11 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">How does auto-close work? <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></button>
-        <div class="faq-a"><p>You set a timer for each door — 5 minutes, 15 minutes, whatever you want. If the door is left open past the timer, it closes automatically. You'll get an alert before it closes. You can also schedule all doors to close at a specific time every night as a safety net.</p></div>
+        <div class="faq-a"><p>It's fully customizable. Set a timer so the door closes after a certain number of minutes, schedule it to close at a specific time every night, or trigger it based on other events — whatever makes sense for how you use your garage. We'll configure it to work exactly the way you want during installation.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What if something is blocking the door when it tries to auto-close? <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+        <div class="faq-a"><p>It won't close. Your garage door's built-in safety sensors are always active — if something is in the way, the door won't move. Our system monitors those sensors and will send you an alert so you know the obstruction is there and the door is still open. Nothing overrides your safety sensors.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">Are there any monthly fees? <svg width="14" height="8" viewBox="0 0 14 8"><path d="M1 1l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg></button>
@@ -706,7 +710,7 @@
     var notifications = [
       { icon: '🚗', title: 'Main Garage Closed', sub: 'Auto-close · Left open 10 min · 9:42 PM', badge: '✓ Closed', color: 'green' },
       { icon: '🚪', title: 'Workshop Door Opened', sub: 'Craig · Phone · 7:15 AM', badge: '✓ Opened', color: 'green' },
-      { icon: '⚠️', title: 'Barn Rollup Left Open', sub: 'Open 15 min · Auto-close disabled · 3:30 PM', badge: '⚠ Open', color: 'red' },
+      { icon: '⚠️', title: 'Barn Rollup Left Open', sub: 'Auto-close disabled · 3:30 PM', badge: '⚠ Open', color: 'red' },
       { icon: '🔒', title: 'All Doors Closed', sub: 'Nightly schedule · 10:00 PM', badge: '✓ Secured', color: 'green' }
     ];
 

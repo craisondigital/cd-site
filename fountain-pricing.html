@@ -111,8 +111,12 @@
     .section-title { font-family: var(--font-display); font-size: clamp(1.7rem,3.2vw,2.6rem); font-weight: 800; line-height: 1.12; letter-spacing: -0.02em; margin-bottom: 1rem; color: var(--white); }
     .section-sub { color: var(--muted); font-size: 1rem; max-width: 580px; margin-bottom: 3rem; line-height: 1.7; }
 
+    /* ── HERO GRID & GLOW ── */
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(47,128,237,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(47,128,237,0.04) 1px, transparent 1px); background-size: 56px 56px; mask-image: radial-gradient(ellipse 85% 75% at 50% 55%, black 15%, transparent 100%); -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 55%, black 15%, transparent 100%); pointer-events: none; }
+    .hero-glow { position: absolute; top: 15%; left: 50%; transform: translateX(-50%); width: 700px; height: 400px; background: radial-gradient(ellipse, rgba(47,128,237,0.08) 0%, transparent 70%); pointer-events: none; }
+
     /* ── PACKAGES GRID ── */
-    #packages { background: var(--dark); padding-top: 70px; }
+    #packages { background: var(--dark); padding-top: 70px; position: relative; overflow: hidden; }
     #packages .section-inner { padding-top: 3rem; }
     .packages-grid {
       display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
@@ -129,12 +133,13 @@
     .pkg-card.featured { border-color: rgba(0,212,255,0.2); box-shadow: 0 0 50px rgba(47,128,237,0.08); }
     .pkg-card.featured::before { opacity: 1; background: linear-gradient(90deg, transparent, var(--cyan), transparent); }
     .pkg-badge {
-      display: inline-block; background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2);
+      position: absolute; top: 1.2rem; right: 1.2rem;
+      background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2);
       color: var(--cyan); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase; padding: 0.15rem 0.55rem; border-radius: 4px; margin-bottom: 0.8rem;
-      align-self: flex-start;
+      text-transform: uppercase; padding: 0.15rem 0.55rem; border-radius: 4px;
     }
-    .pkg-icon-large { font-size: 2rem; margin-bottom: 1rem; display: block; }
+    .pkg-icon-large { margin-bottom: 1rem; display: block; }
+    .pkg-icon-large svg { width: 40px; height: 40px; }
     .pkg-name { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
     .pkg-tagline { font-size: 0.85rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.6rem; }
     .pkg-price-block { margin-bottom: 1.6rem; }
@@ -389,9 +394,12 @@
   </nav>
 
   <!-- ── PACKAGES ── -->
-  <section id="packages"><div class="section-inner">
+  <section id="packages">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="section-inner">
     <div class="section-tag" style="color:var(--white);">Our Packages</div>
-    <h2 class="section-title">What happens to your fountain <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">when it's windy?</em></h2>
+    <h2 class="section-title">Is your fountain <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">running?</em></h2>
 
     <!-- Notification toast - cycles through different fountain scenarios -->
     <div style="margin-bottom:2rem;text-align:center;">
@@ -399,8 +407,8 @@
         <div class="notif-dot"></div>
         <div class="notif-icon" id="toastIcon">⛲</div>
         <div class="notif-body">
-          <div class="notif-title" id="toastTitle">Fountain Schedule Active</div>
-          <div class="notif-sub" id="toastSub">Sunset mode · Fountain &amp; LEDs turned on · 7:32 PM</div>
+          <div class="notif-title" id="toastTitle">Sunset mode activated</div>
+          <div class="notif-sub" id="toastSub">Fountain &amp; LEDs on · 7:32 PM</div>
         </div>
         <div class="notif-badge" id="toastBadge">✓ Scheduled</div>
       </div>
@@ -409,11 +417,11 @@
     <div class="packages-grid">
       <!-- PHONE CONTROL -->
       <div class="pkg-card">
-        <div class="pkg-icon-large">📱</div>
+        <div class="pkg-icon-large"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="4" width="20" height="32" rx="4" stroke="var(--blue-bright)" stroke-width="2"/><circle cx="20" cy="30" r="2" fill="var(--blue-bright)"/><line x1="16" y1="8" x2="24" y2="8" stroke="var(--blue-bright)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
         <div class="pkg-name">Phone Control</div>
         <div class="pkg-tagline">Turn your fountain and LEDs on and off from your phone — from anywhere. Set schedules so it runs on its own.</div>
         <div class="pkg-price-block">
-          <div class="pkg-price">$345</div>
+          <div class="pkg-price">$395</div>
           <div class="pkg-price-sub">Installed · One-time · No monthly fees</div>
         </div>
         <div class="pkg-divider"></div>
@@ -434,11 +442,11 @@
       <!-- WEATHER PROTECTED -->
       <div class="pkg-card featured">
         <div class="pkg-badge">Recommended</div>
-        <div class="pkg-icon-large">🌬️</div>
+        <div class="pkg-icon-large"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 14 C12 14 18 14 22 14 C26 14 28 12 28 9" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round"/><path d="M4 22 C14 22 24 22 30 22 C34 22 36 19 36 15" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round"/><path d="M8 30 C14 30 20 30 24 30 C27 30 28 28 28 25" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round"/></svg></div>
         <div class="pkg-name">Weather Protected</div>
         <div class="pkg-tagline">Everything in Phone Control, plus a local weather station that automatically shuts off the fountain in high winds.</div>
         <div class="pkg-price-block">
-          <div class="pkg-price">$695</div>
+          <div class="pkg-price">$895</div>
           <div class="pkg-price-sub">Installed · One-time · No monthly fees</div>
         </div>
         <div class="pkg-divider"></div>
@@ -465,9 +473,10 @@
     <img src="img/fountain_day.png" alt="Lake fountain" loading="lazy"/>
     <div class="photo-banner-overlay">
       <div class="photo-banner-text">
-        <h2>Is your fountain running right now?</h2>
-        <div style="font-size:3rem;margin:0.5rem 0;">🤷</div>
+        <h2>What happens to your fountain when it's windy?</h2>
+
         <p>No app? No schedule? No wind protection? <span style="color:var(--blue-bright);font-weight:500;">There's a better way.</span></p>
+        <p style="margin-top:0.8rem;font-family:var(--font-display);font-weight:800;font-size:1rem;color:var(--white);">Craison<span style="color:var(--cyan);">Digital</span></p>
       </div>
     </div>
   </div>
@@ -688,7 +697,7 @@
           setRed();
           icon.textContent = '🌬️';
           title.textContent = 'Wind Protection Activated';
-          sub.textContent = 'Wind gust 24 mph · Fountain auto-shutoff · 2:15 PM';
+          sub.textContent = 'Wind gust 24 mph · 2:17 PM';
           badge.textContent = '⛔ Shutoff';
           toast.style.opacity = '1';
 
@@ -699,8 +708,8 @@
               // Swap back to schedule (green)
               setGreen();
               icon.textContent = '⛲';
-              title.textContent = 'Fountain Schedule Active';
-              sub.textContent = 'Sunset mode · Fountain & LEDs turned on · 7:32 PM';
+              title.textContent = 'Sunset mode activated';
+              sub.textContent = 'Fountain & LEDs on · 7:32 PM';
               badge.textContent = '✓ Scheduled';
               toast.style.opacity = '1';
               loop();

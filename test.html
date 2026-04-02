@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Craison Digital — Smart Property Systems for Large Estates | Sarasota, FL</title>
+  <meta name="description" content="Craison Digital designs and installs smart property systems for large residential estates in Sarasota, Florida. Gates, pools, lighting, cameras, and outbuildings — all working together.">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #faf9f7;
+      --bg-warm: #f3f1ed;
+      --bg-deep: #1b1f23;
+      --bg-card: #ffffff;
+      --text: #2c2c2c;
+      --text-light: #5a5a5a;
+      --text-muted: #8a8a8a;
+      --accent: #3d5a73;
+      --accent-hover: #2e4558;
+      --accent-light: rgba(61, 90, 115, 0.08);
+      --border: #e2dfd9;
+      --border-light: #eceae5;
+      --white: #ffffff;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Inter', -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 400;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(250, 249, 247, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta-btn {
+      background: var(--accent);
+      color: var(--white) !important;
+      padding: 0.55rem 1.5rem;
+      border-radius: 5px;
+      font-weight: 500 !important;
+      transition: background 0.2s;
+    }
+
+    .nav-cta-btn:hover { background: var(--accent-hover); }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .mobile-toggle span {
+      display: block;
+      width: 20px;
+      height: 1.5px;
+      background: var(--text);
+      margin: 5px 0;
+      border-radius: 1px;
+    }
+
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      padding: 1rem 2.5rem 1.5rem;
+      border-top: 1px solid var(--border-light);
+      background: var(--bg);
+    }
+
+    .mobile-nav.open { display: flex; }
+
+    .mobile-nav a {
+      padding: 0.6rem 0;
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 0.95rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .mobile-nav a:last-child { border-bottom: none; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 10rem 2.5rem 6rem;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .hero-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--text);
+      max-width: 720px;
+      margin-bottom: 1.8rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--text-light);
+      max-width: 560px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--white);
+      padding: 0.85rem 2rem;
+      border-radius: 5px;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover { background: var(--accent-hover); }
+
+    .btn-secondary {
+      display: inline-block;
+      color: var(--text-light);
+      padding: 0.85rem 1.5rem;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 400;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--text-muted);
+      color: var(--text);
+    }
+
+    /* ── PHOTO PLACEHOLDER ── */
+    .photo-block {
+      background: linear-gradient(145deg, #d4cfc6, #c5bfb4);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(0,0,0,0.2);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .photo-block::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.06));
+    }
+
+    .hero-image {
+      max-width: 1120px;
+      margin: 0 auto 0;
+      padding: 0 2.5rem;
+    }
+
+    .hero-image .photo-block {
+      width: 100%;
+      height: 420px;
+      border-radius: 10px;
+    }
+
+    /* ── SECTIONS ── */
+    section { position: relative; }
+
+    .section-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 6rem 2.5rem;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-heading {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 1rem;
+      letter-spacing: -0.015em;
+    }
+
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--text-light);
+      max-width: 600px;
+      line-height: 1.75;
+      margin-bottom: 3rem;
+    }
+
+    /* ── WHAT WE DO ── */
+    .whatwedo-section { background: var(--white); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border-light);
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .service-item {
+      background: var(--white);
+      padding: 2.2rem;
+    }
+
+    .service-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .service-item h3 {
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .service-item p {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.65;
+    }
+
+    /* ── USE CASES ── */
+    .usecases-section { background: var(--bg); }
+
+    .usecase-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .usecase {
+      display: flex;
+      gap: 1.4rem;
+      align-items: flex-start;
+    }
+
+    .usecase-marker {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+
+    .usecase-text h4 {
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    .usecase-text p {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.65;
+    }
+
+    /* ── WHO THIS IS FOR ── */
+    .whofor-section { background: var(--white); }
+
+    .whofor-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .whofor-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .whofor-list li {
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 1rem;
+      color: var(--text-light);
+      line-height: 1.65;
+    }
+
+    .whofor-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .whofor-image .photo-block {
+      width: 100%;
+      height: 380px;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .process-section { background: var(--bg); }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    .process-step { position: relative; }
+
+    .step-num {
+      font-family: var(--serif);
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 0.8rem;
+    }
+
+    .process-step h4 {
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .process-step p {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.65;
+    }
+
+    /* ── WHY CRAISON ── */
+    .why-section { background: var(--bg-deep); color: var(--white); }
+    .why-section .section-label { color: rgba(255,255,255,0.4); }
+    .why-section .section-heading { color: var(--white); }
+    .why-section .section-desc { color: rgba(255,255,255,0.55); }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem;
+    }
+
+    .why-item h4 {
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 0.5rem;
+    }
+
+    .why-item p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.7;
+    }
+
+    .why-item {
+      padding-left: 1.5rem;
+      border-left: 2px solid rgba(255,255,255,0.08);
+    }
+
+    /* ── LOCAL TRUST ── */
+    .local-section { background: var(--white); }
+
+    .local-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .local-content p {
+      font-size: 1.05rem;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+    }
+
+    .local-detail {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      border-top: 1px solid var(--border-light);
+      padding-top: 1.2rem;
+      margin-top: 1.2rem;
+    }
+
+    .local-image .photo-block {
+      width: 100%;
+      height: 340px;
+    }
+
+    /* ── FINAL CTA ── */
+    .cta-section {
+      background: var(--bg);
+      text-align: center;
+    }
+
+    .cta-section .section-inner {
+      padding: 7rem 2.5rem;
+    }
+
+    .cta-section .section-heading {
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-section .section-desc {
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 2.5rem;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-note {
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border-light);
+    }
+
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 2.5rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-left {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .footer-left .logo {
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .footer-right {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .footer-right a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      transition: color 0.2s;
+    }
+
+    .footer-right a:hover { color: var(--text); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .process-steps { grid-template-columns: repeat(2, 1fr); gap: 2.5rem; }
+      .whofor-layout,
+      .local-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .why-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-inner { padding: 0.9rem 1.5rem; }
+      .nav-links { display: none !important; }
+      .mobile-toggle { display: block; }
+      .mobile-nav { padding: 1rem 1.5rem 1.5rem; }
+      .hero { padding: 8rem 1.5rem 4rem; }
+      .hero-image { padding: 0 1.5rem; }
+      .hero-image .photo-block { height: 260px; }
+      .section-inner { padding: 4rem 1.5rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .usecase-list { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; gap: 2rem; }
+      .whofor-layout,
+      .local-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-inner {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+      .footer-right { flex-wrap: wrap; justify-content: center; }
+      .cta-section .section-inner { padding: 5rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="logo">Craison<span>Digital</span></a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#whatwedo">Services</a></li>
+        <li><a href="#process">How It Works</a></li>
+        <li><a href="#why">About</a></li>
+        <li><a href="#contact" class="nav-cta-btn">Get a Quote</a></li>
+      </ul>
+    </div>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#whatwedo">Services</a>
+      <a href="#process">How It Works</a>
+      <a href="#why">About</a>
+      <a href="#contact">Get a Quote</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-label">Smart Property Systems · Sarasota, FL</div>
+    <h1>Your entire property, working together without the headaches</h1>
+    <p class="hero-sub">We design and install smart systems that actually work — and fix the ones that don't. Gates, lighting, cameras, pools, outbuildings. One property. One system. Done right.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Schedule a Consultation</a>
+      <a href="#process" class="btn-secondary">See How It Works</a>
+    </div>
+  </section>
+
+  <div class="hero-image">
+    <div class="photo-block">Property overview photo</div>
+  </div>
+
+  <!-- WHAT WE DO -->
+  <section class="whatwedo-section" id="whatwedo">
+    <div class="section-inner">
+      <div class="section-label">What We Do</div>
+      <h2 class="section-heading">Everything on your property,<br>connected and controlled</h2>
+      <p class="section-desc">We don't sell gadgets. We take the systems your property already has — and the ones it needs — and make them work together simply and reliably.</p>
+
+      <div class="services-grid">
+        <div class="service-item">
+          <div class="service-icon">🚪</div>
+          <h3>Gates &amp; Access</h3>
+          <p>Automatic entry, guest codes, delivery windows. Know who's coming and going without being tied to an intercom.</p>
+        </div>
+        <div class="service-item">
+          <div class="service-icon">🏠</div>
+          <h3>Garages &amp; Outbuildings</h3>
+          <p>Barns, workshops, warehouses. Doors that close when they should, lights that respond to presence, climate that adjusts on its own.</p>
+        </div>
+        <div class="service-item">
+          <div class="service-icon">💡</div>
+          <h3>Lighting</h3>
+          <p>Landscape, pathway, security. Lights that follow schedules, respond to motion, and don't require six different apps.</p>
+        </div>
+        <div class="service-item">
+          <div class="service-icon">📷</div>
+          <h3>Cameras &amp; Security</h3>
+          <p>Cameras that do more than record. Motion triggers useful actions — lights turn on, you get the right alert, doors lock.</p>
+        </div>
+        <div class="service-item">
+          <div class="service-icon">🏊</div>
+          <h3>Pools &amp; Fountains</h3>
+          <p>Pumps, heaters, lighting, water features. Controlled from one place with schedules that actually run.</p>
+        </div>
+        <div class="service-item">
+          <div class="service-icon">⚡</div>
+          <h3>System Integration</h3>
+          <p>The real work. Making every piece — old and new — talk to each other so your property runs as one system, not twenty.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REAL-LIFE USE CASES -->
+  <section class="usecases-section" id="usecases">
+    <div class="section-inner">
+      <div class="section-label">How It Actually Works</div>
+      <h2 class="section-heading">This is what your property does<br>after we set it up</h2>
+      <p class="section-desc">Not concepts. Not demos. These are things that happen every day on properties we've built.</p>
+
+      <div class="usecase-list">
+        <div class="usecase">
+          <div class="usecase-marker">🚗</div>
+          <div class="usecase-text">
+            <h4>You pull up. The gate opens.</h4>
+            <p>Your vehicle is recognized before you reach the driveway. Gate opens, path lights come on, garage door lifts. No buttons, no remotes, no waiting.</p>
+          </div>
+        </div>
+        <div class="usecase">
+          <div class="usecase-marker">🏚️</div>
+          <div class="usecase-text">
+            <h4>The barn closes itself at night</h4>
+            <p>No one inside after dark? Doors close, interior lights shut off, exterior security lights activate. You don't have to walk out there to check.</p>
+          </div>
+        </div>
+        <div class="usecase">
+          <div class="usecase-marker">💡</div>
+          <div class="usecase-text">
+            <h4>Lights respond to what's happening</h4>
+            <p>Motion on the east side of the house? Those lights come up. Guest arriving at the front gate? The path illuminates. Sunset? Landscape lighting handles itself.</p>
+          </div>
+        </div>
+        <div class="usecase">
+          <div class="usecase-marker">🏊</div>
+          <div class="usecase-text">
+            <h4>Pool and fountains, handled</h4>
+            <p>Pumps run on schedule. The heater warms the pool before you get home Friday. Fountain features turn on for guests and off when no one's around.</p>
+          </div>
+        </div>
+        <div class="usecase">
+          <div class="usecase-marker">📷</div>
+          <div class="usecase-text">
+            <h4>Cameras that trigger real actions</h4>
+            <p>Person detected at the back fence? Lights flood that zone and you get a snapshot on your phone. Not just a recording you'll never watch.</p>
+          </div>
+        </div>
+        <div class="usecase">
+          <div class="usecase-marker">📱</div>
+          <div class="usecase-text">
+            <h4>Everything from one place</h4>
+            <p>Gate, pool, lights, cameras, garage, barn — all in one app. Or set it and forget it. The best automation is the kind you never have to think about.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO THIS IS FOR -->
+  <section class="whofor-section" id="whofor">
+    <div class="section-inner">
+      <div class="whofor-layout">
+        <div>
+          <div class="section-label">Who This Is For</div>
+          <h2 class="section-heading">Built for properties that need more than a thermostat and a doorbell</h2>
+          <p style="font-size: 1.05rem; color: var(--text-light); line-height: 1.8; margin-bottom: 2rem;">If your property has a gate, multiple buildings, acreage, a pool, or outdoor systems that aren't talking to each other — this is what we do.</p>
+          <ul class="whofor-list">
+            <li>Estates and multi-acre residential properties</li>
+            <li>Properties with gates, barns, workshops, or warehouses</li>
+            <li>Homes with pools, fountains, and landscape lighting</li>
+            <li>Owners tired of juggling multiple apps and remotes</li>
+            <li>Properties where contractors installed systems that don't work together</li>
+            <li>Anyone who wants reliability, not a science project</li>
+          </ul>
+        </div>
+        <div class="whofor-image">
+          <div class="photo-block">Estate property photo</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="process-section" id="process">
+    <div class="section-inner">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-heading">Straightforward from start to finish</h2>
+      <p class="section-desc">No jargon. No pressure. We look at what you have, figure out what you need, and build it right.</p>
+
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-num">01</div>
+          <h4>Walk the property</h4>
+          <p>We visit in person. We look at every system, every building, every pain point. We ask what works, what doesn't, and what you wish it could do.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">02</div>
+          <h4>Design the system</h4>
+          <p>We map out what connects to what, what needs to be added, and what can stay. You get a clear plan with real pricing before any work starts.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">03</div>
+          <h4>Install and integrate</h4>
+          <p>We handle all the hardware, wiring, programming, and testing. Everything is configured to work together before we call it done.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">04</div>
+          <h4>Support it long-term</h4>
+          <p>Systems need upkeep. We monitor, update, and adjust as your needs change. When something isn't right, we fix it — usually before you notice.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CRAISON DIGITAL -->
+  <section class="why-section" id="why">
+    <div class="section-inner">
+      <div class="section-label">Why Craison Digital</div>
+      <h2 class="section-heading">We're not a tech company.<br>We're the people who make your property work.</h2>
+      <p class="section-desc">There's a difference between selling smart devices and building a system that runs a property. We do the second thing.</p>
+
+      <div class="why-grid">
+        <div class="why-item">
+          <h4>We work with what you have</h4>
+          <p>You don't need to rip everything out and start over. Most properties already have 70% of what they need. We connect it, fix what's broken, and fill in the gaps.</p>
+        </div>
+        <div class="why-item">
+          <h4>Reliability over gimmicks</h4>
+          <p>We don't install things because they're new. We install things because they work. Every decision is measured by whether it makes your property more dependable.</p>
+        </div>
+        <div class="why-item">
+          <h4>One system, not twenty apps</h4>
+          <p>The goal is fewer things to manage, not more. We consolidate control so you're not switching between apps for your gate, your lights, your cameras, and your pool.</p>
+        </div>
+        <div class="why-item">
+          <h4>We stay involved</h4>
+          <p>Install-and-disappear isn't our model. We provide ongoing support because property systems need someone who knows the setup and can respond when things change.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCAL TRUST -->
+  <section class="local-section" id="local">
+    <div class="section-inner">
+      <div class="local-layout">
+        <div class="local-content">
+          <div class="section-label">Sarasota, Florida</div>
+          <h2 class="section-heading">Local work, done in person</h2>
+          <p>We're based in Sarasota and work throughout the surrounding area. Every project starts with a site visit. We see the property, understand the layout, and meet the people who live there.</p>
+          <p>This isn't remote support or phone-it-in consulting. We're on your property, doing the work, and available when you need us.</p>
+          <div class="local-detail">
+            Serving Sarasota, Bradenton, Lakewood Ranch, Siesta Key, Longboat Key, Venice, and surrounding communities.
+          </div>
+        </div>
+        <div class="local-image">
+          <div class="photo-block">Sarasota area photo</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="cta-section" id="contact">
+    <div class="section-inner">
+      <div class="section-label">Get Started</div>
+      <h2 class="section-heading">Ready to make your property work the way it should?</h2>
+      <p class="section-desc">Tell us what you've got, what's not working, and what you want it to do. We'll take it from there.</p>
+      <div class="cta-actions">
+        <a href="mailto:craig@craisondigital.com" class="btn-primary">Request a Consultation</a>
+        <a href="tel:+19415551234" class="btn-secondary">Call Us Directly</a>
+      </div>
+      <p class="cta-note">No contracts to start. Just a conversation about your property.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <a href="index.html" class="logo">Craison<span>Digital</span></a>
+        <span>&copy; 2026 Craison Digital. Sarasota, FL.</span>
+      </div>
+      <div class="footer-right">
+        <a href="#whatwedo">Services</a>
+        <a href="#process">Process</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const toggle = document.getElementById('mobileToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    toggle.addEventListener('click', () => {
+      mobileNav.classList.toggle('open');
+    });
+
+    // Close mobile menu on link click
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+      });
+    });
+
+    // Smooth reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.service-item, .usecase, .process-step, .why-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(16px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>

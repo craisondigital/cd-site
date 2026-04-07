@@ -23,6 +23,15 @@
       --border: #e2dfd9;
       --border-light: #eceae5;
       --white: #ffffff;
+      --green: #2d8a4e;
+      --green-light: rgba(45, 138, 78, 0.08);
+      --green-border: rgba(45, 138, 78, 0.2);
+      --warn: #b8860b;
+      --warn-light: rgba(184, 134, 11, 0.08);
+      --warn-border: rgba(184, 134, 11, 0.2);
+      --exit-color: #b04a4a;
+      --exit-light: rgba(176, 74, 74, 0.08);
+      --exit-border: rgba(176, 74, 74, 0.2);
       --serif: 'Playfair Display', Georgia, serif;
       --sans: 'Inter', -apple-system, sans-serif;
     }
@@ -138,10 +147,19 @@
 
     /* ── HERO ── */
     .hero {
-      padding: 10rem 2.5rem 6rem;
+      padding: 6.5rem 2.5rem 6rem;
       max-width: 1120px;
       margin: 0 auto;
     }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-content {}
 
     .hero-label {
       font-size: 0.72rem;
@@ -154,19 +172,18 @@
 
     .hero h1 {
       font-family: var(--serif);
-      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-size: clamp(2.2rem, 4vw, 3rem);
       font-weight: 600;
       line-height: 1.15;
       color: var(--text);
-      max-width: 720px;
       margin-bottom: 1.8rem;
       letter-spacing: -0.02em;
     }
 
     .hero-sub {
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       color: var(--text-light);
-      max-width: 560px;
+      max-width: 520px;
       line-height: 1.75;
       margin-bottom: 2.5rem;
     }
@@ -176,6 +193,12 @@
       gap: 1rem;
       flex-wrap: wrap;
       align-items: center;
+    }
+
+    .hero-toast {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
     }
 
     .btn-primary {
@@ -299,22 +322,21 @@
 
     .service-item {
       background: var(--white);
-      padding: 2.2rem;
+      padding: 0;
     }
 
-    .service-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
-      background: var(--accent-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      margin-bottom: 1.2rem;
+    .service-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
     }
 
-    .service-item h3 {
+    .service-body {
+      padding: 1.5rem 2rem 2rem;
+    }
+
+    .service-body h3 {
       font-family: var(--sans);
       font-size: 0.95rem;
       font-weight: 600;
@@ -322,7 +344,7 @@
       margin-bottom: 0.5rem;
     }
 
-    .service-item p {
+    .service-body p {
       font-size: 0.85rem;
       color: var(--text-light);
       line-height: 1.65;
@@ -544,6 +566,123 @@
       color: var(--text-muted);
     }
 
+    /* ── TOAST NOTIFICATION ── */
+
+    .toast {
+      background: var(--white);
+      border: 1px solid var(--green-border);
+      border-radius: 12px;
+      padding: 0.85rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+      opacity: 0;
+      transform: translateY(10px) scale(0.98);
+      transition: opacity 0.45s ease, transform 0.45s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      max-width: 480px;
+      width: 100%;
+    }
+
+    .toast.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .toast.warn {
+      border-color: var(--warn-border);
+    }
+
+    .toast.exit {
+      border-color: var(--exit-border);
+    }
+
+    .toast-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      flex-shrink: 0;
+      animation: toast-pulse 1.2s ease-in-out infinite;
+    }
+
+    .toast.warn .toast-dot { background: var(--warn); }
+    .toast.exit .toast-dot { background: var(--exit-color); }
+
+    @keyframes toast-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .toast-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--green-light);
+      border: 1px solid var(--green-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .toast.warn .toast-icon {
+      background: var(--warn-light);
+      border-color: var(--warn-border);
+    }
+
+    .toast.exit .toast-icon {
+      background: var(--exit-light);
+      border-color: var(--exit-border);
+    }
+
+    .toast-body {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .toast-title {
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.1rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .toast-sub {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .toast-badge {
+      background: var(--green-light);
+      border: 1px solid var(--green-border);
+      color: var(--green);
+      font-size: 0.62rem;
+      font-weight: 600;
+      padding: 0.18rem 0.5rem;
+      border-radius: 100px;
+      white-space: nowrap;
+      transition: background 0.3s, border-color 0.3s, color 0.3s;
+    }
+
+    .toast-label {
+      text-align: right;
+      margin-top: 0.5rem;
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
     /* ── FOOTER ── */
     footer {
       background: var(--bg);
@@ -598,7 +737,9 @@
       .nav-links { display: none !important; }
       .mobile-toggle { display: block; }
       .mobile-nav { padding: 1rem 1.5rem 1.5rem; }
-      .hero { padding: 8rem 1.5rem 4rem; }
+      .hero { padding: 5.5rem 1.5rem 4rem; }
+      .hero-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-toast { align-items: center; }
       .hero-image { padding: 0 1.5rem; }
       .hero-image .photo-block { height: 260px; }
       .section-inner { padding: 4rem 1.5rem; }
@@ -614,6 +755,12 @@
       }
       .footer-right { flex-wrap: wrap; justify-content: center; }
       .cta-section .section-inner { padding: 5rem 1.5rem; }
+      .toast { padding: 0.7rem 0.9rem; gap: 0.5rem; max-width: 360px; border-radius: 10px; }
+      .toast-icon { width: 30px; height: 30px; font-size: 0.85rem; }
+      .toast-title { font-size: 0.78rem; }
+      .toast-sub { font-size: 0.62rem; }
+      .toast-badge { font-size: 0.56rem; padding: 0.14rem 0.4rem; }
+      .toast-dot { width: 5px; height: 5px; }
     }
   </style>
 </head>
@@ -643,12 +790,28 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-label">Smart Property Systems · Sarasota, FL</div>
-    <h1>Your entire property, working together without the headaches</h1>
-    <p class="hero-sub">We design and install smart systems that actually work — and fix the ones that don't. Gates, lighting, cameras, pools, outbuildings. One property. One system. Done right.</p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Schedule a Consultation</a>
-      <a href="#process" class="btn-secondary">See How It Works</a>
+    <div class="hero-layout">
+      <div class="hero-content">
+        <div class="hero-label">Smart Property Systems · Sarasota, FL</div>
+        <h1>Your entire property, working together without the headaches</h1>
+        <p class="hero-sub">We design and install smart systems that actually work — and fix the ones that don't. Gates, lighting, cameras, pools, outbuildings. One property. One system. Done right.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary">Schedule a Consultation</a>
+          <a href="#process" class="btn-secondary">See How It Works</a>
+        </div>
+      </div>
+      <div class="hero-toast">
+        <div class="toast" id="estateToast">
+          <div class="toast-dot"></div>
+          <div class="toast-icon" id="toastIcon">🏊</div>
+          <div class="toast-body">
+            <div class="toast-title" id="toastTitle">Pool Service — entered via PIN</div>
+            <div class="toast-sub" id="toastSub">Gate Access · PIN entry · 7:30 AM</div>
+          </div>
+          <div class="toast-badge" id="toastBadge">✓ Authorized</div>
+        </div>
+        <p class="toast-label">Live notifications from an actual property system</p>
+      </div>
     </div>
   </section>
 
@@ -665,34 +828,46 @@
 
       <div class="services-grid">
         <div class="service-item">
-          <div class="service-icon">🚪</div>
-          <h3>Gates &amp; Access</h3>
-          <p>Automatic entry, guest codes, delivery windows. Know who's coming and going without being tied to an intercom.</p>
+          <img src="img/gate_home.png" alt="Gate Control" class="service-img">
+          <div class="service-body">
+            <h3>Gates &amp; Access</h3>
+            <p>Automatic entry, guest codes, delivery windows. Know who's coming and going without being tied to an intercom.</p>
+          </div>
         </div>
         <div class="service-item">
-          <div class="service-icon">🏠</div>
-          <h3>Garages &amp; Outbuildings</h3>
-          <p>Barns, workshops, warehouses. Doors that close when they should, lights that respond to presence, climate that adjusts on its own.</p>
+          <img src="img/rollup_home.png" alt="Garage and Outbuilding Control" class="service-img">
+          <div class="service-body">
+            <h3>Garages &amp; Outbuildings</h3>
+            <p>Barns, workshops, warehouses. Doors that close when they should, lights that respond to presence, climate that adjusts on its own.</p>
+          </div>
         </div>
         <div class="service-item">
-          <div class="service-icon">💡</div>
-          <h3>Lighting</h3>
-          <p>Landscape, pathway, security. Lights that follow schedules, respond to motion, and don't require six different apps.</p>
+          <img src="img/fountain_night.png" alt="Landscape Lighting" class="service-img">
+          <div class="service-body">
+            <h3>Lighting</h3>
+            <p>Landscape, pathway, security. Lights that follow schedules, respond to motion, and don't require six different apps.</p>
+          </div>
         </div>
         <div class="service-item">
-          <div class="service-icon">📷</div>
-          <h3>Cameras &amp; Security</h3>
-          <p>Cameras that do more than record. Motion triggers useful actions — lights turn on, you get the right alert, doors lock.</p>
+          <img src="img/camera_home.png" alt="Camera and Security" class="service-img">
+          <div class="service-body">
+            <h3>Cameras &amp; Security</h3>
+            <p>Cameras that do more than record. Motion triggers useful actions — lights turn on, you get the right alert, doors lock.</p>
+          </div>
         </div>
         <div class="service-item">
-          <div class="service-icon">🏊</div>
-          <h3>Pools &amp; Fountains</h3>
-          <p>Pumps, heaters, lighting, water features. Controlled from one place with schedules that actually run.</p>
+          <img src="img/pool_home.png" alt="Pool and Fountain Control" class="service-img">
+          <div class="service-body">
+            <h3>Pools &amp; Fountains</h3>
+            <p>Pumps, heaters, lighting, water features. Controlled from one place with schedules that actually run.</p>
+          </div>
         </div>
         <div class="service-item">
-          <div class="service-icon">⚡</div>
-          <h3>System Integration</h3>
-          <p>The real work. Making every piece — old and new — talk to each other so your property runs as one system, not twenty.</p>
+          <img src="img/ha_integration.png" alt="Full Property Integration" class="service-img">
+          <div class="service-body">
+            <h3>System Integration</h3>
+            <p>The real work. Making every piece — old and new — talk to each other so your property runs as one system, not twenty.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -909,6 +1084,65 @@
         }
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    // Toast notification cycle
+    (function() {
+      var toast = document.getElementById('estateToast');
+      var toastIcon = document.getElementById('toastIcon');
+      var toastTitle = document.getElementById('toastTitle');
+      var toastSub = document.getElementById('toastSub');
+      var toastBadge = document.getElementById('toastBadge');
+
+      var notifications = [
+        { icon: '🏊', title: 'Pool Service — entered via PIN', sub: 'Gate Access · PIN entry · 7:30 AM', badge: '✓ Authorized', style: '' },
+        { icon: '🚗', title: 'Craig — Kia exited', sub: 'Gate Control · Hands-free exit · 8:05 AM', badge: '↑ Exited', style: 'exit' },
+        { icon: '🌿', title: 'Irrigation started — Program A', sub: 'Zone 1 · Scheduled program · 8:15 AM', badge: '✓ Started', style: '' },
+        { icon: '🚗', title: 'Craig — Kia arrived', sub: 'Gate Control · Hands-free entry · 9:45 AM', badge: '✓ Arrived', style: '' },
+        { icon: '📹', title: 'Person detected — Warehouse', sub: 'Camera · Warehouse lights on · 9:52 AM', badge: '✓ Lights On', style: '' },
+        { icon: '⚠️', title: 'Warehouse Bay 1 — Left open', sub: 'Open 45 min · Auto-closing · 11:45 AM', badge: '⚠ Closing', style: 'warn' },
+        { icon: '⛲', title: 'Fountain auto-shutoff', sub: 'Wind speed 18 mph · Auto-shutoff · 3:40 PM', badge: '⚠ Wind', style: 'warn' },
+        { icon: '🏠', title: 'Barn Door — Closed', sub: 'Schedule · Nightly close · 9:00 PM', badge: '✓ Scheduled', style: '' },
+        { icon: '🗣️', title: 'Pool Night Activated', sub: 'Voice command · Lights · Fountain · Spa · 9:03 PM', badge: '✓ Voice', style: '' },
+        { icon: '🌡️', title: 'Spa is ready — 102°F', sub: 'Heating complete · 9:45 PM', badge: '✓ Ready', style: '' },
+        { icon: '🏊', title: 'Spa shut off', sub: 'No people detected · Camera · 11:15 PM', badge: '✓ Auto', style: '' },
+        { icon: '🔒', title: 'Alarm Armed — Goodnight', sub: 'All doors locked · Cameras active · 11:30 PM', badge: '✓ Armed', style: '' }
+      ];
+
+      var current = 0;
+
+      function showNotification() {
+        toast.classList.remove('visible', 'warn', 'exit');
+        setTimeout(function() {
+          var n = notifications[current];
+          toastIcon.textContent = n.icon;
+          toastTitle.textContent = n.title;
+          toastSub.textContent = n.sub;
+          toastBadge.textContent = n.badge;
+
+          if (n.style === 'warn') {
+            toast.classList.add('warn');
+            toastBadge.style.background = 'var(--warn-light)';
+            toastBadge.style.borderColor = 'var(--warn-border)';
+            toastBadge.style.color = 'var(--warn)';
+          } else if (n.style === 'exit') {
+            toast.classList.add('exit');
+            toastBadge.style.background = 'var(--exit-light)';
+            toastBadge.style.borderColor = 'var(--exit-border)';
+            toastBadge.style.color = 'var(--exit-color)';
+          } else {
+            toastBadge.style.background = 'var(--green-light)';
+            toastBadge.style.borderColor = 'var(--green-border)';
+            toastBadge.style.color = 'var(--green)';
+          }
+
+          toast.classList.add('visible');
+          current = (current + 1) % notifications.length;
+        }, 450);
+      }
+
+      showNotification();
+      setInterval(showNotification, 5500);
+    })();
 
     document.querySelectorAll('.service-item, .usecase, .process-step, .why-item').forEach(el => {
       el.style.opacity = '0';

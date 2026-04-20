@@ -190,8 +190,7 @@
     <div class="hero-inner">
       
       <h1>Built Different.<br><em>On Purpose.</em></h1>
-      <div class="hero-eyebrow">Sarasota, FL &nbsp;·&nbsp; Est. 2025</div>
-      <p class="hero-sub">Your property should work locally, respect your privacy, and belong to you completely. That's not a feature list. It's the foundation we build everything on.</p>
+<p class="hero-sub">Your property should work locally, respect your privacy, and belong to you completely. That's not a feature list. It's the foundation we build everything on.</p>
     </div>
   </section>
 
@@ -325,7 +324,7 @@
           <div class="form-row">
             <div class="form-group">
               <label for="name">Your Name</label>
-              <input type="text" id="name" name="name" placeholder="Craig Scuilla" />
+              <input type="text" id="name" name="name" placeholder="John Smith" />
             </div>
             <div class="form-group">
               <label for="phone">Phone Number</label>

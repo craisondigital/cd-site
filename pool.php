@@ -749,7 +749,7 @@
       <h2 class="section-title">Ready to simplify your pool?</h2>
       <p class="section-sub" style="margin-bottom:0;">Tell us about your pool and how you use it. We'll figure out the rest.</p>
       <form class="contact-form" action="https://formspree.io/f/xaqabrdo" method="POST">
-        <input type="hidden" name="_next" value="https://craisondigital.com/thank-you.html"/><input type="hidden" name="_subject" value="New inquiry — Pool Automation"/>
+        <input type="hidden" name="_next" value="https://craisondigital.com/thank-you.php"/><input type="hidden" name="_subject" value="New inquiry — Pool Automation"/>
         <div class="form-row">
           <div class="form-group"><label>First Name</label><input type="text" name="first_name" placeholder="John"/></div>
           <div class="form-group"><label>Last Name</label><input type="text" name="last_name" placeholder="Smith"/></div>

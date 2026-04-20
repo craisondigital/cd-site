@@ -1,6 +1,6 @@
 # CLAUDE_REFERENCE.md
 > **Purpose:** Read this file FIRST every session to understand the codebase before making changes.
-> Last updated: 2026-03-25
+> Last updated: 2026-04-20
 
 ---
 
@@ -9,154 +9,147 @@
 - **Repo:** cd-site
 - **Branch:** main
 - **Business:** Craison Digital — Smart Home / Smart Property consulting (Sarasota area)
-- **Hosting:** Bluehost (static HTML, deployed via cPanel Git Version Control)
+- **Hosting:** Bluehost (PHP, deployed via GitHub Actions FTP)
 - **Domain:** craisondigital.com
 
 ---
 
 ## FILE INVENTORY (root directory)
 
-| File | Purpose | Size | Deployed |
-|---|---|---|---|
-| `index.html` | **Homepage** — Animated estate SVG hero with full property automation showcase | ~103KB | ✓ |
-| `gate.html` | **Gate product page** — Smart Gate Access for Large Properties (SVG animation hero) | ~78KB | ✓ |
-| `fountains.html` | **Fountain product page** — Smart Lake Fountain Control | ~77KB | ✓ |
-| `pool.html` | **Pool product page** — Smart Pool Automation (any brand, or no automation at all) | ~83KB | ✓ |
-| `pricing.html` | **Gate pricing/packages page** — 3-tier installed pricing, add-on cards, FAQ, contact | ~42KB | ✓ |
-| `404.html` | **Custom 404 page** — Branded error page matching site design | ~5KB | ✓ |
-| `.htaccess` | **Apache config** — Custom 404, GZIP, caching, security headers | ~1KB | ✓ |
-| `nav.html` | **Nav prototype** — Working standalone nav test page (reference for nav pattern) | ~10KB | ✓ |
-| `img/` | **Images directory** — Product photos and assets | varies | ✓ |
-| `.cpanel.yml` | **Deployment config** — Auto-deploys all *.html + .htaccess + img/ to public_html | <1KB | No |
-| `CLAUDE_REFERENCE.md` | **This file** — Codebase reference for Claude sessions | ~20KB | No |
+| File | Purpose | Deployed |
+|---|---|---|
+| `index.php` | **Homepage** — Animated notification hero, services grid, timeline, contact form | ✓ |
+| `about.php` | **About page** | ✓ |
+| `gate.php` | **Gate product page** — Smart Gate Access for Large Properties | ✓ |
+| `fountains.php` | **Fountain product page** — Smart Lake Fountain Control | ✓ |
+| `pool.php` | **Pool product page** — Smart Pool Automation | ✓ |
+| `garage.php` | **Garage product page** — Rollup & Garage Door Control | ✓ |
+| `pricing.php` | **Gate pricing page** — 3-tier installed pricing, add-on cards, FAQ, contact | ✓ |
+| `fountain-pricing.php` | **Fountain pricing page** | ✓ |
+| `garage-pricing.php` | **Garage pricing page** | ✓ |
+| `thank-you.php` | **Form confirmation page** — Post-submit redirect, noindex | ✓ |
+| `404.html` | **Custom 404 page** — Branded error page | ✓ |
+| `nav.php` | **Shared nav include** — PHP include used by all pages | ✓ |
+| `footer.php` | **Shared footer include** — PHP include used by all pages | ✓ |
+| `.htaccess` | **Apache config** — Custom 404, GZIP, caching, security headers | ✓ |
+| `img/` | **Images directory** — Product photos and assets | ✓ |
+| `.cpanel.yml` | **Unused** — Legacy cPanel deployment config, superseded by GitHub Actions | No |
+| `CLAUDE_REFERENCE.md` | **This file** — Codebase reference for Claude sessions | No |
+
+### Cleanup candidates (not deployed, not needed)
+- `*.bak` files (`gate_backup.bak`, `index_backup_svg_animation.bak`)
+- `temp-*.txt` files (`temp-changes.txt`, `temp-ignore.txt`, `temp-ignore2.txt`, `temp-placeholder.txt`)
 
 ### Images in `img/`
 | File | Used On | Description |
 |---|---|---|
-| `Gate_rfid_animation.png` | pricing.html, gate.html | RFID reader/gate product shot |
-| `PhoneControl.png` | pricing.html | Phone controlling gate |
-| `keypad.png` | pricing.html | Weatherproof keypad |
-| `wifi_bridge.png` | pricing.html | Point-to-point wireless bridge antennas |
-| `gate_alarm.png` | pricing.html | Gate alarm/siren — also used as photo banner background |
-| `door_cam.png` | pricing.html | Doorbell camera |
+| `Gate_rfid_animation.png` | pricing.php, gate.php | RFID reader/gate product shot |
+| `PhoneControl.png` | pricing.php | Phone controlling gate |
+| `keypad.png` | pricing.php | Weatherproof keypad |
+| `wifi_bridge.png` | pricing.php | Point-to-point wireless bridge antennas |
+| `gate_alarm.png` | pricing.php | Gate alarm/siren |
+| `door_cam.png` | pricing.php | Doorbell camera |
+| `gate_home.png` | index.php | Gate card on homepage |
+| `pool_home.png` | index.php | Pool card on homepage |
+| `fountain_night.png` | index.php | Fountain card on homepage |
+| `rollup_home.png` | index.php | Garage/rollup card on homepage |
+| `camera_home.png` | index.php | Camera integration card |
+| `ha_integration.png` | index.php | One-app dashboard card |
 
 ---
 
-## DEPLOYMENT (Bluehost + cPanel Git Version Control)
+## DEPLOYMENT (GitHub Actions + FTP)
 
 ### How it works:
-1. Repo is cloned to `/home4/craisond/repositories/cd-site` on Bluehost
-2. `.cpanel.yml` uses wildcard `*.html` — auto-deploys ALL HTML files + .htaccess + img/ to `/home4/craisond/public_html/`
-3. Push changes to GitHub → go to cPanel → Git Version Control → click **Update from Remote** → click **Deploy HEAD Commit**
+1. Push to `main` branch on GitHub
+2. `.github/workflows/deploy.yml` triggers automatically
+3. FTP Deploy Action uploads **all files** to Bluehost via FTP
+4. No manual steps required — push = deploy
 
-### .cpanel.yml auto-deploys:
-- **All `*.html` files** in the repo root
-- `.htaccess`
-- `img/` directory (recursive copy)
+### Credentials (stored as GitHub repo secrets):
+- `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`
 
 ### NOT deployed:
-- CLAUDE_REFERENCE.md, .cpanel.yml itself
+- `CLAUDE_REFERENCE.md`, `*.bak`, `temp-*.txt` files are uploaded but irrelevant to the live site
 
 ### Bluehost details:
-- Home directory: `/home4/craisond/` (NOT `/home/`)
+- Home directory: `/home4/craisond/`
 - Deploy path: `/home4/craisond/public_html/`
-- Repo path: `/home4/craisond/repositories/cd-site`
 
 ---
 
 ## TECH STACK
-- **Pure static HTML** — no build system, no framework, no bundler
-- **Single-file architecture** — each page has HTML + CSS + JS all inline in one `.html` file
+- **PHP with server-side includes** — nav and footer are shared include files
+- **Single-file CSS/JS** — each page still has its own inline styles and scripts (no external CSS/JS libraries)
 - **Fonts:** Google Fonts — `Syne` (display/headings, weight 400-800) + `DM Sans` (body, weight 300-600)
-- **No external CSS or JS libraries** — everything is custom
-- **SVG illustrations** — complex inline SVGs with JavaScript animations
-- **No backend / no form handling** — forms use `onsubmit="return false;"` (placeholder)
+- **No build system, no framework, no bundler**
+- **SVG illustrations** — complex inline SVGs with JavaScript animations on some pages
+- **Forms:** Formspree (`https://formspree.io/f/xaqabrdo`) — redirect to `thank-you.php` on submit
 
 ---
 
-## ⚠️ NAVIGATION — ONE PATTERN FOR ALL PAGES
+## ⚠️ NAVIGATION — PHP INCLUDE PATTERN
 
-The nav uses v5 pattern with **separate mobile-menu div inside the nav element**. DO NOT use position:fixed overlays for the mobile menu. **All pages use the same simplified nav — NO page-specific section links.**
+The nav lives in `nav.php` and is included on every page. Active state is driven by a `$activePage` variable set **before** the include.
 
-```
-Home | Services ▾ | Pricing ▾ | [Get a Quote]
-```
-
-### Active states:
-- **index.html:** `Home` gets `class="nav-active"`, Services and Pricing `<a>` have NO `nav-active` or `href`
-- **Product pages (gate, pool, fountains):** Services `<a>` gets `class="nav-active"`, set `class="dropdown-active"` on the current product in the Services dropdown
-- **Pricing pages (pricing, fountain-pricing):** Pricing `<a>` gets `class="nav-active"`, set `class="dropdown-active"` on the current pricing page in the Pricing dropdown. Services `<a>` also gets `class="nav-active"` with `dropdown-active` on the parent product.
-- **404.html:** No active state, CTA links to `index.html#contact` instead of `#contact`
-
-### Desktop:
-```html
-<ul class="nav-links">
-  <li><a href="index.html">Home</a></li>
-  <li class="nav-dropdown">
-    <a class="nav-active">Services <svg>...chevron...</svg></a>
-    <div class="dropdown-panel">
-      <ul class="dropdown-inner">
-        <li><a href="gate.html" class="dropdown-active"><span class="dd-icon">🚪</span> Smart Gate Access</a></li>
-        <li><a href="pool.html"><span class="dd-icon">🌊</span> Pool &amp; Spa Automation</a></li>
-        <li><a href="fountains.html"><span class="dd-icon">⛲</span> Lake &amp; Fountain Control</a></li>
-      </ul>
-    </div>
-  </li>
-  <li class="nav-dropdown">
-    <a>Pricing <svg>...chevron...</svg></a>
-    <div class="dropdown-panel">
-      <ul class="dropdown-inner">
-        <li><a href="pricing.html"><span class="dd-icon">🚪</span> Gate Control</a></li>
-        <li><a href="fountain-pricing.html"><span class="dd-icon">⛲</span> Fountain Control</a></li>
-      </ul>
-    </div>
-  </li>
-  <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
-</ul>
+### Usage pattern (top of `<body>` on every page):
+```php
+<?php $activePage = 'home'; ?>
+<?php include 'nav.php'; ?>
 ```
 
-### Mobile:
-```html
-<div class="mobile-menu" id="mobileMenu">
-  <a href="index.html">Home</a>
-  <div class="mm-label">Services</div>
-  <div class="mm-sub">
-    <a href="gate.html" class="dropdown-active">Smart Gate Access</a>
-    <a href="pool.html">Pool &amp; Spa Automation</a>
-    <a href="fountains.html">Lake &amp; Fountain Control</a>
-  </div>
-  <div class="mm-label">Pricing</div>
-  <div class="mm-sub">
-    <a href="pricing.html">Gate Control</a>
-    <a href="fountain-pricing.html">Fountain Control</a>
-  </div>
-  <div class="mm-divider"></div>
-  <a href="#contact" class="nav-cta">Get a Quote</a>
-</div>
+### Valid `$activePage` values:
+- `'home'` — index.php
+- `'about'` — about.php
+- `'gate'` — gate.php
+- `'fountains'` — fountains.php
+- `'garage'` — garage.php
+- `'pool'` — pool.php
+- `'pricing'` — pricing.php
+- `'fountain-pricing'` — fountain-pricing.php
+- `'garage-pricing'` — garage-pricing.php
+
+### How nav.php resolves active state:
+```php
+$servicePages = ['gate', 'fountains', 'garage', 'pool'];
+$pricingPages = ['pricing', 'fountain-pricing', 'garage-pricing'];
+$isServiceActive = in_array($activePage, $servicePages);
+$isPricingActive = in_array($activePage, $pricingPages);
 ```
 
-Set `class="dropdown-active"` on the current page's link in both desktop and mobile dropdowns.
+- Service product pages → `Services` label gets `nav-active`, current page link gets `dropdown-active`
+- Pricing pages → `Pricing` label gets `nav-active`, current page link gets `dropdown-active`
+- `home` → `Home` gets `nav-active`
+- `about` → `About` gets `nav-active`
+
+### Nav structure:
+```
+Home | About | Services ▾ | Pricing ▾ | [Get a Quote]
+```
+
+**Services dropdown:** Gate Controls 🚪 · Fountain Controls ⛲ · Garage Controls 🚗 · Pool Controls 🌊
+
+**Pricing dropdown:** Gate Control 🚪 · Fountain Control ⛲ · Garage Control 🚗
+
+### Mobile menu:
+Same links, uses `.mobile-menu` div with `.mm-label` / `.mm-sub` structure. Toggle via `#navToggle` / `#mobileMenu`.
 
 ---
 
-## FOOTER (consistent across all pages)
+## FOOTER — PHP INCLUDE PATTERN
 
-```html
-<footer>
-  <div class="footer-top">
-    <div class="footer-logo"><a href="index.html">Craison<span>Digital</span></a></div>
-    <div class="footer-nav">
-      <a href="index.html">Home</a><a href="gate.html">Gate</a>
-      <a href="pool.html">Pool</a><a href="fountains.html">Fountains</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div>© 2026 Craison Digital. All rights reserved.</div>
-    <div>Smart Property Consulting · Estates &amp; Compounds · Sarasota</div>
-  </div>
-</footer>
+Footer lives in `footer.php`. Include at the bottom of `<body>` on every page:
+
+```php
+<?php include 'footer.php'; ?>
 ```
+
+### Footer links:
+Home · About · Gate · Pool · Fountains · Garage · Contact
+
+### Footer bottom line:
+`© 2026 Craison Digital. All rights reserved.`
+`Smart Property Consulting · Estates & Compounds · Sarasota`
 
 ---
 
@@ -168,38 +161,40 @@ Set `class="dropdown-active"` on the current page's link in both desktop and mob
 --card-hover: #141d2e; --border: rgba(255,255,255,0.06);
 --blue: #2f80ed; --blue-bright: #5ba4f5;
 --blue-glow: rgba(47,128,237,0.15); --cyan: #00d4ff;
---green: #4ade80; --text: #e4e9f2; --muted: #6b7a8d; --white: #f4f7fb;
+--green: #4ade80; --green-glow: rgba(74,222,128,0.15);
+--text: #e4e9f2; --muted: #6b7a8d; --white: #f4f7fb;
 --font-display: 'Syne', sans-serif; --font-body: 'DM Sans', sans-serif;
 ```
 
 ### Visual Patterns
-- Dark theme only, noise texture overlay, section alternation (--black / --dark)
-- Border: 1px solid rgba(255,255,255,0.06), border-radius: cards 14-16px, buttons 8px, badges 100px
+- Dark theme only, noise texture overlay (`body::before`), section alternation (`--black` / `--dark`)
+- Border: `1px solid rgba(255,255,255,0.06)`, border-radius: cards 14-16px, buttons 8px, badges 100px
 - Glow effects on CTAs and SVG elements
-- fadeUp animation with staggered delays
+- `fadeUp` animation with staggered delays
+- `.reveal` class + IntersectionObserver for scroll-triggered animations
 
 ### Typography
-- **h1:** Syne 800, clamp(2.2rem, 5.2vw, 4.2rem)
-- **Section titles:** Syne 800, clamp(1.7rem, 3.2vw, 2.6rem)
+- **h1:** Syne 800, `clamp(2.2rem, 5.2vw, 4.2rem)`
+- **Section titles:** Syne 800, `clamp(1.7rem, 3.2vw, 2.6rem)`
 - **Card titles:** Syne 700, ~1rem
 - **Body:** DM Sans 300, 0.85-0.9rem
 - **Tags/labels:** 0.7rem, weight 600, letter-spacing 0.16em, uppercase
 
 ### Responsive Breakpoints
-- **960px:** grids to 2-col, featured card spans full width centered
-- **768px:** hamburger menu, grids to 1-col, footer stacks, toast compact styles, photo banner auto height
-- **480px:** add-on grids to 1-col
+- **960px:** grids to 2-col, plan layout stacks
+- **768px:** hamburger menu, grids to 1-col, footer stacks, compact toast styles
+- **480px:** add-on grids to 1-col, app icons smaller
 
 ---
 
-## ⭐ PRICING PAGE TEMPLATE (pricing.html) — REPLICATE FOR NEW PRODUCTS
+## ⭐ PRICING PAGE TEMPLATE (pricing.php) — REPLICATE FOR NEW PRODUCTS
 
 ### Page Flow
 ```
-Nav (standard site-wide nav — Home | Services | Get a Quote)
- → Packages Section (#packages) — section tag + gradient h2 + cycling notification toast + 3-col pricing cards + footnote
- → Photo Banner — emotional hook (full-width image, dark overlay, bold text)
- → Add-Ons Section (#addons) — section tag + h2 + 2-col image cards (how-card pattern) + footnote
+Nav (standard)
+ → Packages Section (#packages) — gradient h2 + cycling notification toast + 3-col pricing cards + footnote
+ → Photo Banner — full-width image, dark overlay, bold text
+ → Add-Ons Section (#addons) — 2-col image cards (how-card pattern) + footnote
  → FAQ Section (#faq) — accordion
  → Contact Form (#contact)
  → Footer
@@ -208,41 +203,28 @@ Nav (standard site-wide nav — Home | Services | Get a Quote)
 ### Packages Section
 - **Section tag** in WHITE (not blue): `style="color:var(--white);"`
 - **H2** with blue-to-cyan gradient on key phrase
-- **Cycling notification toast** — centered, static-positioned, JS cycles through 3-4 product scenarios every 3.5s with fade transition. Green badge for entries, red for exits.
-- **3-column pricing cards** — each has: emoji icon → name → tagline → LARGE price (2.4rem white) → "Installed · One-time · No monthly fees" → divider → feature list with cyan checkmarks → muted features (gray dashes showing what's NOT included) → full-width CTA button → footnote
-- **Featured card**: `class="pkg-card featured"` — cyan border glow, badge, always-visible gradient line
-- **Footnote**: centered, mentions existing equipment assumption, free property assessment
+- **Cycling notification toast** — centered, static-positioned, JS cycles through 3-4 product scenarios every 3.5s with fade transition
+- **3-column pricing cards** — emoji icon → name → tagline → LARGE price (2.4rem white) → "Installed · One-time · No monthly fees" → divider → feature list with cyan checkmarks → muted features (gray dashes) → full-width CTA button
+- **Featured card:** `class="pkg-card featured"` — cyan border glow, badge, always-visible gradient line
+- **Footnote:** centered, mentions existing equipment assumption, free property assessment
 
 ### Pricing Philosophy
-- Show INSTALLED prices (hardware + labor bundled) — never show component costs to customer
+- Show INSTALLED prices (hardware + labor bundled) — never show component costs
 - "Contact" for variable-complexity items
 - Bundle vs standalone pricing for simple add-ons
 - No "starting at" on cards — footnote handles the disclaimer
-
-### Photo Banner
-- Full-width image with `brightness(0.35) saturate(0.7)` filter
-- Dark gradient overlay, centered text
-- Height: 280px desktop, auto/min-height 220px mobile
-- Can include large emoji on its own line between heading and subtitle
 
 ### Add-On Cards (how-card pattern)
 - 2-column grid, product photo at top (180px), card body with h3 + description
 - **NO emoji icons** — photos only in this section
 - Optional pricing line at bottom
-- Cards can have IDs for deep linking: `id="wireless-bridge"`
-- Dashboard mockup card uses inline HTML scaled to 180px instead of photo
-
-### FAQ Accordion
-- Click-to-expand, max-height animation, chevron rotation
-- Answers can contain inline links as soft CTAs
-- Cover: requirements, pricing inclusions, specs, modularity, power outages, upgradability
 
 ### Gate Pricing Reference
-| Package | Installed Price | Hardware | Labor |
-|---|---|---|---|
-| Phone Control | $295 | ~$19 | $276 |
-| Hands-Free RFID | $650 | ~$238 | $412 |
-| Full Access Control | $995 | ~$400+ | $595 |
+| Package | Installed Price |
+|---|---|
+| Phone Control | $295 |
+| Hands-Free RFID | $650 |
+| Full Access Control | $995 |
 
 | Add-On | With Package | Standalone |
 |---|---|---|
@@ -254,20 +236,20 @@ Nav (standard site-wide nav — Home | Services | Get a Quote)
 ---
 
 ## IMPORTANT NOTES
-1. Each file is self-contained — CSS and JS inline
-2. **New pricing pages:** copy `pricing.html` as template. Nav is already correct.
-3. **New product pages:** copy `gate.html` as template for SVG hero pages. Nav is already correct.
-4. DO NOT add page-specific section links to nav on ANY page — all pages use the simplified nav (Home | Services | Get a Quote)
-5. DO NOT use position:fixed overlays for mobile nav
-6. Forms are non-functional — `onsubmit="return false;"`
-7. Footer must say **Sarasota** (not Miami)
-8. Images go in `img/` directory
+1. Nav and footer are shared PHP includes — edit `nav.php` or `footer.php` to change them everywhere
+2. Always set `$activePage` before including `nav.php`
+3. **New pricing pages:** copy `pricing.php` as template, set correct `$activePage`, add to nav.php's `$pricingPages` array
+4. **New product pages:** copy `gate.php` as template, set correct `$activePage`, add to nav.php's `$servicePages` array
+5. DO NOT add page-specific section links to nav — all pages use simplified nav
+6. DO NOT use `position:fixed` overlays for mobile nav
+7. Forms use Formspree — action `https://formspree.io/f/xaqabrdo`, redirect to `thank-you.php`
+8. Footer must say **Sarasota** (not Miami)
+9. Images go in `img/` directory
 
 ---
 
 ## TODO
-- [ ] Wire up contact forms (Formspree or PHP mail())
 - [ ] Open Graph meta tags for social sharing
 - [ ] robots.txt and sitemap.xml for SEO
 - [ ] HTTPS redirect in .htaccess
-- [ ] Footer Miami → Sarasota still needed in: index.html, pool.html, fountains.html, 404.html
+- [ ] Clean up `*.bak` and `temp-*.txt` files from repo

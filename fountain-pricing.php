@@ -533,7 +533,7 @@
       <h2 class="section-title">Ready to upgrade your fountain?</h2>
       <p class="section-sub" style="margin-bottom:0;">Tell us about your property and we'll get back to you with a custom quote.</p>
       <form class="contact-form" action="https://formspree.io/f/xaqabrdo" method="POST">
-        <input type="hidden" name="_next" value="https://craisondigital.com/thank-you.html"/><input type="hidden" name="_subject" value="New inquiry — Fountain Pricing"/>
+        <input type="hidden" name="_next" value="https://craisondigital.com/thank-you.php"/><input type="hidden" name="_subject" value="New inquiry — Fountain Pricing"/>
         <div class="form-row">
           <div class="form-group"><label>First Name</label><input type="text" name="first_name" placeholder="John"/></div>
           <div class="form-group"><label>Last Name</label><input type="text" name="last_name" placeholder="Smith"/></div>

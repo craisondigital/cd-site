@@ -101,6 +101,7 @@ The nav lives in `nav.php` and is included on every page. Active state is driven
 ### Valid `$activePage` values:
 - `'home'` — index.php
 - `'about'` — about.php
+- `'how-it-works'` — how-a-smart-home-should-work.php
 - `'gate'` — gate.php
 - `'fountains'` — fountains.php
 - `'garage'` — garage.php

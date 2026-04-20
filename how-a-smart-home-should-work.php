@@ -169,7 +169,7 @@
     <div class="hero-inner">
       <div class="hero-eyebrow">The Guide</div>
       <h1>How a Smart Home<br><em>Should Work</em></h1>
-      <p class="hero-sub">Most smart homes are built around features, not around how people live. Here's what the industry keeps getting wrong — and what good actually looks like.</p>
+      <p class="hero-sub">Most smart homes are built around features, not around how people live. Here's what the industry keeps getting wrong — and what it looks like when you get it right.</p>
     </div>
   </section>
 

@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Craison Digital – Smart Pool Automation</title>
+  <meta name="description" content="We make your pool dead simple. Whatever equipment you have, we build you one clean app — controlled by phone, voice, or automation. No more confusing menus."/>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230d1320'/><text x='4' y='24' font-size='22' font-weight='bold' fill='%2300d4ff'>C</text></svg>"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #060a10; --dark: #0b1018; --card: #0f1724;
+      --card-hover: #141d2e; --border: rgba(255,255,255,0.06);
+      --blue: #2f80ed; --blue-bright: #5ba4f5;
+      --blue-glow: rgba(47,128,237,0.15); --cyan: #00d4ff;
+      --green: #4ade80; --green-glow: rgba(74,222,128,0.15);
+      --text: #e4e9f2; --muted: #6b7a8d; --white: #f4f7fb;
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--text); font-family: var(--font-body); font-weight: 300; line-height: 1.75; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.5; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(6,10,16,0.92);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 4rem;
+    }
+    .nav-logo {
+      font-family: var(--font-display); font-weight: 800; font-size: 1.1rem;
+      color: var(--white); text-decoration: none;
+    }
+    .nav-logo span { color: var(--cyan); }
+    .nav-toggle {
+      display: none; background: none; border: none;
+      cursor: pointer; padding: 0.5rem;
+    }
+    .nav-toggle span {
+      display: block; width: 22px; height: 2px; background: var(--text);
+      margin: 5px 0; border-radius: 2px;
+    }
+    .nav-links {
+      display: flex; align-items: center; gap: 2.2rem; list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.85rem;
+      font-weight: 400; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.nav-active { color: var(--text); }
+    .nav-divider { width: 1px; height: 14px; background: var(--border); }
+    .nav-cta {
+      background: var(--blue); color: var(--white) !important;
+      padding: 0.5rem 1.4rem; border-radius: 6px; font-weight: 500 !important;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: var(--blue-bright) !important; transform: translateY(-1px); }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a {
+      display: inline-flex; align-items: center; gap: 0.3rem; cursor: default;
+    }
+    .nav-dropdown > a svg { transition: transform 0.2s; }
+    .dropdown-panel {
+      visibility: hidden; opacity: 0;
+      position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%);
+      padding-top: 0.75rem; z-index: 110;
+      transition: visibility 0.15s, opacity 0.15s;
+    }
+    .nav-dropdown:hover .dropdown-panel { visibility: visible; opacity: 1; }
+    .nav-dropdown:hover > a svg { transform: rotate(180deg); }
+    .dropdown-inner {
+      background: rgba(11,16,24,0.97);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px; padding: 0.5rem 0; min-width: 240px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.6);
+      list-style: none;
+    }
+    .dropdown-inner li a {
+      display: flex; align-items: center; gap: 0.65rem;
+      padding: 0.65rem 1.2rem; font-size: 0.84rem; color: var(--muted);
+      transition: all 0.15s; white-space: nowrap;
+    }
+    .dropdown-inner li a:hover { color: var(--white); background: rgba(47,128,237,0.08); }
+    .dropdown-inner li a.dropdown-active { color: var(--blue-bright); }
+    .dropdown-inner li a .dd-icon { font-size: 1rem; width: 1.2rem; text-align: center; flex-shrink: 0; }
+    .mobile-menu { display: none; }
+    .hero { position: relative; width: 100%; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; overflow: hidden; padding-top: 70px; }
+    .hero-bg { position: absolute; inset: 0; background: linear-gradient(180deg, #040710 0%, #081525 40%, #0a1a30 100%); }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(47,128,237,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(47,128,237,0.04) 1px, transparent 1px); background-size: 56px 56px; mask-image: radial-gradient(ellipse 85% 75% at 50% 55%, black 15%, transparent 100%); -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 55%, black 15%, transparent 100%); }
+    .hero-glow { position: absolute; top: 15%; left: 50%; transform: translateX(-50%); width: 700px; height: 400px; background: radial-gradient(ellipse, rgba(47,128,237,0.08) 0%, transparent 70%); pointer-events: none; }
+
+    .hero-headline-above { position: relative; z-index: 3; text-align: center; padding: 2rem 2rem 1.5rem; }
+    .hero-headline-above h1 { font-family: var(--font-display); font-size: clamp(2.2rem,5.2vw,4.2rem); font-weight: 800; line-height: 1.06; letter-spacing: -0.025em; margin-bottom: 0; animation: fadeUp 0.6s 0.1s ease both; color: var(--white); }
+    .hero-headline-above h1 em { font-style: normal; background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    .pool-illustration { position: relative; z-index: 2; width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
+
+    .notif-wrap { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; z-index: 10; pointer-events: none; }
+    .notif-toast { background: rgba(8,18,32,0.96); border: 1px solid rgba(74,222,128,0.35); border-radius: 14px; padding: 1rem 1.4rem; display: flex; align-items: center; gap: 0.9rem; box-shadow: 0 0 40px rgba(74,222,128,0.15), 0 8px 40px rgba(0,0,0,0.5); opacity: 0; transform: translateY(14px) scale(0.97); transition: opacity 0.5s ease, transform 0.5s ease; max-width: 360px; width: 90%; }
+    .notif-toast.visible { opacity: 1; transform: translateY(0) scale(1); }
+    .notif-toast.amber { border-color: rgba(220,160,20,0.35); box-shadow: 0 0 40px rgba(220,160,20,0.12), 0 8px 40px rgba(0,0,0,0.5); }
+    .notif-toast.amber .notif-dot { background: #dcaa14; box-shadow: 0 0 8px #dcaa14; }
+    .notif-toast.amber .notif-icon { background: linear-gradient(135deg,#3a3010,#2a2008); border-color: rgba(220,160,20,0.35); }
+    .notif-toast.amber .notif-badge { background: rgba(220,160,20,0.1); border-color: rgba(220,160,20,0.25); color: #dcaa14; }
+    .notif-icon { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg,#1a4a2a,#0d2a1a); border: 1.5px solid rgba(74,222,128,0.35); display: flex; align-items: center; justify-content: center; font-size: 1.15rem; flex-shrink: 0; }
+    .notif-body { flex: 1; }
+    .notif-title { font-family: var(--font-display); font-size: 0.88rem; font-weight: 700; color: var(--text); margin-bottom: 0.1rem; }
+    .notif-sub { font-size: 0.72rem; color: var(--muted); }
+    .notif-badge { background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.25); color: var(--green); font-size: 0.65rem; font-weight: 600; padding: 0.2rem 0.55rem; border-radius: 100px; white-space: nowrap; }
+    .notif-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); flex-shrink: 0; animation: blink 1s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    .hero-content { position: relative; z-index: 3; width: 100%; text-align: center; padding: 2.5rem 2rem 5rem; background: linear-gradient(0deg, var(--black) 28%, transparent 100%); }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(47,128,237,0.08); border: 1px solid rgba(47,128,237,0.2); color: var(--blue-bright); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 0.9rem; border-radius: 100px; margin-bottom: 1.5rem; animation: fadeUp 0.6s ease both; }
+    .hero-eyebrow::before { content: ''; width: 5px; height: 5px; background: var(--cyan); border-radius: 50%; box-shadow: 0 0 8px var(--cyan); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .hero-content h1 { font-family: var(--font-display); font-size: clamp(2.2rem,5.2vw,4.2rem); font-weight: 800; line-height: 1.06; letter-spacing: -0.025em; margin-bottom: 1.3rem; animation: fadeUp 0.6s 0.1s ease both; color: var(--white); }
+    .hero-content h1 em { font-style: normal; background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-content .hero-sub { font-size: 1.08rem; color: var(--muted); max-width: 850px; margin: 0 auto 2.2rem; animation: fadeUp 0.6s 0.2s ease both; line-height: 1.7; }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+    .btn-primary { background: var(--blue); color: var(--white); padding: 0.8rem 2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 500; text-decoration: none; border: none; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 20px rgba(47,128,237,0.25); display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-primary:hover { background: var(--blue-bright); transform: translateY(-1px); box-shadow: 0 0 32px rgba(47,128,237,0.4); }
+    .btn-secondary { background: transparent; color: var(--text); padding: 0.8rem 2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 400; text-decoration: none; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.15); color: var(--white); }
+
+    .stats-bar { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--dark); display: flex; justify-content: center; position: relative; z-index: 1; }
+    .stat { flex: 1; max-width: 280px; padding: 2rem 2.5rem; text-align: center; border-right: 1px solid var(--border); }
+    .stat:last-child { border-right: none; }
+    .stat-number { font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: var(--blue-bright); line-height: 1; margin-bottom: 0.3rem; }
+    .stat-label { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    section { position: relative; z-index: 1; }
+    .section-inner { max-width: 1100px; margin: 0 auto; padding: 6rem 4rem; }
+    .section-tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue-bright); margin-bottom: 0.7rem; }
+    .section-title { font-family: var(--font-display); font-size: clamp(1.7rem,3.2vw,2.6rem); font-weight: 800; line-height: 1.12; letter-spacing: -0.02em; margin-bottom: 1rem; color: var(--white); }
+    .section-sub { color: var(--muted); font-size: 1rem; max-width: 520px; margin-bottom: 3rem; line-height: 1.7; }
+
+    #problem { background: var(--dark); }
+    .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .problem-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; }
+    .problem-card h3 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; margin-bottom: 1.2rem; color: var(--white); display: flex; align-items: center; gap: 0.7rem; }
+    .problem-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+    .problem-card li { font-size: 0.9rem; color: var(--muted); display: flex; align-items: flex-start; gap: 0.7rem; line-height: 1.6; }
+    .problem-card li::before { content: '—'; color: rgba(255,255,255,0.15); flex-shrink: 0; margin-top: 1px; }
+    .solution-card li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+    .solution-card { border-color: rgba(47,128,237,0.15); background: linear-gradient(135deg, var(--card) 0%, rgba(47,128,237,0.04) 100%); }
+
+    .experience-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .exp-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; transition: all 0.3s; position: relative; overflow: hidden; }
+    .exp-card:hover { background: var(--card-hover); border-color: rgba(47,128,237,0.15); transform: translateY(-2px); }
+    .exp-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--blue), transparent); opacity: 0; transition: opacity 0.3s; }
+    .exp-card:hover::before { opacity: 1; }
+    .exp-icon { width: 48px; height: 48px; background: var(--blue-glow); border: 1px solid rgba(47,128,237,0.18); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; font-size: 1.3rem; }
+    .exp-card h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--white); }
+    .exp-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+    .exp-card .exp-tag { display: inline-block; margin-top: 0.8rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cyan); opacity: 0.7; }
+
+    #package { background: var(--dark); }
+    .package-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .package-item { background: var(--card); padding: 2rem; transition: background 0.2s; }
+    .package-item:hover { background: var(--card-hover); }
+    .pkg-icon { width: 42px; height: 42px; background: var(--blue-glow); border: 1px solid rgba(47,128,237,0.18); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-size: 1.2rem; }
+    .pkg-title { font-family: var(--font-display); font-size: 0.98rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--white); }
+    .pkg-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+    .pkg-optional { display: inline-block; background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2); color: var(--cyan); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.15rem 0.5rem; border-radius: 4px; margin-bottom: 0.6rem; }
+
+    .steps { display: flex; flex-direction: column; position: relative; }
+    .steps::before { content: ''; position: absolute; left: 22px; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--blue), transparent); }
+    .step { display: grid; grid-template-columns: 48px 1fr; gap: 1.6rem; padding: 1.8rem 0; border-bottom: 1px solid var(--border); }
+    .step:last-child { border-bottom: none; }
+    .step-num { width: 44px; height: 44px; border-radius: 50%; background: var(--blue-glow); border: 1px solid var(--blue); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 0.82rem; font-weight: 700; color: var(--blue-bright); flex-shrink: 0; position: relative; z-index: 1; }
+    .step-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem; color: var(--white); }
+    .step-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+
+    #features { background: var(--dark); }
+    .features-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .feature-list { display: flex; flex-direction: column; gap: 1.4rem; }
+    .feature-item { display: flex; gap: 0.9rem; align-items: flex-start; }
+    .feature-check { width: 20px; height: 20px; border-radius: 50%; background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.25); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 3px; font-size: 0.6rem; color: var(--cyan); }
+    .feature-text strong { display: block; font-weight: 500; font-size: 0.92rem; margin-bottom: 0.15rem; color: var(--white); }
+    .feature-text span { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
+
+    .dashboard-mockup { background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: 0 20px 70px rgba(0,0,0,0.5), 0 0 0 1px rgba(47,128,237,0.08); }
+    .mockup-bar { background: #0a0f18; border-bottom: 1px solid var(--border); padding: 0.7rem 1rem; display: flex; align-items: center; gap: 0.45rem; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; }
+    .dot-r{background:#ff5f57} .dot-y{background:#febc2e} .dot-g{background:#28c840}
+    .mockup-title { margin-left: auto; margin-right: auto; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.03em; }
+    .mockup-body { padding: 1.2rem; }
+    .mockup-row { display: flex; justify-content: space-between; align-items: center; padding: 0.65rem 0.9rem; background: rgba(255,255,255,0.02); border-radius: 8px; margin-bottom: 0.5rem; font-size: 0.78rem; }
+    .mockup-row:last-child { margin-bottom: 0; }
+    .tag-name { font-weight: 500; color: var(--text); font-size: 0.8rem; }
+    .tag-time { color: var(--muted); font-size: 0.68rem; }
+    .tag-status { font-size: 0.68rem; padding: 0.15rem 0.6rem; border-radius: 100px; font-weight: 500; }
+    .status-on{background:rgba(40,200,100,0.1);color:#4ade80;border:1px solid rgba(40,200,100,0.18)}
+    .status-off{background:rgba(107,122,141,0.12);color:#6b7a8d;border:1px solid rgba(107,122,141,0.18)}
+    .status-heat{background:rgba(251,146,60,0.1);color:#fb923c;border:1px solid rgba(251,146,60,0.18)}
+    .mockup-notif { margin-top: 0.8rem; background: rgba(47,128,237,0.06); border: 1px solid rgba(47,128,237,0.12); border-radius: 8px; padding: 0.65rem 0.9rem; font-size: 0.72rem; color: var(--blue-bright); display: flex; gap: 0.5rem; align-items: center; }
+
+    .compat-section { text-align: center; }
+    .compat-logos { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 2rem; }
+    .compat-logo { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 2rem 2.5rem; display: flex; flex-direction: column; align-items: center; gap: 0.8rem; min-width: 180px; transition: all 0.3s; }
+    .compat-logo:hover { border-color: rgba(47,128,237,0.15); background: var(--card-hover); }
+    .compat-name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--white); }
+    .compat-sub { font-size: 0.75rem; color: var(--muted); }
+    .compat-check { font-size: 0.7rem; color: var(--green); font-weight: 500; margin-top: 0.2rem; }
+
+    .beyond-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .beyond-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.6rem; text-align: center; transition: all 0.3s; }
+    .beyond-card:hover { border-color: rgba(47,128,237,0.15); background: var(--card-hover); }
+    .beyond-icon { font-size: 1.8rem; margin-bottom: 0.8rem; display: block; }
+    .beyond-card h4 { font-family: var(--font-display); font-size: 0.88rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
+    .beyond-card p { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+    #pricing { background: var(--dark); }
+    .pricing-card { max-width: 520px; margin: 0 auto; background: var(--card); border: 1px solid rgba(47,128,237,0.2); border-radius: 18px; padding: 2.8rem; position: relative; box-shadow: 0 0 50px rgba(47,128,237,0.06); text-align: center; }
+    .pricing-card::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 50%; height: 1px; background: linear-gradient(90deg, transparent, var(--blue), transparent); }
+    .price-label { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+    .price-amount { font-family: var(--font-display); font-size: 2.6rem; font-weight: 800; color: var(--white); line-height: 1; margin-bottom: 0.3rem; }
+    .price-note { font-size: 0.8rem; color: var(--muted); margin-bottom: 2rem; }
+    .price-includes { text-align: left; border-top: 1px solid var(--border); padding-top: 1.8rem; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.8rem; }
+    .price-line { display: flex; align-items: center; gap: 0.7rem; font-size: 0.88rem; color: var(--text); }
+    .price-line::before { content: '✓'; color: var(--cyan); font-weight: 700; flex-shrink: 0; }
+
+    #contact { text-align: center; }
+    .cta-box { max-width: 600px; margin: 0 auto; }
+    .contact-form { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 2rem; text-align: left; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+    label { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.04em; font-weight: 400; }
+    input, textarea, select { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 0.7rem 0.9rem; color: var(--text); font-family: var(--font-body); font-size: 0.88rem; outline: none; transition: border-color 0.2s; width: 100%; }
+    input:focus, textarea:focus, select:focus { border-color: rgba(47,128,237,0.4); }
+    textarea { resize: vertical; min-height: 100px; }
+    select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7a8d' fill='none' stroke-width='1.5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.9rem center; padding-right: 2.2rem; }
+    select option { background: var(--card); color: var(--text); }
+    .form-submit-row { display: flex; align-items: center; gap: 1rem; margin-top: 0.5rem; }
+    .form-submit-row .btn-primary { flex-shrink: 0; }
+    .form-note { font-size: 0.72rem; color: var(--muted); }
+
+    footer { border-top: 1px solid var(--border); background: var(--black); padding: 2.5rem 4rem; font-size: 0.78rem; color: var(--muted); }
+    .footer-logo { font-family: var(--font-display); font-weight: 800; font-size: 0.95rem; color: var(--white); }
+    .footer-logo span { color: var(--cyan); }
+    .footer-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; }
+    .footer-nav { display: flex; gap: 1.8rem; }
+    .footer-nav a { color: var(--muted); text-decoration: none; font-size: 0.8rem; transition: color 0.2s; }
+    .footer-nav a:hover { color: var(--text); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 1.2rem; border-top: 1px solid var(--border); }
+
+    .section-divider { width: 100%; height: 1px; background: var(--border); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .experience-grid { grid-template-columns: 1fr 1fr; }
+      .beyond-grid { grid-template-columns: 1fr 1fr; }
+      .features-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .problem-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-bar { padding: 0.9rem 1.5rem; }
+      .nav-toggle { display: block; }
+      .nav-links { display: none !important; }
+      .mobile-menu {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        padding: 1.2rem 2rem 1.8rem;
+        border-top: 1px solid var(--border);
+        background: var(--black);
+      }
+      .mobile-menu.open { display: flex; }
+      .mobile-menu a {
+        display: block; width: 100%; text-align: center;
+        padding: 0.55rem 0;
+        font-size: 1rem; color: var(--text);
+        text-decoration: none;
+        transition: color 0.15s;
+      }
+      .mobile-menu a:active { color: var(--blue-bright); }
+      .mobile-menu .mm-label {
+        display: block; width: 100%; text-align: center;
+        padding: 0.6rem 0 0.15rem;
+        font-size: 0.62rem; font-weight: 600;
+        letter-spacing: 0.14em; text-transform: uppercase;
+        color: var(--blue-bright);
+      }
+      .mobile-menu .mm-sub a {
+        color: var(--muted); font-size: 1rem;
+        padding: 0.45rem 0;
+      }
+      .mobile-menu .mm-sub a:active { color: var(--text); }
+      .mobile-menu .mm-sub a.dropdown-active { color: var(--blue-bright); }
+      .mobile-menu .mm-divider {
+        width: 32px; height: 1px; background: var(--border);
+        margin: 0.4rem auto;
+      }
+      .mobile-menu .nav-cta {
+        display: inline-block; margin-top: 0.4rem;
+        padding: 0.6rem 1.8rem; font-size: 1rem;
+      }
+
+                              .section-inner { padding: 4rem 1.5rem; }
+      .experience-grid { grid-template-columns: 1fr; }
+      .beyond-grid { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .stats-bar { display: grid; grid-template-columns: 1fr 1fr; justify-items: center; }
+      .stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat:nth-child(odd) { border-right: 1px solid var(--border); }
+      footer { flex-direction: column; gap: 0.8rem; text-align: center; padding: 2rem 1.5rem; }
+      .footer-top { flex-direction: column; gap: 0.8rem; }
+      .footer-nav { justify-content: center; flex-wrap: wrap; gap: 1rem; }
+      .footer-bottom { flex-direction: column; gap: 0.4rem; text-align: center; }
+      .notif-toast { padding: 0.6rem 0.7rem; gap: 0.4rem; max-width: 270px; border-radius: 10px; }
+      .notif-icon { width: 28px; height: 28px; font-size: 0.85rem; }
+      .notif-title { font-size: 0.72rem; }
+      .notif-sub { font-size: 0.6rem; }
+      .notif-badge { font-size: 0.52rem; padding: 0.12rem 0.4rem; }
+      .notif-dot { width: 5px; height: 5px; }
+      .form-submit-row { flex-direction: column; align-items: stretch; }
+      .compat-logos { gap: 1rem; }
+      .compat-logo { min-width: 140px; padding: 1.5rem 1.8rem; }
+    }
+    @media (max-width: 480px) {
+      .beyond-grid { grid-template-columns: 1fr; }
+      .stats-bar { grid-template-columns: 1fr; justify-items: center; }
+      .stat { border-right: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <?php $activePage = 'pool'; ?>
+<?php include 'nav.php'; ?>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+
+    <div class="hero-headline-above">
+      <h1>Your pool, finally<br/><em>simple.</em></h1>
+    </div>
+
+    <div class="pool-illustration" style="position:relative;">
+
+      <svg id="poolSVG" viewBox="0 0 1100 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+        <defs>
+          <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#05080f"/><stop offset="100%" stop-color="#0b1628"/></linearGradient>
+          <linearGradient id="poolWaterGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0a3a5a" stop-opacity="0.9"/><stop offset="50%" stop-color="#082a48"/><stop offset="100%" stop-color="#061e38" stop-opacity="0.95"/></linearGradient>
+          <linearGradient id="poolGlowGreen" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4ade80" stop-opacity="0.18"/><stop offset="100%" stop-color="#22c55e" stop-opacity="0.04"/></linearGradient>
+          <linearGradient id="spaWaterGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0a3a5a" stop-opacity="0.9"/><stop offset="50%" stop-color="#082a48"/><stop offset="100%" stop-color="#061e38" stop-opacity="0.95"/></linearGradient>
+          <linearGradient id="paverHighlight" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#242f3e"/><stop offset="100%" stop-color="#1a2430"/></linearGradient>
+          <linearGradient id="paverDark" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1e2a38"/><stop offset="100%" stop-color="#18222e"/></linearGradient>
+          <linearGradient id="phoneGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a1a2e"/><stop offset="100%" stop-color="#0d0d1a"/></linearGradient>
+          <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="glowStrong" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="waterRipple" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="1.5"/></filter>
+          <filter id="jetBlur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5"/></filter>
+          <pattern id="paverPattern" x="0" y="0" width="48" height="24" patternUnits="userSpaceOnUse">
+            <rect width="48" height="24" fill="#1a2535"/>
+            <rect x="1" y="1" width="22" height="10" rx="1.5" fill="url(#paverHighlight)" opacity="0.7"/>
+            <rect x="25" y="1" width="22" height="10" rx="1.5" fill="url(#paverDark)" opacity="0.7"/>
+            <rect x="13" y="13" width="22" height="10" rx="1.5" fill="url(#paverHighlight)" opacity="0.6"/>
+            <rect x="37" y="13" width="10" height="10" rx="1.5" fill="url(#paverDark)" opacity="0.6"/>
+            <rect x="-12" y="13" width="23" height="10" rx="1.5" fill="url(#paverDark)" opacity="0.6"/>
+            <line x1="0" y1="12" x2="48" y2="12" stroke="#111c28" stroke-width="1.5"/>
+            <line x1="0" y1="0" x2="48" y2="0" stroke="#111c28" stroke-width="0.8"/>
+            <line x1="24" y1="0" x2="24" y2="12" stroke="#111c28" stroke-width="1.5"/>
+            <line x1="12" y1="12" x2="12" y2="24" stroke="#111c28" stroke-width="1.5"/>
+            <line x1="36" y1="12" x2="36" y2="24" stroke="#111c28" stroke-width="1.5"/>
+          </pattern>
+          <clipPath id="sceneClip"><rect width="1100" height="520"/></clipPath>
+          <clipPath id="poolClip"><path d="M130,130 Q130,110 150,110 L730,110 Q750,110 750,130 L750,395 Q750,415 730,415 L150,415 Q130,415 130,395 Z"/></clipPath>
+          <clipPath id="spaClip"><ellipse cx="880" cy="260" rx="110" ry="110"/></clipPath>
+        </defs>
+        <g clip-path="url(#sceneClip)">
+          <rect width="1100" height="520" fill="url(#skyGrad)"/>
+          <circle cx="80" cy="12" r="1" fill="white" opacity="0.55"/><circle cx="200" cy="6" r="1.2" fill="white" opacity="0.6"/><circle cx="350" cy="22" r="0.8" fill="white" opacity="0.65"/><circle cx="500" cy="10" r="1" fill="white" opacity="0.4"/><circle cx="650" cy="4" r="1.2" fill="white" opacity="0.6"/><circle cx="780" cy="18" r="0.8" fill="white" opacity="0.5"/><circle cx="900" cy="8" r="1" fill="white" opacity="0.6"/><circle cx="1020" cy="26" r="1.2" fill="white" opacity="0.4"/>
+          <!-- LUXURY PAVER DECK -->
+          <rect x="60" y="55" width="980" height="420" rx="22" fill="url(#paverPattern)"/>
+          <rect x="60" y="55" width="980" height="420" rx="22" fill="none" stroke="#2a3a4e" stroke-width="1.5" opacity="0.4"/>
+          <rect x="62" y="57" width="976" height="416" rx="20" fill="none" stroke="white" stroke-width="0.5" opacity="0.03"/>
+          <!-- Coping around pool -->
+          <path d="M122,122 Q122,102 142,102 L738,102 Q758,102 758,122 L758,403 Q758,423 738,423 L142,423 Q122,423 122,403 Z" fill="none" stroke="#2a3a50" stroke-width="6" opacity="0.5"/>
+          <path d="M122,122 Q122,102 142,102 L738,102 Q758,102 758,122 L758,403 Q758,423 738,423 L142,423 Q122,423 122,403 Z" fill="none" stroke="#3a4a5e" stroke-width="2" opacity="0.3"/>
+          <!-- Coping around spa -->
+          <ellipse cx="880" cy="260" rx="118" ry="118" fill="none" stroke="#2a3a50" stroke-width="6" opacity="0.5"/>
+          <ellipse cx="880" cy="260" rx="118" ry="118" fill="none" stroke="#3a4a5e" stroke-width="2" opacity="0.3"/>
+          <!-- MAIN POOL -->
+          <path d="M130,130 Q130,110 150,110 L730,110 Q750,110 750,130 L750,395 Q750,415 730,415 L150,415 Q130,415 130,395 Z" fill="#051520"/>
+          <path d="M130,130 Q130,110 150,110 L730,110 Q750,110 750,130 L750,395 Q750,415 730,415 L150,415 Q130,415 130,395 Z" fill="none" stroke="#1a3050" stroke-width="1" opacity="0.5"/>
+          <g clip-path="url(#poolClip)">
+            <rect x="130" y="118" width="620" height="300" fill="url(#poolWaterGrad)"/>
+            <rect x="130" y="118" width="620" height="300" fill="url(#poolGlowGreen)"/>
+            <rect id="poolWaterOverlay" x="130" y="118" width="620" height="300" fill="#4ade80" opacity="0.06"/>
+            <g id="caustics" opacity="0.3">
+              <ellipse cx="240" cy="190" rx="45" ry="20" fill="#4ade80" opacity="0.1" filter="url(#waterRipple)"/>
+              <ellipse cx="440" cy="260" rx="60" ry="25" fill="#22c55e" opacity="0.08" filter="url(#waterRipple)"/>
+              <ellipse cx="620" cy="180" rx="40" ry="16" fill="#4ade80" opacity="0.09" filter="url(#waterRipple)"/>
+              <ellipse cx="320" cy="340" rx="50" ry="22" fill="#22c55e" opacity="0.06" filter="url(#waterRipple)"/>
+              <ellipse cx="680" cy="320" rx="45" ry="18" fill="#4ade80" opacity="0.07" filter="url(#waterRipple)"/>
+              <ellipse cx="190" cy="370" rx="38" ry="15" fill="#22c55e" opacity="0.06" filter="url(#waterRipple)"/>
+              <ellipse cx="540" cy="360" rx="42" ry="17" fill="#4ade80" opacity="0.05" filter="url(#waterRipple)"/>
+            </g>
+            <g id="ripples" opacity="0.3">
+              <path d="M140,175 Q250,167 370,175 Q490,183 610,175 Q680,170 740,175" fill="none" stroke="#6ee7a0" stroke-width="0.8" opacity="0.4"/>
+              <path d="M140,215 Q230,209 350,215 Q470,221 590,215 Q680,209 740,215" fill="none" stroke="#6ee7a0" stroke-width="0.6" opacity="0.3"/>
+              <path d="M140,260 Q270,254 400,260 Q530,266 660,260 Q710,256 740,260" fill="none" stroke="#6ee7a0" stroke-width="0.7" opacity="0.35"/>
+              <path d="M140,305 Q220,301 340,305 Q460,309 580,305 Q670,301 740,305" fill="none" stroke="#6ee7a0" stroke-width="0.5" opacity="0.25"/>
+              <path d="M140,350 Q280,344 420,350 Q560,356 660,350 Q710,347 740,350" fill="none" stroke="#6ee7a0" stroke-width="0.6" opacity="0.2"/>
+            </g>
+            <g id="poolLights">
+              <ellipse cx="220" cy="370" rx="50" ry="40" fill="#4ade80" opacity="0.08"/><circle cx="220" cy="400" r="10" fill="#4ade80" opacity="0.85" filter="url(#glowStrong)"/>
+              <ellipse cx="440" cy="370" rx="50" ry="40" fill="#4ade80" opacity="0.08"/><circle cx="440" cy="400" r="10" fill="#4ade80" opacity="0.85" filter="url(#glowStrong)"/>
+              <ellipse cx="660" cy="370" rx="50" ry="40" fill="#4ade80" opacity="0.08"/><circle cx="660" cy="400" r="10" fill="#4ade80" opacity="0.85" filter="url(#glowStrong)"/>
+            </g>
+          </g>
+          <path d="M150,110 L730,110" stroke="#4ade80" stroke-width="0.8" opacity="0.15"/>
+          <!-- Pool to spa connection -->
+          <path d="M750,230 L770,230 L770,290 L750,290" fill="#051520" stroke="#1a3050" stroke-width="1" opacity="0.4"/>
+          <rect x="750" y="235" width="20" height="50" fill="url(#poolWaterGrad)" opacity="0.6"/>
+          <!-- HOT TUB / SPA -->
+          <ellipse cx="880" cy="260" rx="110" ry="110" fill="#051520"/>
+          <ellipse cx="880" cy="260" rx="110" ry="110" fill="none" stroke="#1a3050" stroke-width="1" opacity="0.5"/>
+          <path d="M800,220 Q810,210 830,215" fill="none" stroke="#0a1a30" stroke-width="3" opacity="0.5"/>
+          <path d="M800,300 Q810,310 830,305" fill="none" stroke="#0a1a30" stroke-width="3" opacity="0.5"/>
+          <path d="M930,215 Q950,210 960,220" fill="none" stroke="#0a1a30" stroke-width="3" opacity="0.5"/>
+          <path d="M930,305 Q950,310 960,300" fill="none" stroke="#0a1a30" stroke-width="3" opacity="0.5"/>
+          <g clip-path="url(#spaClip)">
+            <ellipse cx="880" cy="260" rx="108" ry="108" fill="url(#spaWaterGrad)"/>
+            <ellipse cx="880" cy="260" rx="108" ry="108" fill="url(#poolGlowGreen)" opacity="0.6"/>
+            <ellipse id="spaWaterOverlay" cx="880" cy="260" rx="108" ry="108" fill="#4ade80" opacity="0.06"/>
+            <g id="spaCaustics" opacity="0.2">
+              <ellipse id="spaCaustic1" cx="860" cy="240" rx="30" ry="14" fill="#4ade80" opacity="0.12" filter="url(#waterRipple)"/>
+              <ellipse id="spaCaustic2" cx="900" cy="280" rx="25" ry="12" fill="#22c55e" opacity="0.1" filter="url(#waterRipple)"/>
+            </g>
+            <g id="spaLights">
+              <ellipse cx="825" cy="330" rx="30" ry="22" fill="#4ade80" opacity="0.06"/><circle id="spaLight1" cx="825" cy="340" r="7" fill="#4ade80" opacity="0.7" filter="url(#glowStrong)"/><circle id="spaLightGlow1" cx="825" cy="310" r="28" fill="#4ade80" opacity="0.05"/>
+              <ellipse cx="880" cy="345" rx="30" ry="22" fill="#4ade80" opacity="0.06"/><circle id="spaLight2" cx="880" cy="350" r="7" fill="#4ade80" opacity="0.7" filter="url(#glowStrong)"/><circle id="spaLightGlow2" cx="880" cy="320" r="28" fill="#4ade80" opacity="0.05"/>
+              <ellipse cx="935" cy="330" rx="30" ry="22" fill="#4ade80" opacity="0.06"/><circle id="spaLight3" cx="935" cy="340" r="7" fill="#4ade80" opacity="0.7" filter="url(#glowStrong)"/><circle id="spaLightGlow3" cx="935" cy="310" r="28" fill="#4ade80" opacity="0.05"/>
+            </g>
+            <g id="spaJets" opacity="0">
+              <ellipse cx="820" cy="235" rx="18" ry="12" fill="white" opacity="0.08" filter="url(#jetBlur)"/><circle cx="823" cy="222" r="5" fill="white" opacity="0.35" filter="url(#jetBlur)"/><circle cx="835" cy="228" r="6" fill="white" opacity="0.3" filter="url(#jetBlur)"/><circle cx="815" cy="230" r="4.5" fill="white" opacity="0.28" filter="url(#jetBlur)"/><circle cx="830" cy="215" r="4" fill="white" opacity="0.22" filter="url(#jetBlur)"/><circle cx="813" cy="218" r="3.5" fill="white" opacity="0.2" filter="url(#jetBlur)"/><circle cx="840" cy="240" r="5.5" fill="white" opacity="0.25" filter="url(#jetBlur)"/><circle cx="827" cy="245" r="3.5" fill="white" opacity="0.18" filter="url(#jetBlur)"/>
+              <ellipse cx="940" cy="235" rx="18" ry="12" fill="white" opacity="0.08" filter="url(#jetBlur)"/><circle cx="937" cy="222" r="5" fill="white" opacity="0.35" filter="url(#jetBlur)"/><circle cx="925" cy="228" r="6" fill="white" opacity="0.3" filter="url(#jetBlur)"/><circle cx="945" cy="230" r="4.5" fill="white" opacity="0.28" filter="url(#jetBlur)"/><circle cx="930" cy="215" r="4" fill="white" opacity="0.22" filter="url(#jetBlur)"/><circle cx="947" cy="218" r="3.5" fill="white" opacity="0.2" filter="url(#jetBlur)"/><circle cx="920" cy="240" r="5.5" fill="white" opacity="0.25" filter="url(#jetBlur)"/><circle cx="933" cy="245" r="3.5" fill="white" opacity="0.18" filter="url(#jetBlur)"/>
+              <ellipse cx="880" cy="310" rx="20" ry="10" fill="white" opacity="0.07" filter="url(#jetBlur)"/><circle cx="880" cy="305" r="5.5" fill="white" opacity="0.32" filter="url(#jetBlur)"/><circle cx="870" cy="298" r="5" fill="white" opacity="0.28" filter="url(#jetBlur)"/><circle cx="892" cy="300" r="4.5" fill="white" opacity="0.25" filter="url(#jetBlur)"/><circle cx="875" cy="315" r="4" fill="white" opacity="0.2" filter="url(#jetBlur)"/><circle cx="888" cy="312" r="3.5" fill="white" opacity="0.18" filter="url(#jetBlur)"/>
+              <ellipse cx="880" cy="255" rx="30" ry="18" fill="white" opacity="0.04" filter="url(#jetBlur)"/><circle cx="880" cy="252" r="6" fill="white" opacity="0.18" filter="url(#jetBlur)"/><circle cx="868" cy="258" r="5" fill="white" opacity="0.15" filter="url(#jetBlur)"/><circle cx="894" cy="248" r="5.5" fill="white" opacity="0.14" filter="url(#jetBlur)"/><circle cx="875" cy="245" r="4" fill="white" opacity="0.12" filter="url(#jetBlur)"/><circle cx="890" cy="262" r="4.5" fill="white" opacity="0.1" filter="url(#jetBlur)"/>
+              <circle cx="845" cy="200" r="2" fill="white" opacity="0.1" filter="url(#jetBlur)"/><circle cx="915" cy="195" r="2.2" fill="white" opacity="0.08" filter="url(#jetBlur)"/><circle cx="880" cy="190" r="2.5" fill="white" opacity="0.07" filter="url(#jetBlur)"/>
+            </g>
+            <g id="spaRipples" opacity="0.2">
+              <ellipse cx="880" cy="220" rx="70" ry="10" fill="none" stroke="#6ee7a0" stroke-width="0.8" opacity="0.4"/>
+              <ellipse cx="880" cy="248" rx="80" ry="12" fill="none" stroke="#6ee7a0" stroke-width="0.7" opacity="0.35"/>
+              <ellipse cx="880" cy="275" rx="75" ry="11" fill="none" stroke="#6ee7a0" stroke-width="0.6" opacity="0.3"/>
+              <ellipse cx="880" cy="300" rx="65" ry="9" fill="none" stroke="#6ee7a0" stroke-width="0.7" opacity="0.35"/>
+            </g>
+          </g>
+          <path d="M778,230 A110,110 0 0,1 982,230" fill="none" stroke="#4ade80" stroke-width="0.8" opacity="0.12"/>
+          <text x="880" y="160" font-size="7" fill="#6ee7a0" font-family="monospace" font-weight="bold" letter-spacing="1.5" text-anchor="middle" opacity="0.4">SPA</text>
+          <!-- PHONE -->
+          <g id="phoneGroup" opacity="1">
+            <rect x="440" y="70" width="220" height="380" rx="28" fill="url(#phoneGrad)" stroke="#2a3a55" stroke-width="2"/><rect x="440" y="70" width="220" height="380" rx="28" fill="none" stroke="#2f80ed" stroke-width="1" opacity="0.25"/>
+            <rect x="454" y="100" width="192" height="330" rx="14" fill="#060e18"/>
+            <rect x="454" y="100" width="192" height="34" rx="14" fill="#0a1520"/>
+            <text x="475" y="122" font-size="12" fill="#5ba4f5" font-family="monospace" font-weight="bold">Pool &amp; Spa</text><circle cx="630" cy="117" r="5" fill="#4ade80" opacity="0.7"/>
+            <text id="phoneTemp" x="550" y="210" font-size="58" fill="#00d4ff" font-family="'Syne',sans-serif" font-weight="800" text-anchor="middle">96°</text><text x="600" y="210" font-size="16" fill="#6b7a8d" font-family="monospace">F</text>
+            <text id="phoneTempLabel" x="550" y="235" font-size="12" fill="#6b7a8d" font-family="monospace" text-anchor="middle">SPA TEMP</text>
+            <line x1="480" y1="258" x2="620" y2="258" stroke="#2f80ed" stroke-width="1" opacity="0.15"/>
+            <g id="spaBtn"><rect id="spaBtnBg" x="475" y="275" width="150" height="52" rx="12" fill="#1a0a2a" stroke="#a78bfa" stroke-width="1.2"/><text id="spaBtnText" x="550" y="308" font-size="18" fill="#a78bfa" font-family="'Syne',sans-serif" font-weight="700" text-anchor="middle">START SPA</text></g>
+            <g id="tapIndicator" opacity="0"><circle cx="550" cy="301" r="32" fill="none" stroke="#00d4ff" stroke-width="2" opacity="0.6"/><circle cx="550" cy="301" r="14" fill="#00d4ff" opacity="0.2"/></g>
+            <text id="phoneStatus" x="550" y="355" font-size="10" fill="#6b7a8d" font-family="monospace" text-anchor="middle">Tap to start</text>
+            <g id="phoneNotif" opacity="0">
+              <rect x="462" y="138" width="176" height="56" rx="10" fill="rgba(8,18,32,0.96)" stroke="rgba(74,222,128,0.4)" stroke-width="1"/>
+              <circle cx="476" cy="158" r="3" fill="#4ade80" opacity="0.9"/><circle cx="492" cy="166" r="12" fill="#0d2a1a" stroke="rgba(74,222,128,0.3)" stroke-width="1"/><text x="492" y="171" font-size="11" text-anchor="middle">♨️</text>
+              <text x="512" y="160" font-size="8.5" fill="#e4e9f2" font-family="'Syne',sans-serif" font-weight="700">Spa Heated</text><text x="512" y="173" font-size="6.5" fill="#6b7a8d" font-family="monospace">102°F · Jets on · Ready</text>
+              <rect x="595" y="153" width="36" height="16" rx="8" fill="rgba(74,222,128,0.1)" stroke="rgba(74,222,128,0.25)" stroke-width="0.8"/><text x="613" y="164" font-size="6" fill="#4ade80" font-weight="600" font-family="monospace" text-anchor="middle">Ready</text>
+            </g>
+            <rect x="505" y="75" width="90" height="10" rx="5" fill="#0a0f18"/><rect x="510" y="420" width="80" height="4" rx="2" fill="#1e2d40" opacity="0.5"/>
+          </g>
+          <!-- Corner brackets -->
+          <path d="M0,0 L0,22 M0,0 L22,0" stroke="#2f80ed" stroke-width="2" opacity="0.22" fill="none"/><path d="M1100,0 L1100,22 M1100,0 L1078,0" stroke="#2f80ed" stroke-width="2" opacity="0.22" fill="none"/><path d="M0,520 L0,498 M0,520 L22,520" stroke="#2f80ed" stroke-width="2" opacity="0.22" fill="none"/><path d="M1100,520 L1100,498 M1100,520 L1078,520" stroke="#2f80ed" stroke-width="2" opacity="0.22" fill="none"/>
+          <rect x="0" y="480" width="1100" height="40" fill="#080c10"/><rect x="0" y="480" width="1100" height="2" fill="#1e2d40" opacity="0.4"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">Smart Pool Automation</div>
+      <p class="hero-sub">Your pool shouldn't need a manual. Whether you have a full automation system or just a pump and heater with no smart controls at all — we build you one simple app with only the controls you actually use. Phone, voice, or automation.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Request a Quote →</a>
+        <a href="#experience" class="btn-secondary">See How It Works</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-number">1 APP</div><div class="stat-label">Replaces your pool controller</div></div>
+    <div class="stat"><div class="stat-number">4 WAYS</div><div class="stat-label">Phone, voice, buttons, or auto</div></div>
+    <div class="stat"><div class="stat-number">24/7</div><div class="stat-label">Monitoring &amp; smart scheduling</div></div>
+    <div class="stat"><div class="stat-number">100%</div><div class="stat-label">Works with your existing gear</div></div>
+  </div>
+
+  <section id="problem"><div class="section-inner">
+    <div class="section-tag">Why Upgrade</div>
+    <h2 class="section-title">Your pool works. Using it shouldn't be this hard.</h2>
+    <p class="section-sub">It doesn't matter what brand your equipment is. The experience of controlling it should be simple.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div style="text-align:center;margin-bottom:0.8rem;"><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="16" stroke="#f87171" stroke-width="2"/><path d="M12 12l12 12M24 12L12 24" stroke="#f87171" stroke-width="2" stroke-linecap="round"/></svg></div><h3>The way it is now</h3>
+        <ul>
+          <li>A confusing app — or no app at all — just switches on an equipment pad</li>
+          <li>Menus 6 levels deep just to change the temperature</li>
+          <li>You bought a pool to enjoy it, not troubleshoot it</li>
+          <li>Different apps for the pump, the heater, the lights — none of them talk to each other</li>
+          <li>Features you're paying for that you've never figured out how to use</li>
+        </ul>
+      </div>
+      <div class="problem-card solution-card">
+        <div style="text-align:center;margin-bottom:0.8rem;"><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="16" stroke="#4ade80" stroke-width="2"/><path d="M11 18l5 5 9-9" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>The way it should be</h3>
+        <ul>
+          <li>One app with only the controls you care about — nothing extra, nothing buried</li>
+          <li>Built around how you actually use your pool, not how a manufacturer thinks you should</li>
+          <li>Works from your phone, your couch, or across the country</li>
+          <li>Pump, heater, spa, lights — everything in one place, one tap</li>
+          <li>"Hey Siri, heat the spa to 102" — and it just works</li>
+        </ul>
+      </div>
+    </div>
+  </div></section>
+
+  <section id="experience"><div class="section-inner">
+    <div class="section-tag">The Experience</div>
+    <h2 class="section-title">Four ways to control. Zero learning curve.</h2>
+    <p class="section-sub">We program your pool around your life — not the other way around.</p>
+    <div class="experience-grid">
+      <div class="exp-card">
+        <div class="exp-icon">📱</div>
+        <h3>Phone Control</h3>
+        <p>Open the app, tap a button. That's it. We build your dashboard with only the controls you actually use — no clutter, no confusion. Works from anywhere in the world.</p>
+        <div class="exp-tag">Core Feature</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-icon">🗣️</div>
+        <h3>Voice Control</h3>
+        <p>"Hey Siri, turn on the spa." "Alexa, set pool to 86 degrees." "Hey Google, turn on the pool lights." Natural voice commands through any smart speaker or phone you already own.</p>
+        <div class="exp-tag">Core Feature</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-icon">⚡</div>
+        <h3>Smart Automation</h3>
+        <p>Tell us what you want and we program it. The spa heats before your Friday evening. Lights come on at sunset. The pump runs during off-peak hours. Your pool runs itself — exactly the way you want.</p>
+        <div class="exp-tag">Core Feature</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-icon">🔘</div>
+        <h3>Physical Buttons</h3>
+        <p>Not everyone wants to pull out their phone. We can install simple switches or buttons right by the pool — press one to start the spa, another to turn on the lights. Easy for guests, kids, or anyone.</p>
+        <div class="exp-tag">Core Feature</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section id="compat" style="background:var(--dark);"><div class="section-inner compat-section">
+    <div class="section-tag">Compatibility</div>
+    <h2 class="section-title">Whatever you have, we can work with it.</h2>
+    <p class="section-sub" style="margin:0 auto 3rem;">Pentair, Hayward, Jandy, or something else entirely — we integrate it. No automation system at all? We can automate your pump and heater from scratch. Every setup is different, and that's fine.</p>
+    <div class="compat-logos">
+      <div class="compat-logo">
+        <div style="font-size:2rem;">🔗</div>
+        <div class="compat-name">Existing Automation</div>
+        <div class="compat-sub">Pentair, Hayward, Jandy, Intermatic, and more</div>
+        <div class="compat-check">✓ We integrate it</div>
+      </div>
+      <div class="compat-logo">
+        <div style="font-size:2rem;">⚡</div>
+        <div class="compat-name">No Automation</div>
+        <div class="compat-sub">Just a pump, heater, and switches on the pad</div>
+        <div class="compat-check">✓ We automate it</div>
+      </div>
+      <div class="compat-logo">
+        <div style="font-size:2rem;">🧩</div>
+        <div class="compat-name">Mixed Equipment</div>
+        <div class="compat-sub">Different brands, different eras — doesn't matter</div>
+        <div class="compat-check">✓ We unify it</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section id="integration"><div class="section-inner" style="text-align:center;">
+    <div class="section-tag">Whole-House Integration</div>
+    <h2 class="section-title">Your pool talks to the rest of your home.</h2>
+    <p class="section-sub" style="margin:0 auto 2rem;max-width:560px;">Because your pool is part of the same smart home platform, it can trigger — and respond to — anything else in your house. Here's what that looks like.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;max-width:900px;margin:0 auto;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.8rem;text-align:left;">
+        <div style="font-size:1.3rem;margin-bottom:0.6rem;">💡</div>
+        <div style="font-family:var(--font-display);font-size:0.92rem;font-weight:700;color:var(--white);margin-bottom:0.4rem;">Porch lights turn red while the spa heats</div>
+        <p style="font-size:0.8rem;color:var(--muted);line-height:1.6;margin-bottom:0;">A visual cue you can see from inside — when the lights go back to normal, the spa is ready. No checking the app.</p>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.8rem;text-align:left;">
+        <div style="font-size:1.3rem;margin-bottom:0.6rem;">🔊</div>
+        <div style="font-family:var(--font-display);font-size:0.92rem;font-weight:700;color:var(--white);margin-bottom:0.4rem;">"The spa is ready" announced on your speakers</div>
+        <p style="font-size:0.8rem;color:var(--muted);line-height:1.6;margin-bottom:0;">When the spa reaches temperature, your smart speakers announce it throughout the house so you don't have to watch the app.</p>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.8rem;text-align:left;">
+        <div style="font-size:1.3rem;margin-bottom:0.6rem;">🌙</div>
+        <div style="font-family:var(--font-display);font-size:0.92rem;font-weight:700;color:var(--white);margin-bottom:0.4rem;">One "Pool Night" button sets the whole scene</div>
+        <p style="font-size:0.8rem;color:var(--muted);line-height:1.6;margin-bottom:0;">Pool lights on, landscape lighting dimmed, porch music playing, spa heating — one tap or one voice command sets everything at once.</p>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.8rem;text-align:left;">
+        <div style="font-size:1.3rem;margin-bottom:0.6rem;">📹</div>
+        <div style="font-family:var(--font-display);font-size:0.92rem;font-weight:700;color:var(--white);margin-bottom:0.4rem;">Hot tub shuts off when everyone's gone</div>
+        <p style="font-size:0.8rem;color:var(--muted);line-height:1.6;margin-bottom:0;">The pool camera detects no one has been in the spa for 20 minutes and automatically shuts off the jets and heater — no wasted energy, no forgetting to turn it off.</p>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.8rem;text-align:left;">
+        <div style="font-size:1.3rem;margin-bottom:0.6rem;">🚨</div>
+        <div style="font-family:var(--font-display);font-size:0.92rem;font-weight:700;color:var(--white);margin-bottom:0.4rem;">Camera alerts &amp; automatic safety response</div>
+        <p style="font-size:0.8rem;color:var(--muted);line-height:1.6;margin-bottom:0;">Motion detected at the pool after hours? The camera starts recording, flood lights turn on, you get an instant notification, and the gate locks — all automatically.</p>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.8rem;text-align:left;">
+        <div style="font-size:1.3rem;margin-bottom:0.6rem;">👶</div>
+        <div style="font-family:var(--font-display);font-size:0.92rem;font-weight:700;color:var(--white);margin-bottom:0.4rem;">Kid enters pool area? You know immediately.</div>
+        <p style="font-size:0.8rem;color:var(--muted);line-height:1.6;margin-bottom:0;">The camera sends a push notification the moment someone enters the pool zone — and can turn on lights, trigger an indoor alert, or announce it on your speakers.</p>
+      </div>
+    </div>
+    <p style="color:var(--muted);font-size:0.85rem;margin-top:2rem;">This is what happens when your pool is part of the same system as your lights, speakers, cameras, and locks — not stuck in its own separate app.</p>
+  </div></section>
+
+  <section id="package" style="background:var(--dark);"><div class="section-inner">
+    <div class="section-tag">What's Included</div>
+    <h2 class="section-title">Everything in one package.</h2>
+    <p class="section-sub">Integration, setup, and a clean dashboard — done for you.</p>
+    <div class="package-grid">
+      <div class="package-item"><div class="pkg-icon">🔗</div><div class="pkg-title">Equipment Integration</div><div class="pkg-desc">We connect whatever pool equipment you have — any brand, any age. If there's no automation system at all, we add smart control to your existing pump and heater.</div></div>
+      <div class="package-item"><div class="pkg-icon">📱</div><div class="pkg-title">Custom App Dashboard</div><div class="pkg-desc">We build your controls around how you actually use your pool. Only the buttons you need, right where you expect them — nothing buried, nothing confusing.</div></div>
+      <div class="package-item"><div class="pkg-icon">🗣️</div><div class="pkg-title">Voice Assistant Setup</div><div class="pkg-desc">Full Siri, Alexa, and Google Home integration. Control your pool with natural voice commands from any device in your home.</div></div>
+      <div class="package-item"><div class="pkg-icon">⏰</div><div class="pkg-title">Automations Built for You</div><div class="pkg-desc">Tell us how you use your pool and we'll program it. Friday night spa routine, off-peak pump schedules, sunset lighting — your pool runs on your schedule, not a default one.</div></div>
+      <div class="package-item"><div class="pkg-icon">🌡️</div><div class="pkg-title">Temperature &amp; Chemistry Monitoring</div><div class="pkg-desc">See your water temperature, pH, and chlorine levels at a glance. Get alerts when chemistry needs attention.</div></div>
+      <div class="package-item"><div class="pkg-icon">🏠</div><div class="pkg-title">Smart Home Integration</div><div class="pkg-desc">Your pool connects to your lights, cameras, gate, and every other smart system — all managed from the same app you already use.</div></div>
+    </div>
+  </div></section>
+
+  <section id="how"><div class="section-inner">
+    <div class="section-tag">The Process</div>
+    <h2 class="section-title">Simple from day one.</h2>
+    <p class="section-sub">We handle the technical work. You get a pool that's finally easy to use.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><div><div class="step-title">We look at what you have</div><div class="step-desc">We evaluate your existing pool setup — whatever brand, whatever age. Existing automation system? We integrate it. No automation at all? We figure out the best way to add smart control.</div></div></div>
+      <div class="step"><div class="step-num">02</div><div><div class="step-title">We learn how you use your pool</div><div class="step-desc">This is what makes us different. We ask you what matters — when you swim, how you use the spa, what you want automated. Then we build around that, not around a manufacturer's default settings.</div></div></div>
+      <div class="step"><div class="step-num">03</div><div><div class="step-title">We build your system</div><div class="step-desc">We connect your equipment, build your dashboard with only the controls you need, set up voice commands, and program your automations — all customized to the way you actually live.</div></div></div>
+      <div class="step"><div class="step-num">04</div><div><div class="step-title">You enjoy your pool</div><div class="step-desc">We walk you through everything. But honestly, there's not much to learn — that's the whole point. One tap, one voice command, or it just happens automatically.</div></div></div>
+    </div>
+  </div></section>
+
+  <section id="features"><div class="section-inner">
+    <div class="features-layout">
+      <div>
+        <div class="section-tag">Dashboard</div>
+        <h2 class="section-title">Built for you. Not a template.</h2>
+        <p class="section-sub" style="margin-bottom:2rem;">Your dashboard shows what you care about and nothing else. We design it around your pool, your habits, and your preferences.</p>
+        <div class="feature-list">
+          <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Only the controls you use</strong><span>No 40-button screen. If you only use the spa, heater, and lights — that's all you'll see.</span></div></div>
+          <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Live temperature and status</strong><span>See what's running, what temperature the water is, and whether everything is on track — at a glance.</span></div></div>
+          <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Automations that match your routine</strong><span>We don't set generic schedules. We ask when you swim, when you entertain, and build around that.</span></div></div>
+          <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Works with any equipment</strong><span>Doesn't matter if you have a Pentair system, a basic pump and heater, or a mix of brands — it all shows up in one place.</span></div></div>
+        </div>
+      </div>
+      <div class="dashboard-mockup">
+        <div class="mockup-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><div class="mockup-title">Pool Dashboard</div></div>
+        <div class="mockup-body">
+          <div class="mockup-row"><div><div class="tag-name">🌊 Pool Pump</div><div class="tag-time">Running · High Speed · Since 8:00 AM</div></div><div class="tag-status status-on">ON</div></div>
+          <div class="mockup-row"><div><div class="tag-name">🔥 Heater</div><div class="tag-time">Heating to 84°F · Currently 81°F</div></div><div class="tag-status status-heat">Heating</div></div>
+          <div class="mockup-row"><div><div class="tag-name">💡 Pool Lights</div><div class="tag-time">Color mode: Ocean Blue</div></div><div class="tag-status status-on">ON</div></div>
+          <div class="mockup-row"><div><div class="tag-name">🧹 Cleaner</div><div class="tag-time">Next run: Tomorrow 6:00 AM</div></div><div class="tag-status status-off">OFF</div></div>
+          <div class="mockup-row"><div><div class="tag-name">🧪 Chemistry</div><div class="tag-time">pH 7.4 · Chlorine 3.0 PPM</div></div><div class="tag-status status-on">Balanced</div></div>
+          <div class="mockup-notif">⏰ &nbsp;<span><strong>Next schedule:</strong> Pump switches to low speed at 6:00 PM (off-peak)</span></div>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <section id="beyond"><div class="section-inner" style="text-align:center;">
+    <div class="section-tag">Beyond the Pool</div>
+    <h2 class="section-title">One app. Your entire property.</h2>
+    <p class="section-sub" style="margin:0 auto 1.5rem;">Your pool is just the starting point. The same app that controls your pool can manage every system across your property — all from one place.</p>
+    <p class="section-sub" style="margin:0 auto 3rem; max-width: 520px;">No juggling five different apps from five different vendors. Craison Digital integrates everything into one unified platform that you already know how to use.</p>
+    <div class="beyond-grid">
+      <div class="beyond-card"><div class="beyond-icon">🚪</div><h4>Smart Gate Access</h4><p>Hands-free RFID entry, remote phone access, and full logging — your gate opens automatically as you arrive</p></div>
+      <div class="beyond-card"><div class="beyond-icon">👁️</div><h4>Security Cameras</h4><p>View every camera on your property from the same app — with motion alerts, recording, and automated flood lights</p></div>
+      <div class="beyond-card"><div class="beyond-icon">💡</div><h4>Lighting Control</h4><p>Control lights in every building from one place — schedules, scenes, and automation included</p></div>
+      <div class="beyond-card"><div class="beyond-icon">🌡️</div><h4>Climate &amp; HVAC</h4><p>Manage thermostats across your main home, guest house, barn, or shop — all in one view</p></div>
+      <div class="beyond-card"><div class="beyond-icon">⛲</div><h4>Lake &amp; Fountain Control</h4><p>Turn lake fountains and water features on and off from your phone — set schedules and sync with lighting</p></div>
+      <div class="beyond-card"><div class="beyond-icon">🌿</div><h4>Irrigation &amp; Sensors</h4><p>Automated watering, soil sensors, water leak detection — monitored and controlled alongside everything else</p></div>
+    </div>
+    <p style="color:var(--text);font-size:0.95rem;margin-top:2.5rem;font-weight:400;">One app. One dashboard. Every building. Every system.</p>
+    <p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem;">Ready to go beyond the pool? <a href="#contact" style="color:var(--blue-bright);text-decoration:none;">Let's talk about what's possible.</a></p>
+  </div></section>
+
+  <section id="pricing"><div class="section-inner" style="text-align:center;">
+    <div class="section-tag">Pricing</div>
+    <h2 class="section-title">One flat rate. No surprises.</h2>
+    <p class="section-sub" style="margin:0 auto 3rem;">Everything included — integration, setup, dashboard, and voice control. Add optional packages to fit your pool.</p>
+    <div class="pricing-card">
+      <div class="price-label">Smart Pool Package</div>
+      <div class="price-amount">Contact for Pricing</div>
+      <div class="price-note">Every pool is different. We'll scope yours and give you a clear quote.</div>
+      <div class="price-includes">
+        <div class="price-line">Integration with your existing equipment — any brand</div>
+        <div class="price-line">Custom dashboard built around how you use your pool</div>
+        <div class="price-line">Voice control setup (Siri, Alexa, Google)</div>
+        <div class="price-line">Automations programmed to your routine</div>
+        <div class="price-line">Smart home integration with your other systems</div>
+        <div class="price-line">Walkthrough &amp; handoff training</div>
+      </div>
+      <a href="#contact" class="btn-primary" style="display:block;text-align:center;justify-content:center;">Request a Quote →</a>
+    </div>
+    <div style="margin-top:3rem;">
+      <div class="section-tag">Optional Add-On</div>
+      <p style="color:var(--muted);font-size:0.95rem;margin:0.5rem auto 2rem;max-width:520px;">Take your pool automation even further with camera-based intelligence.</p>
+    </div>
+    <div style="max-width:600px;margin:0 auto;">
+      <div style="background:var(--card);border:1px solid rgba(47,128,237,0.15);border-radius:14px;padding:2.2rem;text-align:left;">
+        <div style="font-size:1.5rem;margin-bottom:0.8rem;">📹</div>
+        <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:700;color:var(--white);margin-bottom:0.6rem;">Pool Camera &amp; Smart Sensing</div>
+        <p style="font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:1rem;">A dedicated pool-area camera that does more than record. It becomes a sensor for your entire pool system — triggering automations based on what's actually happening at the pool.</p>
+        <p style="font-size:0.83rem;color:var(--text);line-height:1.7;margin-bottom:0;">
+          <span style="color:var(--cyan);font-weight:600;">→</span> Auto-shutoff the spa when no one has been in it for 20 minutes<br>
+          <span style="color:var(--cyan);font-weight:600;">→</span> Get an instant alert when someone enters the pool area — great for kids and pets<br>
+          <span style="color:var(--cyan);font-weight:600;">→</span> Turn on pool lights automatically when motion is detected after dark<br>
+          <span style="color:var(--cyan);font-weight:600;">→</span> Trigger porch lights when motion is detected near the pool<br>
+          <span style="color:var(--cyan);font-weight:600;">→</span> Start recording when unexpected motion is detected overnight<br>
+          <span style="color:var(--cyan);font-weight:600;">→</span> Trigger landscape lighting when guests walk toward the pool
+        </p>
+      </div>
+    </div>
+  </div></section>
+
+  <section id="contact"><div class="section-inner">
+    <div class="cta-box">
+      <div class="section-tag">Get Started</div>
+      <h2 class="section-title">Ready to simplify your pool?</h2>
+      <p class="section-sub" style="margin-bottom:0;">Tell us about your pool and how you use it. We'll figure out the rest.</p>
+      <form class="contact-form" action="https://formspree.io/f/xaqabrdo" method="POST">
+        <input type="hidden" name="_next" value="https://craisondigital.com/thank-you.html"/><input type="hidden" name="_subject" value="New inquiry — Pool Automation"/>
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" name="first_name" placeholder="John"/></div>
+          <div class="form-group"><label>Last Name</label><input type="text" name="last_name" placeholder="Smith"/></div>
+        </div>
+        <div class="form-group"><label>Email</label><input type="email" name="_replyto" placeholder="john@example.com"/></div>
+        <div class="form-group"><label>Phone</label><input type="tel" name="phone" placeholder="(555) 000-0000"/></div>
+        <div class="form-group">
+          <label>Current Pool Setup</label>
+          <select name="pool_setup">
+            <option value="" disabled selected>What best describes your setup?</option>
+            <option>I have a pool automation system (Pentair, Hayward, Jandy, etc.)</option>
+            <option>Just a pump and heater — no automation</option>
+            <option>Pool + spa / hot tub</option>
+            <option>Mix of different brands and equipment</option>
+            <option>Not sure — I need someone to look at it</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Tell us about your pool and how you use it</label><textarea name="message" placeholder="What's frustrating about controlling your pool today? What would you want to be able to do from your phone? Do you have any smart home devices already?"></textarea></div>
+        <div class="form-submit-row">
+          <button type="submit" class="btn-primary">Send My Request →</button>
+          <span class="form-note">We typically respond within 24 hours.</span>
+        </div>
+      </form>
+    </div>
+  </div></section>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-logo"><a href="index.php" style="color:inherit;text-decoration:none;">Craison<span>Digital</span></a></div>
+      <div class="footer-nav"><a href="index.php">Home</a><a href="about.php">About</a><a href="gate.php">Gate</a><a href="pool.php">Pool</a><a href="fountains.php">Fountains</a><a href="garage.php">Garage</a><a href="#contact">Contact</a></div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Craison Digital. All rights reserved.</div>
+      <div>Smart Property Consulting · Estates &amp; Compounds · Sarasota</div>
+    </div>
+  </footer>
+
+  <script>
+  (function() {
+    var caustics = document.getElementById('caustics');
+    var ripples = document.getElementById('ripples');
+    var phoneTemp = document.getElementById('phoneTemp');
+    var phoneTempLabel = document.getElementById('phoneTempLabel');
+    var phoneStatus = document.getElementById('phoneStatus');
+    var phoneNotif = document.getElementById('phoneNotif');
+    var tapIndicator = document.getElementById('tapIndicator');
+    var phoneGroup = document.getElementById('phoneGroup');
+    var spaBtnBg = document.getElementById('spaBtnBg');
+    var spaBtnText = document.getElementById('spaBtnText');
+    var spaJets = document.getElementById('spaJets');
+    var spaRipples = document.getElementById('spaRipples');
+    var spaCaustics = document.getElementById('spaCaustics');
+    var spaWaterOverlay = document.getElementById('spaWaterOverlay');
+    var spaCaustic1 = document.getElementById('spaCaustic1');
+    var spaCaustic2 = document.getElementById('spaCaustic2');
+    var spaLight1 = document.getElementById('spaLight1');
+    var spaLight2 = document.getElementById('spaLight2');
+    var spaLight3 = document.getElementById('spaLight3');
+    var spaLightGlow1 = document.getElementById('spaLightGlow1');
+    var spaLightGlow2 = document.getElementById('spaLightGlow2');
+    var spaLightGlow3 = document.getElementById('spaLightGlow3');
+    if (!phoneGroup) return;
+
+    var CYCLE = 14000;
+    // Animation phases:
+    // 0.00-0.08: phone fades in, idle
+    // 0.08-0.18: tap SPA button
+    // 0.18-0.26: jets turn on, lights go red (heating), button changes to "HEATING"
+    // 0.26-0.58: heating — temp rises 96→102, lights red, jets bubbling
+    // 0.58-0.64: lights transition red→blue (heated), button changes to "SPA ON"
+    // 0.64-0.70: in-phone notification slides in
+    // 0.70-0.88: notification visible on phone, jets running, lights blue
+    // 0.88-0.94: notification fades, phone fades
+    // 0.94-1.00: reset
+
+    var startTs = null, lastTs = null;
+
+    function lerp(a,b,t){ return a+(b-a)*t; }
+    function clamp(v,lo,hi){ return v<lo?lo:v>hi?hi:v; }
+    function ease(t){ return t*t*(3-2*t); }
+    function frac(t,a,b){ return clamp((t-a)/(b-a),0,1); }
+    function lerpColor(r1,g1,b1,r2,g2,b2,t){
+      return 'rgb('+Math.round(lerp(r1,r2,t))+','+Math.round(lerp(g1,g2,t))+','+Math.round(lerp(b1,b2,t))+')';
+    }
+
+    function setSpaLights(color, glowColor, op, waterOp) {
+      [spaLight1, spaLight2, spaLight3].forEach(function(l){ l.setAttribute('fill', color); l.setAttribute('opacity', String(op)); });
+      [spaLightGlow1, spaLightGlow2, spaLightGlow3].forEach(function(l){ l.setAttribute('fill', glowColor); });
+      // Color the water to match the lights
+      spaWaterOverlay.setAttribute('fill', color);
+      spaWaterOverlay.setAttribute('opacity', String(waterOp || 0.08));
+      spaCaustic1.setAttribute('fill', color);
+      spaCaustic2.setAttribute('fill', color);
+    }
+
+    function tick(ts) {
+      if (startTs === null) startTs = ts;
+      var dt = lastTs ? ts - lastTs : 16;
+      lastTs = ts;
+      var f = ((ts - startTs) % CYCLE) / CYCLE;
+
+      // Pool caustics (always gently moving)
+      var cx = Math.sin(ts * 0.0008) * 15;
+      var cy = Math.cos(ts * 0.0006) * 8;
+      caustics.setAttribute('transform', 'translate('+cx+','+cy+')');
+      var ry = Math.sin(ts * 0.001) * 3;
+      ripples.setAttribute('transform', 'translate(0,'+ry+')');
+
+      // Spa caustics
+      var scx = Math.sin(ts * 0.001) * 8;
+      var scy = Math.cos(ts * 0.0008) * 5;
+      spaCaustics.setAttribute('transform', 'translate('+scx+','+scy+')');
+
+      // Phone fade in at start, fade out at end, stays visible in between
+      if (f < 0.08) {
+        phoneGroup.setAttribute('opacity', String(ease(frac(f, 0.0, 0.08))));
+      } else if (f >= 0.90 && f < 0.96) {
+        phoneGroup.setAttribute('opacity', String(1 - ease(frac(f, 0.90, 0.96))));
+      } else if (f >= 0.96) {
+        phoneGroup.setAttribute('opacity', '0');
+      } else {
+        phoneGroup.setAttribute('opacity', '1');
+      }
+
+      // Tap indicator on SPA button
+      if (f >= 0.08 && f < 0.18) {
+        var tapF = frac(f, 0.08, 0.18);
+        var tapOp = tapF < 0.5 ? ease(tapF * 2) : 1 - ease((tapF - 0.5) * 2);
+        tapIndicator.setAttribute('opacity', String(tapOp * 0.9));
+      } else {
+        tapIndicator.setAttribute('opacity', '0');
+      }
+
+      // SPA button state
+      if (f < 0.18) {
+        spaBtnBg.setAttribute('fill', '#1a0a2a');
+        spaBtnBg.setAttribute('stroke', '#a78bfa');
+        spaBtnText.textContent = 'START SPA';
+        spaBtnText.setAttribute('fill', '#a78bfa');
+      } else if (f < 0.58) {
+        spaBtnBg.setAttribute('fill', '#2a0a0a');
+        spaBtnBg.setAttribute('stroke', '#dc3c3c');
+        spaBtnText.textContent = 'HEATING...';
+        spaBtnText.setAttribute('fill', '#dc3c3c');
+      } else if (f < 0.90) {
+        spaBtnBg.setAttribute('fill', '#0a2a1a');
+        spaBtnBg.setAttribute('stroke', '#4ade80');
+        spaBtnText.textContent = 'SPA ON';
+        spaBtnText.setAttribute('fill', '#4ade80');
+      } else {
+        spaBtnBg.setAttribute('fill', '#1a0a2a');
+        spaBtnBg.setAttribute('stroke', '#a78bfa');
+        spaBtnText.textContent = 'START SPA';
+        spaBtnText.setAttribute('fill', '#a78bfa');
+      }
+
+      // Jets
+      var jetsOn = f >= 0.18 && f < 0.92;
+      if (jetsOn) {
+        var jIn = ease(frac(f, 0.18, 0.26));
+        var jOut = f > 0.88 ? 1 - ease(frac(f, 0.88, 0.92)) : 1;
+        var jOp = jIn * jOut;
+        spaJets.setAttribute('opacity', String(jOp));
+        var jx = Math.sin(ts * 0.009) * 5 + Math.cos(ts * 0.015) * 3;
+        var jy = Math.sin(ts * 0.012) * 4 + Math.cos(ts * 0.007) * 2;
+        spaJets.setAttribute('transform', 'translate('+jx+','+jy+')');
+        spaRipples.setAttribute('opacity', String(0.2 + 0.5 * jOp));
+        var sry = Math.sin(ts * 0.004) * 3;
+        var srx = Math.cos(ts * 0.003) * 2;
+        spaRipples.setAttribute('transform', 'translate('+srx+','+sry+')');
+        spaCaustics.setAttribute('opacity', String(0.2 + 0.25 * jOp * (0.5 + 0.5 * Math.sin(ts * 0.003))));
+      } else {
+        spaJets.setAttribute('opacity', '0');
+        spaRipples.setAttribute('opacity', '0.2');
+        spaCaustics.setAttribute('opacity', '0.2');
+      }
+
+      // Spa lights + water color: green → red (heating) → green (ready, matches pool)
+      if (f < 0.18) {
+        setSpaLights('#4ade80', '#4ade80', 0.7, 0.06);
+      } else if (f < 0.26) {
+        var t = ease(frac(f, 0.18, 0.26));
+        var col = lerpColor(74,222,128, 220,60,60, t);
+        var wOp = lerp(0.06, 0.22, t);
+        setSpaLights(col, col, 0.7 + 0.1 * t, wOp);
+      } else if (f < 0.58) {
+        var pulse = 0.65 + 0.15 * Math.sin(ts * 0.006);
+        var wPulse = 0.18 + 0.06 * Math.sin(ts * 0.004);
+        setSpaLights('#dc3c3c', '#dc3c3c', pulse, wPulse);
+      } else if (f < 0.64) {
+        var t2 = ease(frac(f, 0.58, 0.64));
+        var col2 = lerpColor(220,60,60, 74,222,128, t2);
+        var wOp2 = lerp(0.22, 0.06, t2);
+        setSpaLights(col2, col2, 0.8 - 0.1 * t2, wOp2);
+      } else {
+        setSpaLights('#4ade80', '#4ade80', 0.7, 0.06);
+      }
+
+      // Phone temp display
+      var temp;
+      if (f < 0.18) { temp = 96; }
+      else if (f < 0.58) { temp = Math.round(lerp(96, 102, ease(frac(f, 0.18, 0.58)))); }
+      else { temp = 102; }
+      phoneTemp.textContent = temp + '°';
+
+      if (f < 0.08) {
+        phoneTempLabel.textContent = 'SPA TEMP';
+        phoneTempLabel.setAttribute('fill', '#6b7a8d');
+        phoneStatus.textContent = 'Tap to start';
+        phoneStatus.setAttribute('fill', '#6b7a8d');
+      } else if (f < 0.18) {
+        phoneTempLabel.textContent = 'SPA TEMP';
+        phoneTempLabel.setAttribute('fill', '#a78bfa');
+        phoneStatus.textContent = 'Starting spa...';
+        phoneStatus.setAttribute('fill', '#a78bfa');
+      } else if (f < 0.58) {
+        phoneTempLabel.textContent = 'HEATING...';
+        phoneTempLabel.setAttribute('fill', '#dc3c3c');
+        phoneStatus.textContent = 'Jets on · Heating';
+        phoneStatus.setAttribute('fill', '#dc3c3c');
+      } else if (f < 0.90) {
+        phoneTempLabel.textContent = 'READY';
+        phoneTempLabel.setAttribute('fill', '#4ade80');
+        phoneStatus.textContent = 'Spa is ready';
+        phoneStatus.setAttribute('fill', '#4ade80');
+      } else {
+        phoneTempLabel.textContent = 'SPA TEMP';
+        phoneTempLabel.setAttribute('fill', '#6b7a8d');
+        phoneStatus.textContent = '';
+      }
+
+      // In-phone notification (slides down from top of phone screen)
+      if (f >= 0.64 && f < 0.88) {
+        var nIn = f < 0.68 ? ease(frac(f, 0.64, 0.68)) : 1;
+        var nOut = f > 0.84 ? 1 - ease(frac(f, 0.84, 0.88)) : 1;
+        phoneNotif.setAttribute('opacity', String(nIn * nOut));
+        var slideY = lerp(-12, 0, nIn);
+        phoneNotif.setAttribute('transform', 'translate(0,' + slideY + ')');
+      } else {
+        phoneNotif.setAttribute('opacity', '0');
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+
+var navToggle = document.getElementById('navToggle');
+    var mobileMenu = document.getElementById('mobileMenu');
+    if(navToggle && mobileMenu){
+      navToggle.addEventListener('click', function(){ mobileMenu.classList.toggle('open'); });
+      mobileMenu.querySelectorAll('a').forEach(function(a){
+        a.addEventListener('click', function(){ mobileMenu.classList.remove('open'); });
+      });
+    }
+  })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Craison Digital – Garage Door Controls for Large Properties</title>
+  <meta name="description" content="Control every garage door and rollup door across your property from one app. See what's open. Close what shouldn't be. Works with your existing motors."/>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230d1320'/><text x='4' y='24' font-size='22' font-weight='bold' fill='%2300d4ff'>C</text></svg>"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #060a10; --dark: #0b1018; --card: #0f1724;
+      --card-hover: #141d2e; --border: rgba(255,255,255,0.06);
+      --blue: #2f80ed; --blue-bright: #5ba4f5;
+      --blue-glow: rgba(47,128,237,0.15); --cyan: #00d4ff;
+      --green: #4ade80; --green-glow: rgba(74,222,128,0.15);
+      --text: #e4e9f2; --muted: #6b7a8d; --white: #f4f7fb;
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--text); font-family: var(--font-body); font-weight: 300; line-height: 1.75; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.5; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(6,10,16,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    .nav-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 4rem; }
+    .nav-logo { font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--cyan); }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--text); margin: 5px 0; border-radius: 2px; }
+    .nav-links { display: flex; align-items: center; gap: 2.2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 400; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.nav-active { color: var(--text); }
+    .nav-cta { background: var(--blue); color: var(--white) !important; padding: 0.5rem 1.4rem; border-radius: 6px; font-weight: 500 !important; transition: background 0.2s, transform 0.15s; }
+    .nav-cta:hover { background: var(--blue-bright) !important; transform: translateY(-1px); }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { display: inline-flex; align-items: center; gap: 0.3rem; cursor: default; }
+    .nav-dropdown > a svg { transition: transform 0.2s; }
+    .dropdown-panel { visibility: hidden; opacity: 0; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); padding-top: 0.75rem; z-index: 110; transition: visibility 0.15s, opacity 0.15s; }
+    .nav-dropdown:hover .dropdown-panel { visibility: visible; opacity: 1; }
+    .nav-dropdown:hover > a svg { transform: rotate(180deg); }
+    .dropdown-inner { background: rgba(11,16,24,0.97); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 0.5rem 0; min-width: 240px; box-shadow: 0 16px 48px rgba(0,0,0,0.6); list-style: none; }
+    .dropdown-inner li a { display: flex; align-items: center; gap: 0.65rem; padding: 0.65rem 1.2rem; font-size: 0.84rem; color: var(--muted); transition: all 0.15s; white-space: nowrap; }
+    .dropdown-inner li a:hover { color: var(--white); background: rgba(47,128,237,0.08); }
+    .dropdown-inner li a.dropdown-active { color: var(--blue-bright); }
+    .dropdown-inner li a .dd-icon { font-size: 1rem; width: 1.2rem; text-align: center; flex-shrink: 0; }
+    .mobile-menu { display: none; }
+
+    .hero { position: relative; width: 100%; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; padding-top: 70px; }
+    .hero-bg { position: absolute; inset: 0; background: linear-gradient(180deg, #040710 0%, #081525 40%, #0a1a30 100%); }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(47,128,237,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(47,128,237,0.04) 1px, transparent 1px); background-size: 56px 56px; mask-image: radial-gradient(ellipse 85% 75% at 50% 55%, black 15%, transparent 100%); -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 55%, black 15%, transparent 100%); }
+    .hero-glow { position: absolute; top: 15%; left: 50%; transform: translateX(-50%); width: 700px; height: 400px; background: radial-gradient(ellipse, rgba(47,128,237,0.08) 0%, transparent 70%); pointer-events: none; }
+    .hero-headline-above { position: relative; z-index: 3; text-align: center; padding: 2rem 2rem 1.5rem; }
+    .hero-headline-above h1 { font-family: var(--font-display); font-size: clamp(2.2rem,5.2vw,4.2rem); font-weight: 800; line-height: 1.06; letter-spacing: -0.025em; margin-bottom: 0; animation: fadeUp 0.6s 0.1s ease both; color: var(--white); }
+    .hero-headline-above h1 em { font-style: normal; background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .notif-area { position: relative; z-index: 2; width: 100%; max-width: 600px; margin: 0 auto; padding: 1.5rem 1rem; min-height: 80px; display: flex; align-items: center; justify-content: center; }
+    .notif-toast { background: rgba(8,18,32,0.96); border: 1px solid rgba(74,222,128,0.35); border-radius: 14px; padding: 1rem 1.4rem; display: flex; align-items: center; gap: 0.9rem; box-shadow: 0 0 40px rgba(74,222,128,0.15), 0 8px 40px rgba(0,0,0,0.5); opacity: 0; transform: translateY(14px) scale(0.97); transition: opacity 0.5s ease, transform 0.5s ease; max-width: 420px; width: 100%; }
+    .notif-toast.visible { opacity: 1; transform: translateY(0) scale(1); }
+    .notif-toast.warn { border-color: rgba(251,191,36,0.35); box-shadow: 0 0 40px rgba(251,191,36,0.12), 0 8px 40px rgba(0,0,0,0.5); }
+    .notif-toast.warn .notif-dot { background: #fbbf24; box-shadow: 0 0 8px #fbbf24; }
+    .notif-icon { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg,#1a4a2a,#0d2a1a); border: 1.5px solid rgba(74,222,128,0.35); display: flex; align-items: center; justify-content: center; font-size: 1.15rem; flex-shrink: 0; }
+    .notif-body { flex: 1; }
+    .notif-title { font-family: var(--font-display); font-size: 0.88rem; font-weight: 700; color: var(--text); margin-bottom: 0.1rem; }
+    .notif-sub { font-size: 0.72rem; color: var(--muted); }
+    .notif-badge { background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.25); color: var(--green); font-size: 0.65rem; font-weight: 600; padding: 0.2rem 0.55rem; border-radius: 100px; white-space: nowrap; }
+    .notif-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); flex-shrink: 0; animation: blink 1s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .hero-content { position: relative; z-index: 3; width: 100%; text-align: center; padding: 2.5rem 2rem 5rem; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(47,128,237,0.08); border: 1px solid rgba(47,128,237,0.2); color: var(--blue-bright); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 0.9rem; border-radius: 100px; margin-bottom: 1.5rem; animation: fadeUp 0.6s ease both; }
+    .hero-eyebrow::before { content: ''; width: 5px; height: 5px; background: var(--cyan); border-radius: 50%; box-shadow: 0 0 8px var(--cyan); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .hero-content .hero-sub { font-size: 1.08rem; color: var(--muted); max-width: 850px; margin: 0 auto 2.2rem; animation: fadeUp 0.6s 0.2s ease both; line-height: 1.7; }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+    .btn-primary { background: var(--blue); color: var(--white); padding: 0.8rem 2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 500; text-decoration: none; border: none; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 20px rgba(47,128,237,0.25); display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-primary:hover { background: var(--blue-bright); transform: translateY(-1px); box-shadow: 0 0 32px rgba(47,128,237,0.4); }
+    .btn-secondary { background: transparent; color: var(--text); padding: 0.8rem 2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 400; text-decoration: none; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.15); color: var(--white); }
+
+    .stats-bar { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--dark); display: flex; justify-content: center; position: relative; z-index: 1; }
+    .stat { flex: 1; max-width: 280px; padding: 2rem 2.5rem; text-align: center; border-right: 1px solid var(--border); }
+    .stat:last-child { border-right: none; }
+    .stat-number { font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: var(--blue-bright); line-height: 1; margin-bottom: 0.3rem; }
+    .stat-label { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    section { position: relative; z-index: 1; }
+    .section-inner { max-width: 1100px; margin: 0 auto; padding: 6rem 4rem; }
+    .section-tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue-bright); margin-bottom: 0.7rem; }
+    .section-title { font-family: var(--font-display); font-size: clamp(1.7rem,3.2vw,2.6rem); font-weight: 800; line-height: 1.12; letter-spacing: -0.02em; margin-bottom: 1rem; color: var(--white); }
+    .section-sub { color: var(--muted); font-size: 1rem; max-width: 520px; margin-bottom: 3rem; line-height: 1.7; }
+
+    #problem { background: var(--dark); }
+    .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .problem-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; }
+    .problem-card h3 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; margin-bottom: 1.2rem; color: var(--white); display: flex; align-items: center; gap: 0.7rem; }
+    .problem-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+    .problem-card li { font-size: 0.9rem; color: var(--muted); display: flex; align-items: flex-start; gap: 0.7rem; line-height: 1.6; }
+    .problem-card li::before { content: '—'; color: rgba(255,255,255,0.15); flex-shrink: 0; margin-top: 1px; }
+    .solution-card li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+    .solution-card { border-color: rgba(47,128,237,0.15); background: linear-gradient(135deg, var(--card) 0%, rgba(47,128,237,0.04) 100%); }
+
+    .experience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .exp-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; transition: all 0.3s; position: relative; overflow: hidden; }
+    .exp-card:hover { background: var(--card-hover); border-color: rgba(47,128,237,0.15); transform: translateY(-2px); }
+    .exp-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--blue), transparent); opacity: 0; transition: opacity 0.3s; }
+    .exp-card:hover::before { opacity: 1; }
+    .exp-icon { width: 48px; height: 48px; background: var(--blue-glow); border: 1px solid rgba(47,128,237,0.18); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; font-size: 1.3rem; }
+    .exp-card h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--white); }
+    .exp-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+    .exp-card .exp-tag { display: inline-block; margin-top: 0.8rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cyan); opacity: 0.7; }
+
+    #package { background: var(--dark); }
+    .package-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .package-item { background: var(--card); padding: 2rem; transition: background 0.2s; }
+    .package-item:hover { background: var(--card-hover); }
+    .pkg-icon { width: 42px; height: 42px; background: var(--blue-glow); border: 1px solid rgba(47,128,237,0.18); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-size: 1.2rem; }
+    .pkg-title { font-family: var(--font-display); font-size: 0.98rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--white); }
+    .pkg-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+    .steps { display: flex; flex-direction: column; position: relative; }
+    .steps::before { content: ''; position: absolute; left: 22px; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--blue), transparent); }
+    .step { display: grid; grid-template-columns: 48px 1fr; gap: 1.6rem; padding: 1.8rem 0; border-bottom: 1px solid var(--border); }
+    .step:last-child { border-bottom: none; }
+    .step-num { width: 44px; height: 44px; border-radius: 50%; background: var(--blue-glow); border: 1px solid var(--blue); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 0.82rem; font-weight: 700; color: var(--blue-bright); flex-shrink: 0; position: relative; z-index: 1; }
+    .step-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem; color: var(--white); }
+    .step-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+
+    #features { background: var(--dark); }
+    .features-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .feature-list { display: flex; flex-direction: column; gap: 1.4rem; }
+    .feature-item { display: flex; gap: 0.9rem; align-items: flex-start; }
+    .feature-check { width: 20px; height: 20px; border-radius: 50%; background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.25); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 3px; font-size: 0.6rem; color: var(--cyan); }
+    .feature-text strong { display: block; font-weight: 500; font-size: 0.92rem; margin-bottom: 0.15rem; color: var(--white); }
+    .feature-text span { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
+    .dashboard-mockup { background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: 0 20px 70px rgba(0,0,0,0.5), 0 0 0 1px rgba(47,128,237,0.08); }
+    .mockup-bar { background: #0a0f18; border-bottom: 1px solid var(--border); padding: 0.7rem 1rem; display: flex; align-items: center; gap: 0.45rem; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; }
+    .dot-r{background:#ff5f57} .dot-y{background:#febc2e} .dot-g{background:#28c840}
+    .mockup-title { margin-left: auto; margin-right: auto; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.03em; }
+    .mockup-body { padding: 1.2rem; }
+    .mockup-row { display: flex; justify-content: space-between; align-items: center; padding: 0.65rem 0.9rem; background: rgba(255,255,255,0.02); border-radius: 8px; margin-bottom: 0.5rem; font-size: 0.78rem; }
+    .mockup-row:last-child { margin-bottom: 0; }
+    .tag-name { font-weight: 500; color: var(--text); font-size: 0.8rem; }
+    .tag-time { color: var(--muted); font-size: 0.68rem; }
+    .tag-status { font-size: 0.68rem; padding: 0.15rem 0.6rem; border-radius: 100px; font-weight: 500; }
+    .status-closed{background:rgba(40,200,100,0.1);color:#4ade80;border:1px solid rgba(40,200,100,0.18)}
+    .status-open{background:rgba(251,113,133,0.08);color:#f87171;border:1px solid rgba(251,113,133,0.18)}
+    .status-alert{background:rgba(251,191,36,0.08);color:#fbbf24;border:1px solid rgba(251,191,36,0.18)}
+    .mockup-notif { margin-top: 0.8rem; background: rgba(47,128,237,0.06); border: 1px solid rgba(47,128,237,0.12); border-radius: 8px; padding: 0.65rem 0.9rem; font-size: 0.72rem; color: var(--blue-bright); display: flex; gap: 0.5rem; align-items: center; }
+
+    .beyond-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .beyond-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.6rem; text-align: center; transition: all 0.3s; }
+    .beyond-card:hover { border-color: rgba(47,128,237,0.15); background: var(--card-hover); }
+    .beyond-icon { font-size: 1.8rem; margin-bottom: 0.8rem; display: block; }
+    .beyond-card h4 { font-family: var(--font-display); font-size: 0.88rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
+    .beyond-card p { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+    #pricing { background: var(--dark); }
+    .pricing-card { max-width: 520px; margin: 0 auto; background: var(--card); border: 1px solid rgba(47,128,237,0.2); border-radius: 18px; padding: 2.8rem; position: relative; box-shadow: 0 0 50px rgba(47,128,237,0.06); text-align: center; }
+    .pricing-card::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 50%; height: 1px; background: linear-gradient(90deg, transparent, var(--blue), transparent); }
+    .price-label { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+    .price-amount { font-family: var(--font-display); font-size: 2.6rem; font-weight: 800; color: var(--white); line-height: 1; margin-bottom: 0.3rem; }
+    .price-note { font-size: 0.8rem; color: var(--muted); margin-bottom: 2rem; }
+    .price-includes { text-align: left; border-top: 1px solid var(--border); padding-top: 1.8rem; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.8rem; }
+    .price-line { display: flex; align-items: center; gap: 0.7rem; font-size: 0.88rem; color: var(--text); }
+    .price-line::before { content: '✓'; color: var(--cyan); font-weight: 700; flex-shrink: 0; }
+
+    #contact { text-align: center; }
+    .cta-box { max-width: 600px; margin: 0 auto; }
+    .contact-form { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 2rem; text-align: left; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+    label { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.04em; font-weight: 400; }
+    input, textarea, select { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 0.7rem 0.9rem; color: var(--text); font-family: var(--font-body); font-size: 0.88rem; outline: none; transition: border-color 0.2s; width: 100%; }
+    input:focus, textarea:focus, select:focus { border-color: rgba(47,128,237,0.4); }
+    textarea { resize: vertical; min-height: 100px; }
+    select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7a8d' fill='none' stroke-width='1.5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.9rem center; padding-right: 2.2rem; }
+    select option { background: var(--card); color: var(--text); }
+    .form-submit-row { display: flex; align-items: center; gap: 1rem; margin-top: 0.5rem; }
+    .form-submit-row .btn-primary { flex-shrink: 0; }
+    .form-note { font-size: 0.72rem; color: var(--muted); }
+
+    footer { border-top: 1px solid var(--border); background: var(--black); padding: 2.5rem 4rem; font-size: 0.78rem; color: var(--muted); }
+    .footer-logo { font-family: var(--font-display); font-weight: 800; font-size: 0.95rem; color: var(--white); }
+    .footer-logo span { color: var(--cyan); }
+    .footer-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; }
+    .footer-nav { display: flex; gap: 1.8rem; }
+    .footer-nav a { color: var(--muted); text-decoration: none; font-size: 0.8rem; transition: color 0.2s; }
+    .footer-nav a:hover { color: var(--text); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 1.2rem; border-top: 1px solid var(--border); }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 960px) {
+      .experience-grid { grid-template-columns: 1fr 1fr; }
+      .beyond-grid { grid-template-columns: 1fr 1fr; }
+      .features-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .problem-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-bar { padding: 0.9rem 1.5rem; }
+      .nav-toggle { display: block; }
+      .nav-links { display: none !important; }
+      .mobile-menu { display: none; flex-direction: column; align-items: center; padding: 1.2rem 2rem 1.8rem; border-top: 1px solid var(--border); background: var(--black); }
+      .mobile-menu.open { display: flex; }
+      .mobile-menu a { display: block; width: 100%; text-align: center; padding: 0.55rem 0; font-size: 1rem; color: var(--text); text-decoration: none; transition: color 0.15s; }
+      .mobile-menu a:active { color: var(--blue-bright); }
+      .mobile-menu .mm-label { display: block; width: 100%; text-align: center; padding: 0.6rem 0 0.15rem; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-bright); }
+      .mobile-menu .mm-sub a { color: var(--muted); font-size: 1rem; padding: 0.45rem 0; }
+      .mobile-menu .mm-sub a:active { color: var(--text); }
+      .mobile-menu .mm-sub a.dropdown-active { color: var(--blue-bright); }
+      .mobile-menu .mm-divider { width: 32px; height: 1px; background: var(--border); margin: 0.4rem auto; }
+      .mobile-menu .nav-cta { display: inline-block; margin-top: 0.4rem; padding: 0.6rem 1.8rem; font-size: 1rem; }
+      .section-inner { padding: 4rem 1.5rem; }
+      .experience-grid { grid-template-columns: 1fr; }
+      .beyond-grid { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .stats-bar { display: grid; grid-template-columns: 1fr 1fr; justify-items: center; }
+      .stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat:nth-child(odd) { border-right: 1px solid var(--border); }
+      footer { flex-direction: column; gap: 0.8rem; text-align: center; padding: 2rem 1.5rem; }
+      .footer-top { flex-direction: column; gap: 0.8rem; }
+      .footer-nav { justify-content: center; flex-wrap: wrap; gap: 1rem; }
+      .footer-bottom { flex-direction: column; gap: 0.4rem; text-align: center; }
+      .form-submit-row { flex-direction: column; align-items: stretch; }
+      .notif-toast { padding: 0.6rem 0.7rem; gap: 0.4rem; max-width: 270px; border-radius: 10px; }
+      .notif-icon { width: 28px; height: 28px; font-size: 0.85rem; }
+      .notif-title { font-size: 0.72rem; }
+      .notif-sub { font-size: 0.6rem; }
+      .notif-badge { font-size: 0.52rem; padding: 0.12rem 0.4rem; }
+      .notif-dot { width: 5px; height: 5px; }
+    }
+    @media (max-width: 480px) {
+      .beyond-grid { grid-template-columns: 1fr; }
+      .stats-bar { grid-template-columns: 1fr; justify-items: center; }
+      .stat { border-right: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <?php $activePage = 'garage'; ?>
+<?php include 'nav.php'; ?>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+
+    <div class="hero-headline-above">
+      <h1>Every door. Every building.<br/><em>One tap.</em></h1>
+      <p style="font-family:var(--font-display);font-size:clamp(1.1rem,2.4vw,1.6rem);font-weight:700;color:var(--muted);letter-spacing:-0.01em;margin-top:0.8rem;animation:fadeUp 0.6s 0.15s ease both;">From your bed. From across town. From anywhere.</p>
+    </div>
+
+    <div class="notif-area">
+      <div class="notif-toast" id="notifToast">
+        <div class="notif-dot"></div>
+        <div class="notif-icon" id="notifIconEl">⚠️</div>
+        <div class="notif-body">
+          <div class="notif-title" id="notifTitleEl">Warehouse Bay 1 left open</div>
+          <div class="notif-sub" id="notifSubEl">Left open 45 min · Tap to close · 11:14 PM</div>
+        </div>
+        <div class="notif-badge" id="notifBadgeEl">⚠ Alert</div>
+      </div>
+    </div>
+
+    <div class="hero-content">
+      <p class="hero-sub">Control every garage door, rollup door, and barn door across your entire property from your phone, with your voice, or through scheduling. Know what's open. Close what shouldn't be. No more wondering.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Get a Quote <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></a>
+        <a href="#" class="btn-secondary" onclick="return false;">▶ Watch the Video</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience"><div class="section-inner">
+    <div class="section-tag">The Experience</div>
+    <h2 class="section-title">Your doors. <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Fully Intelligent.</em></h2>
+    <p class="section-sub">Every door on your property becomes part of one intelligent system — monitored, controlled, and alerting you without lifting a finger.</p>
+    <div class="experience-grid">
+      <div class="exp-card reveal" style="padding-top:0;">
+        <img src="img/garage_phone.png" alt="Phone Control" style="width:calc(100% + 4rem);height:180px;object-fit:cover;border-radius:14px 14px 0 0;margin:0 -2rem 1.2rem -2rem;"/>
+        <h3>Phone Control</h3>
+        <p>Open the barn for your landscaper while you're at the main house. Close the shop from the airport. Toggle the garage light. Control any door on any building from anywhere in the world.</p>
+        <div class="exp-tag">Core Feature</div>
+      </div>
+      <div class="exp-card reveal" style="padding-top:0;">
+        <img src="img/garage_voice.png" alt="Voice Control" style="width:calc(100% + 4rem);height:180px;object-fit:cover;border-radius:14px 14px 0 0;margin:0 -2rem 1.2rem -2rem;"/>
+        <h3>Voice Control</h3>
+        <p>"Hey Siri, close all the doors." One command secures every building on the property. Or target a specific one: "Close the barn door." Works with Siri, Google, and Alexa.</p>
+        <div class="exp-tag">Core Feature</div>
+      </div>
+      <div class="exp-card reveal" style="padding-top:0;">
+        <img src="img/garage_camera.png" alt="Scheduling & Camera Integration" style="width:calc(100% + 4rem);height:180px;object-fit:cover;border-radius:14px 14px 0 0;margin:0 -2rem 1.2rem -2rem;"/>
+        <h3>Scheduling &amp; Camera Integration</h3>
+        <p>Set the barn to close every night at 10 PM. Workshop closes at sunset. Or go further — the barn door closes automatically after the camera stops detecting people inside. With Craison Digital, every system on your property works as one.</p>
+        <div class="exp-tag">Core Feature</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;padding:1.5rem 2rem;background:var(--card);border:1px solid var(--border);border-radius:12px;display:inline-flex;align-items:center;gap:0.8rem;width:100%;justify-content:center;"><span style="font-size:1.3rem;">🔧</span><span style="font-family:var(--font-display);font-size:0.95rem;font-weight:700;color:var(--text);">Works with your existing motors and openers — <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">no replacement needed.</em></span></div>
+  </div></section>
+
+  <section id="problem"><div class="section-inner">
+    <div class="section-tag">The Problem</div>
+    <h2 class="section-title">The property you love. The doors you can't <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">control.</em></h2>
+    <p class="section-sub">Large properties have garage doors and rollup doors scattered across buildings — each with its own remote, its own motor, and no way to know what's open from the main house.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div style="text-align:center;margin-bottom:0.8rem;"><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="16" stroke="#f87171" stroke-width="2"/><path d="M12 12l12 12M24 12L12 24" stroke="#f87171" stroke-width="2" stroke-linecap="round"/></svg></div><h3>What most people deal with</h3>
+        <ul>
+          <li>Lying in bed wondering if you left the warehouse open</li>
+          <li>A drawer full of remotes — and none of them work from the main house</li>
+          <li>Driving across the property in the dark to check a door</li>
+          <li>No way to let the contractor into the barn when you're not there</li>
+          <li>Five buildings, five different motors, zero coordination</li>
+        </ul>
+      </div>
+      <div class="problem-card solution-card">
+        <div style="text-align:center;margin-bottom:0.8rem;"><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="16" stroke="#4ade80" stroke-width="2"/><path d="M11 18l5 5 9-9" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>What <span style="white-space:nowrap;font-weight:800;">Craison<span style="color:var(--cyan);">Digital</span></span> builds</h3>
+        <ul>
+          <li>One app shows every door across every building — open or closed, right now</li>
+          <li>Get an alert the moment any door is left open past your threshold</li>
+          <li>Close the warehouse from your bed. Open the barn from across town.</li>
+          <li>Control garage lights and get obstruction sensor alerts from the app</li>
+          <li>Let anyone into any building with a tap — and get notified when they arrive</li>
+          <li>Works with your existing motors. No ripping anything out.</li>
+        </ul>
+      </div>
+    </div>
+  </div></section>
+
+  <section id="features"><div class="section-inner">
+    <div class="features-layout">
+      <div>
+        <div class="section-tag">Your Dashboard</div>
+        <h2 class="section-title">Every building.<br/><em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">One screen.</em></h2>
+        <p class="section-sub" style="margin-bottom:2rem;">This is what it looks like when every door on your property is finally connected.</p>
+        <div class="feature-list">
+          <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Never wonder if a door is open again</strong><span>Glance at your phone and see every door across every building — green or amber, closed or open, instantly.</span></div></div>
+          <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Close it from wherever you are</strong><span>On the couch, at the airport, in bed at midnight — one tap and it's done.</span></div></div>
+          <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Every event is logged</strong><span>Who opened it, when, and how — phone, voice, schedule, or manual. A complete history for every door.</span></div></div>
+          <div class="feature-item"><div class="feature-check">✓</div><div class="feature-text"><strong>Built around how you live</strong><span>Different thresholds for different buildings. Different schedules for different seasons. Your system, your rules.</span></div></div>
+        </div>
+      </div>
+      <div class="dashboard-mockup">
+        <div class="mockup-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><div class="mockup-title">Garage Door Status</div></div>
+        <div class="mockup-body">
+          <div class="mockup-row"><div><div class="tag-name">Main House — 3 Car Garage</div><div class="tag-time">Closed · Last opened 7:32 AM</div></div><div class="tag-status status-closed">Closed</div></div>
+          <div class="mockup-row"><div><div class="tag-name">Barn — Rollup Door</div><div class="tag-time">Open · Opened 9:15 AM</div></div><div class="tag-status status-open">Open</div></div>
+          <div class="mockup-row"><div><div class="tag-name">Workshop — Side Door</div><div class="tag-time">Closed · Last opened yesterday</div></div><div class="tag-status status-closed">Closed</div></div>
+          <div class="mockup-row"><div><div class="tag-name">Guest House — Garage</div><div class="tag-time">Closed · Last opened 3 days ago</div></div><div class="tag-status status-closed">Closed</div></div>
+          <div class="mockup-row"><div><div class="tag-name">Warehouse — Bay 1</div><div class="tag-time">Open 45 min · Alert sent</div></div><div class="tag-status status-alert">⚠ Left Open</div></div>
+          <div class="mockup-notif">🔔 &nbsp;<span><strong>Warehouse Bay 1</strong> has been open for 45 minutes</span></div>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <section id="beyond"><div class="section-inner" style="text-align:center;">
+    <div class="section-tag">Beyond the Garage</div>
+    <h2 class="section-title"><em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">One app.</em> Your entire property.</h2>
+    <p class="section-sub" style="margin:0 auto 3rem;max-width:750px;">Your garage doors are just the start. We automate everything on your property.</p>
+    <div class="beyond-grid">
+      <a href="gate.php" class="beyond-card" style="padding:0;overflow:hidden;text-decoration:none;"><img src="img/gate_home.png" alt="Gate Control" style="width:100%;height:120px;object-fit:cover;"/><div style="padding:1rem 1.6rem 1.6rem;"><h4>Gate Control</h4><p>Your gate opens as you arrive — hands-free. Phone access, visitor logging, and automatic opening from the same app</p></div></a>
+      <a href="fountains.php" class="beyond-card" style="padding:0;overflow:hidden;text-decoration:none;"><img src="img/fountain_night.png" alt="Fountain Controls" style="width:100%;height:120px;object-fit:cover;"/><div style="padding:1rem 1.6rem 1.6rem;"><h4>Fountain Controls</h4><p>Your fountains turn on when you want them and shut off automatically when the wind picks up. Schedules, phone control, and synced lighting — all from the same app that runs everything else.</p></div></a>
+      <a href="pool.php" class="beyond-card" style="padding:0;overflow:hidden;text-decoration:none;"><img src="img/pool_home.png" alt="Pool Controls" style="width:100%;height:120px;object-fit:cover;"/><div style="padding:1rem 1.6rem 1.6rem;"><h4>Pool Controls</h4><p>One tap to heat the spa. Voice controls for your entire pool. Custom dashboard with only the buttons you actually use — works with any existing equipment, any brand. All from the same app.</p></div></a>
+    </div>
+    <p style="color:var(--muted);font-size:0.9rem;margin-top:2rem;">Cameras, lighting, networking, irrigation, and more. <a href="#contact" style="color:var(--blue-bright);text-decoration:none;">Let's talk about what's possible.</a></p>
+  </div></section>
+
+  <section id="contact"><div class="section-inner">
+    <div class="cta-box" style="max-width:700px;">
+      <div class="section-tag">Get Started</div>
+      <h2 class="section-title" style="white-space:nowrap;">Tell us about your <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">property.</em></h2>
+      <p class="section-sub" style="margin:0 auto;max-width:600px;">Tell us about your property and we'll get back to you with a custom quote.</p>
+      <form class="contact-form" action="https://formspree.io/f/xaqabrdo" method="POST">
+        <input type="hidden" name="_next" value="https://craisondigital.com/thank-you.html"/><input type="hidden" name="_subject" value="New inquiry — Garage Control"/>
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" name="first_name" placeholder="John"/></div>
+          <div class="form-group"><label>Last Name</label><input type="text" name="last_name" placeholder="Smith"/></div>
+        </div>
+        <div class="form-group"><label>Email</label><input type="email" name="_replyto" placeholder="john@example.com"/></div>
+        <div class="form-group"><label>Phone</label><input type="tel" name="phone" placeholder="(555) 000-0000"/></div>
+        <div class="form-group">
+          <label>Property Type</label>
+          <select name="property_type">
+            <option value="" disabled selected>Select your property type</option>
+            <option>Ranch / Farm</option>
+            <option>Estate / Residential Acreage</option>
+            <option>Equestrian Property</option>
+            <option>Commercial / Multi-Building</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Tell us about your doors and property</label><textarea name="message" placeholder="How many buildings have garage or rollup doors? Roughly how many doors total? Any buildings without Wi-Fi?"></textarea></div>
+        <div class="form-submit-row">
+          <button type="submit" class="btn-primary">Send My Request →</button>
+          <span class="form-note">We typically respond within 24 hours.</span>
+        </div>
+      </form>
+    </div>
+  </div></section>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-logo"><a href="index.php" style="color:inherit;text-decoration:none;">Craison<span>Digital</span></a></div>
+      <div class="footer-nav"><a href="index.php">Home</a><a href="about.php">About</a><a href="gate.php">Gate</a><a href="pool.php">Pool</a><a href="fountains.php">Fountains</a><a href="garage.php">Garage</a><a href="#contact">Contact</a></div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 Craison Digital. All rights reserved.</div>
+      <div>Smart Property Consulting &middot; Estates &amp; Compounds &middot; Sarasota</div>
+    </div>
+  </footer>
+
+  <script>
+  (function() {
+    // --- Cycling Notification Toasts ---
+    var toast = document.getElementById('notifToast');
+    var notifIcon = document.getElementById('notifIconEl');
+    var notifTitle = document.getElementById('notifTitleEl');
+    var notifSub = document.getElementById('notifSubEl');
+    var notifBadge = document.getElementById('notifBadgeEl');
+
+    var notifications = [
+      { icon: '⚠️', title: 'Warehouse Bay 1 left open', sub: 'Left open 45 min · Tap to close · 11:14 PM', badge: '⚠ Alert', warn: true },
+      { icon: '✅', title: 'Warehouse Bay 1 — Closed', sub: 'Closed remotely · 11:15 PM', badge: '✓ Closed', warn: false },
+      { icon: '🚜', title: 'Barn Door — Opened', sub: 'Opened for landscaper · 2:30 PM', badge: '✓ Opened', warn: false },
+      { icon: '🗣️', title: '"Close everything"', sub: 'All 5 doors confirmed closed · 11:00 PM', badge: '✓ Secured', warn: false }
+    ];
+    var currentNotif = 0;
+
+    function showNotification() {
+      toast.classList.remove('visible');
+      toast.classList.remove('warn');
+      setTimeout(function() {
+        var n = notifications[currentNotif];
+        notifIcon.textContent = n.icon;
+        notifTitle.textContent = n.title;
+        notifSub.textContent = n.sub;
+        notifBadge.textContent = n.badge;
+        if (n.warn) {
+          toast.classList.add('warn');
+          notifBadge.style.background = 'rgba(251,191,36,0.1)';
+          notifBadge.style.borderColor = 'rgba(251,191,36,0.25)';
+          notifBadge.style.color = '#fbbf24';
+        } else {
+          notifBadge.style.background = 'rgba(74,222,128,0.1)';
+          notifBadge.style.borderColor = 'rgba(74,222,128,0.25)';
+          notifBadge.style.color = '#4ade80';
+        }
+        toast.classList.add('visible');
+        currentNotif = (currentNotif + 1) % notifications.length;
+      }, 500);
+    }
+
+    showNotification();
+    setInterval(showNotification, 3500);
+
+    // --- Nav toggle ---
+    var navToggle = document.getElementById('navToggle');
+    var mobileMenu = document.getElementById('mobileMenu');
+    if (navToggle && mobileMenu) {
+      navToggle.addEventListener('click', function() { mobileMenu.classList.toggle('open'); });
+      mobileMenu.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() { mobileMenu.classList.remove('open'); });
+      });
+    }
+
+    // --- Reveal on scroll ---
+    var els = document.querySelectorAll('.reveal');
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(function(el) { obs.observe(el); });
+  })();
+  </script>
+
+</body>
+</html>

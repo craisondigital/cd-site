@@ -68,8 +68,8 @@
     .article-inner { max-width: 700px; margin: 0 auto; padding: 1rem 2rem 6rem; }
 
     .article-inner h2 { font-family: var(--font-display); font-size: clamp(1.25rem, 2vw, 1.6rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.015em; color: var(--white); margin: 3.5rem 0 1.1rem; }
-    .article-inner h2:first-child { margin-top: 0; }
 
+    .article-lede { font-family: var(--font-display); font-size: clamp(1.15rem, 2.2vw, 1.45rem); font-weight: 700; color: var(--white); line-height: 1.5; letter-spacing: -0.01em; margin-bottom: 0; }
     .article-inner p { font-size: 1rem; color: var(--muted); line-height: 1.85; margin-bottom: 1.3rem; }
     .article-inner p:last-child { margin-bottom: 0; }
     .article-inner strong { color: var(--text); font-weight: 500; }
@@ -175,6 +175,9 @@
   <div class="article-body">
     <div class="article-inner">
 
+      <p class="article-lede">You've spent thousands on smart home equipment. You still walk into a room and wave your hands at a light switch that doesn't respond. That's not a smart home. That's just expensive frustration.</p>
+
+      <hr class="article-divider">
       <h2>Most Smart Homes Get This Wrong</h2>
       <p>Walk into a home with a "smart" lighting system and try to use it like a normal person. Half the time, the switches don't work anymore. The app takes five seconds to respond. The voice assistant mishears you. And if you don't know which scene does what, you're just standing in a dim room hoping something happens.</p>
       <p>That's not automation. That's inconvenience with extra steps.</p>
@@ -187,7 +190,7 @@
       <p>Technology should adapt to you. Not the other way around.</p>
       <p>If your lights were simple before, they should still be simple. The switch on the wall should still work exactly the way it always did. Automation should be an enhancement — something that makes things better — not a replacement for behavior that already worked fine.</p>
       <p>When you walk into a room, the light should come on. When you leave, it should go off. When you sit down to watch a movie, the lights should adjust without you thinking about it. These things should happen because the system has learned how you live — not because you remembered to tap the right button in the right app at the right time.</p>
-      <p>The goal isn't to give you more control. The goal is to make control unnecessary.</p>
+      <p>The goal isn't to give you more control. It's to make control unnecessary.</p>
 
       <hr class="article-divider">
 
@@ -202,6 +205,7 @@
 
       <h2>Reliability Isn't Optional</h2>
       <p>A smart home that works 90% of the time is a problem.</p>
+      <p>Because that 10% is when it matters.</p>
       <p>That other 10% — that's the morning you're late and the gate won't open. That's the night the lights don't respond and someone's fumbling in the dark. That's the house guest who can't figure out how to make anything work and stops trying.</p>
       <p>Reliability means the system behaves predictably, every time. It means that when something does fail, it fails gracefully — the switch still works, the door still opens manually, the lights don't just stay off. The automation layer should sit on top of normal behavior, not replace it.</p>
       <div class="callout">
@@ -278,7 +282,8 @@
       <div class="article-cta">
         <p>Before we choose a single device, we ask how you live. Who else uses this home. What's already working. What's breaking. What you've given up on. We build around your answers — not around a product catalogue.</p>
         <p>We prioritize local control. We make sure switches still work. We stay involved after the install, because a home is a living thing and systems need to evolve with it. We're not selling smart home features. We're building homes that work the way they should have all along.</p>
-        <p>If that sounds like what you've been looking for, we'd like to talk.</p>
+        <p>If you're wondering what this would look like on your property, that's exactly what we help design.</p>
+        <p>If that sounds like what you've been looking for, we should talk.</p>
         <div class="cta-actions">
           <a href="#contact" class="btn-primary">Talk to Us About Your Property →</a>
           <a href="index.php" class="btn-secondary">See What We Automate</a>

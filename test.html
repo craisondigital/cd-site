@@ -156,7 +156,7 @@
       display: grid;
       grid-template-columns: 1fr 400px;
       gap: 3rem;
-      align-items: center;
+      align-items: start;
     }
 
     .hero-content {}
@@ -172,12 +172,19 @@
 
     .hero h1 {
       font-family: var(--serif);
-      font-size: clamp(2.2rem, 4vw, 3rem);
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
       font-weight: 600;
       line-height: 1.15;
       color: var(--text);
-      margin-bottom: 1.8rem;
+      margin-bottom: 2.5rem;
       letter-spacing: -0.02em;
+    }
+
+    .hero-subheading {
+      font-size: 1.2rem;
+      color: var(--text);
+      margin-bottom: 2rem;
+      line-height: 1.5;
     }
 
     .hero-sub {
@@ -790,11 +797,12 @@
 
   <!-- HERO -->
   <section class="hero">
+    <div class="hero-label">Smart Property Systems · Sarasota, FL</div>
+    <h1>Your entire property, working together without the headaches</h1>
+    <p class="hero-subheading"><strong>Built around what you have — or designed right from the start.</strong></p>
     <div class="hero-layout">
       <div class="hero-content">
-        <div class="hero-label">Smart Property Systems · Sarasota, FL</div>
-        <h1>Your entire property, working together without the headaches</h1>
-        <p class="hero-sub">We design and install smart systems that actually work — and fix the ones that don't. Gates, lighting, cameras, pools, outbuildings. One property. One system. Done right.</p>
+        <p class="hero-sub">Your property already has everything it needs — it just doesn't work together. We bring your gates, lighting, cameras, pool, and outbuildings into one system that actually makes sense. No rip-and-replace. No cookie-cutter installs. Just a smarter, simpler property.</p>
         <div class="hero-actions">
           <a href="#contact" class="btn-primary">Schedule a Consultation</a>
           <a href="#process" class="btn-secondary">See How It Works</a>
@@ -863,10 +871,10 @@
           </div>
         </div>
         <div class="service-item">
-          <img src="img/ha_integration.png" alt="Full Property Integration" class="service-img">
+          <img src="img/fountain_day.png" alt="Lake Fountain and Irrigation" class="service-img">
           <div class="service-body">
-            <h3>System Integration</h3>
-            <p>The real work. Making every piece — old and new — talk to each other so your property runs as one system, not twenty.</p>
+            <h3>Lake Fountains &amp; Irrigation</h3>
+            <p>Fountains that run on schedule and shut off in high wind. Irrigation zones that water the right areas at the right time. All from your phone or fully automatic.</p>
           </div>
         </div>
       </div>

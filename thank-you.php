@@ -74,12 +74,7 @@
     </div>
   </main>
 
-  <footer>
-    <div class="footer-bottom">
-      <div>© 2026 Craison Digital. All rights reserved.</div>
-      <div>Smart Property Consulting · Estates &amp; Compounds · Sarasota</div>
-    </div>
-  </footer>
+  <?php include 'footer.php'; ?>
 
 </body>
 </html>

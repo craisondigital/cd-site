@@ -568,16 +568,7 @@
     </div>
   </div></section>
 
-  <footer>
-    <div class="footer-top">
-      <div class="footer-logo"><a href="index.php" style="color:inherit;text-decoration:none;">Craison<span>Digital</span></a></div>
-      <div class="footer-nav"><a href="index.php">Home</a><a href="about.php">About</a><a href="gate.php">Gate</a><a href="pool.php">Pool</a><a href="fountains.php">Fountains</a><a href="garage.php">Garage</a><a href="#contact">Contact</a></div>
-    </div>
-    <div class="footer-bottom">
-      <div>© 2026 Craison Digital. All rights reserved.</div>
-      <div>Smart Property Consulting · Estates &amp; Compounds · Sarasota</div>
-    </div>
-  </footer>
+  <?php include 'footer.php'; ?>
 
   <script>
   (function() {

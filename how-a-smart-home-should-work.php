@@ -175,9 +175,8 @@
   <div class="article-body">
     <div class="article-inner">
 
-      <p class="article-lede">You've spent thousands on smart home equipment. You still walk into a room and wave your hands at a light switch that doesn't respond. That's not a smart home. That's just expensive frustration.</p>
-
       <hr class="article-divider">
+      <p class="article-lede">You've spent thousands on smart home equipment.</p>
       <h2>Most Smart Homes Get This Wrong</h2>
       <p>Walk into a home with a "smart" lighting system and try to use it like a normal person. Half the time, the switches don't work anymore. The app takes five seconds to respond. The voice assistant mishears you. And if you don't know which scene does what, you're just standing in a dim room hoping something happens.</p>
       <p>That's not automation. That's inconvenience with extra steps.</p>

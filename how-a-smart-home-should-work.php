@@ -50,7 +50,7 @@
     .mobile-menu { display: none; }
 
     /* ── HERO ── */
-    .hero { position: relative; width: 100%; padding: 140px 2rem 40px; text-align: center; overflow: hidden; }
+    .hero { position: relative; width: 100%; padding: 140px 2rem 0; text-align: center; overflow: hidden; }
     .hero-bg { position: absolute; inset: 0; background: linear-gradient(180deg, #040710 0%, #081525 60%, var(--black) 100%); }
     .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(47,128,237,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(47,128,237,0.04) 1px, transparent 1px); background-size: 56px 56px; mask-image: radial-gradient(ellipse 70% 80% at 50% 40%, black 10%, transparent 100%); -webkit-mask-image: radial-gradient(ellipse 70% 80% at 50% 40%, black 10%, transparent 100%); }
     .hero-glow { position: absolute; top: 10%; left: 50%; transform: translateX(-50%); width: 600px; height: 300px; background: radial-gradient(ellipse, rgba(47,128,237,0.08) 0%, transparent 70%); pointer-events: none; }
@@ -65,7 +65,7 @@
 
     /* ── ARTICLE ── */
     .article-body { position: relative; z-index: 1; }
-    .article-inner { max-width: 700px; margin: 0 auto; padding: 1rem 2rem 6rem; }
+    .article-inner { max-width: 700px; margin: 0 auto; padding: 0 2rem 6rem; }
 
     .article-inner h2 { font-family: var(--font-display); font-size: clamp(1.25rem, 2vw, 1.6rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.015em; color: var(--white); margin: 3.5rem 0 1.1rem; }
 
@@ -177,7 +177,7 @@
     <div class="article-inner">
 
       <hr class="article-divider">
-      <p class="article-lede">You've spent thousands on smart home equipment.</p>
+      <p class="article-lede">You've spent <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">thousands on smart home equipment.</em></p>
       <h2>Most Smart Homes Get This Wrong</h2>
       <p>Walk into a home with a "smart" lighting system and try to use it like a normal person. Half the time, the switches don't work anymore. The app takes five seconds to respond. The voice assistant mishears you. And if you don't know which scene does what, you're just standing in a dim room hoping something happens.</p>
       <p>That's not automation. That's inconvenience with extra steps.</p>

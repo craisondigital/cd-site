@@ -273,7 +273,7 @@
       .how-grid { grid-template-columns: 1fr 1fr; }
       .how-grid-3 { grid-template-columns: 1fr 1fr; }
     }
-    @media (max-width: 768px) {
+    @media (max-width: 1000px) {
       .nav-bar { padding: 0.9rem 1.5rem; }
       .nav-toggle { display: block; }
       .nav-links { display: none !important; }

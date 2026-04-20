@@ -4,7 +4,9 @@
       "Bash(grep:*)",
       "Bash(xargs cat:*)",
       "Bash(gh repo:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(python3 *)",
+      "Bash(node *)"
     ]
   }
 }

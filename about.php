@@ -146,7 +146,7 @@
     .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 1.2rem; border-top: 1px solid var(--border); }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
+    @media (max-width: 1000px) {
       .nav-bar { padding: 0.9rem 1.5rem; }
       .nav-toggle { display: block; }
       .nav-links { display: none !important; }
@@ -164,6 +164,8 @@
       .mobile-menu .mm-sub a.dropdown-active { color: var(--blue-bright); }
       .mobile-menu .mm-divider { width: 32px; height: 1px; background: var(--border); margin: 0.4rem auto; }
       .mobile-menu .nav-cta { display: inline-block; margin-top: 0.4rem; padding: 0.6rem 1.8rem; font-size: 1rem; }
+    }
+    @media (max-width: 768px) {
       .section-inner { padding: 4rem 1.5rem; }
       .form-row { grid-template-columns: 1fr; }
       .form-submit-row { flex-direction: column; align-items: stretch; }

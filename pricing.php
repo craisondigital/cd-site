@@ -297,7 +297,7 @@
       .packages-grid .pkg-card:last-child { grid-column: 1 / -1; max-width: 480px; justify-self: center; }
       .how-grid { grid-template-columns: 1fr 1fr; }
     }
-    @media (max-width: 768px) {
+    @media (max-width: 1000px) {
       #packages .section-title { white-space: normal; }
       .nav-bar { padding: 0.9rem 1.5rem; }
       .nav-toggle { display: block; }

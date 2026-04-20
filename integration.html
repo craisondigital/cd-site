@@ -728,17 +728,18 @@
       <div class="section-tag">Get Started</div>
       <h2 class="section-title">Tell us what's on your <span class="gradient-text">property.</span></h2>
       <p class="section-sub" style="margin:0 auto;max-width:600px;">Tell us what you already own, what frustrates you, and what you wish worked better. We'll put together a plan to connect everything.</p>
-      <form class="contact-form" onsubmit="return false;">
+      <form class="contact-form" action="https://formspree.io/f/xaqabrdo" method="POST">
+        <input type="hidden" name="_subject" value="New inquiry — Full Property Integration"/>
         <div class="form-row">
-          <div class="form-group"><label>First Name</label><input type="text" placeholder="John"/></div>
-          <div class="form-group"><label>Last Name</label><input type="text" placeholder="Smith"/></div>
+          <div class="form-group"><label>First Name</label><input type="text" name="first_name" placeholder="John"/></div>
+          <div class="form-group"><label>Last Name</label><input type="text" name="last_name" placeholder="Smith"/></div>
         </div>
-        <div class="form-group"><label>Email</label><input type="email" placeholder="john@example.com"/></div>
-        <div class="form-group"><label>Phone</label><input type="tel" placeholder="(941) 555-0000"/></div>
+        <div class="form-group"><label>Email</label><input type="email" name="_replyto" placeholder="john@example.com"/></div>
+        <div class="form-group"><label>Phone</label><input type="tel" name="phone" placeholder="(941) 555-0000"/></div>
         <div class="form-row">
           <div class="form-group">
             <label>Property Type</label>
-            <select>
+            <select name="property_type">
               <option value="" disabled selected>Select your property type</option>
               <option>Estate / Residential Acreage</option>
               <option>Ranch / Farm</option>
@@ -750,7 +751,7 @@
           </div>
           <div class="form-group">
             <label>Number of Buildings</label>
-            <select>
+            <select name="num_buildings">
               <option value="" disabled selected>How many buildings?</option>
               <option>1 building</option>
               <option>2 buildings</option>
@@ -761,7 +762,7 @@
         </div>
         <div class="form-group">
           <label>What smart devices do you already have?</label>
-          <textarea placeholder="Tell us about your existing setup — what brands, what's working, what isn't. What do you wish your smart home could do that it can't today?"></textarea>
+          <textarea name="message" placeholder="Tell us about your existing setup — what brands, what's working, what isn't. What do you wish your smart home could do that it can't today?"></textarea>
         </div>
         <div class="form-submit-row">
           <button type="submit" class="btn-primary">Send My Request →</button>

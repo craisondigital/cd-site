@@ -799,16 +799,17 @@
       <div class="section-tag">Get Started</div>
       <h2 class="section-title">Ready to simplify your pool?</h2>
       <p class="section-sub" style="margin-bottom:0;">Tell us about your pool and how you use it. We'll figure out the rest.</p>
-      <form class="contact-form" onsubmit="return false;">
+      <form class="contact-form" action="https://formspree.io/f/xaqabrdo" method="POST">
+        <input type="hidden" name="_subject" value="New inquiry — Pool Automation"/>
         <div class="form-row">
-          <div class="form-group"><label>First Name</label><input type="text" placeholder="John"/></div>
-          <div class="form-group"><label>Last Name</label><input type="text" placeholder="Smith"/></div>
+          <div class="form-group"><label>First Name</label><input type="text" name="first_name" placeholder="John"/></div>
+          <div class="form-group"><label>Last Name</label><input type="text" name="last_name" placeholder="Smith"/></div>
         </div>
-        <div class="form-group"><label>Email</label><input type="email" placeholder="john@example.com"/></div>
-        <div class="form-group"><label>Phone</label><input type="tel" placeholder="(555) 000-0000"/></div>
+        <div class="form-group"><label>Email</label><input type="email" name="_replyto" placeholder="john@example.com"/></div>
+        <div class="form-group"><label>Phone</label><input type="tel" name="phone" placeholder="(555) 000-0000"/></div>
         <div class="form-group">
           <label>Current Pool Setup</label>
-          <select>
+          <select name="pool_setup">
             <option value="" disabled selected>What best describes your setup?</option>
             <option>I have a pool automation system (Pentair, Hayward, Jandy, etc.)</option>
             <option>Just a pump and heater — no automation</option>
@@ -817,7 +818,7 @@
             <option>Not sure — I need someone to look at it</option>
           </select>
         </div>
-        <div class="form-group"><label>Tell us about your pool and how you use it</label><textarea placeholder="What's frustrating about controlling your pool today? What would you want to be able to do from your phone? Do you have any smart home devices already?"></textarea></div>
+        <div class="form-group"><label>Tell us about your pool and how you use it</label><textarea name="message" placeholder="What's frustrating about controlling your pool today? What would you want to be able to do from your phone? Do you have any smart home devices already?"></textarea></div>
         <div class="form-submit-row">
           <button type="submit" class="btn-primary">Send My Request →</button>
           <span class="form-note">We typically respond within 24 hours.</span>

@@ -594,17 +594,18 @@
       <h2 class="section-title">Ready to upgrade your garage?</h2>
       <p class="section-sub" style="margin-bottom:0;">Tell us about your property and we'll get back to you with a custom quote.</p>
       <p style="font-size:0.78rem;color:var(--muted);margin-top:0.6rem;">Trusted by property owners across Sarasota — 10+ years of smart home experience.</p>
-      <form class="contact-form" onsubmit="return false;">
+      <form class="contact-form" action="https://formspree.io/f/xaqabrdo" method="POST">
+        <input type="hidden" name="_subject" value="New inquiry — Garage Pricing"/>
         <div class="form-row">
-          <div class="form-group"><label>First Name</label><input type="text" placeholder="John"/></div>
-          <div class="form-group"><label>Last Name</label><input type="text" placeholder="Smith"/></div>
+          <div class="form-group"><label>First Name</label><input type="text" name="first_name" placeholder="John"/></div>
+          <div class="form-group"><label>Last Name</label><input type="text" name="last_name" placeholder="Smith"/></div>
         </div>
-        <div class="form-group"><label>Email</label><input type="email" placeholder="john@example.com"/></div>
-        <div class="form-group"><label>Phone</label><input type="tel" placeholder="(555) 000-0000"/></div>
+        <div class="form-group"><label>Email</label><input type="email" name="_replyto" placeholder="john@example.com"/></div>
+        <div class="form-group"><label>Phone</label><input type="tel" name="phone" placeholder="(555) 000-0000"/></div>
         <div class="form-row">
           <div class="form-group">
             <label>Property Type</label>
-            <select>
+            <select name="property_type">
               <option value="" disabled selected>Select your property type</option>
               <option>Ranch / Farm</option>
               <option>Estate / Residential Acreage</option>
@@ -615,7 +616,7 @@
           </div>
           <div class="form-group">
             <label>Number of Doors</label>
-            <select>
+            <select name="num_doors">
               <option value="" disabled selected>How many doors?</option>
               <option>1 door</option>
               <option>2 doors</option>
@@ -625,7 +626,7 @@
             </select>
           </div>
         </div>
-        <div class="form-group"><label>Tell us about your garage and property</label><textarea placeholder="What kind of doors do you have? How many garages? Are any detached? Any other details about your setup..."></textarea></div>
+        <div class="form-group"><label>Tell us about your garage and property</label><textarea name="message" placeholder="What kind of doors do you have? How many garages? Are any detached? Any other details about your setup..."></textarea></div>
         <div class="form-submit-row">
           <button type="submit" class="btn-primary">Send My Request →</button>
           <span class="form-note">We typically respond within 24 hours.</span>

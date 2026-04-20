@@ -366,24 +366,25 @@
         <div class="section-tag">Get in Touch</div>
         <h2 class="section-title">Let's talk about your property.</h2>
         <p class="section-sub">Tell us what you're working with and what you'd like it to do. We'll take it from there.</p>
-        <form class="contact-form" onsubmit="return false;">
+        <form class="contact-form" action="https://formspree.io/f/xaqabrdo" method="POST">
+          <input type="hidden" name="_subject" value="New inquiry — About Page"/>
           <div class="form-row">
             <div class="form-group">
               <label for="name">Your Name</label>
-              <input type="text" id="name" placeholder="Craig Scuilla" />
+              <input type="text" id="name" name="name" placeholder="Craig Scuilla" />
             </div>
             <div class="form-group">
               <label for="phone">Phone Number</label>
-              <input type="tel" id="phone" placeholder="(941) 555-0100" />
+              <input type="tel" id="phone" name="phone" placeholder="(941) 555-0100" />
             </div>
           </div>
           <div class="form-group">
             <label for="email">Email Address</label>
-            <input type="email" id="email" placeholder="you@example.com" />
+            <input type="email" id="email" name="_replyto" placeholder="you@example.com" />
           </div>
           <div class="form-group">
             <label for="interest">What are you interested in?</label>
-            <select id="interest">
+            <select id="interest" name="interest">
               <option value="">Select a service...</option>
               <option>Full Property Integration</option>
               <option>Smart Gate Access</option>
@@ -394,7 +395,7 @@
           </div>
           <div class="form-group">
             <label for="message">Tell us about your property</label>
-            <textarea id="message" placeholder="Describe your property, what systems you currently have, and what you'd like to improve..."></textarea>
+            <textarea id="message" name="message" placeholder="Describe your property, what systems you currently have, and what you'd like to improve..."></textarea>
           </div>
           <div class="form-submit-row">
             <button type="submit" class="btn-primary">Send Message</button>

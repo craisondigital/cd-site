@@ -1,1 +1,1 @@
-<?php echo "deploy test - " . date('Y-m-d H:i:s'); ?>
+<?php echo "deploy test v2 - " . date('Y-m-d H:i:s'); ?>

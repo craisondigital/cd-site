@@ -69,8 +69,8 @@
 
     .article-inner h2 { font-family: var(--font-display); font-size: clamp(1.25rem, 2vw, 1.6rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.015em; color: var(--white); margin: 3.5rem 0 1.1rem; }
 
-    .article-lede { font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; color: var(--white); line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 0.4rem; }
-    .article-lede + h2 { margin-top: 0; font-size: clamp(0.9rem, 1.4vw, 1.05rem); font-weight: 500; color: var(--muted); letter-spacing: 0; }
+    .article-lede { font-family: var(--font-display); font-size: clamp(1.9rem, 3.8vw, 2.8rem); font-weight: 800; color: var(--white); line-height: 1.15; letter-spacing: -0.025em; margin-bottom: 0.4rem; }
+    .article-lede + h2 { margin-top: 0; }
     .article-inner p { font-size: 1rem; color: var(--muted); line-height: 1.85; margin-bottom: 1.3rem; }
     .article-inner p:last-child { margin-bottom: 0; }
     .article-inner strong { color: var(--text); font-weight: 500; }

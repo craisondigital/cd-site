@@ -69,7 +69,8 @@
 
     .article-inner h2 { font-family: var(--font-display); font-size: clamp(1.25rem, 2vw, 1.6rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.015em; color: var(--white); margin: 3.5rem 0 1.1rem; }
 
-    .article-lede { font-family: var(--font-display); font-size: clamp(1.15rem, 2.2vw, 1.45rem); font-weight: 700; color: var(--white); line-height: 1.5; letter-spacing: -0.01em; margin-bottom: 0; }
+    .article-lede { font-family: var(--font-display); font-size: clamp(1.15rem, 2.2vw, 1.45rem); font-weight: 700; color: var(--white); line-height: 1.5; letter-spacing: -0.01em; margin-bottom: 0.25rem; }
+    .article-lede + h2 { margin-top: 0; }
     .article-inner p { font-size: 1rem; color: var(--muted); line-height: 1.85; margin-bottom: 1.3rem; }
     .article-inner p:last-child { margin-bottom: 0; }
     .article-inner strong { color: var(--text); font-weight: 500; }

@@ -207,8 +207,8 @@
         </div>
 
         <div class="prose">
-          <p>Every manufacturer wanted to be their own ecosystem. Every device needed its own app. Every system worked great in isolation and fell apart the moment you tried to connect it to anything else. You'd invest real money in a gate controller, a lighting system, a pool automation setup — and none of them would talk to each other. If your internet went down, half of it stopped working. If the company behind the software changed direction or shut down, you were starting over.</p>
-          <p>And underneath all of it, a more uncomfortable truth: most of these systems were designed to keep you dependent. Monthly fees, locked hardware, proprietary apps that only worked with their brand. The homeowner owned the devices, but the company controlled the experience.</p>
+          <p>Every manufacturer wants to be their own ecosystem. Every device needs its own app. Every system works great in isolation and falls apart the moment you try to connect it to anything else. You invest real money in a gate controller, a lighting system, a pool automation setup — and none of them talk to each other. If your internet goes down, half of it stops working. If the company behind the software changes direction or shuts down, you're starting over.</p>
+          <p>And underneath all of it, a more uncomfortable truth: most of these systems are designed to keep you dependent. Monthly fees, locked hardware, proprietary apps that only work with their brand. The homeowner owns the devices, but the company controls the experience.</p>
 
           <div class="pull-quote">The vision wasn't complicated. A system that worked locally. That you actually owned. That didn't require a dozen apps or a cloud server staying online just to open your gate.</div>
 

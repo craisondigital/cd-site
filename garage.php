@@ -377,7 +377,7 @@
   <section id="contact"><div class="section-inner">
     <div class="cta-box" style="max-width:700px;">
       <div class="section-tag">Get Started</div>
-      <h2 class="section-title" style="white-space:nowrap;">Tell us about your <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">property.</em></h2>
+      <h2 class="section-title">Tell us about your <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">property.</em></h2>
       <p class="section-sub" style="margin:0 auto;max-width:600px;">Tell us about your property and we'll get back to you with a custom quote.</p>
       <form class="contact-form" action="https://formspree.io/f/xaqabrdo" method="POST">
         <input type="hidden" name="_next" value="https://craisondigital.com/thank-you.php"/><input type="hidden" name="_subject" value="New inquiry — Garage Control"/>

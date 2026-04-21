@@ -154,6 +154,7 @@
     .solution-card { border-color: rgba(47,128,237,0.15); background: linear-gradient(135deg, var(--card) 0%, rgba(47,128,237,0.04) 100%); }
 
     .experience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .addons-grid { grid-template-columns: repeat(2, 1fr); }
     .exp-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; transition: all 0.3s; position: relative; overflow: hidden; }
     .exp-card:hover { background: var(--card-hover); border-color: rgba(47,128,237,0.15); transform: translateY(-2px); }
     .exp-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--blue), transparent); opacity: 0; transition: opacity 0.3s; }
@@ -298,6 +299,7 @@
 
                               .section-inner { padding: 4rem 1.5rem; }
       .experience-grid { grid-template-columns: 1fr; }
+      .addons-grid { grid-template-columns: 1fr; }
       .beyond-grid { grid-template-columns: 1fr 1fr; }
       .form-row { grid-template-columns: 1fr; }
       .stats-bar { display: grid; grid-template-columns: 1fr 1fr; justify-items: center; }
@@ -476,7 +478,7 @@
     <div class="section-tag">Optional Add-Ons</div>
     <h2 class="section-title">Take your gate even <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">further.</em></h2>
     <p class="section-sub">Enhance your gate system with these add-ons — installed and configured alongside your core setup.</p>
-    <div class="experience-grid" style="grid-template-columns:repeat(2,1fr);">
+    <div class="experience-grid addons-grid">
       <div class="exp-card" style="padding-top:0;">
         <img src="img/door_cam.png" alt="Gate Camera & Doorbell" style="width:calc(100% + 4rem);height:180px;object-fit:cover;border-radius:14px 14px 0 0;margin:0 -2rem 1.2rem -2rem;"/>
         <h3>Gate Camera &amp; Doorbell</h3>
@@ -538,7 +540,7 @@
   <section id="contact"><div class="section-inner">
     <div class="cta-box" style="max-width:700px;">
       <div class="section-tag">Get Started</div>
-      <h2 class="section-title" style="white-space:nowrap;">Tell us about your <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">property.</em></h2>
+      <h2 class="section-title">Tell us about your <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">property.</em></h2>
       <p class="section-sub" style="margin:0 auto;max-width:600px;">Tell us about your property and we'll get back to you with a custom quote.</p>
       <form class="contact-form" action="https://formspree.io/f/xaqabrdo" method="POST">
         <input type="hidden" name="_next" value="https://craisondigital.com/thank-you.php"/><input type="hidden" name="_subject" value="New inquiry — Smart Gate Access"/>

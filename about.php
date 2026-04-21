@@ -203,7 +203,7 @@
         <div class="section-tag" style="color:var(--white);margin-bottom:0.5rem;">How This Started</div>
         <div class="section-tag" style="margin-bottom:2rem;">A note from Craig, our owner</div>
         <div class="prose">
-          <p>Long before smart home technology became a mainstream conversation, I was already deep in it — and already frustrated by the same problems that still exist today.</p>
+          <p>I got into this long before anyone called it a smart home. And the things that bothered me back then are still the same things bothering people today.</p>
         </div>
 
         <div class="prose">

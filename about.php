@@ -62,6 +62,9 @@
     .hero-inner h1 { font-family: var(--font-display); font-size: clamp(2.2rem, 5.2vw, 4rem); font-weight: 800; line-height: 1.06; letter-spacing: -0.025em; color: var(--white); margin-bottom: 1.4rem; animation: fadeUp 0.6s 0.1s ease both; }
     .hero-inner h1 em { font-style: normal; background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .hero-sub { font-size: 1.1rem; color: var(--muted); line-height: 1.7; max-width: 660px; margin: 0 auto; animation: fadeUp 0.6s 0.2s ease both; }
+    .hero-principles { list-style: none; margin: 1rem auto 0; max-width: 660px; display: flex; flex-direction: column; gap: 0.55rem; animation: fadeUp 0.6s 0.2s ease both; }
+    .hero-principles li { font-size: 1.1rem; color: var(--white); font-weight: 500; display: flex; align-items: center; gap: 0.6rem; justify-content: center; }
+    .hp-check { color: var(--green); font-weight: 700; font-size: 1rem; }
     @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
 
     /* ── SHARED SECTION ── */
@@ -192,7 +195,13 @@
     <div class="hero-inner">
       
       <h1>Built Different.<br><em>On Purpose.</em></h1>
-<p class="hero-sub">Your property should work locally, respect your privacy, and belong to you completely. That's not a feature list. It's the foundation we build everything on.</p>
+<p class="hero-sub">Your property should:</p>
+<ul class="hero-principles">
+  <li><span class="hp-check">✓</span> Work locally</li>
+  <li><span class="hp-check">✓</span> Respect your privacy</li>
+  <li><span class="hp-check">✓</span> Belong to you completely</li>
+</ul>
+<p class="hero-sub" style="margin-top:1.2rem;">That's not a feature list. It's the foundation we build everything on.</p>
     </div>
   </section>
 

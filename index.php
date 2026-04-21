@@ -89,7 +89,7 @@
     .app-graveyard { position: relative; z-index: 1; }
     .app-graveyard-inner { max-width: 1100px; margin: 0 auto; padding: 2rem 4rem 6rem; text-align: center; }
     .graveyard-sub { font-size: 1.2rem; color: var(--muted); max-width: 875px; margin: 0 auto; line-height: 1.75; }
-    .animation-stage{position:relative;width:100%;max-width:620px;height:360px;margin:0 auto 2.5rem;display:flex;align-items:center;justify-content:center}
+    .animation-stage{position:relative;width:100%;max-width:620px;height:360px;margin:0 auto 2.5rem;display:flex;align-items:center;justify-content:center;overflow:hidden}
     .app-icon{position:absolute;width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;border:1px solid rgba(255,255,255,0.05);background:rgba(15,23,36,0.75);box-shadow:0 4px 20px rgba(0,0,0,0.3);transition:all 1s ease;opacity:0;z-index:1}
     .app-icon .app-label{position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);font-size:0.48rem;color:rgba(107,122,141,0.6);white-space:nowrap;font-weight:500;letter-spacing:0.04em;transition:opacity 0.4s}
     .app-icon::after{content:'\2715';position:absolute;top:-6px;right:-6px;width:16px;height:16px;border-radius:50%;background:rgba(239,68,68,0.75);color:white;font-size:0.5rem;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 0 8px rgba(239,68,68,0.35);transition:all 0.6s ease;opacity:0}

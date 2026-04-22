@@ -231,6 +231,7 @@
       <hr class="article-divider">
 
       <h2>Reliability Isn't Optional</h2>
+      <p style="text-align:center;"><img src="img/before_after_light.png" alt="" style="max-width:90%;border-radius:12px;border:1px solid rgba(255,255,255,0.1);box-shadow:0 0 40px rgba(47,128,237,0.15);"></p>
       <p>A smart home that works 90% of the time is a problem.</p>
       <p>Because that 10% is when it matters.</p>
       <p>That's the morning you're running late and the gate won't open.<br>

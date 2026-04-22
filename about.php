@@ -210,7 +210,7 @@
     <div class="section-inner">
       <div class="prose-section">
         <div class="section-tag" style="color:var(--white);margin-bottom:0.5rem;">How This Started</div>
-        <div class="section-tag" style="margin-bottom:2rem;font-size:0.9rem;letter-spacing:0.08em;">A note from Craig, our owner</div>
+        <div class="section-tag" style="margin-bottom:2rem;font-size:0.9rem;letter-spacing:0.08em;">A note from Craig, owner</div>
         <div class="prose">
           <p>I got into this long before anyone was calling it a "smart home."<br>
           And honestly, the same things that bothered me back then are still what people deal with today.</p>

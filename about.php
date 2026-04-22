@@ -210,11 +210,11 @@
     <div class="section-inner">
       <div class="prose-section">
         <div class="section-tag" style="color:var(--white);margin-bottom:0.5rem;">How This Started</div>
-        <div class="section-tag" style="margin-bottom:2rem;">A note from Craig, our owner</div>
+        <div class="section-tag" style="margin-bottom:2rem;font-size:0.9rem;letter-spacing:0.08em;">A note from Craig, our owner</div>
         <div class="prose">
           <p>I got into this long before anyone was calling it a "smart home."<br>
           And honestly, the same things that bothered me back then are still what people deal with today.</p>
-          <p>Every manufacturer wants to be its own ecosystem.<br>
+          <p style="font-size:1.25rem;color:var(--white);line-height:1.8;">Every manufacturer wants to be its own ecosystem.<br>
           Every device has its own app.<br>
           Everything works fine on its own… until you try to tie it all together.</p>
           <p>You spend real money on a gate controller, lighting, pool automation—and none of it actually talks to each other.<br>

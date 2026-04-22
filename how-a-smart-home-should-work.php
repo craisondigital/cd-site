@@ -170,7 +170,7 @@
     <div class="hero-glow"></div>
     <div class="hero-inner">
 <h1>How a Smart Home<br><em>Should Work</em></h1>
-      <p class="hero-sub">Most smart home systems are built around features. Not around how people actually live.<br>Here's what keeps going wrong — and what it looks like when it's done right.</p>
+      <p class="hero-sub">Most smart home systems are built around features. Not around how people actually live.<br>Here's what keeps going wrong—and what it looks like when it's done right.</p>
     </div>
   </section>
 
@@ -179,59 +179,104 @@
 
       <hr class="article-divider">
       <p class="article-lede">You've spent <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">thousands on smart home equipment.</em></p>
+      <p>And somehow, your house is harder to use than it used to be.</p>
+
       <h2>Most Smart Homes Get This Wrong</h2>
-      <p>Walk into a home with a "smart" lighting system and try to use it like a normal person. Half the time, the switches don't work anymore. The app takes five seconds to respond. The voice assistant mishears you. And if you don't know which scene does what, you're just standing in a dim room hoping something happens.</p>
-      <p>That's not automation. That's inconvenience with extra steps.</p>
-      <p>The problem isn't the devices — it's the approach. Most smart home installations are built around features, not around how people actually live. The result is a system that impresses people for a week and frustrates them for years.</p>
-      <div class="pull-quote">Good automation starts with a different question: not what can we control, but what should we make effortless.</div>
+      <p>Walk into a home with a "smart" lighting system and try to use it like a normal person.</p>
+      <p>Half the time, the switches don't work anymore.<br>
+      The app takes five seconds to respond.<br>
+      The voice assistant mishears you.</p>
+      <p>And if you don't know which scene does what, you're just standing in a dim room hoping something happens.</p>
+      <p>That's not automation.</p>
+      <p>That's inconvenience with extra steps.</p>
+      <p>The problem isn't the devices—it's the approach.<br>
+      Systems get built around features instead of how people actually live.</p>
+      <p>They impress people for a week.<br>
+      Then frustrate them for years.</p>
+      <p>The right approach starts with a different question:<br>
+      not what can we control—but what should just happen.</p>
 
       <hr class="article-divider">
 
       <h2>A Smart Home Should Fit Your Life</h2>
       <p>Technology should adapt to you. Not the other way around.</p>
-      <p>If your lights were simple before, they should still be simple. The switch on the wall should still work exactly the way it always did. Automation should be an enhancement — something that makes things better — not a replacement for behavior that already worked fine.</p>
-      <p>Walk into a room — the light comes on. Leave — it goes off. Settle in for a movie and the lights adjust without you thinking about it. The system should know how you live. You shouldn't have to remember which button, which app, which scene.</p>
-      <p>The goal isn't to give you more control. It's to make control unnecessary.</p>
+      <p>If your lights were simple before, they should still be simple.<br>
+      The switch on the wall should still work exactly the way it always did.</p>
+      <p>Automation should make things better—not replace behavior that already worked.</p>
+      <p>Walk into a room, the light comes on.<br>
+      Leave, it goes off.</p>
+      <p>Sit down to watch a movie and the lights adjust without you thinking about it.</p>
+      <p>The system should know how you live.<br>
+      You shouldn't have to remember which button, which app, which scene.</p>
+      <p>The goal isn't to give you more control.</p>
+      <p>It's to make control unnecessary.</p>
 
       <hr class="article-divider">
 
       <h2>It Has to Work for Everyone</h2>
       <p>You are not the only person in your home.</p>
-      <p>A smart home that only works for the person who set it up isn't a smart home — it's a technical burden on everyone else. Your partner, your kids, the house sitter — none of them should need a tutorial.</p>
-      <p>That means the lights work when you flip the switch. The thermostat is readable. The gate opens when it's supposed to. Nothing requires an app nobody has installed.</p>
-      <div class="pull-quote">If someone has to call you to figure out how to turn on the porch light, something went wrong during the design phase.</div>
-      <p>A well-built system is transparent. People use it without knowing it's there.</p>
+      <p>A system that only works for the person who set it up isn't a smart home—it's a burden on everyone else.</p>
+      <p>Your partner. Your kids. Guests. The house sitter.<br>
+      Nobody should need a tutorial.</p>
+      <p>The lights should work when you flip the switch.<br>
+      The thermostat should make sense.<br>
+      The gate should open when it's supposed to.</p>
+      <p>Nothing should depend on an app nobody has.</p>
+      <p>If someone has to call you to turn on a porch light, something went wrong.</p>
+      <p>A well-built system is transparent.<br>
+      People use it without thinking about it.</p>
 
       <hr class="article-divider">
 
       <h2>Reliability Isn't Optional</h2>
       <p>A smart home that works 90% of the time is a problem.</p>
       <p>Because that 10% is when it matters.</p>
-      <p>That 10% is the morning you're running late and the gate won't open. It's your partner fumbling in the dark because the lights aren't responding. It's your house guest giving up on figuring out how anything works.</p>
-      <p>Reliability means the system behaves predictably, every time. It means that when something does fail, it fails gracefully — the switch still works, the door still opens manually, the lights don't just stay off. The automation layer should sit on top of normal behavior, not replace it.</p>
-      <div class="callout">
-        <div class="callout-label">The right way to think about it</div>
-        <p>A good system has no single points of failure. It degrades quietly rather than breaking loudly. If the automation goes down, the home still functions — just without the smart layer on top. That's the floor, not the ceiling.</p>
-      </div>
+      <p>That's the morning you're running late and the gate won't open.<br>
+      That's someone fumbling in the dark because the lights aren't responding.<br>
+      That's a guest giving up on trying to figure out how anything works.</p>
+      <p>Reliability means the system behaves predictably, every time.</p>
+      <p>And when something does fail, it fails gracefully.<br>
+      The switch still works.<br>
+      The door still opens.<br>
+      The lights don't just stay off.</p>
+      <p>Automation should sit on top of normal behavior—not replace it.</p>
+      <p>A good system has no single points of failure.<br>
+      If something goes down, the home still works—just without the smart layer.</p>
+      <p>That's the baseline.</p>
 
       <hr class="article-divider">
 
       <h2>The Best App Is No App</h2>
-      <p>There's a version of a smart home where you control everything from your phone. Lights, locks, temperature, blinds, music — all managed from a dashboard you carry everywhere.</p>
-      <p>That sounds good until you realize: you already have switches on the wall, a thermostat, and years of muscle memory for how your home works. Adding an app doesn't improve any of that. It just adds a step.</p>
-      <p>Apps have a place. Remote access matters. Being able to check whether the gate is closed when you're halfway to the airport — that's genuinely useful. But apps should be backup, not primary. The house should work without your phone. Walking in the front door shouldn't require you to open anything.</p>
+      <p>There's a version of a smart home where everything runs through your phone.</p>
+      <p>Lights, locks, temperature, music—all controlled from a dashboard you carry everywhere.</p>
+      <p>That sounds good—until you realize you already have switches on the wall.<br>
+      You already have a thermostat.<br>
+      You already know how your home works.</p>
+      <p>Adding an app doesn't improve that.<br>
+      It just adds a step.</p>
+      <p>Apps have their place.<br>
+      Remote access matters.</p>
+      <p>Being able to check your gate when you're halfway to the airport—that's useful.</p>
+      <p>But apps should be backup—not primary.</p>
+      <p>The house should work without your phone.<br>
+      Walking in the front door shouldn't require you to open anything.</p>
       <div class="pull-quote">The best smart home interaction is the one that doesn't happen.</div>
 
       <hr class="article-divider">
 
       <h2>Your Home Should Work Without the Internet</h2>
-      <p>If your internet goes down, your front door should still unlock. Your lights should still work. Your thermostat should still respond.</p>
-      <p>This sounds obvious. It isn't how most systems are built.</p>
-      <p>A surprising number of smart home products route every command through a cloud server — even when you're standing three feet from the device you're trying to control. Your light switch asks a server in another state for permission to turn on. When that server is slow, your light is slow. When that server is down, your light doesn't work at all.</p>
-      <div class="callout">
-        <div class="callout-label">How it should be built</div>
-        <p>A well-designed system runs locally. Your home's automation happens on your property, on hardware you control. The cloud is an extension — a way to access your home from a distance — not the foundation everything else depends on. Internet outages shouldn't be a home emergency.</p>
-      </div>
+      <p>If your internet goes down, your home should still function.</p>
+      <p>Lights. Doors. Thermostat. Gate.</p>
+      <p>It sounds obvious.</p>
+      <p>It's not how most systems are built.</p>
+      <p>A lot of products send every command through a cloud server—even when you're standing a few feet away.</p>
+      <p>Your light switch asks a server somewhere else for permission to turn on.<br>
+      When that server is slow, your light is slow.<br>
+      When it's down, your light doesn't work at all.</p>
+      <p>A well-designed system runs locally.</p>
+      <p>Your home's automation happens on your property, on hardware you control.<br>
+      The cloud is just an extension—not the foundation.</p>
+      <p>Internet outages shouldn't be a home emergency.</p>
 
       <hr class="article-divider">
 
@@ -243,47 +288,64 @@
           <div class="example-icon">🚪</div>
           <div class="example-text">
             <strong>Your gate opens when you pull up the driveway.</strong>
-            No button. No app. You just drive in. When a service worker arrives, they use their own code. You get a notification. The gate closes behind them. You didn't touch anything.
+            No button. No app. You just drive in. A service worker uses their own code. You get a notification. The gate closes behind them.
           </div>
         </div>
         <div class="example">
           <div class="example-icon">💡</div>
           <div class="example-text">
             <strong>Your lights come on when you walk in at night.</strong>
-            And turn off when you leave. During the day they stay off. The switches on the wall still work exactly as they always did. Nothing changed except it now also just handles itself.
+            They turn off when you leave. During the day, they stay off. The switches still work exactly the way they always did.
           </div>
         </div>
         <div class="example">
           <div class="example-icon">🏊</div>
           <div class="example-text">
             <strong>Your pool heats up before you get home on Friday.</strong>
-            You didn't schedule it — the system learned your patterns. When the temperature hits where you like it, it stops. You get in the spa. You didn't open an app once.
+            You didn't schedule it. It just happens. When it hits temperature, it stops.
           </div>
         </div>
         <div class="example">
           <div class="example-icon">⛲</div>
           <div class="example-text">
             <strong>Your fountain runs on a schedule and shuts off in high wind.</strong>
-            No water blowing across the dock, no mess. When the wind drops, it turns back on. You never think about it. It just works.
+            No water blowing everywhere. When conditions improve, it turns back on.
           </div>
         </div>
         <div class="example">
           <div class="example-icon">✈️</div>
           <div class="example-text">
             <strong>You leave for two weeks and the house runs normally.</strong>
-            Lights follow schedules. Cameras watch the perimeter. Doors stay locked. You can check in from your phone if you want. But you don't have to.
+            Lights, security, access—all handled. You can check in if you want. But you don't have to.
           </div>
         </div>
       </div>
 
-      <p>None of this is complicated. It just requires building the system the right way from the start.</p>
+      <p>None of this is complicated.</p>
+      <p>It just requires building the system the right way from the start.</p>
+
+      <hr class="article-divider">
+
+      <h2>How We Approach It</h2>
+      <p>Before we choose a single device, we start with how you live.</p>
+      <p>Who uses the home.<br>
+      What's working.<br>
+      What isn't.<br>
+      What you've already given up on.</p>
+      <p>Then we build around that—not around a product catalog.</p>
+      <p>We prioritize local control.<br>
+      We make sure the switches still work.<br>
+      We stay involved after the install—because homes change, and the system needs to keep up.</p>
+      <p>We're not here to sell you features.</p>
+      <p>We're here to build something that actually works.</p>
 
       <hr class="article-divider">
 
       <div class="article-cta">
-        <p>Before we choose a single device, we ask how you live. Who else uses this home. What's already working. What's breaking. What you've given up on. We build around your answers — not around a product catalogue.</p>
-        <p>We prioritize local control. We make sure the switches still work. We stay involved after the install — because homes change, and the system needs to keep up. We're not here to sell you features. We're here to build something that actually works.</p>
-        <p>If that sounds like what you've been looking for, let's talk about your property.</p>
+        <p><strong style="font-family:var(--font-display);font-size:1.1rem;color:var(--white);letter-spacing:-0.01em;">Ready to Start</strong></p>
+        <p>If this sounds like what you've been looking for, let's talk.</p>
+        <p>Tell me about your property.<br>
+        We'll figure out what makes sense.</p>
         <div class="cta-actions">
           <a href="#contact" class="btn-primary">Talk to Us About Your Property →</a>
           <a href="index.php" class="btn-secondary">See What We Automate</a>

@@ -249,7 +249,7 @@
 
       <hr class="article-divider">
 
-      <h2>The Best App Is No App</h2>
+      <h2>The Best App Is the One You Don't Need</h2>
       <p>There's a version of a smart home where everything runs through your phone.</p>
       <p>Lights, locks, temperature, music—all controlled from a dashboard you carry everywhere.</p>
       <p>That sounds good—until you realize you already have switches on the wall.<br>

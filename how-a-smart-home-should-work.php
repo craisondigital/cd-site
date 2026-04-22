@@ -65,7 +65,7 @@
 
     /* ── ARTICLE ── */
     .article-body { position: relative; z-index: 1; }
-    .article-inner { max-width: 1100px; margin: 0 auto; padding: 0 4rem 6rem; }
+    .article-inner { max-width: 700px; margin: 0 auto; padding: 0 2rem 6rem; }
 
     .article-inner h2 { font-family: var(--font-display); font-size: clamp(1.25rem, 2vw, 1.6rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.015em; color: var(--white); margin: 3.5rem 0 1.1rem; }
 

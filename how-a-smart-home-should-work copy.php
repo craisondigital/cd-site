@@ -170,7 +170,7 @@
     <div class="hero-glow"></div>
     <div class="hero-inner">
 <h1>How a Smart Home<br><em>Should Work</em></h1>
-      <p class="hero-sub">Most smart home systems are built around features. Not around how people actually live.<br>Here's what keeps going wrong — and what it looks like when it's done right.</p>
+      <p class="hero-sub">Most smart homes are built around features, not around how people live. Here's what the industry keeps getting wrong —<br>and what it looks like when you get it right.</p>
     </div>
   </section>
 
@@ -190,14 +190,14 @@
       <h2>A Smart Home Should Fit Your Life</h2>
       <p>Technology should adapt to you. Not the other way around.</p>
       <p>If your lights were simple before, they should still be simple. The switch on the wall should still work exactly the way it always did. Automation should be an enhancement — something that makes things better — not a replacement for behavior that already worked fine.</p>
-      <p>Walk into a room — the light comes on. Leave — it goes off. Settle in for a movie and the lights adjust without you thinking about it. The system should know how you live. You shouldn't have to remember which button, which app, which scene.</p>
+      <p>When you walk into a room, the light should come on. When you leave, it should go off. When you sit down to watch a movie, the lights should adjust without you thinking about it. These things should happen because the system has learned how you live — not because you remembered to tap the right button in the right app at the right time.</p>
       <p>The goal isn't to give you more control. It's to make control unnecessary.</p>
 
       <hr class="article-divider">
 
       <h2>It Has to Work for Everyone</h2>
       <p>You are not the only person in your home.</p>
-      <p>A smart home that only works for the person who set it up isn't a smart home — it's a technical burden on everyone else. Your partner, your kids, the house sitter — none of them should need a tutorial.</p>
+      <p>A smart home that only works for the person who set it up isn't a smart home — it's a technical burden on everyone else. Your partner, your kids, your guests, the house sitter: they all need to be able to use your home without a tutorial.</p>
       <p>That means the lights work when you flip the switch. The thermostat is readable. The gate opens when it's supposed to. Nothing requires an app nobody has installed.</p>
       <div class="pull-quote">If someone has to call you to figure out how to turn on the porch light, something went wrong during the design phase.</div>
       <p>A well-built system is transparent. People use it without knowing it's there.</p>
@@ -207,7 +207,7 @@
       <h2>Reliability Isn't Optional</h2>
       <p>A smart home that works 90% of the time is a problem.</p>
       <p>Because that 10% is when it matters.</p>
-      <p>That 10% is the morning you're running late and the gate won't open. It's your partner fumbling in the dark because the lights aren't responding. It's your house guest giving up on figuring out how anything works.</p>
+      <p>That other 10% — that's the morning you're late and the gate won't open. That's the night the lights don't respond and someone's fumbling in the dark. That's the house guest who can't figure out how to make anything work and stops trying.</p>
       <p>Reliability means the system behaves predictably, every time. It means that when something does fail, it fails gracefully — the switch still works, the door still opens manually, the lights don't just stay off. The automation layer should sit on top of normal behavior, not replace it.</p>
       <div class="callout">
         <div class="callout-label">The right way to think about it</div>
@@ -218,7 +218,7 @@
 
       <h2>The Best App Is No App</h2>
       <p>There's a version of a smart home where you control everything from your phone. Lights, locks, temperature, blinds, music — all managed from a dashboard you carry everywhere.</p>
-      <p>That sounds good until you realize: you already have switches on the wall, a thermostat, and years of muscle memory for how your home works. Adding an app doesn't improve any of that. It just adds a step.</p>
+      <p>That sounds good until you realize: you already have switches on the wall. You already have a thermostat. You already have muscle memory for how your home works. Adding an app doesn't make any of that better. It just adds a step.</p>
       <p>Apps have a place. Remote access matters. Being able to check whether the gate is closed when you're halfway to the airport — that's genuinely useful. But apps should be backup, not primary. The house should work without your phone. Walking in the front door shouldn't require you to open anything.</p>
       <div class="pull-quote">The best smart home interaction is the one that doesn't happen.</div>
 
@@ -236,7 +236,7 @@
       <hr class="article-divider">
 
       <h2>What This Looks Like in the Real World</h2>
-      <p>Here's what it actually looks like.</p>
+      <p>None of this is abstract. Here's what these principles look like when a system is built the right way.</p>
 
       <div class="examples">
         <div class="example">
@@ -282,8 +282,9 @@
 
       <div class="article-cta">
         <p>Before we choose a single device, we ask how you live. Who else uses this home. What's already working. What's breaking. What you've given up on. We build around your answers — not around a product catalogue.</p>
-        <p>We prioritize local control. We make sure the switches still work. We stay involved after the install — because homes change, and the system needs to keep up. We're not here to sell you features. We're here to build something that actually works.</p>
-        <p>If that sounds like what you've been looking for, let's talk about your property.</p>
+        <p>We prioritize local control. We make sure switches still work. We stay involved after the install, because a home is a living thing and systems need to evolve with it. We're not selling smart home features. We're building homes that work the way they should have all along.</p>
+        <p>If you're wondering what this would look like on your property, that's exactly what we help design.</p>
+        <p>If that sounds like what you've been looking for, we should talk.</p>
         <div class="cta-actions">
           <a href="#contact" class="btn-primary">Talk to Us About Your Property →</a>
           <a href="index.php" class="btn-secondary">See What We Automate</a>

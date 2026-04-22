@@ -212,17 +212,35 @@
         <div class="section-tag" style="color:var(--white);margin-bottom:0.5rem;">How This Started</div>
         <div class="section-tag" style="margin-bottom:2rem;">A note from Craig, our owner</div>
         <div class="prose">
-          <p>I got into this long before anyone called it a smart home. And the things that bothered me back then are still the same things bothering people today.</p>
+          <p>I got into this long before anyone was calling it a "smart home."<br>
+          And honestly, the same things that bothered me back then are still what people deal with today.</p>
+          <p>Every manufacturer wants to be its own ecosystem.<br>
+          Every device has its own app.<br>
+          Everything works fine on its own… until you try to tie it all together.</p>
+          <p>You spend real money on a gate controller, lighting, pool automation—and none of it actually talks to each other.<br>
+          Your internet goes down, and suddenly half your property doesn't work.<br>
+          If the company behind it changes direction or disappears, you're stuck starting over.</p>
+          <p>And underneath all of it, there's a bigger issue most people don't realize at first:</p>
+          <p>A lot of these systems are built in a way that keeps you dependent.</p>
+          <p>Monthly fees. Locked hardware. Apps that only work with one brand.</p>
+          <p>You might own the equipment—<br>
+          but you don't really own how it works.</p>
         </div>
 
         <div class="prose">
-          <p>Every manufacturer wants to be their own ecosystem. Every device needs its own app. Every system works great in isolation and falls apart the moment you try to connect it to anything else. You invest real money in a gate controller, a lighting system, a pool automation setup — and none of them talk to each other. If your internet goes down, half of it stops working. If the company behind the software changes direction or shuts down, you're starting over.</p>
-          <p>And underneath all of it, a more uncomfortable truth: most of these systems are designed to keep you dependent. Monthly fees, locked hardware, proprietary apps that only work with their brand. The homeowner owns the devices, but the company controls the experience.</p>
+          <div class="pull-quote">The vision was never complicated.
+          I just wanted a system that runs locally, that you actually own, and that doesn't rely on a dozen apps—or the internet—just to open your gate or turn on your lights.</div>
 
-          <div class="pull-quote">The vision wasn't complicated. A system that worked locally. That you actually owned. That didn't require a dozen apps or a cloud server staying online just to open your gate.</div>
-
-          <p>The problem back then wasn't the idea — it was that the tools weren't ready to deliver it properly. Not at the level a real property deserved. Not in a way that was maintainable, reliable, and genuinely easy to use for everyone in the household.</p>
-          <p>That's changed. The platform and the tooling have caught up to the vision. CraisonDigital exists to put that to work — for properties here in Sarasota that deserve better than what most of the industry has been offering.</p>
+          <p>The problem back then wasn't the idea—it was the tools.<br>
+          They just weren't there yet.<br>
+          <br>
+          Not at the level a real property needs.<br>
+          Not in a way that was reliable, easy to maintain, or simple enough for everyone in the house to actually use.<br>
+          <br>
+          That's changed.<br>
+          <br>
+          The technology has finally caught up.<br>
+          CraisonDigital exists to take that and apply it to real properties here in Sarasota—done the right way.</p>
         </div>
       </div>
     </div>
@@ -235,9 +253,12 @@
         <div class="section-tag">The Open Home</div>
         <h2 class="section-title">Why we build around Home Assistant.</h2>
         <div class="prose">
-          <p>Home Assistant is the platform I build on, and I want to be direct about why — because it isn't just a technical choice. It's an alignment of values.</p>
-          <p>Home Assistant is built around what its community calls the <strong>Open Home philosophy</strong>: the belief that a smart home should respect your privacy, give you real control, work across brands, and keep working without depending on any company's continued existence or goodwill. It's the platform that finally made it possible to build the kind of system I'd been trying to build for fifteen years.</p>
-          <p>For a homeowner, what that actually means in practice:</p>
+          <p>Home Assistant is the platform I build on, and I want to be clear about why—because it's not just a technical decision.</p>
+          <p>It's how I believe this stuff should work.</p>
+          <p>Home Assistant is built around something they call the <strong>Open Home philosophy</strong>.<br>
+          At a high level, it just means your system respects your privacy, gives you real control, works across different brands, and keeps working without depending on some company staying in business.</p>
+          <p>It's the first platform that actually made it possible to build the kind of system I'd been trying to build for the last fifteen years.</p>
+          <p>For a homeowner, what that really means:</p>
         </div>
 
         <div class="oh-principles">
@@ -245,42 +266,46 @@
             <span class="oh-check">✓</span>
             <div class="oh-principle-text">
               <strong>Your system runs locally</strong>
-              <span>Automations, access control, and device logic live on hardware at your property — not on a server somewhere. Your internet goes out, your property still works.</span>
+              <span>Automations, access control, and device logic run on hardware at your property—not on some server somewhere. If your internet goes out, everything still works.</span>
             </div>
           </div>
           <div class="oh-principle">
             <span class="oh-check">✓</span>
             <div class="oh-principle-text">
               <strong>Your data stays yours</strong>
-              <span>No cloud company is logging when your gate opens, who's on camera, or when you're home. What happens on your property stays on your property.</span>
+              <span>No cloud company tracking when your gate opens, who's on camera, or when you're home. What happens on your property stays there.</span>
             </div>
           </div>
           <div class="oh-principle">
             <span class="oh-check">✓</span>
             <div class="oh-principle-text">
               <strong>No unnecessary subscriptions</strong>
-              <span>You're not paying a monthly fee to keep your own gate working. The system I build for you belongs to you — not to a service contract.</span>
+              <span>You're not paying a monthly fee just to keep your own gate working. The system belongs to you—not a service contract.</span>
             </div>
           </div>
           <div class="oh-principle">
             <span class="oh-check">✓</span>
             <div class="oh-principle-text">
               <strong>Works across brands</strong>
-              <span>Your pool automation doesn't need to be the same brand as your cameras. Your lighting doesn't care who made your gate controller. The whole property connects regardless.</span>
+              <span>Your pool, cameras, lighting, and gate don't all have to match. Everything ties together, regardless of who made it.</span>
             </div>
           </div>
           <div class="oh-principle">
             <span class="oh-check">✓</span>
             <div class="oh-principle-text">
               <strong>Built to last</strong>
-              <span>Open platforms don't get discontinued. If I'm unavailable for any reason, your system keeps running exactly as I left it — and another qualified integrator can pick it up.</span>
+              <span>This isn't tied to one company staying in business. If I'm ever out of the picture, your system keeps running—and someone else can step in without starting over.</span>
             </div>
           </div>
         </div>
 
         <div class="ha-callout">
-          <div class="ha-callout-label">Worth saying clearly</div>
-          <p>I'm not affiliated with Home Assistant or its parent company Nabu Casa. I just genuinely believe it's the right foundation for this kind of work — and I've believed something like it since long before it existed in its current form. When a platform finally arrives that matches what you've been trying to build for fifteen years, you use it.</p>
+          <div class="ha-callout-label">Just to be clear</div>
+          <p>I'm not affiliated with Home Assistant or Nabu Casa.<br>
+          I just believe it's the right foundation for this kind of work.<br>
+          <br>
+          I've been trying to build something like this for fifteen years.<br>
+          When a platform finally shows up that does it right—you use it.</p>
         </div>
       </div>
     </div>
@@ -291,16 +316,22 @@
     <div class="section-inner">
       <div class="prose-section">
         <div class="section-tag">Rooted Here</div>
-        <h2 class="section-title">I've lived in Sarasota my whole life.<br>This is my home.</h2>
+        <h2 class="section-title">I've lived in Sarasota my whole life.<br>This is home.</h2>
         <div class="prose">
-          <p>That matters for a reason that has nothing to do with geography.</p>
-          <p>When someone trusts me with their property — their gate access, their security cameras, the systems that run their outbuildings — they're not just hiring a vendor. They're letting someone into how their home actually operates. That requires a different kind of accountability than you get from a national installer or a remote service team.</p>
-          <p>I'm not a franchise. I'm not a satellite office someone set up to cover the market. I don't close a ticket and move on to the next city. The people I work with here are neighbors. I'll know their property the way a good contractor knows a building — because I designed it, I built it, and I'm still twenty minutes away when something needs attention years later.</p>
+          <p>And that matters—for reasons that have nothing to do with geography.</p>
+          <p>When someone trusts me with their property—their gate access, their cameras, the systems running their outbuildings—they're not just hiring someone to install equipment. They're trusting someone with how their property actually works.</p>
+          <p>That requires a different level of accountability than you get from a national installer or a remote service team.</p>
+          <p>I'm not a franchise. I'm not a satellite office covering a territory.<br>
+          The people I work with here are neighbors.</p>
+          <p>I'll know your property the way a good contractor knows a building—because I designed it, I built it, and I'm still nearby when something needs attention years later.</p>
 
-          <div class="pull-quote">I'm not interested in one-time installs. I'm interested in knowing your property well and being the person you call when something needs to change.</div>
+          <div class="pull-quote">I'm not interested in one-time installs.<br>
+          I'm interested in knowing your property and being the person you call when something needs to change.</div>
 
-          <p>That's the kind of relationship worth building. It's also the only kind that makes sense for this type of work — where the system I leave behind needs to hold up, grow with you, and be supported by someone who actually knows what they built.</p>
-          <p>CraisonDigital is built around serving this community well, for the long term. That's not a positioning statement. It's just the only way I know how to do this kind of work right.</p>
+          <p>That's the kind of relationship this work requires.<br>
+          The system needs to hold up, grow with you, and be supported by someone who actually knows what they built.</p>
+          <p>That's what CraisonDigital is built around.<br>
+          Doing this the right way, for the long term.</p>
         </div>
       </div>
     </div>
@@ -312,9 +343,11 @@
       <span class="section-tag">Ready to Start</span>
       <h2 class="section-title">If this sounds like the right fit,<br>let's talk.</h2>
       <div class="closing-prose">
-        <p>I'm not the right choice for every project. If you're looking for the lowest quote or the fastest turnaround, there are easier options out there.</p>
-        <p>But if you want a system built on technology you actually own, designed by someone who has been thinking about this for fifteen years, and supported by someone who is still going to be here — that's what CraisonDigital is.</p>
-        <p>Tell me about your property. We'll figure out what makes sense together.</p>
+        <p>I'm not the right choice for every project.<br>
+        If you're looking for the lowest quote or the fastest turnaround, there are easier options out there.</p>
+        <p>But if you want a system you actually own—designed the right way, and supported by someone who's still going to be here—that's what I do.</p>
+        <p>Tell me about your property.<br>
+        We'll figure out what makes sense.</p>
       </div>
       <div class="closing-actions">
         <a href="#contact" class="btn-primary">Schedule a Conversation</a>

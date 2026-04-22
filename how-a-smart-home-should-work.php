@@ -200,6 +200,7 @@
       <hr class="article-divider">
 
       <h2>A Smart Home Should Fit Your Life</h2>
+      <p style="text-align:center;"><img src="img/happy_user.png" alt="" style="max-width:90%;border-radius:12px;border:1px solid rgba(255,255,255,0.1);box-shadow:0 0 40px rgba(47,128,237,0.15);"></p>
       <p>Technology should adapt to you. Not the other way around.</p>
       <p>If your lights were simple before, they should still be simple.<br>
       The switch on the wall should still work exactly the way it always did.</p>

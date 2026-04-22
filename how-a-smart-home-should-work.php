@@ -255,15 +255,20 @@
       <p>That sounds good—until you realize you already have switches on the wall.<br>
       You already have a thermostat.<br>
       You already know how your home works.</p>
-      <p>Adding an app doesn't improve that.<br>
+      <p>Adding an app doesn't replace that.<br>
       It just adds a step.</p>
       <p>Apps have their place.<br>
       Remote access matters.</p>
       <p>Being able to check your gate when you're halfway to the airport—that's useful.</p>
       <p>But apps should be backup—not primary.</p>
-      <p>The house should work without your phone.<br>
+      <p>Your house should work without your phone.<br>
       Walking in the front door shouldn't require you to open anything.</p>
-      <div class="pull-quote">The best smart home interaction is the one that doesn't happen.</div>
+      <p>You shouldn't need to remember which app controls what.</p>
+      <p>You'll still have a dashboard.<br>
+      Everything will still be there when you need it.</p>
+      <p>But the goal isn't to control your home from your phone.<br>
+      The goal is to not have to.</p>
+      <div class="pull-quote">The best smart home interaction<br>is the one that doesn't happen.</div>
 
       <hr class="article-divider">
 

@@ -54,7 +54,7 @@
     .hero-bg { position: absolute; inset: 0; background: linear-gradient(180deg, #040710 0%, #081525 60%, var(--black) 100%); }
     .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(47,128,237,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(47,128,237,0.04) 1px, transparent 1px); background-size: 56px 56px; mask-image: radial-gradient(ellipse 70% 80% at 50% 40%, black 10%, transparent 100%); -webkit-mask-image: radial-gradient(ellipse 70% 80% at 50% 40%, black 10%, transparent 100%); }
     .hero-glow { position: absolute; top: 10%; left: 50%; transform: translateX(-50%); width: 600px; height: 300px; background: radial-gradient(ellipse, rgba(47,128,237,0.08) 0%, transparent 70%); pointer-events: none; }
-    .hero-inner { position: relative; z-index: 2; max-width: 680px; margin: 0 auto; }
+    .hero-inner { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; }
     .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(47,128,237,0.08); border: 1px solid rgba(47,128,237,0.2); color: var(--blue-bright); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.3rem 0.85rem; border-radius: 100px; margin-bottom: 1.4rem; animation: fadeUp 0.6s ease both; }
     .hero-eyebrow::before { content: ''; width: 5px; height: 5px; background: var(--cyan); border-radius: 50%; box-shadow: 0 0 8px var(--cyan); animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }

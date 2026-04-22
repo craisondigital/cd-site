@@ -144,8 +144,8 @@
       .mobile-menu .nav-cta { display: inline-block; margin-top: 0.4rem; padding: 0.6rem 1.8rem; font-size: 1rem; }
     }
     @media (max-width: 768px) {
-      .hero { padding: 120px 1.5rem 0; }
-      .article-inner { padding: 3.5rem 1.5rem 4rem; }
+      .hero { padding: 90px 1.5rem 0; }
+      .article-inner { padding: 2rem 1.5rem 4rem; }
       .pull-quote { font-size: 1.1rem; }
       .article-cta { padding: 1.8rem; }
       .cta-actions { flex-direction: column; }

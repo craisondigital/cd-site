@@ -179,7 +179,7 @@
 
       <hr class="article-divider">
       <p class="article-lede">You've spent <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">thousands on smart home equipment.</em></p>
-      <p>And somehow, your house is harder to use than it used to be.</p>
+      <p class="article-lede" style="color:var(--white);">And somehow, your house is harder to use than it used to be.</p>
 
       <h2>Most Smart Homes Get This Wrong</h2>
       <p>Walk into a home with a "smart" lighting system and try to use it like a normal person.</p>

@@ -201,7 +201,7 @@
   <li><span class="hp-check">✓</span> Respect your privacy</li>
   <li><span class="hp-check">✓</span> Belong to you completely</li>
 </ul>
-<p class="hero-sub" style="margin-top:1.2rem;">That's not a feature list. It's the foundation we build everything on.</p>
+<p class="hero-sub" style="margin-top:1.2rem;">This is the foundation I build everything on.</p>
     </div>
   </section>
 
@@ -237,7 +237,7 @@
     <div class="section-inner">
       <div class="prose-section">
         <div class="section-tag">The Open Home</div>
-        <h2 class="section-title">Why we build around Home Assistant.</h2>
+        <h2 class="section-title">Why I build around Home Assistant.</h2>
         <div class="prose">
           <p>The platform I build on is Home Assistant. The reason is simple: it's built around how I think these systems should actually work.</p>
           <p>They call it the <strong>Open Home philosophy</strong>. Your system respects your privacy, gives you real control, works across brands, and keeps running without depending on any single company staying in business.</p>
@@ -342,7 +342,7 @@
       <div class="contact-layout">
         <div class="section-tag">Get in Touch</div>
         <h2 class="section-title">Let's talk about your property.</h2>
-        <p class="section-sub">Tell us what you're working with and what you'd like it to do. We'll take it from there.</p>
+        <p class="section-sub">Tell me what you're working with and what you'd like it to do. I'll take it from there.</p>
         <form class="contact-form" action="https://formspree.io/f/xaqabrdo" method="POST">
           <input type="hidden" name="_next" value="https://craisondigital.com/thank-you.php"/><input type="hidden" name="_subject" value="New inquiry — About Page"/>
           <div class="form-row">
@@ -371,12 +371,12 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="message">Tell us about your property</label>
+            <label for="message">Tell me about your property</label>
             <textarea id="message" name="message" placeholder="Describe your property, what systems you currently have, and what you'd like to improve..."></textarea>
           </div>
           <div class="form-submit-row">
             <button type="submit" class="btn-primary">Send Message</button>
-            <span class="form-note">We typically respond within one business day.</span>
+            <span class="form-note">I typically respond within one business day.</span>
           </div>
         </form>
       </div>

@@ -217,7 +217,7 @@
           <p style="font-size:1.05rem;color:var(--white);line-height:1.8;">Every manufacturer wants to be its own ecosystem.<br>
           Every device has its own app.<br>
           Everything works fine on its own… until you try to tie it all together.</p>
-          <p>You drop real money on a gate controller, pool automation, lighting—and none of it knows the other exists. One cloud goes down or one company pivots and you're stuck. Meanwhile you're paying monthly fees just to keep things running the way they should have worked out of the box.</p>
+          <p>You drop real money on a gate controller, pool automation, lighting. None of it knows the other exists. One cloud goes down or one company pivots and you're stuck. Meanwhile you're paying monthly fees just to keep things running the way they should have worked out of the box.</p>
           <p>The hardware is yours. How it works? Not really.</p>
         </div>
 

@@ -213,34 +213,24 @@
         <div class="section-tag" style="margin-bottom:2rem;font-size:0.9rem;letter-spacing:0.08em;">A note from Craig, owner</div>
         <div class="prose">
           <p>I got into this long before anyone was calling it a "smart home."<br>
-          And honestly, the same things that bothered me back then are still what people deal with today.</p>
+          And the same things that bothered me back then are still what people are dealing with today.</p>
           <p style="font-size:1.05rem;color:var(--white);line-height:1.8;">Every manufacturer wants to be its own ecosystem.<br>
           Every device has its own app.<br>
           Everything works fine on its own… until you try to tie it all together.</p>
           <p>You spend real money on a gate controller, lighting, pool automation—and none of it actually talks to each other.<br>
           Your internet goes down, and suddenly half your property doesn't work.<br>
           If the company behind it changes direction or disappears, you're stuck starting over.</p>
-          <p>And underneath all of it, there's a bigger issue most people don't realize at first:</p>
-          <p>A lot of these systems are built in a way that keeps you dependent.</p>
-          <p>Monthly fees. Locked hardware. Apps that only work with one brand.</p>
+          <p>And don't forget the monthly fees, locked hardware, and apps that only work with one brand.</p>
           <p>You might own the equipment—<br>
           but you don't really own how it works.</p>
         </div>
 
         <div class="prose">
-          <div class="pull-quote">The vision was never complicated.
+          <div class="pull-quote">
           I just wanted a system that runs locally, that you actually own, and that doesn't rely on a dozen apps—or the internet—just to open your gate or turn on your lights.</div>
-
-          <p>The problem back then wasn't the idea—it was the tools.<br>
-          They just weren't there yet.<br>
-          <br>
-          Not at the level a real property needs.<br>
-          Not in a way that was reliable, easy to maintain, or simple enough for everyone in the house to actually use.<br>
-          <br>
-          That's changed.<br>
-          <br>
-          The technology has finally caught up.<br>
-          CraisonDigital exists to take that and apply it to real properties here in Sarasota—done the right way.</p>
+          
+          <p>The technology has finally caught up.<p>
+          <br>CraisonDigital exists to take this vision and apply it to real properties here in Sarasota.</br>
         </div>
       </div>
     </div>
@@ -253,10 +243,10 @@
         <div class="section-tag">The Open Home</div>
         <h2 class="section-title">Why we build around Home Assistant.</h2>
         <div class="prose">
-          <p>Home Assistant is the platform I build on, and I want to be clear about why—because it's not just a technical decision.</p>
-          <p>It's how I believe this stuff should work.</p>
+          <p>Home Assistant is the platform I build on, and I want to be clear about why.</p>
+          <p>It's how I believe this stuff should work!</p>
           <p>Home Assistant is built around something they call the <strong>Open Home philosophy</strong>.<br>
-          At a high level, it just means your system respects your privacy, gives you real control, works across different brands, and keeps working without depending on some company staying in business.</p>
+          This means your system respects your privacy, gives you real control, works across different brands, and keeps working without depending on some company staying in business.</p>
           <p>It's the first platform that actually made it possible to build the kind of system I'd been trying to build for the last fifteen years.</p>
           <p>For a homeowner, what that really means:</p>
         </div>
@@ -280,7 +270,7 @@
             <span class="oh-check">✓</span>
             <div class="oh-principle-text">
               <strong>No unnecessary subscriptions</strong>
-              <span>You're not paying a monthly fee just to keep your own gate working. The system belongs to you—not a service contract.</span>
+              <span>You're not paying a monthly fee just to keep your own gate working. The system belongs to you, not a service contract.</span>
             </div>
           </div>
           <div class="oh-principle">
@@ -305,7 +295,7 @@
           I just believe it's the right foundation for this kind of work.<br>
           <br>
           I've been trying to build something like this for fifteen years.<br>
-          When a platform finally shows up that does it right—you use it.</p>
+          When a platform finally shows up that does it right, you use it.</p>
         </div>
       </div>
     </div>
@@ -318,8 +308,7 @@
         <div class="section-tag">Rooted Here</div>
         <h2 class="section-title">I've lived in Sarasota my whole life.<br>This is home.</h2>
         <div class="prose">
-          <p>And that matters—for reasons that have nothing to do with geography.</p>
-          <p>When someone trusts me with their property—their gate access, their cameras, the systems running their outbuildings—they're not just hiring someone to install equipment. They're trusting someone with how their property actually works.</p>
+          <p>When someone trusts me with their property, their gate access, their cameras, the systems running their outbuildings, they're not just hiring someone to install equipment. They're trusting someone with how their property actually works.</p>
           <p>That requires a different level of accountability than you get from a national installer or a remote service team.</p>
           <p>I'm not a franchise. I'm not a satellite office covering a territory.<br>
           The people I work with here are neighbors.</p>
@@ -345,7 +334,7 @@
       <div class="closing-prose">
         <p>I'm not the right choice for every project.<br>
         If you're looking for the lowest quote or the fastest turnaround, there are easier options out there.</p>
-        <p>But if you want a system you actually own—designed the right way, and supported by someone who's still going to be here—that's what I do.</p>
+        <p>But if you want a system you actually own, designed the right way, and supported by someone who's still going to be here, that's what I do.</p>
         <p>Tell me about your property.<br>
         We'll figure out what makes sense.</p>
       </div>

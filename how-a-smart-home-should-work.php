@@ -170,7 +170,7 @@
     <div class="hero-glow"></div>
     <div class="hero-inner">
 <h1>How a Smart Home<br><em>Should Work</em></h1>
-      <p class="hero-sub">Most smart home systems are built around features. Not around how people actually live.<br>Here's what keeps going wrong—and what it looks like when it's done right.</p>
+      <p class="hero-sub">Most smart home systems are built around features, not around how people actually live.<br>Here's what keeps going wrong, and what it looks like when it's done right.</p>
     </div>
   </section>
 
@@ -183,31 +183,24 @@
       <p style="text-align:center;"><img src="img/frustrated_user.png" alt="" style="max-width:90%;border-radius:12px;border:1px solid rgba(255,255,255,0.1);box-shadow:0 0 40px rgba(47,128,237,0.15);"></p>
 
       <h2>Most Smart Homes Get This Wrong</h2>
-      <p>Walk into a home with a "smart" lighting system and try to use it like a normal person.</p>
-      <p>Half the time, the switches don't work anymore.<br>
-      The app takes five seconds to respond.<br>
-      The voice assistant mishears you.</p>
-      <p>And if you don't know which scene does what, you're just standing in a dim room hoping something happens.</p>
+      <p>Walk into a home with a "smart" lighting system and try to use it like a normal person. Half the time, the switches don't work anymore. You have to open an app that takes 5 seconds to respond and is hard to navigate.
+        You can't remember the right phrase to get the Voice Assistant to work. Your scrolling through pages on an App just to show a houseguest how to turn on a light.
+      </p>
       <p>That's not automation.</p>
-      <p>That's inconvenience with extra steps.</p>
-      <p>The problem isn't the devices—it's the approach.<br>
-      Systems get built around features instead of how people actually live.</p>
-      <p>They impress people for a week.<br>
-      Then frustrate them for years.</p>
-      <p>The right approach starts with a different question:<br>
-      not what can we control—but what should just happen.</p>
+      <p>That's inconvenience.</p>
+      <p>When Systems get built around features instead of how people actually live, they tend to impress for a week and frustrate for years.</p>
+      <p>We approach things differently.</p>
 
       <hr class="article-divider">
 
       <h2>A Smart Home Should Fit Your Life</h2>
       <p style="text-align:center;"><img src="img/happy_user.png" alt="" style="max-width:90%;border-radius:12px;border:1px solid rgba(255,255,255,0.1);box-shadow:0 0 40px rgba(47,128,237,0.15);"></p>
-      <p>Technology should adapt to you. Not the other way around.</p>
-      <p>If your lights were simple before, they should still be simple.<br>
-      The switch on the wall should still work exactly the way it always did.</p>
-      <p>Automation should make things better—not replace behavior that already worked.</p>
-      <p>Walk into a room, the light comes on.<br>
-      Leave, it goes off.</p>
-      <p>Sit down to watch a movie and the lights adjust without you thinking about it.</p>
+      <p>Technology should adapt to you, not the other way around.</p>
+      <p>The switch on the wall should still work exactly the way it always did.</p>
+      <p>Automation should make things better, not replace behavior that already worked.</p>
+      <p>Walk into a room, the light comes on.</p>
+      <p>Start a movie and the lights adjust.</p>
+      <p>When it's to windy your fountain and sprinklers turn off.</p>
       <p>The system should know how you live.<br>
       You shouldn't have to remember which button, which app, which scene.</p>
       <p>The goal isn't to give you more control.</p>
@@ -217,9 +210,9 @@
 
       <h2>It Has to Work for Everyone</h2>
       <p>You are not the only person in your home.</p>
-      <p>A system that only works for the person who set it up isn't a smart home—it's a burden on everyone else.</p>
-      <p>Your partner. Your kids. Guests. The house sitter.<br>
-      Nobody should need a tutorial.</p>
+      <p>A system that only works for the person who set it up isn't a smart home. It's a burden for everyone else.</p>
+      <p>Your partner, kids, guests, the house/pet sitter.<br>
+      You should not need to leave a tutorial to control your home features.</p>
       <p>The lights should work when you flip the switch.<br>
       The thermostat should make sense.<br>
       The gate should open when it's supposed to.</p>

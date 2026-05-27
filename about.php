@@ -225,8 +225,8 @@
           <div class="pull-quote">
           I just wanted a system that runs locally, that you actually own, and that doesn't rely on a dozen apps—or the internet—just to open your gate or turn on your lights.</div>
           
-          <p>The technology has finally caught up.<p>
-          <br>CraisonDigital exists to take this vision and apply it to real properties here in Sarasota.</br>
+          <p>The technology has finally caught up. What I was trying to build fifteen years ago is actually buildable now, and it works the way it always should have.</p>
+          <p>CraisonDigital is how I bring that to properties here in Sarasota.</p>
         </div>
       </div>
     </div>
@@ -239,11 +239,9 @@
         <div class="section-tag">The Open Home</div>
         <h2 class="section-title">Why we build around Home Assistant.</h2>
         <div class="prose">
-          <p>Home Assistant is the platform I build on, and I want to be clear about why.</p>
-          <p>It's how I believe this stuff should work!</p>
-          <p>Home Assistant is built around something they call the <strong>Open Home philosophy</strong>.<br>
-          This means your system respects your privacy, gives you real control, works across different brands, and keeps working without depending on some company staying in business.</p>
-          <p>It's the first platform that actually made it possible to build the kind of system I'd been trying to build for the last fifteen years.</p>
+          <p>The platform I build on is Home Assistant. The reason is simple: it's built around how I think these systems should actually work.</p>
+          <p>They call it the <strong>Open Home philosophy</strong>. Your system respects your privacy, gives you real control, works across brands, and keeps running without depending on any single company staying in business.</p>
+          <p>It's the first platform that let me build what I'd been trying to build for fifteen years.</p>
           <p>For a homeowner, what that really means:</p>
         </div>
 
@@ -287,11 +285,8 @@
 
         <div class="ha-callout">
           <div class="ha-callout-label">Just to be clear</div>
-          <p>I'm not affiliated with Home Assistant or Nabu Casa.<br>
-          I just believe it's the right foundation for this kind of work.<br>
-          <br>
-          I've been trying to build something like this for fifteen years.<br>
-          When a platform finally shows up that does it right, you use it.</p>
+          <p>I'm not affiliated with Home Assistant or Nabu Casa. No referral fees, no partnership.</p>
+          <p>I use it because it's the right foundation for this kind of work. When a platform finally shows up that does it right, you use it.</p>
         </div>
       </div>
     </div>

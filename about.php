@@ -217,12 +217,8 @@
           <p style="font-size:1.05rem;color:var(--white);line-height:1.8;">Every manufacturer wants to be its own ecosystem.<br>
           Every device has its own app.<br>
           Everything works fine on its own… until you try to tie it all together.</p>
-          <p>You spend real money on a gate controller, lighting, pool automation—and none of it actually talks to each other.<br>
-          Your internet goes down, and suddenly half your property doesn't work.<br>
-          If the company behind it changes direction or disappears, you're stuck starting over.</p>
-          <p>And don't forget the monthly fees, locked hardware, and apps that only work with one brand.</p>
-          <p>You might own the equipment—<br>
-          but you don't really own how it works.</p>
+          <p>You drop real money on a gate controller, pool automation, lighting—and none of it knows the other exists. One cloud goes down or one company pivots and you're stuck. Meanwhile you're paying monthly fees just to keep things running the way they should have worked out of the box.</p>
+          <p>The hardware is yours. How it works? Not really.</p>
         </div>
 
         <div class="prose">

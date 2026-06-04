@@ -193,7 +193,7 @@
     <div class="hero-headline-above">
       <h1>Your existing systems. <br><em>ALL WORKING TOGETHER!</em></h1>
       <p style="font-family:var(--font-display);font-size:clamp(1.1rem,2.4vw,1.6rem);font-weight:700;color:var(--text);letter-spacing:-0.01em;margin-top:0.8rem;animation:fadeUp 0.6s 0.15s ease both;">Every Acre. One App. <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Fully Intelligent</em></p>
-      <p style="font-size:0.95rem;color:var(--muted);margin-top:0.5rem;animation:fadeUp 0.6s 0.2s ease both;">LARGE ACRE ESTATE CONTROLS<br>We integrate gates, pools, security, lighting, and existing smart devices into one reliable system for large properties</p>
+      <p style="font-size:0.95rem;color:var(--muted);margin-top:0.5rem;animation:fadeUp 0.6s 0.2s ease both;">SARASOTA LARGE ACRE ESTATE CONTROLS<br>We integrate gates, pools, security, lighting, and existing smart devices into one reliable system for large properties in Sarasota Florida</p>
     </div>
     <div style="position:relative;z-index:2;width:100%;max-width:530px;margin:0 auto;padding:1.5rem 1rem;min-height:80px;display:flex;align-items:center;justify-content:center;">
       <div class="notif-toast" id="estateNotif" style="max-width:500px;width:100%;">
@@ -207,9 +207,9 @@
       </div>
     </div>
     <div class="hero-content">
-      <p class="hero-sub">We connect your existing devices — and fully integrate your property. If you've got a large property with a gate, pool, fountain, multiple buildings and a dozen apps that don't talk to each other, we connect everything you already own into one system that actually makes sense. No rip-and-replace. No cookie-cutter installs. Just your property, finally simple.</p>
-      <div class="hero-actions"><a href="#contact" class="btn-primary">Schedule a Property Assessment →</a></div><br>
-      Let's discuss what's working, what's not, and how your property can be simpler, more reliable, and easier to live with.
+      <p class="hero-sub">We connect your existing devices and fully integrate your property. If you have a large property with a gate, pool, fountain, multiple buildings and a dozen apps that don't talk to each other, we connect everything into one system that actually makes sense. No rip-and-replace. No cookie-cutter installs. Just your property, finally simple.</p>
+      <div class="hero-actions"><a href="#contact" class="btn-primary">Schedule a Property Assessment →</a></div>
+      <p style="font-size:0.88rem;color:var(--muted);margin-top:1.2rem;opacity:0.75;">Let's discuss what's frustrating you, what's already working, and how your property can be simplified without starting over.</p>
     </div>
   </section>
 

@@ -33,8 +33,8 @@
     .nav-links a:hover { color: var(--text); }
     .nav-links a.nav-active { color: var(--text); }
     .nav-divider { width: 1px; height: 14px; background: var(--border); }
-    .nav-cta { background: #D97706; color: var(--white) !important; padding: 0.5rem 1.4rem; border-radius: 6px; font-weight: 500 !important; border: 1px solid rgba(255,255,255,0.35); transition: background 0.2s, transform 0.15s; }
-    .nav-cta:hover { background: #B45309 !important; transform: translateY(-1px); }
+    .nav-cta { background: #A16207; color: var(--white) !important; padding: 0.5rem 1.4rem; border-radius: 6px; font-weight: 500 !important; border: 1px solid rgba(255,255,255,0.35); transition: background 0.2s, transform 0.15s; }
+    .nav-cta:hover { background: #854D0E !important; transform: translateY(-1px); }
     .nav-dropdown { position: relative; }
     .nav-dropdown > a { display: inline-flex; align-items: center; gap: 0.3rem; cursor: default; }
     .nav-dropdown > a svg { transition: transform 0.2s; }
@@ -77,8 +77,8 @@
     .hero-content .hero-sub { font-size: 1.25rem; color: var(--muted); max-width: 1000px; margin: 0 auto 2.2rem; animation: fadeUp 0.6s 0.2s ease both; line-height: 1.7; }
     .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
     @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
-    .btn-primary { background: #D97706; color: var(--white); padding: 0.85rem 2.2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 500; text-decoration: none; border: 1px solid rgba(255,255,255,0.35); cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.5rem; }
-    .btn-primary:hover { background: #B45309; transform: translateY(-2px); }
+    .btn-primary { background: #A16207; color: var(--white); padding: 0.85rem 2.2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 500; text-decoration: none; border: 1px solid rgba(255,255,255,0.35); cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-primary:hover { background: #854D0E; transform: translateY(-2px); }
     .btn-secondary { background: transparent; color: var(--text); padding: 0.85rem 2.2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 400; text-decoration: none; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; }
     .btn-secondary:hover { border-color: rgba(255,255,255,0.15); color: var(--white); }
     section { position: relative; z-index: 1; }

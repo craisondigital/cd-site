@@ -15,7 +15,7 @@
       --blue: #2f80ed; --blue-bright: #5ba4f5;
       --blue-glow: rgba(47,128,237,0.15); --cyan: #00d4ff;
       --green: #4ade80; --green-glow: rgba(74,222,128,0.15);
-      --text: #e4e9f2; --muted: #6b7a8d; --white: #f4f7fb;
+      --text: #e4e9f2; --muted: #E5E7EB; --white: #f4f7fb;
       --font-display: 'Syne', sans-serif;
       --font-body: 'DM Sans', sans-serif;
     }
@@ -35,8 +35,8 @@
     .nav-links a:hover { color: var(--text); }
     .nav-links a.nav-active { color: var(--text); }
     .nav-divider { width: 1px; height: 14px; background: var(--border); }
-    .nav-cta { background: var(--blue); color: var(--white) !important; padding: 0.5rem 1.4rem; border-radius: 6px; font-weight: 500 !important; transition: background 0.2s, transform 0.15s; }
-    .nav-cta:hover { background: var(--blue-bright) !important; transform: translateY(-1px); }
+    .nav-cta { background: #A16207; color: var(--white) !important; padding: 0.5rem 1.4rem; border-radius: 6px; font-weight: 500 !important; border: 2px solid rgba(255,255,255,0.6); transition: background 0.2s, transform 0.15s; }
+    .nav-cta:hover { background: #854D0E !important; transform: translateY(-1px); }
     .nav-dropdown { position: relative; }
     .nav-dropdown > a { display: inline-flex; align-items: center; gap: 0.3rem; cursor: default; }
     .nav-dropdown > a svg { transition: transform 0.2s; }
@@ -78,8 +78,8 @@
     .prose p:last-child { margin-bottom: 0; }
 
     /* ── BUTTONS ── */
-    .btn-primary { background: var(--blue); color: var(--white); padding: 0.8rem 2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 500; text-decoration: none; border: none; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 20px rgba(47,128,237,0.25); display: inline-flex; align-items: center; gap: 0.5rem; }
-    .btn-primary:hover { background: var(--blue-bright); transform: translateY(-1px); box-shadow: 0 0 32px rgba(47,128,237,0.4); }
+    .btn-primary { background: #A16207; color: var(--white); padding: 0.8rem 2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 500; text-decoration: none; border: 2px solid rgba(255,255,255,0.6); cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-primary:hover { background: #854D0E; transform: translateY(-2px); }
     .btn-secondary { background: transparent; color: var(--text); padding: 0.8rem 2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 400; text-decoration: none; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; }
     .btn-secondary:hover { border-color: rgba(255,255,255,0.15); color: var(--white); }
 

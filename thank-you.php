@@ -15,7 +15,7 @@
       --blue: #2f80ed; --blue-bright: #5ba4f5;
       --blue-glow: rgba(47,128,237,0.15); --cyan: #00d4ff;
       --green: #4ade80;
-      --text: #e4e9f2; --muted: #6b7a8d; --white: #f4f7fb;
+      --text: #e4e9f2; --muted: #E5E7EB; --white: #f4f7fb;
       --font-display: 'Syne', sans-serif;
       --font-body: 'DM Sans', sans-serif;
     }
@@ -38,8 +38,8 @@
     .ty-title { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; color: var(--white); margin-bottom: 1.2rem; animation: fadeUp 0.6s ease both; }
     .ty-sub { font-size: 1rem; color: var(--muted); line-height: 1.75; max-width: 440px; margin: 0 auto 2.5rem; animation: fadeUp 0.6s 0.1s ease both; }
     .ty-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.6s 0.2s ease both; }
-    .btn-primary { background: var(--blue); color: var(--white); padding: 0.8rem 2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 500; text-decoration: none; transition: all 0.2s; box-shadow: 0 0 20px rgba(47,128,237,0.25); display: inline-flex; align-items: center; gap: 0.5rem; }
-    .btn-primary:hover { background: var(--blue-bright); transform: translateY(-1px); box-shadow: 0 0 32px rgba(47,128,237,0.4); }
+    .btn-primary { background: #A16207; color: var(--white); padding: 0.8rem 2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 500; text-decoration: none; border: 2px solid rgba(255,255,255,0.6); transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-primary:hover { background: #854D0E; transform: translateY(-2px); }
     .btn-secondary { background: transparent; color: var(--text); padding: 0.8rem 2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 400; text-decoration: none; border: 1px solid var(--border); transition: all 0.2s; }
     .btn-secondary:hover { border-color: rgba(255,255,255,0.15); color: var(--white); }
     .ty-note { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--muted); }

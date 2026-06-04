@@ -208,7 +208,8 @@
     </div>
     <div class="hero-content">
       <p class="hero-sub">We connect your existing devices — and fully integrate your property. If you've got a large property with a gate, pool, fountain, multiple buildings and a dozen apps that don't talk to each other, we connect everything you already own into one system that actually makes sense. No rip-and-replace. No cookie-cutter installs. Just your property, finally simple.</p>
-      <div class="hero-actions"><a href="#contact" class="btn-primary">Schedule a Consultation →</a></div>
+      <div class="hero-actions"><a href="#contact" class="btn-primary">Schedule a Property Assessment →</a></div><br>
+      Let's discuss what's working, what's not, and how your property can be simpler, more reliable, and easier to live with.
     </div>
   </section>
 

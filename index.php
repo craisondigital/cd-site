@@ -15,7 +15,7 @@
       --blue: #2f80ed; --blue-bright: #5ba4f5;
       --blue-glow: rgba(47,128,237,0.15); --cyan: #00d4ff;
       --green: #4ade80; --green-glow: rgba(74,222,128,0.15);
-      --text: #e4e9f2; --muted: #6b7a8d; --white: #f4f7fb;
+      --text: #e4e9f2; --muted: #E5E7EB; --white: #f4f7fb;
       --font-display: 'Syne', sans-serif;
       --font-body: 'DM Sans', sans-serif;
     }

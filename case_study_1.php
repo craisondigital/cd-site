@@ -66,7 +66,7 @@
     .section-inner { max-width: 1100px; margin: 0 auto; padding: 2.5rem 4rem; }
     .section-tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue-bright); margin-bottom: 0.7rem; }
     .section-title { font-family: var(--font-display); font-size: clamp(1.7rem, 3.2vw, 2.6rem); font-weight: 800; line-height: 1.12; letter-spacing: -0.02em; margin-bottom: 1rem; color: var(--white); }
-    .section-sub { color: var(--muted); font-size: 1rem; max-width: 700px; line-height: 1.7; margin-bottom: 2.5rem; }
+    .section-sub { color: var(--muted); font-size: 1rem; max-width: 700px; line-height: 1.7; margin-bottom: 2.5rem; margin-left: auto; margin-right: auto; }
 
     .btn-primary { background: #A16207; color: var(--white); padding: 0.8rem 2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 500; text-decoration: none; border: 2px solid rgba(255,255,255,0.6); cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.5rem; }
     .btn-primary:hover { background: #854D0E; transform: translateY(-2px); }

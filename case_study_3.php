@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Case Study: Luxury Pool & Smart Home Modernization – Craison Digital</title>
-  <meta name="description" content="How Craison Digital transformed a $150,000 luxury pool renovation into a simple, reliable smart home experience in Sarasota's Beneva Oaks neighborhood."/>
+  <title>Case Study: Intelligent Gate Access & Security – Craison Digital</title>
+  <meta name="description" content="How Craison Digital transformed gate access at a Siesta Key waterfront property — automatic entry, centralized access management, and proactive security."/>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230d1320'/><text x='4' y='24' font-size='22' font-weight='bold' fill='%2300d4ff'>C</text></svg>"/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
   <style>
@@ -99,7 +99,6 @@
     .cs-result { padding: 1.2rem 1.5rem; background: rgba(0,212,255,0.06); border: 1px solid rgba(0,212,255,0.2); border-left: 3px solid var(--cyan); border-radius: 8px; margin-top: 3rem; }
     .cs-result-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); margin-bottom: 0.5rem; }
     .cs-result p { font-size: 1rem; color: var(--white); font-weight: 600; line-height: 1.7; margin: 0; }
-    @media (max-width: 768px) { .cs-before-after { grid-template-columns: 1fr; } }
 
     #contact { background: var(--dark); text-align: center; }
     .contact-inner { margin: 0 auto; }
@@ -150,11 +149,12 @@
       .footer-bottom { flex-direction: column; gap: 0.4rem; text-align: center; }
       .cs-meta { gap: 1.2rem; }
       .cs-placeholder { height: 220px; }
+      .cs-before-after { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <?php $activePage = 'case_study_2'; ?>
+  <?php $activePage = 'case_study_3'; ?>
 <?php include 'nav.php'; ?>
 
   <section class="hero">
@@ -163,46 +163,48 @@
     <div class="hero-glow"></div>
     <div class="hero-inner">
       <div class="hero-eyebrow">Case Study</div>
-      <h1>Making a Luxury Pool and Smart Home<br><em>Easier to Use</em></h1>
-      <p class="hero-sub">Luxury Pool & Smart Home Modernization</p>
-      <p style="font-size:0.88rem;color:var(--muted);margin-top:0.5rem;opacity:0.7;">Beneva Oaks &bull; Sarasota, Florida</p>
+      <h1>Simplifying Access to a<br><em>Gated Property</em></h1>
+      <p class="hero-sub">Intelligent Gate Access & Security</p>
+      <p style="font-size:0.88rem;color:var(--muted);margin-top:0.5rem;opacity:0.7;">Siesta Key, Florida</p>
     </div>
   </section>
 
   <section style="background:var(--black);"><div class="section-inner">
 
     <div class="cs-meta reveal">
-      <div class="cs-meta-item"><span class="cs-meta-label">Location</span><span class="cs-meta-value">Beneva Oaks, Sarasota FL</span></div>
-      <div class="cs-meta-item"><span class="cs-meta-label">Project Type</span><span class="cs-meta-value">Pool & Smart Home Modernization</span></div>
+      <div class="cs-meta-item"><span class="cs-meta-label">Location</span><span class="cs-meta-value">Siesta Key, FL</span></div>
+      <div class="cs-meta-item"><span class="cs-meta-label">Project Type</span><span class="cs-meta-value">Gate Access & Security</span></div>
     </div>
 
-    <p style="font-size:1.05rem;color:var(--muted);line-height:1.75;max-width:860px;margin-bottom:1.2rem;" class="reveal">Premium equipment, unreliable connectivity, and confusing controls were transformed into a simple, reliable experience for the homeowner, family, and guests.</p>
-    <img src="img/pool_home.png" alt="Luxury Pool Sarasota" class="cs-placeholder reveal" style="object-fit:cover;"/>
+    <p style="font-size:1.05rem;color:var(--muted);line-height:1.75;max-width:860px;margin-bottom:1.2rem;" class="reveal">Convenience, security, and visibility were transformed through a smarter approach to property access.</p>
+    <div class="cs-placeholder reveal">Photo Coming Soon</div>
 
     <div class="cs-block reveal">
       <p class="cs-block-label">The Property</p>
-      <p>This Sarasota home had recently completed a major pool renovation with premium automation equipment, app-based controls, and modern smart home features.</p>
-      <p style="margin-top:1.5rem;margin-bottom:1.5rem;font-family:var(--font-display);font-size:clamp(0.95rem,1.6vw,1.15rem);font-weight:800;color:var(--white);line-height:1.35;letter-spacing:-0.015em;border-left:3px solid var(--cyan);padding-left:1.2rem;">The equipment was shiny and new.<br>The experience was not.</p>
-      <p style="margin-top:1rem;">The pool controls were confusing, connectivity was unreliable, and many of the features the homeowner had paid for were rarely used because nobody felt confident operating them.</p>
+      <p>This waterfront property relied on an automated gate to control access for residents, family members, workers, vendors, guests, and delivery drivers.</p>
+      <p style="margin-top:1rem;">Like many gated properties, the gate itself worked.</p>
+      <p style="margin-top:1rem;">The challenge was everything that happened around it.</p>
+      <p style="margin-top:1.5rem;margin-bottom:1.5rem;font-family:var(--font-display);font-size:clamp(0.95rem,1.6vw,1.15rem);font-weight:800;color:var(--white);line-height:1.35;letter-spacing:-0.015em;border-left:3px solid var(--cyan);padding-left:1.2rem;">The gate was automated.<br>The experience was lacking.</p>
+      <p>Residents often needed remotes, apps, or access codes to enter the property. Vendors and service providers required special instructions. Delivery drivers had limited options. Shared access codes had accumulated over time, making it difficult to know who still had access and who did not.</p>
     </div>
 
     <div class="cs-block reveal">
       <p class="cs-block-label">The Challenge</p>
-      <p>The homeowner had invested heavily in creating an incredible backyard and pool environment, but the technology controlling it never lived up to expectations.</p>
-      <p style="margin-top:1rem;">The pool equipment was installed outside the home in an area with a weak WiFi signal. Because the system depended entirely on the manufacturer's cloud app, poor connectivity meant the controls were frequently unavailable, disconnected, or frustrating to access.</p>
-      <p style="margin-top:1rem;">Even when the system was online, the experience wasn't simple. Basic functions were buried inside confusing menus, advanced features went unused, and neither the homeowner nor the pool contractor could confidently explain how everything worked.</p>
-      <p style="margin-top:1rem;">The problems extended beyond the pool. The home had inconsistent WiFi coverage, no practical way to run new network wiring, and several smart devices operating independently. The property had plenty of technology.</p>
-      <p style="margin-top:1rem;">It simply wasn't working together in a way that made life easier.</p>
+      <p>Managing access had become inconvenient and difficult to control.</p>
+      <p style="margin-top:1rem;">Residents frequently had to search for remotes or open an app just to enter the property. Workers, vendors, guests, and delivery drivers all required different methods of access, creating unnecessary complexity for both visitors and the homeowner.</p>
+      <p style="margin-top:1rem;">Over time, access codes had been shared with numerous people. There was no simple way to determine who still had access, no meaningful activity history, and limited visibility into who was entering the property throughout the day.</p>
+      <p style="margin-top:1rem;">The property also lacked meaningful after-hours security awareness. If the gate remained open late at night or unexpected activity occurred, there was little to immediately draw attention to it.</p>
+      <p style="margin-top:1rem;">The homeowner didn't need a new gate.</p>
+      <p style="margin-top:0.5rem;">They needed a better way to manage access.</p>
     </div>
 
     <div class="cs-block reveal">
       <p class="cs-block-label">The Solution</p>
-      <p>Rather than replacing expensive equipment, Craison Digital focused on improving the experience.</p>
-      <p style="margin-top:1rem;">The first step was improving connectivity throughout the property. Existing coax infrastructure was utilized to expand reliable WiFi coverage throughout the home, while a dedicated point-to-point connection was established to the pool house. This allowed a stable wired connection to reach the pool equipment, eliminating the unreliable connection that had been causing so many frustrations.</p>
-      <p style="margin-top:1rem;">Once connectivity issues were resolved, the focus shifted to simplification.</p>
-      <p style="margin-top:1rem;">The pool equipment was integrated into a custom control experience designed around how the homeowner actually used the property. Lighting, irrigation, thermostats, and other smart devices were also brought together into one simple interface, eliminating the need to jump between multiple apps.</p>
-      <p style="margin-top:1rem;">Voice control was added for common tasks, making everyday interactions easier without opening an app.</p>
-      <p style="margin-top:1rem;">Most importantly, the system was designed so family members and guests could enjoy the property without downloading apps, creating accounts, or learning complicated controls.</p>
+      <p>Craison Digital focused on making property access easier for authorized users while improving visibility and control for the homeowner.</p>
+      <p style="margin-top:1rem;">Authorized vehicles were equipped with long-range identification tags, allowing the gate to open automatically as vehicles approached. Residents no longer needed remotes, apps, or access codes for everyday entry.</p>
+      <p style="margin-top:1rem;">At the same time, access management was simplified. New vehicles could be added in minutes, access codes could be created or removed as needed, and different access methods could be provided for guests, vendors, and delivery drivers.</p>
+      <p style="margin-top:1rem;">To improve visibility, all gate activity was logged, providing a complete history of property access and helping the homeowner understand who entered the property and when.</p>
+      <p style="margin-top:1rem;">Additional security automations were also introduced. After-hours gate activity could trigger alerts, activate floodlights, and initiate audible warnings when appropriate, creating a more proactive approach to property security.</p>
     </div>
 
     <div class="cs-block reveal">
@@ -211,26 +213,25 @@
         <div class="cs-ba-col">
           <div class="cs-ba-label">Before</div>
           <ul class="cs-ba-list">
-            <li>Weak WiFi coverage throughout the home</li>
-            <li>Pool equipment located in an area with poor connectivity</li>
-            <li>Cloud-based controls that frequently disconnected</li>
-            <li>Confusing manufacturer app</li>
-            <li>Premium features that were rarely used</li>
-            <li>Multiple smart devices operating independently</li>
-            <li>No simple way for guests to control the property</li>
-            <li>Technology that felt frustrating and unreliable</li>
+            <li>Residents relied on remotes, apps, or gate codes</li>
+            <li>Shared access codes with limited accountability</li>
+            <li>Difficult access management for workers and vendors</li>
+            <li>No simple solution for deliveries and guests</li>
+            <li>Limited visibility into gate activity</li>
+            <li>No proactive after-hours security response</li>
+            <li>Access control that felt inconvenient and outdated</li>
           </ul>
         </div>
         <div class="cs-ba-col after">
           <div class="cs-ba-label">After</div>
           <ul class="cs-ba-list">
-            <li>Reliable WiFi throughout the home and pool areas</li>
-            <li>Stable connectivity to the pool equipment</li>
-            <li>Simple controls designed around the homeowner</li>
-            <li>Siri voice control for everyday functions</li>
-            <li>Pool, lighting, irrigation, thermostats, and smart devices working together</li>
-            <li>Guest-friendly operation without additional apps or accounts</li>
-            <li>Technology that feels simple, reliable, and intuitive</li>
+            <li>Automatic gate access for authorized vehicles</li>
+            <li>Simple management of vehicles, codes, and permissions</li>
+            <li>Convenient access options for guests, vendors, and deliveries</li>
+            <li>Complete access logging and activity history</li>
+            <li>Real-time visibility into property access</li>
+            <li>Integrated security alerts and monitoring</li>
+            <li>Automated floodlight and security responses after hours</li>
           </ul>
         </div>
       </div>
@@ -238,10 +239,12 @@
 
     <div class="cs-result reveal">
       <div class="cs-result-label">The Result</div>
-      <p>The homeowner kept the equipment they had already invested in while gaining a dramatically better experience.</p>
-      <p style="margin-top:0.9rem;font-weight:400;">The pool became reliable. Features that were once ignored became easy to use. Family members and guests could enjoy the property without instructions, training, or app downloads.</p>
-      <p style="margin-top:0.9rem;font-weight:400;">Instead of managing technology, the homeowner could simply enjoy the property.</p>
-      <p style="margin-top:0.9rem;font-weight:700;">The equipment didn't change.<br>The experience did.</p>
+      <p>The gate became easier to use while becoming more secure.</p>
+      <p style="margin-top:0.9rem;font-weight:400;">Residents no longer think about entering the property. Guests, vendors, and delivery drivers have appropriate access without creating unnecessary friction. The homeowner can quickly add or remove access permissions while maintaining complete visibility into property activity.</p>
+      <p style="margin-top:0.9rem;font-weight:400;">Most importantly, the property gained something it never had before: true access control.</p>
+      <p style="margin-top:0.9rem;font-weight:400;">The gate still opens automatically.</p>
+      <p style="margin-top:0.5rem;font-weight:400;">Now the homeowner knows exactly who it opens for.</p>
+      <p style="margin-top:0.9rem;font-weight:700;">Better access. Better visibility. Better security.</p>
     </div>
 
   </div></section>
@@ -249,12 +252,12 @@
   <section id="contact"><div class="section-inner"><div class="contact-inner">
     <div class="section-tag">Get Started</div>
     <h2 class="section-title">Thinking About Simplifying Your Property?</h2>
-    <p class="section-sub">Many homeowners already own the technology they need. The problem is that it was never designed to work together in a way that feels simple.</p>
-    <p style="font-size:0.95rem;color:var(--muted);line-height:1.75;margin-bottom:2rem;">If your home has unreliable WiFi, confusing apps, disconnected systems, or expensive equipment that never quite lived up to expectations, Craison Digital can help create a simpler and more reliable experience using what you already own.</p>
+    <p class="section-sub">Many gated properties already have automation. What they often lack is convenience, visibility, and meaningful control.</p>
+    <p style="font-size:0.95rem;color:var(--muted);line-height:1.75;margin-bottom:2rem;">If you're tired of remotes, shared gate codes, limited access management, or wondering who still has access to your property, Craison Digital can help create a simpler and more secure experience.</p>
     <div style="margin-bottom:2.5rem;"><a href="#contact-form" class="btn-primary">Schedule a Property Assessment →</a></div>
     <form class="contact-form" id="contact-form" action="https://formspree.io/f/xaqabrdo" method="POST">
       <input type="hidden" name="_next" value="https://craisondigital.com/thank-you.php"/>
-      <input type="hidden" name="_subject" value="New inquiry — Case Study 2"/>
+      <input type="hidden" name="_subject" value="New inquiry — Case Study 3"/>
       <div class="form-row">
         <div class="form-group"><label>First Name</label><input type="text" name="first_name" placeholder="John"/></div>
         <div class="form-group"><label>Last Name</label><input type="text" name="last_name" placeholder="Smith"/></div>

@@ -203,7 +203,7 @@
     <div class="hero-headline-above">
       <h1>Every Acre. <em>One App.</em></h1>
       <p style="font-family:var(--font-display);font-size:clamp(1.1rem,2.4vw,1.6rem);font-weight:700;color:var(--text);letter-spacing:-0.01em;margin-top:0.8rem;animation:fadeUp 0.6s 0.15s ease both;">Your existing systems. All working together.</p>
-      <p style="font-size:0.95rem;color:var(--muted);margin-top:0.5rem;animation:fadeUp 0.6s 0.2s ease both;">Smart property automation & Consulting for large homes, estates, and complex properties in Sarasota FL</p>
+      <p style="font-size:0.95rem;color:var(--muted);margin-top:0.5rem;animation:fadeUp 0.6s 0.2s ease both;">Smart Property Automation & Consulting for large homes, estates, and complex properties in Sarasota FL</p>
     </div>
     <div style="position:relative;z-index:2;width:100%;max-width:530px;margin:0 auto;padding:1.5rem 1rem;min-height:80px;display:flex;align-items:center;justify-content:center;">
       <div class="notif-toast" id="estateNotif" style="max-width:500px;width:100%;">

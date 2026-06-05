@@ -177,7 +177,7 @@
     </div>
 
     <p style="font-size:1.05rem;color:var(--muted);line-height:1.75;max-width:860px;margin-bottom:1.2rem;" class="reveal">Convenience, security, and visibility were transformed through a smarter approach to property access.</p>
-    <div class="cs-placeholder reveal">Photo Coming Soon</div>
+    <img src="img/gate_home.png" alt="Gated Property Siesta Key" class="cs-placeholder reveal" style="object-fit:cover;"/>
 
     <div class="cs-block reveal">
       <p class="cs-block-label">The Property</p>

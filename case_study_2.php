@@ -163,8 +163,9 @@
     <div class="hero-glow"></div>
     <div class="hero-inner">
       <div class="hero-eyebrow">Case Study</div>
-      <h1>Making a Luxury Pool<br><em>Simple to Use</em></h1>
+      <h1>Making a Luxury Pool and Smart Home<br><em>Easier to Use</em></h1>
       <p class="hero-sub">Luxury Pool & Smart Home Modernization</p>
+      <p style="font-size:0.88rem;color:var(--muted);margin-top:0.5rem;opacity:0.7;">Beneva Oaks &bull; Sarasota, Florida</p>
     </div>
   </section>
 
@@ -175,31 +176,33 @@
       <div class="cs-meta-item"><span class="cs-meta-label">Project Type</span><span class="cs-meta-value">Pool & Smart Home Modernization</span></div>
     </div>
 
-    <p style="font-size:1.05rem;color:var(--muted);line-height:1.75;max-width:860px;margin-bottom:1.2rem;" class="reveal">A newly renovated pool with premium automation equipment, unreliable connectivity, and confusing controls was transformed into a simple, reliable experience for homeowners and guests alike.</p>
+    <p style="font-size:1.05rem;color:var(--muted);line-height:1.75;max-width:860px;margin-bottom:1.2rem;" class="reveal">Premium equipment, unreliable connectivity, and confusing controls were transformed into a simple, reliable experience for the homeowner, family, and guests.</p>
     <img src="img/pool_home.png" alt="Luxury Pool Sarasota" class="cs-placeholder reveal" style="object-fit:cover;"/>
 
     <div class="cs-block reveal">
       <p class="cs-block-label">The Property</p>
-      <p>This Sarasota property had recently undergone a major pool renovation, complete with modern automation equipment, app-based controls, and premium features designed to create a luxury outdoor living experience.</p>
-      <p style="margin-top:1rem;">The home also included smart lighting, irrigation, thermostats, and other connected devices. On paper, the property had everything needed to be a modern smart home.</p>
-      <p style="margin-top:1rem;">In reality, the technology was difficult to use, frequently disconnected, and rarely delivered the experience the homeowner expected.</p>
+      <p>This Sarasota home had recently completed a major pool renovation with premium automation equipment, app-based controls, and modern smart home features.</p>
+      <p style="margin-top:1rem;font-weight:600;color:var(--white);">The equipment was shiny and new.<br>The experience was not.</p>
+      <p style="margin-top:1rem;">The pool controls were confusing, connectivity was unreliable, and many of the features the homeowner had paid for were rarely used because nobody felt confident operating them.</p>
     </div>
 
     <div class="cs-block reveal">
       <p class="cs-block-label">The Challenge</p>
-      <p>After investing more than $150,000 into the pool renovation, the homeowner was left with a system that was difficult to understand and frustrating to use.</p>
-      <p style="margin-top:1rem;">The pool equipment relied on a weak WiFi connection and cloud-based controls that frequently disconnected, making remote access unreliable. Even when the system was online, many of the features were rarely used because navigating the manufacturer's app was confusing for both the homeowner and the contractors who installed it.</p>
-      <p style="margin-top:1rem;">At the same time, the property suffered from inconsistent WiFi coverage throughout the home, pool area, and equipment locations. Important parts of the property lacked reliable connectivity, limiting what the technology could do and creating an experience that felt anything but luxury.</p>
-      <p style="margin-top:1rem;">The homeowner didn't need more technology. They needed the technology they already owned to actually work.</p>
+      <p>The homeowner had invested heavily in creating an incredible backyard and pool environment, but the technology controlling it never lived up to expectations.</p>
+      <p style="margin-top:1rem;">The pool equipment was installed outside the home in an area with a weak WiFi signal. Because the system depended entirely on the manufacturer's cloud app, poor connectivity meant the controls were frequently unavailable, disconnected, or frustrating to access.</p>
+      <p style="margin-top:1rem;">Even when the system was online, the experience wasn't simple. Basic functions were buried inside confusing menus, advanced features went unused, and neither the homeowner nor the pool contractor could confidently explain how everything worked.</p>
+      <p style="margin-top:1rem;">The problems extended beyond the pool. The home had inconsistent WiFi coverage, no practical way to run new network wiring, and several smart devices operating independently. The property had plenty of technology.</p>
+      <p style="margin-top:1rem;">It simply wasn't working together in a way that made life easier.</p>
     </div>
 
     <div class="cs-block reveal">
       <p class="cs-block-label">The Solution</p>
       <p>Rather than replacing expensive equipment, Craison Digital focused on improving the experience.</p>
-      <p style="margin-top:1rem;">The first step was improving connectivity throughout the property. Existing infrastructure was utilized to expand reliable WiFi coverage throughout the home while a dedicated connection was established to the pool house and equipment area, creating a stable foundation for automation and remote access.</p>
-      <p style="margin-top:1rem;">Once connectivity issues were resolved, the pool equipment was integrated into a simple control experience designed around how the homeowner actually used the property. Pool controls, lighting, irrigation, thermostats, and other connected devices were brought together into one easy-to-use system.</p>
-      <p style="margin-top:1rem;">Voice control was added for everyday tasks, while automations and simplified controls reduced the need to navigate multiple apps and complicated menus.</p>
-      <p style="margin-top:1rem;">Most importantly, the system was designed so homeowners, family members, and guests could easily use the property without downloading apps, creating accounts, or learning complicated controls.</p>
+      <p style="margin-top:1rem;">The first step was improving connectivity throughout the property. Existing coax infrastructure was utilized to expand reliable WiFi coverage throughout the home, while a dedicated point-to-point connection was established to the pool house. This allowed a stable wired connection to reach the pool equipment, eliminating the unreliable connection that had been causing so many frustrations.</p>
+      <p style="margin-top:1rem;">Once connectivity issues were resolved, the focus shifted to simplification.</p>
+      <p style="margin-top:1rem;">The pool equipment was integrated into a custom control experience designed around how the homeowner actually used the property. Lighting, irrigation, thermostats, and other smart devices were also brought together into one simple interface, eliminating the need to jump between multiple apps.</p>
+      <p style="margin-top:1rem;">Voice control was added for common tasks, making everyday interactions easier without opening an app.</p>
+      <p style="margin-top:1rem;">Most importantly, the system was designed so family members and guests could enjoy the property without downloading apps, creating accounts, or learning complicated controls.</p>
     </div>
 
     <div class="cs-block reveal">
@@ -208,25 +211,26 @@
         <div class="cs-ba-col">
           <div class="cs-ba-label">Before</div>
           <ul class="cs-ba-list">
-            <li>Unreliable pool connectivity</li>
-            <li>Weak WiFi coverage throughout key areas</li>
-            <li>Cloud-dependent controls</li>
-            <li>Multiple apps and confusing interfaces</li>
+            <li>Weak WiFi coverage throughout the home</li>
+            <li>Pool equipment located in an area with poor connectivity</li>
+            <li>Cloud-based controls that frequently disconnected</li>
+            <li>Confusing manufacturer app</li>
             <li>Premium features that were rarely used</li>
-            <li>Guests unable to easily control the property</li>
-            <li>Technology that felt complicated and frustrating</li>
+            <li>Multiple smart devices operating independently</li>
+            <li>No simple way for guests to control the property</li>
+            <li>Technology that felt frustrating and unreliable</li>
           </ul>
         </div>
         <div class="cs-ba-col after">
           <div class="cs-ba-label">After</div>
           <ul class="cs-ba-list">
-            <li>Reliable connectivity throughout the property</li>
-            <li>Stable access to pool equipment and controls</li>
-            <li>Simple voice control for everyday functions</li>
-            <li>Pool, lighting, irrigation, and climate controls working together</li>
-            <li>Easy-to-use controls designed around the homeowner</li>
-            <li>Guest-friendly operation without additional apps</li>
-            <li>Technology that finally delivers the experience it was meant to provide</li>
+            <li>Reliable WiFi throughout the home and pool areas</li>
+            <li>Stable connectivity to the pool equipment</li>
+            <li>Simple controls designed around the homeowner</li>
+            <li>Siri voice control for everyday functions</li>
+            <li>Pool, lighting, irrigation, thermostats, and smart devices working together</li>
+            <li>Guest-friendly operation without additional apps or accounts</li>
+            <li>Technology that feels simple, reliable, and intuitive</li>
           </ul>
         </div>
       </div>
@@ -235,9 +239,9 @@
     <div class="cs-result reveal">
       <div class="cs-result-label">The Result</div>
       <p>The homeowner kept the equipment they had already invested in while gaining a dramatically better experience.</p>
-      <p style="margin-top:0.9rem;font-weight:400;">Pool controls became reliable. Features that were previously ignored became easy to use. Family members and guests could enjoy the property without needing instructions, training, or multiple apps.</p>
-      <p style="margin-top:0.9rem;font-weight:400;">Most importantly, the focus shifted away from managing technology and back to enjoying the property.</p>
-      <p style="margin-top:0.9rem;font-weight:700;">Luxury technology that finally feels simple to use.</p>
+      <p style="margin-top:0.9rem;font-weight:400;">The pool became reliable. Features that were once ignored became easy to use. Family members and guests could enjoy the property without instructions, training, or app downloads.</p>
+      <p style="margin-top:0.9rem;font-weight:400;">Instead of managing technology, the homeowner could simply enjoy the property.</p>
+      <p style="margin-top:0.9rem;font-weight:700;">The equipment didn't change.<br>The experience did.</p>
     </div>
 
   </div></section>
@@ -245,8 +249,8 @@
   <section id="contact"><div class="section-inner"><div class="contact-inner">
     <div class="section-tag">Get Started</div>
     <h2 class="section-title">Thinking About Simplifying Your Property?</h2>
-    <p class="section-sub">Many homeowners already own the technology they need. The problem is that it was never designed to work together.</p>
-    <p style="font-size:0.95rem;color:var(--muted);line-height:1.75;margin-bottom:2rem;">If your property has unreliable automation, confusing apps, weak connectivity, or systems that never quite lived up to expectations, Craison Digital can help create a simpler and more reliable experience using what you already own.</p>
+    <p class="section-sub">Many homeowners already own the technology they need. The problem is that it was never designed to work together in a way that feels simple.</p>
+    <p style="font-size:0.95rem;color:var(--muted);line-height:1.75;margin-bottom:2rem;">If your home has unreliable WiFi, confusing apps, disconnected systems, or expensive equipment that never quite lived up to expectations, Craison Digital can help create a simpler and more reliable experience using what you already own.</p>
     <div style="margin-bottom:2.5rem;"><a href="#contact-form" class="btn-primary">Schedule a Property Assessment →</a></div>
     <form class="contact-form" id="contact-form" action="https://formspree.io/f/xaqabrdo" method="POST">
       <input type="hidden" name="_next" value="https://craisondigital.com/thank-you.php"/>

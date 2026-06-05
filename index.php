@@ -201,9 +201,9 @@
   <section class="hero">
     <div class="hero-bg"></div><div class="hero-grid"></div><div class="hero-glow"></div>
     <div class="hero-headline-above">
-      <h1>Your existing systems. <br><em>ALL WORKING TOGETHER!</em></h1>
-      <p style="font-family:var(--font-display);font-size:clamp(1.1rem,2.4vw,1.6rem);font-weight:700;color:var(--text);letter-spacing:-0.01em;margin-top:0.8rem;animation:fadeUp 0.6s 0.15s ease both;">Every Acre. <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">One App.</em></p>
-      <p style="font-size:0.95rem;color:var(--muted);margin-top:0.5rem;animation:fadeUp 0.6s 0.2s ease both;">Smart property automation for large Sarasota estates.<br>We integrate gates, pools, security, lighting, and existing smart devices into one reliable system for large properties in Sarasota Florida</p>
+      <h1>Every Acre. <em>One App.</em></h1>
+      <p style="font-family:var(--font-display);font-size:clamp(1.1rem,2.4vw,1.6rem);font-weight:700;color:var(--text);letter-spacing:-0.01em;margin-top:0.8rem;animation:fadeUp 0.6s 0.15s ease both;">Your existing systems. All working together.</p>
+      <p style="font-size:0.95rem;color:var(--muted);margin-top:0.5rem;animation:fadeUp 0.6s 0.2s ease both;">Smart property automation for large homes, estates, and complex properties in Sarasota FL</p>
     </div>
     <div style="position:relative;z-index:2;width:100%;max-width:530px;margin:0 auto;padding:1.5rem 1rem;min-height:80px;display:flex;align-items:center;justify-content:center;">
       <div class="notif-toast" id="estateNotif" style="max-width:500px;width:100%;">

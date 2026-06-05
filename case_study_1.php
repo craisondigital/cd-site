@@ -73,7 +73,7 @@
     .btn-secondary { background: transparent; color: var(--text); padding: 0.8rem 2rem; border-radius: 8px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 400; text-decoration: none; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; }
     .btn-secondary:hover { border-color: rgba(255,255,255,0.15); color: var(--white); }
 
-    .cs-meta { display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .cs-meta { display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 1rem; }
     .cs-meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
     .cs-meta-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-bright); }
     .cs-meta-value { font-size: 0.92rem; color: var(--white); font-weight: 500; }
@@ -179,7 +179,7 @@
       <div class="cs-meta-item"><span class="cs-meta-label">Project Type</span><span class="cs-meta-value">Whole Property Integration</span></div>
     </div>
 
-    <p style="font-size:1.05rem;color:var(--muted);line-height:1.75;max-width:860px;margin-bottom:2rem;" class="reveal">A large Sarasota property with multiple buildings, disconnected systems, weak coverage, and too many apps was transformed into one reliable, easy-to-manage property experience.</p>
+    <p style="font-size:1.05rem;color:var(--muted);line-height:1.75;max-width:860px;margin-bottom:1.2rem;" class="reveal">A large Sarasota property with multiple buildings, disconnected systems, weak coverage, and too many apps was transformed into one reliable, easy-to-manage property experience.</p>
     <div class="cs-placeholder reveal">Photo Coming Soon</div>
 
     <div class="cs-block reveal">
@@ -256,7 +256,7 @@
   <section id="contact"><div class="section-inner"><div class="contact-inner">
     <div class="section-tag">Get Started</div>
     <h2 class="section-title">Thinking About Simplifying Your Property?</h2>
-    <p class="section-sub" style="max-width:100%;">Large properties are complicated, but managing them does not have to be.</p>
+    <p class="section-sub">Large properties are complicated, but managing them does not have to be.</p>
     <p style="font-size:0.95rem;color:var(--muted);line-height:1.75;margin-bottom:2rem;">If your property has multiple apps, weak WiFi, disconnected systems, or equipment that never quite worked the way it should, Craison Digital can help create a plan around what you already own.</p>
     <div style="margin-bottom:2.5rem;"><a href="#contact-form" class="btn-primary">Schedule a Property Assessment →</a></div>
     <form class="contact-form" id="contact-form" action="https://formspree.io/f/xaqabrdo" method="POST">

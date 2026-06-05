@@ -217,9 +217,9 @@
       </div>
     </div>
     <div class="hero-content">
-      <p class="hero-sub">We connect your existing devices and fully integrate your property. If you have a large property with a gate, pool, fountain, multiple buildings and a dozen apps that don't talk to each other, we connect everything into one system that actually makes sense. No rip-and-replace. No cookie-cutter installs. Just your property, finally simple.</p>
       <div class="hero-actions"><a href="#contact" class="btn-primary">Schedule a Property Assessment →</a></div>
       <p style="font-size:0.88rem;color:var(--muted);margin-top:1.2rem;opacity:0.75;">Let's discuss what's frustrating you, what's already working, and how your property can be simplified without starting over.</p>
+      <p class="hero-sub" style="margin-top:2rem;">We connect your existing devices and fully integrate your property. If you have a large property with a gate, pool, fountain, multiple buildings and a dozen apps that don't talk to each other, we connect everything into one system that actually makes sense. No rip-and-replace. No cookie-cutter installs. Just your property, finally simple.</p>
       <p style="font-size:0.78rem;color:var(--muted);margin-top:0.6rem;opacity:0.55;">Serving Sarasota, Lakewood Ranch, Siesta Key, Longboat Key, Venice, and surrounding areas.</p>
     </div>
   </section>

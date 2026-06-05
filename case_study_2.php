@@ -84,7 +84,7 @@
     .cs-block-label { font-size: 2rem; font-style: normal; font-family: var(--font-display); font-weight: 800; margin-bottom: 0.75rem; letter-spacing: -0.02em; display: inline-block; background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .cs-block p { font-size: 0.95rem; color: var(--muted); line-height: 1.8; }
 
-    .cs-before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+    .cs-before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 0.75rem; }
     .cs-ba-col { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1.8rem; }
     .cs-ba-col.after { border-color: rgba(0,212,255,0.2); background: rgba(0,212,255,0.04); }
     .cs-ba-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1rem; }
@@ -102,7 +102,7 @@
     @media (max-width: 768px) { .cs-before-after { grid-template-columns: 1fr; } }
 
     #contact { background: var(--dark); text-align: center; }
-    .contact-inner { max-width: 600px; margin: 0 auto; }
+    .contact-inner { margin: 0 auto; }
     .contact-form { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 2rem; text-align: left; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
     .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
@@ -182,7 +182,7 @@
     <div class="cs-block reveal">
       <p class="cs-block-label">The Property</p>
       <p>This Sarasota home had recently completed a major pool renovation with premium automation equipment, app-based controls, and modern smart home features.</p>
-      <p style="margin-top:1.5rem;margin-bottom:1.5rem;font-family:var(--font-display);font-size:clamp(0.95rem,1.6vw,1.15rem);font-weight:800;color:var(--white);line-height:1.35;letter-spacing:-0.015em;border-left:3px solid var(--cyan);padding-left:1.2rem;">The equipment was shiny and new.<br><em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">The experience was not.</em></p>
+      <p style="margin-top:1.5rem;margin-bottom:1.5rem;font-family:var(--font-display);font-size:clamp(0.95rem,1.6vw,1.15rem);font-weight:800;color:var(--white);line-height:1.35;letter-spacing:-0.015em;border-left:3px solid var(--cyan);padding-left:1.2rem;">The equipment was shiny and new.<br>The experience was not.</p>
       <p style="margin-top:1rem;">The pool controls were confusing, connectivity was unreliable, and many of the features the homeowner had paid for were rarely used because nobody felt confident operating them.</p>
     </div>
 

@@ -87,7 +87,7 @@
     .cs-list li { font-size: 0.92rem; color: var(--muted); line-height: 1.6; padding-left: 1.1rem; position: relative; }
     .cs-list li::before { content: '—'; position: absolute; left: 0; color: var(--blue-bright); font-weight: 700; }
 
-    .cs-before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+    .cs-before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 0.75rem; }
     .cs-ba-col { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1.8rem; }
     .cs-ba-col.after { border-color: rgba(0,212,255,0.2); background: rgba(0,212,255,0.04); }
     .cs-ba-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1rem; }
@@ -105,7 +105,7 @@
     .cs-result p { font-size: 1rem; color: var(--white); font-weight: 600; line-height: 1.7; margin: 0; }
 
     #contact { background: var(--dark); text-align: center; }
-    .contact-inner { max-width: 600px; margin: 0 auto; }
+    .contact-inner { margin: 0 auto; }
     .contact-form { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 2rem; text-align: left; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
     .form-group { display: flex; flex-direction: column; gap: 0.35rem; }

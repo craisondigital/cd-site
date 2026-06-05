@@ -203,7 +203,7 @@
     <div class="hero-headline-above">
       <h1>Every Acre. <em>One App.</em></h1>
       <p style="font-family:var(--font-display);font-size:clamp(1.1rem,2.4vw,1.6rem);font-weight:700;color:var(--text);letter-spacing:-0.01em;margin-top:0.8rem;animation:fadeUp 0.6s 0.15s ease both;">Your existing systems. All working together.</p>
-      <p style="font-size:0.95rem;color:var(--muted);margin-top:0.5rem;animation:fadeUp 0.6s 0.2s ease both;">Smart property automation for large homes, estates, and complex properties in Sarasota FL</p>
+      <p style="font-size:0.95rem;color:var(--muted);margin-top:0.5rem;animation:fadeUp 0.6s 0.2s ease both;">Smart property automation & Consulting for large homes, estates, and complex properties in Sarasota FL</p>
     </div>
     <div style="position:relative;z-index:2;width:100%;max-width:530px;margin:0 auto;padding:1.5rem 1rem;min-height:80px;display:flex;align-items:center;justify-content:center;">
       <div class="notif-toast" id="estateNotif" style="max-width:500px;width:100%;">
@@ -219,7 +219,7 @@
     <div class="hero-content">
       <div class="hero-actions"><a href="#contact" class="btn-primary">Schedule a Property Assessment →</a></div>
       <p style="font-size:0.88rem;color:var(--muted);margin-top:1.2rem;opacity:0.75;">Let's discuss what's frustrating you, what's already working, and how your property can be simplified without starting over.</p>
-      <p class="hero-sub" style="margin-top:2rem;">Large properties shouldn't require a dozen apps. We connect your existing systems into one reliable platform that simply works.</p>
+      <p class="hero-sub" style="margin-top:2rem;">Large properties shouldn't require a dozen apps.<br>We connect your existing systems into one reliable platform that <em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">simply works.</em></p>
       <p style="font-size:0.78rem;color:var(--muted);margin-top:0.6rem;opacity:0.55;">Serving Sarasota, Lakewood Ranch, Siesta Key, Longboat Key, Venice, and surrounding areas.</p>
     </div>
   </section>

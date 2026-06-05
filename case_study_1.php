@@ -185,37 +185,27 @@
     <div class="cs-block reveal">
       <p class="cs-block-label">The Property</p>
       <p>This 5-acre Sarasota estate included multiple buildings, a gated entrance, irrigation, fountains, outdoor lighting, garage and rollup doors, security devices, thermostats, televisions, pumps, and a growing collection of smart home products.</p>
-      <p style="margin-top:1rem;">Over time, different systems had been added by different people for different reasons. Some devices were smart. Some were not. Some used apps. Some used remotes. Some required manual switches. The result was a property with a lot of useful technology, but no simple way to manage it all.</p>
+      <p style="margin-top:1rem;">Over time, different systems had been added by different people for different reasons. Some devices were smart. Some were not. Some used apps. Some required remotes. Some required manual switches. The result was a property with a lot of useful technology, but no simple way to manage it all.</p>
     </div>
 
     <div class="cs-block reveal">
       <p class="cs-block-label">The Challenge</p>
-      <p>The homeowner was dealing with the same problem many large properties eventually face: every improvement added another layer of complexity.</p>
-      <p style="margin-top:1rem;">The property had multiple buildings, disconnected WiFi networks, and originally relied on separate internet connections. Coverage was inconsistent, devices dropped offline, and systems throughout the property did not reliably communicate with each other.</p>
-      <p style="margin-top:1rem;">At the same time, the homeowner had to remember which app controlled which system. Irrigation had one app. Lights had another. Smart devices had their own controls. Other systems, like fountains, pumps, and certain outdoor lighting, were not connected at all.</p>
-      <p style="margin-top:1rem;">Simple tasks became frustrating because the property required too many apps, too many remotes, and too many different ways of doing things.</p>
+      <p>Like many large properties, every improvement had been made at a different time by different contractors. Each new addition brought another app, another login, and another way of doing things.</p>
+      <p style="margin-top:1rem;">The property consisted of multiple buildings connected by separate internet services and disconnected WiFi networks. Coverage was inconsistent, devices frequently lost connection, and systems throughout the property could not reliably communicate with one another.</p>
+      <p style="margin-top:1rem;">At the same time, many important features of the property — including fountains, pumps, lighting, and other equipment — were either controlled manually or operated completely independently. Simple tasks often meant remembering which app controlled which part of the property.</p>
+      <p style="margin-top:1rem;">The homeowner knew the property was capable of much more. The challenge was making everything work together in a way that was simple, reliable, and easy to live with.</p>
     </div>
 
     <div class="cs-block reveal">
       <p class="cs-block-label">The Solution</p>
-      <ul class="cs-list">
-        <li>Property-wide WiFi from gate to backyard</li>
-        <li>Unified smart home platform</li>
-        <li>Gate access control</li>
-        <li>Garage and Rollup Door Controls</li>
-        <li>Fountain automation</li>
-        <li>Weather-aware irrigation</li>
-        <li>Automated lighting and security notifications</li>
-      </ul>
-      <p style="margin-top:1.2rem;">Craison Digital started by looking at the property as a whole, not as a collection of separate devices.</p>
-      <p style="margin-top:1rem;">The first step was building a reliable foundation. A new property-wide network was installed to provide seamless WiFi coverage from the front gate to the back of the property and across multiple buildings. This eliminated the need for separate internet connections and gave the property one reliable network backbone.</p>
-      <p style="margin-top:1rem;">From there, existing smart devices were integrated into a single platform. Legacy equipment and non-smart systems were also brought into the system where possible, including lighting, fountains, pumps, irrigation, doors, security devices, and other property controls.</p>
-      <p style="margin-top:1rem;">Instead of forcing the homeowner to adapt to a product, the system was built around how the property was actually used.</p>
+      <p>Rather than replacing equipment, we started by understanding how the property was actually used and identifying the systems that created the most frustration.</p>
+      <p style="margin-top:1rem;">A new property-wide network was installed to provide reliable WiFi coverage from the front gate to the back of the property and across multiple buildings. This eliminated the need for separate internet connections and created a reliable foundation for the entire property.</p>
+      <p style="margin-top:1rem;">Existing smart devices were brought together into one simple experience while legacy equipment and previously manual systems were integrated wherever possible. Lighting, irrigation, security devices, fountains, gates, garage doors, thermostats, and other systems were connected so they could finally work together.</p>
+      <p style="margin-top:1rem;">Automations were then created to reduce manual tasks, improve reliability, and provide proactive notifications when important events occurred across the property.</p>
     </div>
 
     <div class="cs-block reveal">
       <p class="cs-block-label">What Changed</p>
-
       <div class="cs-before-after">
         <div class="cs-ba-col">
           <div class="cs-ba-label">Before</div>
@@ -225,20 +215,19 @@
             <li>Disconnected WiFi networks</li>
             <li>Weak coverage across the property</li>
             <li>Smart and non-smart devices operating independently</li>
-            <li>Manual control for important systems</li>
-            <li>Limited visibility into what was happening around the property</li>
+            <li>Manual control of important systems</li>
+            <li>Limited visibility into property activity</li>
           </ul>
         </div>
         <div class="cs-ba-col after">
           <div class="cs-ba-label">After</div>
           <ul class="cs-ba-list">
-            <li>One property-wide network</li>
+            <li>One app for the entire property</li>
             <li>Reliable WiFi from the gate to the back of the property</li>
-            <li>One platform for the entire estate</li>
-            <li>Smart and legacy systems working together</li>
+            <li>Connected systems that work together</li>
             <li>Automated lighting, irrigation, fountain, access, and security functions</li>
             <li>Proactive notifications for important property activity</li>
-            <li>A system that can grow as the property changes</li>
+            <li>A system that can grow as the property evolves</li>
           </ul>
         </div>
       </div>
@@ -246,10 +235,10 @@
 
     <div class="cs-result reveal">
       <div class="cs-result-label">The Result</div>
-      <p>The property went from a collection of disconnected systems to one unified experience.</p>
-      <p style="margin-top:0.9rem;font-weight:400;">The homeowner no longer has to remember which app controls which part of the property. Gates, lighting, irrigation, fountains, doors, thermostats, and other systems can now be monitored and controlled from one simple platform.</p>
-      <p style="margin-top:0.9rem;font-weight:400;">Most importantly, the technology became easier to live with.</p>
-      <p style="margin-top:0.9rem;">One property. One app. One simple experience.</p>
+      <p>The property went from a collection of disconnected systems to one simple, reliable experience.</p>
+      <p style="margin-top:0.9rem;font-weight:400;">The homeowner no longer has to remember which app controls which part of the property. Gates, lighting, irrigation, fountains, thermostats, and security systems can now be managed from one place, with automations handling many of the day-to-day tasks automatically.</p>
+      <p style="margin-top:0.9rem;font-weight:400;">Most importantly, the technology faded into the background.</p>
+      <p style="margin-top:0.9rem;font-weight:700;">One property. One app. One simple experience.</p>
     </div>
 
   </div></section>
@@ -257,8 +246,8 @@
   <section id="contact"><div class="section-inner"><div class="contact-inner">
     <div class="section-tag">Get Started</div>
     <h2 class="section-title">Thinking About Simplifying Your Property?</h2>
-    <p class="section-sub">Large properties are complicated, but managing them does not have to be.</p>
-    <p style="font-size:0.95rem;color:var(--muted);line-height:1.75;margin-bottom:2rem;">If your property has multiple apps, weak WiFi, disconnected systems, or equipment that never quite worked the way it should, Craison Digital can help create a plan around what you already own.</p>
+    <p class="section-sub">Large properties are complicated. Managing them shouldn't be.</p>
+    <p style="font-size:0.95rem;color:var(--muted);line-height:1.75;margin-bottom:2rem;">If your property has multiple apps, unreliable WiFi, disconnected systems, or equipment that never quite worked the way it should, Craison Digital can help create a plan around what you already own.</p>
     <div style="margin-bottom:2.5rem;"><a href="#contact-form" class="btn-primary">Schedule a Property Assessment →</a></div>
     <form class="contact-form" id="contact-form" action="https://formspree.io/f/xaqabrdo" method="POST">
       <input type="hidden" name="_next" value="https://craisondigital.com/thank-you.php"/>

@@ -63,7 +63,7 @@
     @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
 
     section { position: relative; z-index: 1; }
-    .section-inner { max-width: 1100px; margin: 0 auto; padding: 6rem 4rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; padding: 2.5rem 4rem; }
     .section-tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue-bright); margin-bottom: 0.7rem; }
     .section-title { font-family: var(--font-display); font-size: clamp(1.7rem, 3.2vw, 2.6rem); font-weight: 800; line-height: 1.12; letter-spacing: -0.02em; margin-bottom: 1rem; color: var(--white); }
     .section-sub { color: var(--muted); font-size: 1rem; max-width: 700px; line-height: 1.7; margin-bottom: 2.5rem; }
@@ -87,7 +87,20 @@
     .cs-list li { font-size: 0.92rem; color: var(--muted); line-height: 1.6; padding-left: 1.1rem; position: relative; }
     .cs-list li::before { content: '—'; position: absolute; left: 0; color: var(--blue-bright); font-weight: 700; }
 
+    .cs-before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+    .cs-ba-col { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1.8rem; }
+    .cs-ba-col.after { border-color: rgba(0,212,255,0.2); background: rgba(0,212,255,0.04); }
+    .cs-ba-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1rem; }
+    .cs-ba-col:not(.after) .cs-ba-label { color: var(--muted); }
+    .cs-ba-col.after .cs-ba-label { color: var(--cyan); }
+    .cs-ba-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+    .cs-ba-list li { font-size: 0.88rem; color: var(--muted); line-height: 1.55; padding-left: 1.1rem; position: relative; }
+    .cs-ba-list li::before { position: absolute; left: 0; font-weight: 700; }
+    .cs-ba-col:not(.after) .cs-ba-list li::before { content: '✕'; color: rgba(239,68,68,0.6); font-size: 0.7rem; top: 0.2rem; }
+    .cs-ba-col.after .cs-ba-list li { color: var(--text); }
+    .cs-ba-col.after .cs-ba-list li::before { content: '✓'; color: var(--cyan); }
     .cs-result { padding: 1.2rem 1.5rem; background: rgba(0,212,255,0.06); border: 1px solid rgba(0,212,255,0.2); border-left: 3px solid var(--cyan); border-radius: 8px; margin-top: 3rem; }
+    @media (max-width: 768px) { .cs-before-after { grid-template-columns: 1fr; } }
     .cs-result-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); margin-bottom: 0.5rem; }
     .cs-result p { font-size: 1rem; color: var(--white); font-weight: 600; line-height: 1.7; margin: 0; }
 
@@ -131,7 +144,7 @@
       .mobile-menu .nav-cta { display: inline-block; margin-top: 0.4rem; padding: 0.6rem 1.8rem; font-size: 1rem; }
     }
     @media (max-width: 768px) {
-      .section-inner { padding: 4rem 1.5rem; }
+      .section-inner { padding: 2rem 1.5rem; }
       .form-row { grid-template-columns: 1fr; }
       .form-submit-row { flex-direction: column; align-items: stretch; }
       footer { padding: 2rem 1.5rem; }
@@ -166,11 +179,21 @@
       <div class="cs-meta-item"><span class="cs-meta-label">Project Type</span><span class="cs-meta-value">Whole Property Integration</span></div>
     </div>
 
+    <p style="font-size:1.05rem;color:var(--muted);line-height:1.75;max-width:860px;margin-bottom:2rem;" class="reveal">A large Sarasota property with multiple buildings, disconnected systems, weak coverage, and too many apps was transformed into one reliable, easy-to-manage property experience.</p>
     <div class="cs-placeholder reveal">Photo Coming Soon</div>
 
     <div class="cs-block reveal">
+      <p class="cs-block-label">The Property</p>
+      <p>This 5-acre Sarasota estate included multiple buildings, a gated entrance, irrigation, fountains, outdoor lighting, garage and rollup doors, security devices, thermostats, televisions, pumps, and a growing collection of smart home products.</p>
+      <p style="margin-top:1rem;">Over time, different systems had been added by different people for different reasons. Some devices were smart. Some were not. Some used apps. Some used remotes. Some required manual switches. The result was a property with a lot of useful technology, but no simple way to manage it all.</p>
+    </div>
+
+    <div class="cs-block reveal">
       <p class="cs-block-label">Challenge</p>
-      <p>Multiple buildings, disconnected networks, and a mix of smart and non-smart systems that required different apps, remotes, and control methods.</p>
+      <p>The homeowner was dealing with the same problem many large properties eventually face: every improvement added another layer of complexity.</p>
+      <p style="margin-top:1rem;">The property had multiple buildings, disconnected WiFi networks, and originally relied on separate internet connections. Coverage was inconsistent, devices dropped offline, and systems throughout the property did not reliably communicate with each other.</p>
+      <p style="margin-top:1rem;">At the same time, the homeowner had to remember which app controlled which system. Irrigation had one app. Lights had another. Smart devices had their own controls. Other systems, like fountains, pumps, and certain outdoor lighting, were not connected at all.</p>
+      <p style="margin-top:1rem;">Simple tasks became frustrating because the property required too many apps, too many remotes, and too many different ways of doing things.</p>
     </div>
 
     <div class="cs-block reveal">
@@ -184,20 +207,59 @@
         <li>Weather-aware irrigation</li>
         <li>Automated lighting and security notifications</li>
       </ul>
+      <p style="margin-top:1.2rem;">Craison Digital started by looking at the property as a whole, not as a collection of separate devices.</p>
+      <p style="margin-top:1rem;">The first step was building a reliable foundation. A new property-wide network was installed to provide seamless WiFi coverage from the front gate to the back of the property and across multiple buildings. This eliminated the need for separate internet connections and gave the property one reliable network backbone.</p>
+      <p style="margin-top:1rem;">From there, existing smart devices were integrated into a single platform. Legacy equipment and non-smart systems were also brought into the system where possible, including lighting, fountains, pumps, irrigation, doors, security devices, and other property controls.</p>
+      <p style="margin-top:1rem;">Instead of forcing the homeowner to adapt to a product, the system was built around how the property was actually used.</p>
+    </div>
+
+    <div class="cs-block reveal">
+      <p class="cs-block-label">What Changed</p>
+      <div class="cs-before-after">
+        <div class="cs-ba-col">
+          <div class="cs-ba-label">Before</div>
+          <ul class="cs-ba-list">
+            <li>Multiple apps for different systems</li>
+            <li>Separate internet connections</li>
+            <li>Disconnected WiFi networks</li>
+            <li>Weak coverage across the property</li>
+            <li>Smart and non-smart devices operating independently</li>
+            <li>Manual control for important systems</li>
+            <li>Limited visibility into what was happening around the property</li>
+          </ul>
+        </div>
+        <div class="cs-ba-col after">
+          <div class="cs-ba-label">After</div>
+          <ul class="cs-ba-list">
+            <li>One property-wide network</li>
+            <li>Reliable WiFi from the gate to the back of the property</li>
+            <li>One platform for the entire estate</li>
+            <li>Smart and legacy systems working together</li>
+            <li>Automated lighting, irrigation, fountain, access, and security functions</li>
+            <li>Proactive notifications for important property activity</li>
+            <li>A system that can grow as the property changes</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <div class="cs-result reveal">
       <div class="cs-result-label">Result</div>
-      <p>One property. One app. One simple experience.</p>
+      <p>The property went from a collection of disconnected systems to one unified experience.</p>
+      <p style="margin-top:0.9rem;font-weight:400;">The homeowner no longer has to remember which app controls which part of the property. Gates, lighting, irrigation, fountains, doors, thermostats, and other systems can now be monitored and controlled from one simple platform.</p>
+      <p style="margin-top:0.9rem;font-weight:400;">Most importantly, the technology became easier to live with.</p>
+      <p style="margin-top:0.9rem;">One property. One app. One simple experience.</p>
     </div>
 
   </div></section>
 
   <section id="contact"><div class="section-inner"><div class="contact-inner">
     <div class="section-tag">Get Started</div>
-    <h2 class="section-title">Have a similar property?</h2>
-    <p class="section-sub">Tell us what you're working with. We'll figure out the rest.</p>
-    <form class="contact-form" action="https://formspree.io/f/xaqabrdo" method="POST">
+    <h2 class="section-title">Thinking About Simplifying Your Property?</h2>
+    <p class="section-sub" style="max-width:100%;">Large properties are complicated, but managing them does not have to be.</p>
+    <p style="font-size:0.95rem;color:var(--muted);line-height:1.75;margin-bottom:2rem;">If your property has multiple apps, weak WiFi, disconnected systems, or equipment that never quite worked the way it should, Craison Digital can help create a plan around what you already own.</p>
+    <div style="margin-bottom:2.5rem;"><a href="#contact-form" class="btn-primary">Schedule a Property Assessment →</a></div>
+    <form class="contact-form" id="contact-form" action="https://formspree.io/f/xaqabrdo" method="POST">
       <input type="hidden" name="_next" value="https://craisondigital.com/thank-you.php"/>
       <input type="hidden" name="_subject" value="New inquiry — Case Study 1"/>
       <div class="form-row">

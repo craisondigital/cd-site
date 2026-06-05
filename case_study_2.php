@@ -182,7 +182,7 @@
     <div class="cs-block reveal">
       <p class="cs-block-label">The Property</p>
       <p>This Sarasota home had recently completed a major pool renovation with premium automation equipment, app-based controls, and modern smart home features.</p>
-      <p style="margin-top:1rem;font-weight:600;color:var(--white);">The equipment was shiny and new.<br>The experience was not.</p>
+      <p style="margin-top:1.5rem;margin-bottom:1.5rem;font-family:var(--font-display);font-size:clamp(1.1rem,2.2vw,1.5rem);font-weight:800;color:var(--white);line-height:1.35;letter-spacing:-0.015em;border-left:3px solid var(--cyan);padding-left:1.2rem;">The equipment was shiny and new.<br>The experience was not.</p>
       <p style="margin-top:1rem;">The pool controls were confusing, connectivity was unreliable, and many of the features the homeowner had paid for were rarely used because nobody felt confident operating them.</p>
     </div>
 

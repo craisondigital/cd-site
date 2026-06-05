@@ -81,7 +81,7 @@
     .cs-placeholder { width: 100%; height: 360px; background: linear-gradient(135deg, #0d1826 0%, #111f30 100%); border: 1px solid var(--border); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; margin-bottom: 4rem; }
 
     .cs-block { margin-bottom: 3rem; }
-    .cs-block-label { font-size: 0.9rem; color: var(--muted); font-style: italic; margin-bottom: 0.5rem; }
+    .cs-block-label { font-size: 1.3rem; color: var(--white); font-style: italic; font-family: var(--font-display); font-weight: 700; margin-bottom: 0.75rem; }
     .cs-block p { font-size: 0.95rem; color: var(--muted); line-height: 1.8; }
     .cs-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
     .cs-list li { font-size: 0.92rem; color: var(--muted); line-height: 1.6; padding-left: 1.1rem; position: relative; }
@@ -189,7 +189,7 @@
     </div>
 
     <div class="cs-block reveal">
-      <p class="cs-block-label">Challenge</p>
+      <p class="cs-block-label">The Challenge</p>
       <p>The homeowner was dealing with the same problem many large properties eventually face: every improvement added another layer of complexity.</p>
       <p style="margin-top:1rem;">The property had multiple buildings, disconnected WiFi networks, and originally relied on separate internet connections. Coverage was inconsistent, devices dropped offline, and systems throughout the property did not reliably communicate with each other.</p>
       <p style="margin-top:1rem;">At the same time, the homeowner had to remember which app controlled which system. Irrigation had one app. Lights had another. Smart devices had their own controls. Other systems, like fountains, pumps, and certain outdoor lighting, were not connected at all.</p>
@@ -197,7 +197,7 @@
     </div>
 
     <div class="cs-block reveal">
-      <p class="cs-block-label">Solution</p>
+      <p class="cs-block-label">The Solution</p>
       <ul class="cs-list">
         <li>Property-wide WiFi from gate to backyard</li>
         <li>Unified smart home platform</li>
@@ -215,6 +215,7 @@
 
     <div class="cs-block reveal">
       <p class="cs-block-label">What Changed</p>
+
       <div class="cs-before-after">
         <div class="cs-ba-col">
           <div class="cs-ba-label">Before</div>
@@ -244,7 +245,7 @@
     </div>
 
     <div class="cs-result reveal">
-      <div class="cs-result-label">Result</div>
+      <div class="cs-result-label">The Result</div>
       <p>The property went from a collection of disconnected systems to one unified experience.</p>
       <p style="margin-top:0.9rem;font-weight:400;">The homeowner no longer has to remember which app controls which part of the property. Gates, lighting, irrigation, fountains, doors, thermostats, and other systems can now be monitored and controlled from one simple platform.</p>
       <p style="margin-top:0.9rem;font-weight:400;">Most importantly, the technology became easier to live with.</p>

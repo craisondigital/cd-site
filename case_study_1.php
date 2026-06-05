@@ -180,7 +180,7 @@
     </div>
 
     <p style="font-size:1.05rem;color:var(--muted);line-height:1.75;max-width:860px;margin-bottom:1.2rem;" class="reveal">A large Sarasota property with multiple buildings, disconnected systems, weak coverage, and too many apps was transformed into one reliable, easy-to-manage property experience.</p>
-    <div class="cs-placeholder reveal">Photo Coming Soon</div>
+    <img src="img/estate_photo.jpg" alt="5-Acre Sarasota Estate" class="cs-placeholder reveal" style="object-fit:cover;"/>
 
     <div class="cs-block reveal">
       <p class="cs-block-label">The Property</p>

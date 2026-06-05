@@ -81,7 +81,7 @@
     .cs-placeholder { width: 100%; height: 360px; background: linear-gradient(135deg, #0d1826 0%, #111f30 100%); border: 1px solid var(--border); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; margin-bottom: 4rem; }
 
     .cs-block { margin-bottom: 3rem; }
-    .cs-block-label { font-size: 2rem; color: var(--white); font-style: normal; font-family: var(--font-display); font-weight: 800; margin-bottom: 0.75rem; letter-spacing: -0.02em; }
+    .cs-block-label { font-size: 2rem; font-style: normal; font-family: var(--font-display); font-weight: 800; margin-bottom: 0.75rem; letter-spacing: -0.02em; display: inline-block; background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .cs-block p { font-size: 0.95rem; color: var(--muted); line-height: 1.8; }
     .cs-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
     .cs-list li { font-size: 0.92rem; color: var(--muted); line-height: 1.6; padding-left: 1.1rem; position: relative; }

@@ -81,7 +81,7 @@
     .cs-placeholder { width: 100%; height: 360px; background: linear-gradient(135deg, #0d1826 0%, #111f30 100%); border: 1px solid var(--border); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; margin-bottom: 4rem; }
 
     .cs-block { margin-bottom: 3rem; }
-    .cs-block-label { font-size: 2rem; color: var(--white); font-style: normal; font-family: var(--font-display); font-weight: 800; margin-bottom: 0.75rem; letter-spacing: -0.02em; }
+    .cs-block-label { font-size: 2rem; font-style: normal; font-family: var(--font-display); font-weight: 800; margin-bottom: 0.75rem; letter-spacing: -0.02em; display: inline-block; background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .cs-block p { font-size: 0.95rem; color: var(--muted); line-height: 1.8; }
 
     .cs-before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
@@ -182,7 +182,7 @@
     <div class="cs-block reveal">
       <p class="cs-block-label">The Property</p>
       <p>This Sarasota home had recently completed a major pool renovation with premium automation equipment, app-based controls, and modern smart home features.</p>
-      <p style="margin-top:1.5rem;margin-bottom:1.5rem;font-family:var(--font-display);font-size:clamp(0.95rem,1.6vw,1.15rem);font-weight:800;color:var(--white);line-height:1.35;letter-spacing:-0.015em;border-left:3px solid var(--cyan);padding-left:1.2rem;">The equipment was shiny and new.<br>The experience was not.</p>
+      <p style="margin-top:1.5rem;margin-bottom:1.5rem;font-family:var(--font-display);font-size:clamp(0.95rem,1.6vw,1.15rem);font-weight:800;color:var(--white);line-height:1.35;letter-spacing:-0.015em;border-left:3px solid var(--cyan);padding-left:1.2rem;">The equipment was shiny and new.<br><em style="font-style:normal;background:linear-gradient(135deg,var(--blue-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">The experience was not.</em></p>
       <p style="margin-top:1rem;">The pool controls were confusing, connectivity was unreliable, and many of the features the homeowner had paid for were rarely used because nobody felt confident operating them.</p>
     </div>
 

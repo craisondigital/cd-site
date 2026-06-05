@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Case Study: Estate-Wide Automation & Network Upgrade – Craison Digital</title>
-  <meta name="description" content="How Craison Digital unified a 5-acre Sarasota estate — property-wide WiFi, gate access, fountain automation, irrigation, lighting, and security into one platform."/>
+  <title>Case Study: Luxury Pool & Smart Home Modernization – Craison Digital</title>
+  <meta name="description" content="How Craison Digital transformed a $150,000 luxury pool renovation into a simple, reliable smart home experience in Sarasota's Beneva Oaks neighborhood."/>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230d1320'/><text x='4' y='24' font-size='22' font-weight='bold' fill='%2300d4ff'>C</text></svg>"/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
   <style>
@@ -83,9 +83,6 @@
     .cs-block { margin-bottom: 3rem; }
     .cs-block-label { font-size: 2rem; color: var(--white); font-style: normal; font-family: var(--font-display); font-weight: 800; margin-bottom: 0.75rem; letter-spacing: -0.02em; }
     .cs-block p { font-size: 0.95rem; color: var(--muted); line-height: 1.8; }
-    .cs-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
-    .cs-list li { font-size: 0.92rem; color: var(--muted); line-height: 1.6; padding-left: 1.1rem; position: relative; }
-    .cs-list li::before { content: '—'; position: absolute; left: 0; color: var(--blue-bright); font-weight: 700; }
 
     .cs-before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
     .cs-ba-col { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1.8rem; }
@@ -100,9 +97,9 @@
     .cs-ba-col.after .cs-ba-list li { color: var(--text); }
     .cs-ba-col.after .cs-ba-list li::before { content: '✓'; color: var(--cyan); }
     .cs-result { padding: 1.2rem 1.5rem; background: rgba(0,212,255,0.06); border: 1px solid rgba(0,212,255,0.2); border-left: 3px solid var(--cyan); border-radius: 8px; margin-top: 3rem; }
-    @media (max-width: 768px) { .cs-before-after { grid-template-columns: 1fr; } }
     .cs-result-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); margin-bottom: 0.5rem; }
     .cs-result p { font-size: 1rem; color: var(--white); font-weight: 600; line-height: 1.7; margin: 0; }
+    @media (max-width: 768px) { .cs-before-after { grid-template-columns: 1fr; } }
 
     #contact { background: var(--dark); text-align: center; }
     .contact-inner { max-width: 600px; margin: 0 auto; }
@@ -157,7 +154,7 @@
   </style>
 </head>
 <body>
-  <?php $activePage = 'case_study_1'; ?>
+  <?php $activePage = 'case_study_2'; ?>
 <?php include 'nav.php'; ?>
 
   <section class="hero">
@@ -166,42 +163,43 @@
     <div class="hero-glow"></div>
     <div class="hero-inner">
       <div class="hero-eyebrow">Case Study</div>
-      <h1>Simplifying a<br><em>5-Acre Sarasota Estate</em></h1>
-      <p class="hero-sub">Estate-Wide Automation & Network Upgrade</p>
+      <h1>Making a Luxury Pool<br><em>Simple to Use</em></h1>
+      <p class="hero-sub">Luxury Pool & Smart Home Modernization</p>
     </div>
   </section>
 
   <section style="background:var(--black);"><div class="section-inner">
 
     <div class="cs-meta reveal">
-      <div class="cs-meta-item"><span class="cs-meta-label">Location</span><span class="cs-meta-value">Sarasota, FL</span></div>
-      <div class="cs-meta-item"><span class="cs-meta-label">Property Size</span><span class="cs-meta-value">5 Acres</span></div>
-      <div class="cs-meta-item"><span class="cs-meta-label">Project Type</span><span class="cs-meta-value">Whole Property Integration</span></div>
+      <div class="cs-meta-item"><span class="cs-meta-label">Location</span><span class="cs-meta-value">Beneva Oaks, Sarasota FL</span></div>
+      <div class="cs-meta-item"><span class="cs-meta-label">Project Type</span><span class="cs-meta-value">Pool & Smart Home Modernization</span></div>
     </div>
 
-    <p style="font-size:1.05rem;color:var(--muted);line-height:1.75;max-width:860px;margin-bottom:1.2rem;" class="reveal">A large Sarasota property with multiple buildings, disconnected systems, weak coverage, and too many apps was transformed into one reliable, easy-to-manage property experience.</p>
-    <img src="img/estate_photo.jpg" alt="5-Acre Sarasota Estate" class="cs-placeholder reveal" style="object-fit:cover;"/>
+    <p style="font-size:1.05rem;color:var(--muted);line-height:1.75;max-width:860px;margin-bottom:1.2rem;" class="reveal">A newly renovated pool with premium automation equipment, unreliable connectivity, and confusing controls was transformed into a simple, reliable experience for homeowners and guests alike.</p>
+    <img src="img/pool_home.png" alt="Luxury Pool Sarasota" class="cs-placeholder reveal" style="object-fit:cover;"/>
 
     <div class="cs-block reveal">
       <p class="cs-block-label">The Property</p>
-      <p>This 5-acre Sarasota estate included multiple buildings, a gated entrance, irrigation, fountains, outdoor lighting, garage and rollup doors, security devices, thermostats, televisions, pumps, and a growing collection of smart home products.</p>
-      <p style="margin-top:1rem;">Over time, different systems had been added by different people for different reasons. Some devices were smart. Some were not. Some used apps. Some required remotes. Some required manual switches. The result was a property with a lot of useful technology, but no simple way to manage it all.</p>
+      <p>This Sarasota property had recently undergone a major pool renovation, complete with modern automation equipment, app-based controls, and premium features designed to create a luxury outdoor living experience.</p>
+      <p style="margin-top:1rem;">The home also included smart lighting, irrigation, thermostats, and other connected devices. On paper, the property had everything needed to be a modern smart home.</p>
+      <p style="margin-top:1rem;">In reality, the technology was difficult to use, frequently disconnected, and rarely delivered the experience the homeowner expected.</p>
     </div>
 
     <div class="cs-block reveal">
       <p class="cs-block-label">The Challenge</p>
-      <p>Like many large properties, every improvement had been made at a different time by different contractors. Each new addition brought another app, another login, and another way of doing things.</p>
-      <p style="margin-top:1rem;">The property consisted of multiple buildings connected by separate internet services and disconnected WiFi networks. Coverage was inconsistent, devices frequently lost connection, and systems throughout the property could not reliably communicate with one another.</p>
-      <p style="margin-top:1rem;">At the same time, many important features of the property — including fountains, pumps, lighting, and other equipment — were either controlled manually or operated completely independently. Simple tasks often meant remembering which app controlled which part of the property.</p>
-      <p style="margin-top:1rem;">The homeowner knew the property was capable of much more. The challenge was making everything work together in a way that was simple, reliable, and easy to live with.</p>
+      <p>After investing more than $150,000 into the pool renovation, the homeowner was left with a system that was difficult to understand and frustrating to use.</p>
+      <p style="margin-top:1rem;">The pool equipment relied on a weak WiFi connection and cloud-based controls that frequently disconnected, making remote access unreliable. Even when the system was online, many of the features were rarely used because navigating the manufacturer's app was confusing for both the homeowner and the contractors who installed it.</p>
+      <p style="margin-top:1rem;">At the same time, the property suffered from inconsistent WiFi coverage throughout the home, pool area, and equipment locations. Important parts of the property lacked reliable connectivity, limiting what the technology could do and creating an experience that felt anything but luxury.</p>
+      <p style="margin-top:1rem;">The homeowner didn't need more technology. They needed the technology they already owned to actually work.</p>
     </div>
 
     <div class="cs-block reveal">
       <p class="cs-block-label">The Solution</p>
-      <p>Rather than replacing equipment, we started by understanding how the property was actually used and identifying the systems that created the most frustration.</p>
-      <p style="margin-top:1rem;">A new property-wide network was installed to provide reliable WiFi coverage from the front gate to the back of the property and across multiple buildings. This eliminated the need for separate internet connections and created a reliable foundation for the entire property.</p>
-      <p style="margin-top:1rem;">Existing smart devices were brought together into one simple experience while legacy equipment and previously manual systems were integrated wherever possible. Lighting, irrigation, security devices, fountains, gates, garage doors, thermostats, and other systems were connected so they could finally work together.</p>
-      <p style="margin-top:1rem;">Automations were then created to reduce manual tasks, improve reliability, and provide proactive notifications when important events occurred across the property.</p>
+      <p>Rather than replacing expensive equipment, Craison Digital focused on improving the experience.</p>
+      <p style="margin-top:1rem;">The first step was improving connectivity throughout the property. Existing infrastructure was utilized to expand reliable WiFi coverage throughout the home while a dedicated connection was established to the pool house and equipment area, creating a stable foundation for automation and remote access.</p>
+      <p style="margin-top:1rem;">Once connectivity issues were resolved, the pool equipment was integrated into a simple control experience designed around how the homeowner actually used the property. Pool controls, lighting, irrigation, thermostats, and other connected devices were brought together into one easy-to-use system.</p>
+      <p style="margin-top:1rem;">Voice control was added for everyday tasks, while automations and simplified controls reduced the need to navigate multiple apps and complicated menus.</p>
+      <p style="margin-top:1rem;">Most importantly, the system was designed so homeowners, family members, and guests could easily use the property without downloading apps, creating accounts, or learning complicated controls.</p>
     </div>
 
     <div class="cs-block reveal">
@@ -210,24 +208,25 @@
         <div class="cs-ba-col">
           <div class="cs-ba-label">Before</div>
           <ul class="cs-ba-list">
-            <li>Multiple apps for different systems</li>
-            <li>Separate internet connections</li>
-            <li>Disconnected WiFi networks</li>
-            <li>Weak coverage across the property</li>
-            <li>Smart and non-smart devices operating independently</li>
-            <li>Manual control of important systems</li>
-            <li>Limited visibility into property activity</li>
+            <li>Unreliable pool connectivity</li>
+            <li>Weak WiFi coverage throughout key areas</li>
+            <li>Cloud-dependent controls</li>
+            <li>Multiple apps and confusing interfaces</li>
+            <li>Premium features that were rarely used</li>
+            <li>Guests unable to easily control the property</li>
+            <li>Technology that felt complicated and frustrating</li>
           </ul>
         </div>
         <div class="cs-ba-col after">
           <div class="cs-ba-label">After</div>
           <ul class="cs-ba-list">
-            <li>One app for the entire property</li>
-            <li>Reliable WiFi from the gate to the back of the property</li>
-            <li>Connected systems that work together</li>
-            <li>Automated lighting, irrigation, fountain, access, and security functions</li>
-            <li>Proactive notifications for important property activity</li>
-            <li>A system that can grow as the property evolves</li>
+            <li>Reliable connectivity throughout the property</li>
+            <li>Stable access to pool equipment and controls</li>
+            <li>Simple voice control for everyday functions</li>
+            <li>Pool, lighting, irrigation, and climate controls working together</li>
+            <li>Easy-to-use controls designed around the homeowner</li>
+            <li>Guest-friendly operation without additional apps</li>
+            <li>Technology that finally delivers the experience it was meant to provide</li>
           </ul>
         </div>
       </div>
@@ -235,10 +234,10 @@
 
     <div class="cs-result reveal">
       <div class="cs-result-label">The Result</div>
-      <p>The property went from a collection of disconnected systems to one simple, reliable experience.</p>
-      <p style="margin-top:0.9rem;font-weight:400;">The homeowner no longer has to remember which app controls which part of the property. Gates, lighting, irrigation, fountains, thermostats, and security systems can now be managed from one place, with automations handling many of the day-to-day tasks automatically.</p>
-      <p style="margin-top:0.9rem;font-weight:400;">Most importantly, the technology faded into the background.</p>
-      <p style="margin-top:0.9rem;font-weight:700;">One property. One app. One simple experience.</p>
+      <p>The homeowner kept the equipment they had already invested in while gaining a dramatically better experience.</p>
+      <p style="margin-top:0.9rem;font-weight:400;">Pool controls became reliable. Features that were previously ignored became easy to use. Family members and guests could enjoy the property without needing instructions, training, or multiple apps.</p>
+      <p style="margin-top:0.9rem;font-weight:400;">Most importantly, the focus shifted away from managing technology and back to enjoying the property.</p>
+      <p style="margin-top:0.9rem;font-weight:700;">Luxury technology that finally feels simple to use.</p>
     </div>
 
   </div></section>
@@ -246,12 +245,12 @@
   <section id="contact"><div class="section-inner"><div class="contact-inner">
     <div class="section-tag">Get Started</div>
     <h2 class="section-title">Thinking About Simplifying Your Property?</h2>
-    <p class="section-sub">Large properties are complicated. Managing them shouldn't be.</p>
-    <p style="font-size:0.95rem;color:var(--muted);line-height:1.75;margin-bottom:2rem;">If your property has multiple apps, unreliable WiFi, disconnected systems, or equipment that never quite worked the way it should, Craison Digital can help create a plan around what you already own.</p>
+    <p class="section-sub">Many homeowners already own the technology they need. The problem is that it was never designed to work together.</p>
+    <p style="font-size:0.95rem;color:var(--muted);line-height:1.75;margin-bottom:2rem;">If your property has unreliable automation, confusing apps, weak connectivity, or systems that never quite lived up to expectations, Craison Digital can help create a simpler and more reliable experience using what you already own.</p>
     <div style="margin-bottom:2.5rem;"><a href="#contact-form" class="btn-primary">Schedule a Property Assessment →</a></div>
     <form class="contact-form" id="contact-form" action="https://formspree.io/f/xaqabrdo" method="POST">
       <input type="hidden" name="_next" value="https://craisondigital.com/thank-you.php"/>
-      <input type="hidden" name="_subject" value="New inquiry — Case Study 1"/>
+      <input type="hidden" name="_subject" value="New inquiry — Case Study 2"/>
       <div class="form-row">
         <div class="form-group"><label>First Name</label><input type="text" name="first_name" placeholder="John"/></div>
         <div class="form-group"><label>Last Name</label><input type="text" name="last_name" placeholder="Smith"/></div>
